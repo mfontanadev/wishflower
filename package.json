@@ -1,0 +1,22 @@
+{
+  "name": "Orchesta",
+  "version": "1.0.0",
+  "description": "Orchesta simulator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "mongodb": "^2.1.7",
+    "mongoose": "^4.4.6",
+    "socket.io": "latest"
+  },
+  "author": "developer",
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

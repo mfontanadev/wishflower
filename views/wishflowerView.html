@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<read>
+	<html>
+		<head>
+
+			<!-- Title -->
+			<title>Wishflower v2.21</title>
+			<!-- Viewport -->
+			<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+			<style>
+				body { margin: 0; }
+				idCanvas { width: 100%; height: 100% }
+				image, canvas {
+				    user-select: none;
+				    -ms-user-select: none;
+				    -webkit-user-select: none;
+				    -khtml-user-select: none;
+				    -moz-user-select: none;
+				    -webkit-touch-callout: none;
+				    -webkit-user-drag: none;
+					-webkit-tap-highlight-color: rgba(0,0,0,0); 
+				}		
+			</style>
+						
+				
+			<!-- Custom Apis-->
+			<script src="../lib/chel-1.0.1-dist/js/consts.js"></script>
+			<script src="../config/globalDefinitions.js"></script>			
+			<script src="../lib/chel-1.0.1-dist/js/chlib.js"></script>
+			<script src="../lib/chel-1.0.1-dist/js/canvasControl.js"></script>
+			<script src="../lib/chel-1.0.1-dist/js/resourceManager.js"></script>
+			<script src="../lib/chel-1.0.1-dist/js/soundManager.js"></script>
+			<script src="../lib/chel-1.0.1-dist/js/mouseManager.js"></script>
+			<script src="../lib/chel-1.0.1-dist/js/keyboardManager.js"></script>
+
+			<!-- Vendor Apis -->
+    		<script src="../lib/jquery-1.11.2-min/js/jquery1.11.2jquery.min.js"></script>
+			<script src="/socket.io/socket.io.js"></script>
+			<script src="../lib/sound-0.6.1-dist/js/soundjs-0.6.1.min.js"></script>
+
+			<!-- Application logic -->
+			<script src="../controllers/server/protocolMessages.js"></script>
+			<script src="../controllers/entities/requestMessages.js"></script>
+			<script src="../controllers/entities/flower.js"></script>
+			<script src="../controllers/entities/treeNode.js"></script>
+
+			<script src="../controllers/wishflowerController.js"></script>
+		</head>
+
+		<body>
+			<canvas id="idCanvas" width="400" height="320"></canvas>
+		</body>
+	</html>
+</read>
+
