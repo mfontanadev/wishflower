@@ -11,22 +11,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "index.js",
-			"settings":
-			{
-				"buffer_size": 1873,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/treeNode.js",
-			"settings":
-			{
-				"buffer_size": 20145,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -60,12 +44,16 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Carla/MauWork/orchesta",
-		"/C/Users/Carla/MauWork/orchesta/controllers",
-		"/C/Users/Carla/MauWork/orchesta/controllers/entities"
+		"/D/Work/HTML5/wishflower"
 	],
 	"file_history":
 	[
+		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
+		"/D/Work/HTML5/wishflower/wishflower-nb.sublime-project",
+		"/D/Work/HTML5/wishflower/index.js",
+		"/D/Work/HTML5/wishflower/controllers/entities/treeNode.js",
+		"/D/Work/HTML5/wishflower/orchesta-nb.sublime-project",
+		"/D/Work/HTML5/wishflower/wishflower-nb.sublime-workspace",
 		"/C/Users/Carla/MauWork/orchesta/controllers/errorPageController.js"
 	],
 	"find":
@@ -101,70 +89,17 @@
 		"whole_word": false,
 		"wrap": true
 	},
+	"folders":
+	[
+		{
+			"path": "D:\\Work\\HTML5\\wishflower"
+		}
+	],
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1873,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1499,
-								1474
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": -0.0,
-						"translation.y": 683.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "controllers/entities/treeNode.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20145,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								20049,
-								20049
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 8228.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -204,7 +139,7 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "",
-	"project": "orchesta-nb.sublime-project",
+	"project": "",
 	"replace":
 	{
 		"height": 40.0

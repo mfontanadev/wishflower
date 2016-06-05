@@ -1,5 +1,4 @@
 var app = new WishflowerApplication();
-var canvasEx = null;
 
 // ******************************************************************
 // App vars
@@ -7,88 +6,78 @@ var canvasEx = null;
 var m_treeNode = new TreeNode();
 var m_refresh = true;
 var m_rememberWishText = '';
-
+var m_renderTime = 0;
+var m_sampleLogicRate = 0;
 // ******************************************************************
 // Entry point
 // ******************************************************************
 window.onload = function()
 {
-	//m_appState = MainLoopState.C_APP_STATE_INTRO;
-			
-	// Init context.
-	app.m_canvas = document.getElementById('idCanvas');
-	app.m_context = app.m_canvas.getContext('2d');
-
-	canvasEx = new chCanvas(document.getElementById('idCanvas'), window);
+	var canvasEx = new chCanvas(document.getElementById('idCanvas'), window);
 	canvasEx.setResizeMethodToMaxZoom();
 	canvasEx.enableOnResizeChange();
 	canvasEx.performResize();
 
-	console.log(canvasEx.fLog());
+	app.m_canvasEx = canvasEx;
+	console.log(app.m_canvasEx.fLog());
 
-					
-	//resizeCanvas(app.m_canvas, false);
+	app.enableProgressBarWhenLoadingResources();
 
-	initializeControls();
+	//initializeControls();
 
-	//startApp();
+	startApp();
 	render();
 
 };
 
 function initializeControls() 
 {
-	tw = canvasEx.m_canvas.width;
-	th = canvasEx.m_canvas.height;
+	tw = app.m_canvasEx.m_canvas.width;
+	th = app.m_canvasEx.m_canvas.height;
 
 	bw = 50;
 	bh = 30;
 	bc = 4;
 
-    lblInfoControl = new CanvasControl();
-	lblInfoControl.initLabelStyle(canvasEx.m_canvas, ((canvasEx.m_canvas.width/bc)*2) - (bw*3 / 2), 1, bw * 3, bh, "");
-	lblInfoControl._fontSize = 12;
-	lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
-	lblInfoControl._visible = true;
-
+ 
     lblKeyPathControl = new CanvasControl();
-	lblKeyPathControl.initLabelStyle(canvasEx.m_canvas, getCX(tw, bw * 2.5), th - 22 - (bh * 3), bw * 2.5, bh, "");
+	lblKeyPathControl.initLabelStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2.5), th - 22 - (bh * 3), bw * 2.5, bh, "");
 	lblKeyPathControl._fontSize = 14;
 	lblKeyPathControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
 	lblKeyPathControl._visible = false;
 
 	btnMoveLeftControl = new CanvasControl();
-	btnMoveLeftControl.initButtonStyle(canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
+	btnMoveLeftControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
 	btnMoveLeftControl.setImage("glif-left-arrow.png");
 	btnMoveLeftControl._onClick = this.btnMoveLeftControl_controller;
 	btnMoveLeftControl._visible = false;
 	
 	btnMoveRightControl = new CanvasControl();
-	btnMoveRightControl.initButtonStyle(canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, ">");
+	btnMoveRightControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, ">");
 	btnMoveRightControl.setImage("glif-right-arrow.png");
 	btnMoveRightControl._onClick = this.btnMoveRightControl_controller;
 	btnMoveRightControl._visible = false;
 
 	btnSubControl = new CanvasControl();
-	btnSubControl.initButtonStyle(canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
+	btnSubControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
 	btnSubControl.setImage("glif-sub.png");
 	btnSubControl._onClick = this.btnSubControl_controller;
 	btnSubControl._visible = false;
 
 	btnAddControl = new CanvasControl();
-	btnAddControl.initButtonStyle(canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, "+");
+	btnAddControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, "+");
 	btnAddControl.setImage("glif-add.png");
 	btnAddControl._onClick = this.btnAddControl_controller;
 	btnAddControl._visible = false;
 	
 	btnSendWish = new CanvasControl();
-	btnSendWish.initButtonStyle(canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "Send wish");
+	btnSendWish.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "Send wish");
 	btnSendWish._fontSize = 12;
 	btnSendWish._onClick = this.btnSendWish_controller;
 	btnSendWish._visible = false;
 
 	btnMoveDownControl = new CanvasControl();
-	btnMoveDownControl.initButtonStyle(canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "");
+	btnMoveDownControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "");
 	btnMoveDownControl.setImage("glif-down-arrow.png");
 	btnMoveDownControl._fontSize = 12;
 	btnMoveDownControl._onClick = this.btnMoveDownControl_controller;
@@ -96,14 +85,14 @@ function initializeControls()
 	btnMoveDownControl._visible = false;
 
 	inpGenericInput = new CanvasControl();
-	inpGenericInput.initInputStyle(canvasEx.m_canvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
+	inpGenericInput.initInputStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
 	inpGenericInput._fontSize = 12;
 	inpGenericInput.setPlaceholderText("Write your wish and send it.");
 	//inpGenericInput._onSubmit = this.btnSendWish_controller;
 	inpGenericInput._visible = false;
 
 	linkToPage = new CanvasControl();
-	linkToPage.initLabelStyle(canvasEx.m_canvas, getCX(tw, bw * 4), th - 10, bw * 4, 10, "(http://wishflower.herokuapp.com)");
+	linkToPage.initLabelStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 10, bw * 4, 10, "(http://wishflower.herokuapp.com)");
 	linkToPage.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
 	linkToPage._fontSize = 10;
 	linkToPage._textJustify = 0;	
@@ -112,7 +101,7 @@ function initializeControls()
 
 function startApp()
 {
-	chUpadeInfoControlTextCanvas(lblInfoControl, "Loading bitmaps");
+	chUpadeInfoControlTextCanvas(app.m_lblInfoControl, "Loading bitmaps");
 	m_resourceManager = new ResourceManager();
 	m_resourceManager.initWith
 	(
@@ -122,7 +111,7 @@ function startApp()
 		{
 			initAfterBitmapsLoaded();
 		},
-		lblInfoControl
+		app.m_lblInfoControl
 	);
 }
 
@@ -130,7 +119,7 @@ function initAfterBitmapsLoaded()
 {
 	msglog("Bitmaps loaded");
 
-	chUpadeInfoControlTextCanvas(lblInfoControl, "Loading sounds");
+	chUpadeInfoControlTextCanvas(app.m_lblInfoControl, "Loading sounds");
 	m_soundManager = new SoundManager();
 	m_soundManager.initWith
 	(
@@ -142,7 +131,7 @@ function initAfterBitmapsLoaded()
 			initAfterSoundsLoaded();
 		},
 		false,
-		lblInfoControl
+		app.m_lblInfoControl
 	);
 }
 
@@ -151,7 +140,7 @@ function initAfterSoundsLoaded()
 	msglog("Sounds loaded");
 
 	m_mouseManager = new MouseManager();
-	m_mouseManager.initWith(m_canvas, m_soundManager);
+	m_mouseManager.initWith(app.m_canvasEx.m_canvas, m_soundManager);
 
 	// Init keykoard manager
 	m_keyboardManager = new KeyboardManager();
@@ -248,8 +237,8 @@ function render()
 	// clear
 	if (m_refresh === true)
 	{
-        canvasEx.m_context.clearRect(0, 0, canvasEx.m_canvas.width, canvasEx.m_canvas.height);
-        renderRectangle(canvasEx.m_canvas, canvasEx.m_context, 0,0,canvasEx.m_canvas.width, canvasEx.m_canvas.height);
+        app.m_canvasEx.m_context.clearRect(0, 0, app.m_canvasEx.m_canvas.width, app.m_canvasEx.m_canvas.height);
+        //renderRectangle(app.m_canvasEx.m_canvas, app.m_canvasEx.m_context, 0,0,app.m_canvasEx.m_canvas.width, app.m_canvasEx.m_canvas.height);
         m_treeNode.render();
 	}
 
@@ -262,7 +251,8 @@ function render()
 
 function renderControls()
 {
-    lblInfoControl.render();
+    app.m_lblInfoControl.render();
+/*
     lblKeyPathControl.render();
     btnSubControl.render();
     btnAddControl.render();
@@ -275,6 +265,7 @@ function renderControls()
 
     inpGenericInput.render();
 	linkToPage.render();
+*/
 }
 
 // Looping callback
@@ -297,19 +288,21 @@ function doAppStateIntro_Logic()
 {
 	m_appState = MainLoopState.C_APP_STATE_WAITING_USER_NAME;
 
-	lblInfoControl._visible = false;
+	app.m_lblInfoControl._visible = false;
 
+	/*
     lblKeyPathControl._visible = true;
     btnMoveLeftControl._visible = true
     btnMoveRightControl._visible = true
     btnSendWish._visible = true
     inpGenericInput._visible = true
 	linkToPage._visible = true
+	*/
 
 	// Creeate
-	m_treeNode.initWithRootAndBranch(m_canvas, m_context, m_resourceManager);
+	m_treeNode.initWithRootAndBranch(app.m_canvasEx.m_canvas, app.m_canvasEx.m_context, m_resourceManager);
 	//m_treeNode.setY(this.m_canvas.height - 87);
-	m_treeNode.setY(this.m_canvas.height-111);
+	m_treeNode.setY(app.m_canvasEx.m_canvas.height-111);
 	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);
 	m_treeNode.reset();
 	updateTreeData();
