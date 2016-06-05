@@ -1,11 +1,19 @@
 module.exports = function(app)
 {
+	// CONTEXTS
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});
 
 	app.get ('/controllers/wishflowerController.js', 
 		function (req, res) {res.sendFile(__dirname + '/wishflowerController.js');});
+
+	app.get ('/controllers/wishflowerApplication.js', 
+		function (req, res) {res.sendFile(__dirname + '/wishflowerApplication.js');});
+
+	app.get ('/controllers/wishflowerContext.js', 
+		function (req, res) {res.sendFile(__dirname + '/wishflowerContext.js');});
 
 	app.get ('/controllers/entities/flower.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/flower.js');});

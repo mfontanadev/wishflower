@@ -3,8 +3,13 @@ TreeNode.C_NODE_TYPE_ROOT = "root";
 TreeNode.C_NODE_TYPE_BRANCH = "branch";
 TreeNode.C_NODE_TYPE_LEAVE = "leave";
 
-TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 5;
-TreeNode.C_GENERATION_LEAVE_QTTY = 3;
+TreeNode.C_FADING_STOP = 0;
+TreeNode.C_FADING_IN = 1;
+TreeNode.C_FADING_OUT = 2;
+TreeNode.C_FADING_MAX_VALUE = 0.3;
+
+TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 4;
+TreeNode.C_GENERATION_LEAVE_QTTY = 2;
 TreeNode.DEBUG = false;
 
 TreeNode.composedLeaveImg = null;
@@ -12,6 +17,17 @@ TreeNode.rootImg = null;
 TreeNode.branchImg = null;
 TreeNode.leaveImg = null;
 TreeNode.resource = null;
+
+TreeNode.m_wishes = null;
+
+TreeNode.C_TREE_STATUS_NOT_SET = 0;
+TreeNode.C_TREE_STATUS_WAITING_DATA = 1;
+TreeNode.C_TREE_STATUS_RENDERING = 2;
+//TreeNode.C_TREE_NEW_WISH_ANIMATION = 3;
+TreeNode.m_treeSta1tus = TreeNode.C_TREE_STATUS_NOT_SET;
+
+TreeNode.m_treeCursorHash = '';
+TreeNode.m_treeCursor = null;
 
 // Resultados del benchmark (generation = 13; leaves = 6, totBranch = 4096, totLeaves = 24576):
 // Funcion ImplemtLogic = tarda 12 milis en su pico de creación, luego en recorrer tarda 2 milis.
@@ -43,7 +59,8 @@ function TreeNode()
 	this.m_arrGenerationPositions = new Array();
 	this.m_generatorIndex = 0;
 
-    this.m_name = '';
+    this.m_hash = '';
+    this.m_wish = '';
     this.m_linkPosition = 1;
 
     this.m_width = 0;
@@ -52,7 +69,6 @@ function TreeNode()
     this.m_maxHeight = 0;
 
 	this.m_pertAngle = 0;
-	
     this.m_branchDir = -1;
 
     this.m_composedLeaveImg = null;
@@ -60,6 +76,10 @@ function TreeNode()
 
     this.m_scalarImageWidth = 0;
     this.m_scalarImageHeight = 0;
+
+    this.m_fadingStatus = TreeNode.C_FADING_STOP;
+    this.m_fadingCounter = 0;
+    this.m_fadingScalar = TreeNode.C_FADING_MAX_VALUE;
 
     TreeNode.prototype.initWithRootAndBranch = function (_canvas, _context, _resourceManager) 
     {
@@ -75,19 +95,25 @@ function TreeNode()
         this.initLeaveImage();
         this.loadImages();
 
+        this.m_hash = 'M';
         var root = this.createRootNode();
+        root.m_hash = 'R';
         this.addChild(root);
 
         var branch = this.createBranchNode();
         // link the main branch a little bit lower from top, 
         // this simulates the tree is inserted in the root. 
-        branch.setHeightScalar(0.8);     
+        branch.setHeightScalar(0.3);     
+        branch.m_hash = 'T';
         root.addChild(branch);
 
         this.dump();
         this.info();
         this.recalculateTargetPointAndChilds();
         //_context.globalCompositeOperation = "lighter";
+
+        TreeNode.m_treeCursor = branch;
+        TreeNode.m_treeCursorHash = branch.getHash();
     };
 
     TreeNode.prototype.initLeaveImage = function () 
@@ -110,7 +136,7 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_resourceManager.getImageByName('ctree_root2.png');
+        TreeNode.rootImg = this.m_resourceManager.getImageByName('ctree_root3.png');
         TreeNode.branchImg = this.m_resourceManager.getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_resourceManager.getImageByName('ctree_leave.png');
     };
@@ -126,6 +152,9 @@ function TreeNode()
 
     TreeNode.prototype.implementGameLogic = function () 
     {
+        if (TreeNode.m_treeStatus !== TreeNode.C_TREE_STATUS_RENDERING)
+            return;
+
         for (var i = 0; i < this.m_nodes.length; i++) 
         {
             this.m_nodes[i].implementGameLogic();
@@ -162,8 +191,45 @@ function TreeNode()
 
                 this.recalculateTargetPointAndChilds();
             }
+            else
+            {
+                this.implementWishflowerFade();
+            }
         }
     };
+
+    TreeNode.prototype.implementWishflowerFade = function ()
+    {
+        
+        if (this.m_fadingStatus === TreeNode.C_FADING_IN)
+        {
+            this.m_fadingCounter++;
+            if (this.m_fadingCounter >= 100)
+            {
+                this.m_fadingCounter = 100;
+                this.m_fadingStatus = TreeNode.C_FADING_STOP;
+            }
+
+            this.m_fadingScalar = this.calculateFadingScalar();
+        }
+
+        if (this.m_fadingStatus === TreeNode.C_FADING_OUT)
+        {
+            this.m_fadingCounter--;
+            if (this.m_fadingCounter <= 0)
+            {
+                this.m_fadingCounter = 0;
+                this.m_fadingStatus = TreeNode.C_FADING_STOP;
+            }
+
+            this.m_fadingScalar = this.calculateFadingScalar();
+        }
+    }
+
+    TreeNode.prototype.calculateFadingScalar = function ()
+    {
+        return ((1 - TreeNode.C_FADING_MAX_VALUE) * (this.m_fadingCounter / 100)) + TreeNode.C_FADING_MAX_VALUE;  
+    }
 
     TreeNode.prototype.validateAndAddANewChild = function ()
     {
@@ -177,6 +243,7 @@ function TreeNode()
             {
                 var branch = null;
 				
+                /*
 				branch = this.createBranchNode();
                 branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * 1);
                 branch.setHeightScalar(0.95);
@@ -190,6 +257,24 @@ function TreeNode()
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
+                */
+
+                branch = this.createBranchNode();
+                branch.m_hash = '<';
+                branch.setAngle(50 * 1);
+                branch.setHeightScalar(0.95);
+                branch.m_maxHeight = this.m_maxHeight * 0.8;
+                branch.m_maxWidth = this.m_maxWidth - 2;
+                this.addChild(branch);
+
+                branch = this.createBranchNode();
+                branch.m_hash = '>';
+                branch.setAngle(50 * -1);
+                branch.setHeightScalar(0.95);
+                branch.m_maxHeight = this.m_maxHeight * 0.8;
+                branch.m_maxWidth = this.m_maxWidth - 2;
+                this.addChild(branch);
+                
 				
 				branch.m_pertAngle = branch.m_pertAngle * 0.5;
 				this.incrementGenerationPosition();
@@ -203,17 +288,26 @@ function TreeNode()
 
             if (bAddBranch === true) 
             {
-            	var angleArc = 330;
+            	var angleArc = 120;
                 var leaveAngle = 0;
                 var noiseangle = 0;
             	for (var i = 0; i < TreeNode.C_GENERATION_LEAVE_QTTY; i++) 
             	{
-	                var leave = this.createLeaveNode();
+	                /*var leave = this.createLeaveNode();
                     noiseangle = chRandom(10);
                     leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
 	                leave.setAngle( leaveAngle + noiseangle);
 	                leave.setHeightScalar(1);
-	                this.addChild(leave);
+	                this.addChild(leave);*/
+                    
+                    var leave = this.createLeaveNode();
+                    leave.m_hash = i + 1;
+
+                    noiseangle = chRandom(10);
+                    leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
+                    leave.setAngle( leaveAngle + noiseangle);
+                    leave.setHeightScalar(1);
+                    this.addChild(leave);
             	};
 
                 this.incrementGenerationPosition();
@@ -277,7 +371,7 @@ function TreeNode()
 
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_ROOT;
         nodeItem.m_width = 70;
-        nodeItem.m_height = 25;
+        nodeItem.m_height = 20;
         nodeItem.m_maxWidth = nodeItem.m_width;
         nodeItem.m_maxHeight = nodeItem.m_height;
 
@@ -290,7 +384,7 @@ function TreeNode()
 
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
-        nodeItem.m_maxHeight = 60;
+        nodeItem.m_maxHeight = 80;
 		nodeItem.m_pertAngle = 20;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
@@ -330,11 +424,17 @@ function TreeNode()
 		
 		nodeItem.m_arrGenerationPositions.push(-1);
 
+        nodeItem.m_fadingStatus = TreeNode.C_FADING_STOP;
+        nodeItem.m_fadingCounter = 0;
+        nodeItem.m_fadingScalar = TreeNode.C_FADING_MAX_VALUE;
         return nodeItem;
     }
 
     TreeNode.prototype.render = function () 
     {
+        if (TreeNode.m_treeStatus !== TreeNode.C_TREE_STATUS_RENDERING)
+            return;
+
         for (var i = 0; i < this.m_nodes.length; i++) {
             this.m_nodes[i].render();
         }
@@ -374,7 +474,9 @@ function TreeNode()
     TreeNode.prototype.renderLeave = function () 
     {
         renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
-		renderCircleNotFill(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 4, 'green');
+		
+        if (this.m_wish !== '')
+            renderCircleNotFill(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 4, 'green');
     };
 
     TreeNode.prototype.renderRootImage = function () 
@@ -384,12 +486,23 @@ function TreeNode()
 
     TreeNode.prototype.renderBranchImage = function () 
     {
-        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.branchImg, this.m_x1, this.m_y1, this.getFinalAngle(), 1, this.m_scalarImageHeight);
+        var imgAlpha = 1;
+
+        if (this.isNodeVisibleByCursor() === false)
+            imgAlpha = 0.2;
+
+        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.branchImg, this.m_x1, this.m_y1, this.getFinalAngle(), imgAlpha, this.m_scalarImageHeight);
     };
 	
     TreeNode.prototype.renderLeaveImage = function () 
     {
-        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8, this.m_scalarImageHeight);
+        var imgAlpha = 1;
+
+        if (this.isNodeVisibleByCursor() === false)
+            imgAlpha = 0.2;
+
+        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        //drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
     };
 
     TreeNode.prototype.renderIndicators = function () 
@@ -410,12 +523,19 @@ function TreeNode()
         {
             renderCircleNotFill(this.m_canvas, this.m_context, this.m_x1, this.m_y1, 3, 'blue');
             renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1,  1);
-            renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'red');
+        
+            if (this.m_wish !== '')
+                renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'red');
         }
         else if (this.m_nodeType === TreeNode.C_NODE_TYPE_MAIN) 
         {
             renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'brown');
         }
+    };
+
+    TreeNode.prototype.setTreeStatus = function (_treeStatus) 
+    {
+        TreeNode.m_treeStatus = _treeStatus;
     };
 
     TreeNode.prototype.addChild = function (_itemNode) 
@@ -554,13 +674,29 @@ function TreeNode()
 
     TreeNode.prototype.dump = function () 
     {
-
-        for (var i = 0; i < this.m_nodes.length; i++) {
+        for (var i = 0; i < this.m_nodes.length; i++) 
+        {
             this.m_nodes[i].dump();
         }
-        console.log("        ".substring(0,this.m_level) +  this.m_name + "-" + this.m_nodeType + ": l=" + this.m_level + ", x=" + this.m_x1 + ", y=" + this.m_y1 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight);
+            
+        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x=" + this.m_x1 + ", y=" + this.m_y1 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
+        console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
     };
 
+    TreeNode.prototype.getHash = function () 
+    {
+        if (this.m_level > 2)
+        {
+            if (this.m_parent !== null)
+                return this.m_parent.getHash() + this.m_hash;
+            else
+                return this.m_hash; 
+        }
+        else
+        {
+            return "";
+        }
+    };
 
     TreeNode.prototype.info = function () 
     {
@@ -572,6 +708,195 @@ function TreeNode()
 
         return ({totalBranchs: retTotalFinalBranchs, totalLeaves: retTotalLeaves});
     };
+
+    TreeNode.prototype.findNodeByKeyPath = function (_keyPath) 
+    {
+        var result = null;
+
+        if (this.getHash() === _keyPath)
+        {
+            return this;
+        }
+
+        for (var i = 0; i < this.m_nodes.length; i++) 
+        {
+            result = this.m_nodes[i].findNodeByKeyPath(_keyPath);
+            if (result !== null)
+                break;
+        }
+
+        return result;
+    };
+
+    TreeNode.prototype.preOrder = function (_callback) 
+    {
+        _callback(this);
+
+        for (var i = 0; i < this.m_nodes.length; i++) 
+        {
+            this.m_nodes[i].preOrder(_callback);
+        }
+    };
+
+    TreeNode.prototype.updateWishes = function (_wishesArray) 
+    {
+        TreeNode.m_wishes = _wishesArray;
+
+        // Iterate all nodes and set wishes from _wishesArray.
+        this.preOrder
+        (
+            function(_item)
+            {
+                var previosWish = _item.m_wish; 
+                _item.m_wish = '';
+
+                for (var i = 0; i < TreeNode.m_wishes.length; i++) 
+                {
+                    if (_item.getHash() === TreeNode.m_wishes[i].keyPath)
+                    {
+                        _item.m_wish = TreeNode.m_wishes[i].wish;
+                        break;
+                    }
+                }
+
+                if (previosWish === '' && _item.m_wish !== '')
+                {
+                    _item.m_fadingStatus = TreeNode.C_FADING_IN;
+                }
+
+                if (previosWish !== '' && _item.m_wish === '')
+                {
+                    _item.m_fadingStatus = TreeNode.C_FADING_OUT;
+                }
+            }
+        );
+    };
+
+    TreeNode.prototype.getCursorHashFormatted = function () 
+    {
+        var res = TreeNode.m_treeCursorHash;
+        res = res.replace(/>/g, '> ');
+        res = res.replace(/</g, '< ');
+
+        return res;
+    };
+
+    TreeNode.prototype.isNodeVisibleByCursor = function () 
+    {
+        var result = true;
+        
+        if (this.m_level > 2 && TreeNode.m_treeCursorHash !== '')
+        {
+            if (TreeNode.m_treeCursorHash.indexOf(this.getHash()) !== 0)
+            {
+                result = false;
+            }        
+        }
+        return result;
+    };
+
+
+    TreeNode.prototype.cursorLeft = function () 
+    {
+        if (TreeNode.m_treeCursor.m_nodes !== null && 
+            TreeNode.m_treeCursor.m_nodes.length > 0)
+        {
+            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[0];            
+            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+        }
+    };
+
+    TreeNode.prototype.cursorRight = function () 
+    {
+        if (TreeNode.m_treeCursor.m_nodes !== null && 
+            TreeNode.m_treeCursor.m_nodes.length > 1)
+        {
+            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[1];            
+            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+        }
+    };
+
+    TreeNode.prototype.cursorNextLeave = function () 
+    {
+    	if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_BRANCH)
+    	{
+	        if (TreeNode.m_treeCursor.m_nodes !== null && 
+	            TreeNode.m_treeCursor.m_nodes.length > 0)
+	        {
+	            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[0];            
+	            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+	        }
+    	}
+    	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
+    	{
+			var tmpNodeToGo = null;
+			var tmpHashToGo = TreeNode.m_treeCursor.m_parent.getHash();
+
+			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) + 1); 
+			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
+
+			if (tmpNodeToGo !== null)
+			{
+				TreeNode.m_treeCursor = tmpNodeToGo;
+    	        TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+			}
+    	}
+    };
+
+    TreeNode.prototype.cursorPreviousLeave = function () 
+    {
+    	if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_BRANCH)
+    	{
+	        if (TreeNode.m_treeCursor.m_nodes !== null && 
+	            TreeNode.m_treeCursor.m_nodes.length > 0)
+	        {
+	            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[TreeNode.m_treeCursor.m_nodes.length - 1];            
+	            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+	        }
+    	}
+    	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
+    	{
+			var tmpNodeToGo = null;
+			var tmpHashToGo = TreeNode.m_treeCursor.m_parent.getHash();
+
+			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) - 1); 
+			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
+
+			if (tmpNodeToGo !== null)
+			{
+				TreeNode.m_treeCursor = tmpNodeToGo;
+    	        TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+			}
+    	}
+    };
+
+    TreeNode.prototype.cursorDown = function () 
+    {
+        if (TreeNode.m_treeCursor.m_parent !== null)
+        {
+            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_parent;            
+            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
+        }
+    };
+
+
+    TreeNode.prototype.isNextLevelALeaveType = function () 
+    {
+    	//if (TreeNode.m_treeCursor != null)
+		//	TreeNode.m_treeCursor.dump();    	
+        
+        if (TreeNode.m_treeCursor.m_nodes !== null && 
+            TreeNode.m_treeCursor.m_nodes.length > 1 &&
+            TreeNode.m_treeCursor.m_nodes[0].m_nodeType === TreeNode.C_NODE_TYPE_LEAVE )
+        {
+        	return true;
+        }
+        else
+        {
+        	return false;
+        }
+    };
+
 }
 
 

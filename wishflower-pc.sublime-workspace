@@ -4,16 +4,12 @@
 		"selected_items":
 		[
 			[
-				"pla",
-				"_placeholderColor"
+				"Wish",
+				"WishflowerApplication"
 			],
 			[
-				"get",
-				"getText"
-			],
-			[
-				"inp",
-				"inpGenericInput"
+				"m_wi",
+				"m_wishflowerContext"
 			],
 			[
 				"set",
@@ -54,6 +50,10 @@
 			[
 				"m_ma",
 				"m_maxWidth"
+			],
+			[
+				"get",
+				"getGrowingRatio"
 			],
 			[
 				"has",
@@ -138,6 +138,10 @@
 			[
 				"_ima",
 				"_imageLoaded"
+			],
+			[
+				"inp",
+				"inpCurrentNoteInput"
 			],
 			[
 				"btnS",
@@ -306,6 +310,10 @@
 			[
 				"score",
 				"scoreAlteration"
+			],
+			[
+				"pla",
+				"playable"
 			],
 			[
 				"com",
@@ -506,64 +514,40 @@
 			[
 				"C_obj_tpe_tr",
 				"C_OBJ_TYPE_TRASH_PAPER"
-			],
-			[
-				"m_mover",
-				"m_moverIndex"
-			],
-			[
-				"m_m",
-				"m_movCounter"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "controllers/services/wishflower.Route.js",
+			"file": "controllers/entities/flower.js",
 			"settings":
 			{
-				"buffer_size": 490,
+				"buffer_size": 10831,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "controllers/wishflowerController.js",
+			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
 			"settings":
 			{
-				"buffer_size": 9174,
+				"buffer_size": 4550,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "index.js",
+			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
 			"settings":
 			{
-				"buffer_size": 1873,
+				"buffer_size": 89312,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "models/db_wish.js",
+			"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
 			"settings":
 			{
-				"buffer_size": 532,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/services/wishflower.Service.js",
-			"settings":
-			{
-				"buffer_size": 698,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/index.js",
-			"settings":
-			{
-				"buffer_size": 142,
+				"buffer_size": 86092,
 				"line_ending": "Windows"
 			}
 		}
@@ -626,53 +610,47 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/config",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/server",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views"
+		"/D/Work/HTML5/Orchesta/orchesta",
+		"/D/Work/HTML5/Orchesta/orchesta/config",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/entities",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/services",
+		"/D/Work/HTML5/Orchesta/orchesta/lib",
+		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist",
+		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js",
+		"/D/Work/HTML5/Orchesta/orchesta/models",
+		"/D/Work/HTML5/Orchesta/orchesta/node_modules",
+		"/D/Work/HTML5/Orchesta/orchesta/views"
 	],
 	"file_history":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/wishflower.Service.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/db_wish.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/server/serverOrchesta.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/server/protocolMessages.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/errorPage.Route.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/wishflower.Route.js",
+		"/D/Docs/Registros ONline.txt",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/wishflowerApplication.js",
+		"/D/Work/HTML5/Orchesta/orchesta/views/wishflowerView.html",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/entities/treeNode.js",
+		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/chlib.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/index.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/wishflowerController.js",
+		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/canvasControl.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/entities/flower.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/services/wishflower.Service.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/entities/db_wish.js",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/entities/keypair.js",
+		"/D/Work/HTML5/Orchesta/orchesta/index.js",
+		"/D/Work/HTML5/Treninto/trunk/classes/viewHelp.js",
+		"/D/Work/HTML5/PoliticFight/deploypoliticfight/index.html",
+		"/D/Work/HTML5/Treninto/trunk/treninto.html",
+		"/D/Work/HTML5/PoliticFight/deploypoliticfight/classes/viewHelp.js",
+		"/D/Work/HTML5/PoliticFight/deploypoliticfight/classes/viewIntro.js",
+		"/D/Restauracion/Instrucciones.txt",
+		"/D/Work/HTML5/Orchesta/orchesta/controllers/services/wishflower.ServiceMock.js",
+		"/D/Work/HTML5/Orchesta/orchesta/config/globalDefinitions.js",
+		"/D/Docs/Personal/Ideario.txt",
+		"/D/Work/HTML5/Orchesta/orchesta/models/db_wish.js",
+		"/D/Work/HTML5/Orchesta/orchesta/models/index.js",
+		"/C/Program Files (x86)/Microsoft Office/Office14/QUERIES/Rava.iqy",
+		"/D/Work/HTML5/Orchesta/orchesta/models/wishes.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/db_wish_schema.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/db_user.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/errorPage.Service.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/db_user_schema.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/wishflowerView.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/models/wishes.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/treeNode.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/flower.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.1-dist/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/canvasControl.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/config/globalDefinitions.js",
-		"/C/Users/mfontana/Mios/Today/bhip-capacitacion/bhcap/lean/Proyecto2/Controllers/LaberynthController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/chatInterpeter.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/keypair.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/_back/orchesta - original/classes/serverOrchesta.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/config/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/_back/orchesta - original/public/directorController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/chlib.js",
-		"/C/Temp/MongoData/mongodb.config",
-		"/C/robocode/robots/MFR/MFontanaRobot.java",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/node_modules/mongodb/lib/utils.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/node_modules/mongodb/test.js",
-		"/C/Program Files/MongoDB/Server/3.2/bin/mongodb.config",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/package.json",
-		"/C/Users/mfontana/Downloads/javacmd/HelloWorld.java",
 		"/C/Users/mfontana/Mios/Personal/Programas/Ctree/ctree.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/Ctree/ctreeController.js",
 		"/C/Users/mfontana/Mios/Today/lucas/v2/models/customer.js",
@@ -687,12 +665,21 @@
 		"/C/Users/mfontana/Mios/Today/leandro/formByClient.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/javascript/jsdemo.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/javascript/jsdemo.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/wishflowerView.html",
 		"/C/Users/mfontana/Downloads/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/public/assets/img/ctree_branch.png",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/_back/orchesta - original/classes/score.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/_back/orchesta - original/public/editorMultiController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/chlib.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/resourceManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/server/serverOrchesta.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/requestMessages.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/flower.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/errorPageView.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/_back/orchesta - Copy - rama protos/controllers/index.js",
@@ -707,13 +694,17 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/score.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/presenterOrchesta.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/orchestaFactory.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/keypair.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/interpeter.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/instrument.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/chatDirector.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/config/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta - original/public/interpeter.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta - original/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/package.json",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/.gitignore",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/entities/scoreFactory.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/server/protocolMessages.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/ws/test/WebSocket.test.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/.idea/workspace.xml",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/HelloWorld_controller.js",
@@ -729,6 +720,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/editorController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/errorPage.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/sound-0.6.1-dist/js/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/HelloWorld.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta - Copy/lib/bootstrap-3.3.4-dist/js/bootstrap.js",
@@ -736,6 +728,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/Ctree/test.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/_back/private/editorController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/data/game_data.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/glc.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/helpers/helpers.js",
@@ -758,13 +751,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/routes/controllers.js",
 		"/C/Users/mfontana/Mios/Today/chirp-master/chirp-master/chirp/routes/authenticate.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/routes/index.js",
-		"/C/Users/mfontana/Mios/Today/chirp-master/chirp-master/chirp/routes/api.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/public/helpers.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/keypair.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/serverOrchesta.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/public/ctreeController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/public/test.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/interpeter.js"
+		"/C/Users/mfontana/Mios/Today/chirp-master/chirp-master/chirp/routes/api.js"
 	],
 	"find":
 	{
@@ -775,6 +762,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"D:\\Work\\HTML5\\Orchesta\\orchesta",
 			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\OrchestaHeroku\\orchesta",
 			""
 		]
@@ -784,38 +772,39 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"reqFlower",
-			"reqKeyPair",
-			"reqChLib",
-			"chel-1.0.0",
-			"chel-1",
-			"_placeholderColor",
-			"tmpText",
-			"_placeholderText",
-			"place",
-			"value",
-			"inpGenericInput",
-			"_placeholderText",
-			"setPlaceholderText",
-			"_placeholderText",
-			"_placeHolderText",
-			"_placeHo",
-			"_placeHolderColor",
-			"btnAddControl",
-			"m_refresh",
-			"onRefresh",
-			"_imageLoaded",
-			"infocon",
-			"doAppStateIntro_Logic",
-			"lblInfoControl",
-			"server",
-			"btnContinue_controller",
-			"onsu",
-			"onsub",
-			"oncli",
-			"lblInfoControl",
-			"btnContinue",
-			"_onSubmit",
+			"_this",
+			"centerCanvasInWindows",
+			"self",
+			"centerCanvasInWindows",
+			"self",
+			"this",
+			"m_invalidateOnREsize",
+			"zoom",
+			"globalCanvas",
+			"window",
+			"render",
+			"m_context",
+			"m_canvas",
+			"type",
+			"typeif",
+			"initializeControls",
+			"prototy",
+			"centerCanvasInWindows",
+			"canvasWidth",
+			"_paramCanvas",
+			"m_canvas",
+			"initResizing",
+			"hors",
+			"btnLEvelI",
+			"HORS",
+			"Leave",
+			"m_fadingScalar",
+			"leave",
+			"getCursorFormatted",
+			"cursor",
+			"wish",
+			"*",
+			"__basePath",
 			"createRootNode",
 			"C_NODE_TYPE_ROOT",
 			"TPYE",
@@ -910,8 +899,7 @@
 			"C_SND_SOUND_TEST",
 			"play",
 			"ownerSndManager",
-			"SndManager",
-			"m_soundManager"
+			"SndManager"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -919,7 +907,7 @@
 		"regex": false,
 		"replace_history":
 		[
-			"chel-1.0.1",
+			"this",
 			"TYPE",
 			"composedLeaveImg",
 			"reqFlower",
@@ -1012,111 +1000,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/services/wishflower.Route.js",
+					"file": "controllers/entities/flower.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 490,
+						"buffer_size": 10831,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								416,
-								416
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "controllers/wishflowerController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9174,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8950,
-								8950
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5334.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1873,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								929,
-								939
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 405.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "models/db_wish.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 532,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								300,
-								300
+								876,
+								876
 							]
 						],
 						"settings":
@@ -1132,59 +1033,91 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "controllers/services/wishflower.Service.js",
+					"buffer": 1,
+					"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 698,
+						"buffer_size": 4550,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								447,
-								447
+								62,
+								104
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "models/index.js",
+					"buffer": 2,
+					"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 142,
+						"buffer_size": 89312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								142,
-								142
+								89312,
+								89312
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 27644.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1197,
+								1211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1221,19 +1154,15 @@
 		]
 	},
 	"menu_visible": true,
-	"output.exec":
-	{
-		"height": 100.0
-	},
 	"output.find_results":
 	{
 		"height": 0.0
 	},
 	"pinned_build_system": "",
-	"project": "orchesta-bf.sublime-project",
+	"project": "orchesta-pc.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1261,7 +1190,7 @@
 		"selected_items":
 		[
 		],
-		"width": 584.0
+		"width": 888.0
 	},
 	"selected_group": 0,
 	"settings":
@@ -1271,7 +1200,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 242.0,
+	"side_bar_width": 240.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
