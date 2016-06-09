@@ -483,7 +483,7 @@ function callWebService(_type, _servicePath, _callback)
 	console.log("CallWebService request:" + _servicePath);
 
 	$.ajax({
-	   url: '//localhost:5000/' + _servicePath,
+	   url: '//' + app.m_hostname + '/' + _servicePath,
 	   error: function() 
 	   {
 	     	console.log("CallWebService: error");

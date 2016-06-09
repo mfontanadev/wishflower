@@ -3,6 +3,11 @@ function WishflowerApplication(_document, _window)
 	this.m_document = _document;
 	this.m_window = _window;
 	this.m_canvasEx = null;
+	this.m_hostname = getCurrentHostname(_window);
+	console.log("HOST HOST HOST:" + this.m_hostname);
+
+	// Calculate hostname
+
 
 	// Frequency controler.
 	this.m_startTime = 0;
@@ -28,8 +33,6 @@ function WishflowerApplication(_document, _window)
 	this.m_appDataContext = null;
 
 	this.m_lblInfoControl = null;
-
-
 }
 
 WishflowerApplication.prototype.setContext = function (_appDataContext)
