@@ -1,5 +1,9 @@
-function WishflowerApplication() 
+function WishflowerApplication(_document, _window) 
 { 
+	this.m_document = _document;
+	this.m_window = _window;
+	this.m_canvasEx = null;
+
 	// Frequency controler.
 	this.m_startTime = 0;
 	this.m_elapsedTime = 0;
@@ -20,16 +24,17 @@ function WishflowerApplication()
 	this.m_sampleRenderRate = 0;
 	this.m_sampleLogicRate = 0;
 
-	this.m_wishflowerContext = null;
+	// Global game context to pass data between activities.
+	this.m_appDataContext = null;
 
 	this.m_lblInfoControl = null;
 
 
 }
 
-WishflowerApplication.prototype.setContext = function ()
+WishflowerApplication.prototype.setContext = function (_appDataContext)
 {
-	//this.m_wishflowerContext = new WishflowerContext();
+	this.m_appDataContext = _appDataContext;
 };
 
 WishflowerApplication.prototype.enableProgressBarWhenLoadingResources = function ()
@@ -40,11 +45,19 @@ WishflowerApplication.prototype.enableProgressBarWhenLoadingResources = function
 	var infoControlWidth = 150; 
 	var infoControlHeight = 30;
 
-    this.m_lblInfoControl = new CanvasControl();
+   	this.m_lblInfoControl = new CanvasControl();
 	this.m_lblInfoControl.initLabelStyle(this.m_canvasEx.m_canvas, getCenter(this.m_canvasEx.m_canvas.width, infoControlWidth), getCenter(this.m_canvasEx.m_canvas.height, infoControlHeight), infoControlWidth, infoControlHeight, "");
 	this.m_lblInfoControl._fontSize = 12;
 	this.m_lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
 	this.m_lblInfoControl._visible = true;
 };
 
+WishflowerApplication.prototype.initCanvasById = function (_canvasId)
+{
+	this.m_canvasEx = new chCanvas(this.m_document, this.m_window);
 
+	this.m_canvasEx.setCanvasById(_canvasId);
+	this.m_canvasEx.setResizeMethodToMaxZoom();
+	this.m_canvasEx.enableOnResizeChange();
+	this.m_canvasEx.performResize();
+};

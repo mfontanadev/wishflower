@@ -1,4 +1,4 @@
-var app = new WishflowerApplication();
+var app = null;
 
 // ******************************************************************
 // App vars
@@ -13,12 +13,8 @@ var m_sampleLogicRate = 0;
 // ******************************************************************
 window.onload = function()
 {
-	var canvasEx = new chCanvas(document.getElementById('idCanvas'), window);
-	canvasEx.setResizeMethodToMaxZoom();
-	canvasEx.enableOnResizeChange();
-	canvasEx.performResize();
-
-	app.m_canvasEx = canvasEx;
+	app = new WishflowerApplication(document, window);
+	app.initCanvasById('idCanvas');
 	console.log(app.m_canvasEx.fLog());
 
 	app.enableProgressBarWhenLoadingResources();
