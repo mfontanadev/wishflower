@@ -519,6 +519,49 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "controllers/services/wishflower.Service.js",
+			"settings":
+			{
+				"buffer_size": 984,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/wishflowerController.js",
+			"settings":
+			{
+				"buffer_size": 12163,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "function WishflowerApplication(_document, _window) \n{ \n	this.m_document = _document;\n	this.m_window = _window;\n	this.m_canvasEx = null;\n	this.m_hostname = getCurrentHostname(_window);\n	console.log(\"HOST HOST HOST:\" + this.m_hostname);\n\n	// Calculate hostname\n\n\n	// Frequency controler.\n	this.m_startTime = 0;\n	this.m_elapsedTime = 0;\n\n	// Graphics\n	this.m_canvasEx = null;\n\n	// Singletons\n	this.m_appState = 0;\n	this.m_resourceManager = null;\n	this.m_keyboardManager = null;\n	this.m_soundManager = null;\n	this.m_mouseManager = null;\n\n	this.m_renderTime = -1;\n\n	this.m_sampleCount = 1;\n	this.m_sampleRenderRate = 0;\n	this.m_sampleLogicRate = 0;\n\n	// Global game context to pass data between activities.\n	this.m_appDataContext = null;\n\n	this.m_lblInfoControl = null;\n}\n\nWishflowerApplication.prototype.setContext = function (_appDataContext)\n{\n	this.m_appDataContext = _appDataContext;\n};\n\nWishflowerApplication.prototype.enableProgressBarWhenLoadingResources = function ()\n{\n	if (this.m_canvasEx === null)\n		return;\n\n	var infoControlWidth = 150; \n	var infoControlHeight = 30;\n\n   	this.m_lblInfoControl = new CanvasControl();\n	this.m_lblInfoControl.initLabelStyle(this.m_canvasEx.m_canvas, getCenter(this.m_canvasEx.m_canvas.width, infoControlWidth), getCenter(this.m_canvasEx.m_canvas.height, infoControlHeight), infoControlWidth, infoControlHeight, \"\");\n	this.m_lblInfoControl._fontSize = 12;\n	this.m_lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);\n	this.m_lblInfoControl._visible = true;\n};\n\nWishflowerApplication.prototype.initCanvasById = function (_canvasId)\n{\n	this.m_canvasEx = new chCanvas(this.m_document, this.m_window);\n\n	this.m_canvasEx.setCanvasById(_canvasId);\n	this.m_canvasEx.setResizeMethodToMaxZoom();\n	this.m_canvasEx.enableOnResizeChange();\n	this.m_canvasEx.performResize();\n};\n",
+			"file": "controllers/wishflowerApplication.js",
+			"file_size": 1875,
+			"file_write_time": 131099659258883140,
+			"settings":
+			{
+				"buffer_size": 1809,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lib/chel-1.0.1-dist/js/chlib.js",
+			"settings":
+			{
+				"buffer_size": 27653,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/chatInterpeter.js",
+			"settings":
+			{
+				"buffer_size": 3177,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -578,7 +621,14 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public"
 	],
 	"file_history":
 	[
@@ -713,7 +763,7 @@
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -957,8 +1007,153 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "controllers/services/wishflower.Service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 984,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "controllers/wishflowerController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12163,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11639,
+								11639
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6472.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "controllers/wishflowerApplication.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								767,
+								767
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 252.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lib/chel-1.0.1-dist/js/chlib.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27653,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27454,
+								27454
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 16083.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "controllers/entities/chatInterpeter.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 42.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
 			]
 		}
 	],

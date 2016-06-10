@@ -1,4 +1,4 @@
-var app = null;
+var viewMngr = null;
 
 // ******************************************************************
 // App vars
@@ -13,11 +13,11 @@ var m_sampleLogicRate = 0;
 // ******************************************************************
 window.onload = function()
 {
-	app = new WishflowerApplication(document, window);
-	app.initCanvasById('idCanvas');
-	console.log(app.m_canvasEx.fLog());
+	viewMngr = new ViewManager(document, window);
+	viewMngr.initCanvasById('idCanvas');
+	console.log(viewMngr.m_canvasEx.fLog());
 
-	app.enableProgressBarWhenLoadingResources();
+	viewMngr.enableProgressBarWhenLoadingResources();
 
 	//initializeControls();
 
@@ -28,8 +28,8 @@ window.onload = function()
 
 function initializeControls() 
 {
-	tw = app.m_canvasEx.m_canvas.width;
-	th = app.m_canvasEx.m_canvas.height;
+	tw = viewMngr.m_canvasEx.m_canvas.width;
+	th = viewMngr.m_canvasEx.m_canvas.height;
 
 	bw = 50;
 	bh = 30;
@@ -37,43 +37,43 @@ function initializeControls()
 
  
     lblKeyPathControl = new CanvasControl();
-	lblKeyPathControl.initLabelStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2.5), th - 22 - (bh * 3), bw * 2.5, bh, "");
+	lblKeyPathControl.initLabelStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2.5), th - 22 - (bh * 3), bw * 2.5, bh, "");
 	lblKeyPathControl._fontSize = 14;
 	lblKeyPathControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
 	lblKeyPathControl._visible = false;
 
 	btnMoveLeftControl = new CanvasControl();
-	btnMoveLeftControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
+	btnMoveLeftControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
 	btnMoveLeftControl.setImage("glif-left-arrow.png");
 	btnMoveLeftControl._onClick = this.btnMoveLeftControl_controller;
 	btnMoveLeftControl._visible = false;
 	
 	btnMoveRightControl = new CanvasControl();
-	btnMoveRightControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, ">");
+	btnMoveRightControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, ">");
 	btnMoveRightControl.setImage("glif-right-arrow.png");
 	btnMoveRightControl._onClick = this.btnMoveRightControl_controller;
 	btnMoveRightControl._visible = false;
 
 	btnSubControl = new CanvasControl();
-	btnSubControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
+	btnSubControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
 	btnSubControl.setImage("glif-sub.png");
 	btnSubControl._onClick = this.btnSubControl_controller;
 	btnSubControl._visible = false;
 
 	btnAddControl = new CanvasControl();
-	btnAddControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, "+");
+	btnAddControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, "+");
 	btnAddControl.setImage("glif-add.png");
 	btnAddControl._onClick = this.btnAddControl_controller;
 	btnAddControl._visible = false;
 	
 	btnSendWish = new CanvasControl();
-	btnSendWish.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "Send wish");
+	btnSendWish.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "Send wish");
 	btnSendWish._fontSize = 12;
 	btnSendWish._onClick = this.btnSendWish_controller;
 	btnSendWish._visible = false;
 
 	btnMoveDownControl = new CanvasControl();
-	btnMoveDownControl.initButtonStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "");
+	btnMoveDownControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "");
 	btnMoveDownControl.setImage("glif-down-arrow.png");
 	btnMoveDownControl._fontSize = 12;
 	btnMoveDownControl._onClick = this.btnMoveDownControl_controller;
@@ -81,14 +81,14 @@ function initializeControls()
 	btnMoveDownControl._visible = false;
 
 	inpGenericInput = new CanvasControl();
-	inpGenericInput.initInputStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
+	inpGenericInput.initInputStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
 	inpGenericInput._fontSize = 12;
 	inpGenericInput.setPlaceholderText("Write your wish and send it.");
 	//inpGenericInput._onSubmit = this.btnSendWish_controller;
 	inpGenericInput._visible = false;
 
 	linkToPage = new CanvasControl();
-	linkToPage.initLabelStyle(app.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 10, bw * 4, 10, "(http://wishflower.herokuapp.com)");
+	linkToPage.initLabelStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 10, bw * 4, 10, "(http://wishflower.herokuviewMngr.com)");
 	linkToPage.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
 	linkToPage._fontSize = 10;
 	linkToPage._textJustify = 0;	
@@ -97,7 +97,7 @@ function initializeControls()
 
 function startApp()
 {
-	chUpadeInfoControlTextCanvas(app.m_lblInfoControl, "Loading bitmaps");
+	chUpadeInfoControlTextCanvas(viewMngr.m_lblInfoControl, "Loading bitmaps");
 	m_resourceManager = new ResourceManager();
 	m_resourceManager.initWith
 	(
@@ -107,7 +107,7 @@ function startApp()
 		{
 			initAfterBitmapsLoaded();
 		},
-		app.m_lblInfoControl
+		viewMngr.m_lblInfoControl
 	);
 }
 
@@ -115,7 +115,7 @@ function initAfterBitmapsLoaded()
 {
 	msglog("Bitmaps loaded");
 
-	chUpadeInfoControlTextCanvas(app.m_lblInfoControl, "Loading sounds");
+	chUpadeInfoControlTextCanvas(viewMngr.m_lblInfoControl, "Loading sounds");
 	m_soundManager = new SoundManager();
 	m_soundManager.initWith
 	(
@@ -127,7 +127,7 @@ function initAfterBitmapsLoaded()
 			initAfterSoundsLoaded();
 		},
 		false,
-		app.m_lblInfoControl
+		viewMngr.m_lblInfoControl
 	);
 }
 
@@ -136,7 +136,7 @@ function initAfterSoundsLoaded()
 	msglog("Sounds loaded");
 
 	m_mouseManager = new MouseManager();
-	m_mouseManager.initWith(app.m_canvasEx.m_canvas, m_soundManager);
+	m_mouseManager.initWith(viewMngr.m_canvasEx.m_canvas, m_soundManager);
 
 	// Init keykoard manager
 	m_keyboardManager = new KeyboardManager();
@@ -233,8 +233,8 @@ function render()
 	// clear
 	if (m_refresh === true)
 	{
-        app.m_canvasEx.m_context.clearRect(0, 0, app.m_canvasEx.m_canvas.width, app.m_canvasEx.m_canvas.height);
-        //renderRectangle(app.m_canvasEx.m_canvas, app.m_canvasEx.m_context, 0,0,app.m_canvasEx.m_canvas.width, app.m_canvasEx.m_canvas.height);
+        viewMngr.m_canvasEx.m_context.clearRect(0, 0, viewMngr.m_canvasEx.m_canvas.width, viewMngr.m_canvasEx.m_canvas.height);
+        //renderRectangle(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, 0,0,viewMngr.m_canvasEx.m_canvas.width, viewMngr.m_canvasEx.m_canvas.height);
         m_treeNode.render();
 	}
 
@@ -247,7 +247,7 @@ function render()
 
 function renderControls()
 {
-    app.m_lblInfoControl.render();
+    viewMngr.m_lblInfoControl.render();
 /*
     lblKeyPathControl.render();
     btnSubControl.render();
@@ -284,7 +284,7 @@ function doAppStateIntro_Logic()
 {
 	m_appState = MainLoopState.C_APP_STATE_WAITING_USER_NAME;
 
-	app.m_lblInfoControl._visible = false;
+	viewMngr.m_lblInfoControl._visible = false;
 
 	/*
     lblKeyPathControl._visible = true;
@@ -296,9 +296,9 @@ function doAppStateIntro_Logic()
 	*/
 
 	// Creeate
-	m_treeNode.initWithRootAndBranch(app.m_canvasEx.m_canvas, app.m_canvasEx.m_context, m_resourceManager);
+	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_resourceManager);
 	//m_treeNode.setY(this.m_canvas.height - 87);
-	m_treeNode.setY(app.m_canvasEx.m_canvas.height-111);
+	m_treeNode.setY(viewMngr.m_canvasEx.m_canvas.height-111);
 	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);
 	m_treeNode.reset();
 	updateTreeData();
@@ -483,7 +483,7 @@ function callWebService(_type, _servicePath, _callback)
 	console.log("CallWebService request:" + _servicePath);
 
 	$.ajax({
-	   url: '//' + app.m_hostname + '/' + _servicePath,
+	   url: '//' + viewMngr.m_hostname + '/' + _servicePath,
 	   error: function() 
 	   {
 	     	console.log("CallWebService: error");
