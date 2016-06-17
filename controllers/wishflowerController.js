@@ -1,3 +1,4 @@
+// TO DO: hacer sound manager igual que resource manager.
 var viewMngr = null;
 
 // ******************************************************************
@@ -15,11 +16,22 @@ window.onload = function()
 {
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas');
-	console.log(viewMngr.m_canvasEx.fLog());
-
 	viewMngr.enableProgressBarWhenLoadingResources();
+	console.log(viewMngr);
 
-	//initializeControls();
+	// Enable using bitmaps
+	var resourceManager = viewMngr.createResourceManager();
+	resourceManager.setProgressBar(viewMngr.getProgressBar());
+	resourceManager.setProgressBarMessage("Loading bitmpas");
+	resourceManager.setFilenamesArray(global_image_definition);
+	resourceManager.setOnSuccessEventListener(bitmapsLoadCallback);
+
+	// Enable using sounds
+	var soundManager = viewMngr.createSoundManager();
+	soundManager.setProgressBar(viewMngr.getProgressBar());
+	soundManager.setProgressBarMessage("Loading sounds");
+	soundManager.setFilenamesArray(global_sound_definition);
+	soundManager.setOnSuccessEventListener(soundsLoadCallback);
 
 	startApp();
 	render();
@@ -97,44 +109,30 @@ function initializeControls()
 
 function startApp()
 {
-	chUpadeInfoControlTextCanvas(viewMngr.m_lblInfoControl, "Loading bitmaps");
-	m_resourceManager = new ResourceManager();
-	m_resourceManager.initWith
-	(
-		global_image_definition,
-		// Al terminar de cargar las images ejecutar la funcion.
-		function()
-		{
-			initAfterBitmapsLoaded();
-		},
-		viewMngr.m_lblInfoControl
-	);
+	// Asynchronic bitmap loading.
+	viewMngr.loadBitmaps();
 }
 
-function initAfterBitmapsLoaded()
+function bitmapsLoadCallback()
 {
-	msglog("Bitmaps loaded");
+	//console.log(viewMngr.m_resourceManager.m_managerAvailable);
+	// Asynchronic bitmap loading.
 
-	chUpadeInfoControlTextCanvas(viewMngr.m_lblInfoControl, "Loading sounds");
-	m_soundManager = new SoundManager();
-	m_soundManager.initWith
-	(
-		global_sound_definition,
-		"",
-		function()
-		{
-			msglog('callback sound function');
-			initAfterSoundsLoaded();
-		},
-		false,
-		viewMngr.m_lblInfoControl
-	);
+
+	viewMngr.loadSounds();
 }
 
-function initAfterSoundsLoaded()
+function soundsLoadCallback()
 {
-	msglog("Sounds loaded");
+	console.log("controller: sounds loaded");
 
+	//Test image and sound
+	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_resourceManager.getImage(0), 0,0, 1);
+	//viewMngr.m_soundManager.play(0);	
+
+//	viewMngr.m_soundManager.playSoundTest();	
+//	console.log(viewMngr.m_soundManager.m_managerAvailable);
+/*
 	m_mouseManager = new MouseManager();
 	m_mouseManager.initWith(viewMngr.m_canvasEx.m_canvas, m_soundManager);
 
@@ -150,6 +148,7 @@ function initAfterSoundsLoaded()
 	m_startTime = (new Date()).getTime();
 
 	animate();
+	*/
 }
 
 // Game loop
@@ -284,7 +283,7 @@ function doAppStateIntro_Logic()
 {
 	m_appState = MainLoopState.C_APP_STATE_WAITING_USER_NAME;
 
-	viewMngr.m_lblInfoControl._visible = false;
+	//viewMngr.m_lblInfoControl._visible = false;
 
 	/*
     lblKeyPathControl._visible = true;

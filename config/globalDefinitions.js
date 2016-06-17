@@ -14,6 +14,7 @@ MainLoopState.C_LOCAL_STORE_NAMESPACE = "wishflower";
 
 // All sounds used by de app. SoundManager will preload all of them.
 var global_sound_definition = [
+    {src:"Bassdrum_stn.mp3", id:0}
 ];
 
 // All bitmaps used by de app. ResourceManager will preload all of them.

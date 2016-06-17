@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"init",
+				"initDefault"
+			],
+			[
+				"m_",
+				"m_lblInfoControl"
+			],
+			[
+				"load",
+				"loadBitmaps"
+			],
+			[
 				"C_NODE_TYPE_",
 				"C_NODE_TYPE_BRANCH"
 			],
@@ -22,10 +34,6 @@
 			[
 				"is",
 				"isNodeVisibleByCursor"
-			],
-			[
-				"m_",
-				"m_level"
 			],
 			[
 				"pla",
@@ -280,10 +288,6 @@
 				"_directorMode"
 			],
 			[
-				"init",
-				"initWithFull"
-			],
-			[
 				"m_sco",
 				"m_scoreRow"
 			],
@@ -510,55 +514,43 @@
 			[
 				"m_ar",
 				"m_arrAnimations"
-			],
-			[
-				"C_obj_tpe_tr",
-				"C_OBJ_TYPE_TRASH_PAPER"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "controllers/services/wishflower.Service.js",
-			"settings":
-			{
-				"buffer_size": 984,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "controllers/wishflowerController.js",
 			"settings":
 			{
-				"buffer_size": 12163,
+				"buffer_size": 12626,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "function WishflowerApplication(_document, _window) \n{ \n	this.m_document = _document;\n	this.m_window = _window;\n	this.m_canvasEx = null;\n	this.m_hostname = getCurrentHostname(_window);\n	console.log(\"HOST HOST HOST:\" + this.m_hostname);\n\n	// Calculate hostname\n\n\n	// Frequency controler.\n	this.m_startTime = 0;\n	this.m_elapsedTime = 0;\n\n	// Graphics\n	this.m_canvasEx = null;\n\n	// Singletons\n	this.m_appState = 0;\n	this.m_resourceManager = null;\n	this.m_keyboardManager = null;\n	this.m_soundManager = null;\n	this.m_mouseManager = null;\n\n	this.m_renderTime = -1;\n\n	this.m_sampleCount = 1;\n	this.m_sampleRenderRate = 0;\n	this.m_sampleLogicRate = 0;\n\n	// Global game context to pass data between activities.\n	this.m_appDataContext = null;\n\n	this.m_lblInfoControl = null;\n}\n\nWishflowerApplication.prototype.setContext = function (_appDataContext)\n{\n	this.m_appDataContext = _appDataContext;\n};\n\nWishflowerApplication.prototype.enableProgressBarWhenLoadingResources = function ()\n{\n	if (this.m_canvasEx === null)\n		return;\n\n	var infoControlWidth = 150; \n	var infoControlHeight = 30;\n\n   	this.m_lblInfoControl = new CanvasControl();\n	this.m_lblInfoControl.initLabelStyle(this.m_canvasEx.m_canvas, getCenter(this.m_canvasEx.m_canvas.width, infoControlWidth), getCenter(this.m_canvasEx.m_canvas.height, infoControlHeight), infoControlWidth, infoControlHeight, \"\");\n	this.m_lblInfoControl._fontSize = 12;\n	this.m_lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);\n	this.m_lblInfoControl._visible = true;\n};\n\nWishflowerApplication.prototype.initCanvasById = function (_canvasId)\n{\n	this.m_canvasEx = new chCanvas(this.m_document, this.m_window);\n\n	this.m_canvasEx.setCanvasById(_canvasId);\n	this.m_canvasEx.setResizeMethodToMaxZoom();\n	this.m_canvasEx.enableOnResizeChange();\n	this.m_canvasEx.performResize();\n};\n",
-			"file": "controllers/wishflowerApplication.js",
-			"file_size": 1875,
-			"file_write_time": 131099659258883140,
+			"contents": "// Class SoundManager:\n//    Se encarga de cargar dinamicamente los sonidos y gestionar su utilizacion \n//    bajo demanda de las clases que necesiten dibujar.\n\nSoundManager.self = null;\n\nfunction SoundManager()\n{\n	SoundManager.self = this;\n\n	SoundManager.prototype.initDefault = function() \n	{\n		msglog('INIT SOUND:initWith');\n		\n		SoundManager.self = this;\n\n		this.m_items = new Array();\n		this.m_filenames = new Array();\n\n		this.m_idProgressBar = null;\n		this.m_progressBarMessage = \"\";\n\n		this.m_onSuccessCallbak = null;\n\n		//this.m_timeoutRunning = false;\n		//this.m_soundDisabled = false;\n		//this.m_soundCount = -1;\n		//this.m_totalSounds = 0;\n		this.m_firstInit = false;\n\n		if (!createjs.Sound.initializeDefaultPlugins())\n		{\n			msglog('INIT SOUND: new createjs.Sound.initializeDefaultPlugins() not created.');\n\n			// Default sounds\n			this.m_filenames.push({src:\"/lib/nosound.wav\", id:-1});\n			this.m_filenames.push({src:\"/lib/soundtest.mp3\", id:-2});\n        }\n	};\n\n	SoundManager.prototype.initWith = function (_filenames, _callback, _progressBar)\n	{\n		msglog('INIT SOUND:initWith');\n\n		SoundManager.self = this;\n	\n		this.initDefault();\n\n		this.m_filenames = _filenames;\n        this.m_idProgressBar = _progressBar;\n		this.m_onSuccessCallbak = null;\n\n		this.m_totalSounds = this.m_filenames.length;\n		this.m_soundCount = this.m_totalSounds;\n	};\n\n\n		try\n		{\n			createjs.Sound.alternateExtensions = [\"mp3\"];	// add other extensions to try loading if the src file extension is not supported\n			createjs.Sound.addEventListener(\"fileload\", this.soundLoaded);\n			createjs.Sound.registerSounds(this.m_soundList);\n			msglog('INIT SOUND: ok');\n\n			this.m_timeoutRunning = true;\n			window.setTimeout(this.soundLoadTimeOut, 1000 * 10);\n		}\n		catch (e)\n		{\n			msglog('INIT SOUND ERROR:' + e);\n            this.m_timeoutRunning = true;\n            window.setTimeout(this.soundLoadTimeOut, 1000 * 10);\n		}\n	};\n	\n	SoundManager.prototype.setProgressBar = function (_idProgressBar)\n	{\n		m_idProgressBar = _idProgressBar;\n	};\n\n	SoundManager.prototype.soundLoadTimeOut = function(event)\n	{\n		if (ownerSoundManager.m_timeoutRunning === true)\n		{\n			msglog('INIT SOUND: timeout, continue.');\n			ownerSoundManager.m_soundDisabled = true;\n			ownerSoundManager.m_onSuccessCallbak();\n		}\n	};\n\n	SoundManager.prototype.soundLoaded = function(event)\n	{\n		ownerSoundManager.m_timeoutRunning = false;\n		ownerSoundManager.m_soundCount--;\n		msglog(\"Sound loaded id=\" + event.id+ \", count=\" + ownerSoundManager.m_soundCount);\n\n        if ( (typeof ownerSoundManager.m_idProgressBar !== 'undefined') && (ownerSoundManager.m_idProgressBar !== null) )\n		{\n			var percent = (Math.floor(((ownerSoundManager.m_totalSounds - ownerSoundManager.m_soundCount) / ownerSoundManager.m_totalSounds) * 100));\n\n			if ( (typeof ownerSoundManager.m_idProgressBar !== 'undefined') && (ownerSoundManager.m_idProgressBar !== null) )\n            {\n                chUpadeInfoControlTextCanvas(ownerSoundManager.m_idProgressBar, \"Loading sounds: \" + percent + \"%\");\n            }\n		}\n\n		if (ownerSoundManager.m_soundCount === 0)\n		{\n			ownerSoundManager.progressBarVisibility(false);\n			ownerSoundManager.m_onSuccessCallbak();\n		}\n	};\n\n	SoundManager.prototype.initFirstSound = function(_id) \n	{\n		if (this.m_soundDisabled === false && this.m_firstInit === false)\n		{\n			this.m_firstInit = true;\n			this.play(-1);\n		}\n	};\n\n	SoundManager.prototype.playSoundTest = function(_id) \n	{\n		if (this.m_soundDisabled === false)\n		{\n			this.play(-2);\n		}\n	};\n\n	SoundManager.prototype.play = function(_id) \n	{\n		if (this.m_soundDisabled === false)\n		{\n			//Play the sound: play (src, interrupt, delay, offset, loop, volume, pan)\n            var instance = createjs.Sound.play(_id, createjs.Sound.INTERRUPT_ANY, 0, 0, false, 1);\n\n            if (instance == null || instance.playState == createjs.Sound.PLAY_FAILED) \n			{\n				msglog(\"play sound fail id=\" + _id);\n				return; \n			}\n\n			instance.addEventListener (\"complete\", function(instance) \n			{\n				//msglog(\"audio complete\");\n			});\n\n			return instance;\n		}\n	};\n	\n	SoundManager.prototype.stop = function(_id) \n	{\n		if (this.m_soundDisabled === false)\n		{\n			createjs.Sound.stop(_id);\n		}\n	};\n\n	SoundManager.prototype.isPlaying = function(_id) \n	{\n        //TODO: implement soundjs implementation.\n		return false;\n	};\n	\n	SoundManager.prototype.setLoop = function(_id, _infiniteLoop) \n	{\n        //TODO: implement soundjs implementation.\n	};\n	\n	SoundManager.prototype.setVolume = function(_id, _volumePercent) \n	{\n        //TODO: implement soundjs implementation.\n	};\n	\n	SoundManager.prototype.progressBarVisibility = function(_visible)\n	{ \n		if ((typeof m_idProgressBar !== 'undefined') && m_idProgressBar !== null && m_idProgressBar != \"\")\n			m_idProgressBar._visible = _visible;\n	};\n\n	SoundManager.prototype.getSoundIdBySoundName = function(_soundName, _wholeWord)\n	{ \n		var result = -1;\n\n		if (this.m_soundDisabled === false)\n		{\n			if (_wholeWord === true)\n			{\n				for (var i = 0; i < this.m_soundList.length; i++) \n				{\n					if ( this.m_soundList[i].src === _soundName)\n						result = this.m_soundList[i].id;\n				}\n			}\n			else\n			{\n				for (var i = 0; i < this.m_soundList.length; i++) \n				{\n					if ( this.m_soundList[i].src.indexOf(_soundName) != -1)\n						result = this.m_soundList[i].id;\n				}\n			}\n		}\n		\n		return result;\n	}\n\n}",
+			"file": "lib/chel-1.0.1-dist/js/soundManager.js",
+			"file_size": 5537,
+			"file_write_time": 131104942887563355,
 			"settings":
 			{
-				"buffer_size": 1809,
+				"buffer_size": 5336,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/chel-1.0.1-dist/js/chlib.js",
+			"file": "lib/chel-1.0.1-dist/js/resourceManager.js",
 			"settings":
 			{
-				"buffer_size": 27653,
+				"buffer_size": 3612,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "controllers/entities/chatInterpeter.js",
+			"file": "lib/chel-1.0.1-dist/js/viewManager.js",
 			"settings":
 			{
-				"buffer_size": 3177,
+				"buffer_size": 3015,
 				"line_ending": "Windows"
 			}
 		}
@@ -622,8 +614,10 @@
 	"expanded_folders":
 	[
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist",
@@ -632,12 +626,21 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Service.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerApplication.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Service.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/wishflower.ServiceMock.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
@@ -750,16 +753,7 @@
 		"/C/Users/mfontana/Mios/Today/chirp-master/chirp-master/chirp/app.js",
 		"/C/Users/mfontana/Downloads/base-express-master/base-express-master/app.js",
 		"/C/Users/mfontana/Downloads/base-express-master/base-express-master/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/instrument.js",
-		"/C/Users/mfontana/Mios/Today/chirp-master/chirp-master/chirp/routes/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/helloworld_controller.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta - Copy/public/testsnd.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/helloworld.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/public/editorMulti.html",
-		"/C/Users/mfontana/Downloads/base-express-master/base-express-master/models/comment.js",
-		"/C/Users/mfontana/Downloads/base-express-master/base-express-master/middlewares/users.js",
-		"/C/Users/mfontana/Downloads/base-express-master/base-express-master/middlewares/auth.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/routes/controllers.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/instrument.js"
 	],
 	"find":
 	{
@@ -770,6 +764,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower",
 			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\OrchestaHeroku\\orchesta",
 			""
 		]
@@ -779,6 +774,39 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_soundDisabled",
+			"m_soundCount",
+			"_soundPath",
+			"m_timeoutRunning",
+			"m_callback_allLoadedAudio",
+			"preload",
+			"imageloadpost",
+			"m_idProgressBar",
+			"isvi",
+			"m_idProgressBar",
+			"progressBarVisibility",
+			"ownerResourceManager",
+			"bitmaps loaded",
+			"m_lblInfoControl",
+			"preloadImages",
+			"m_items",
+			"m_arrImages",
+			"m_progressBarMessage",
+			"m_arrImages",
+			"_imagesFilenameArray",
+			"m_imagesFilename",
+			"m_idProgressBar",
+			"progressBarVisibility",
+			"C_IMAGE_FOLDER",
+			"bitmapsLoadCallback",
+			"resource",
+			"m_idProgressBar",
+			"ownerResourceManager",
+			"m_onSuccessCallbak",
+			"preloadImages",
+			"m_lblInfoControl",
+			"loadBitmaps",
+			"startApp",
 			"rememberWishText",
 			"tmpCursorParsed",
 			"focus",
@@ -873,40 +901,7 @@
 			"mang",
 			"handle",
 			"tmpSB",
-			"m_textArea",
-			"m_ctreeNode",
-			"CTreeNode",
-			"CTreeNode.",
-			"factory",
-			"m_scoreFactory",
-			"reqScoreFactory",
-			"OrchestaFactory",
-			"reqOrchestaFactory",
-			"v3.01",
-			"myCanvas",
-			"idCanvas",
-			"myCanvas",
-			"v3.00",
-			"v3.0",
-			"v3.00",
-			"handle",
-			"btnLoadInstrument_controller",
-			"handleInputs",
-			"m_directorMode",
-			"m_drawClientName",
-			"startButton",
-			"getMusicianName",
-			"loginHelpe",
-			"getMusicianName",
-			"m_textArea",
-			"script src=\"../lib/jquery-1.11",
-			"socket",
-			"node",
-			"hello",
-			"Protocol_Messages",
-			"protocolMessages",
-			"glc = require",
-			"var glc = null"
+			"m_textArea"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1007,52 +1002,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/services/wishflower.Service.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 984,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "controllers/wishflowerController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12163,
+						"buffer_size": 12626,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11639,
-								11639
+								1256,
+								1256
 							]
 						],
 						"settings":
@@ -1061,27 +1028,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6472.0,
+						"translation.y": 161.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "controllers/wishflowerApplication.js",
+					"buffer": 1,
+					"file": "lib/chel-1.0.1-dist/js/soundManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1809,
+						"buffer_size": 5336,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								767,
-								767
+								655,
+								655
 							]
 						],
 						"settings":
@@ -1090,56 +1057,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 252.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lib/chel-1.0.1-dist/js/chlib.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 27653,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								27454,
-								27454
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 16083.0,
+						"translation.y": 1275.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "controllers/entities/chatInterpeter.js",
+					"buffer": 2,
+					"file": "lib/chel-1.0.1-dist/js/resourceManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3177,
+						"buffer_size": 3612,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								407,
-								367
+								1515,
+								845
 							]
 						],
 						"settings":
@@ -1148,10 +1086,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 42.0,
+						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lib/chel-1.0.1-dist/js/viewManager.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3015,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1523,
+								1523
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 472.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1159,7 +1126,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1200,7 +1167,7 @@
 	"project": "app-bf.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
