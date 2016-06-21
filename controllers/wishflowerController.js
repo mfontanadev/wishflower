@@ -1,4 +1,3 @@
-// TO DO: hacer sound manager igual que resource manager.
 var viewMngr = null;
 
 // ******************************************************************
@@ -20,20 +19,22 @@ window.onload = function()
 	console.log(viewMngr);
 
 	// Enable using bitmaps
-	var resourceManager = viewMngr.createResourceManager();
-	resourceManager.setProgressBar(viewMngr.getProgressBar());
-	resourceManager.setProgressBarMessage("Loading bitmpas");
-	resourceManager.setFilenamesArray(global_image_definition);
-	resourceManager.setOnSuccessEventListener(bitmapsLoadCallback);
+	var bitmapManager = viewMngr.createBitmapManager();
+	bitmapManager.setProgressBar(viewMngr.getProgressBar());
+	bitmapManager.setProgressBarMessage("Loading bitmpas");
+	bitmapManager.setFilenamesArray(global_bitmap_definition);
+	//bitmapManager.setOnLoadedEventListener(bitmapsLoadCallback);
 
 	// Enable using sounds
 	var soundManager = viewMngr.createSoundManager();
 	soundManager.setProgressBar(viewMngr.getProgressBar());
 	soundManager.setProgressBarMessage("Loading sounds");
 	soundManager.setFilenamesArray(global_sound_definition);
-	soundManager.setOnSuccessEventListener(soundsLoadCallback);
+	//soundManager.setOnLoadedEventListener(soundsLoadCallback);
 
-	startApp();
+	viewMngr.performFullResourcesLoad(this.setupApp);
+
+	//startApp();
 	render();
 
 };
@@ -107,27 +108,31 @@ function initializeControls()
 	linkToPage._visible = false;
 }
 
+function setupApp()
+{
+	console.log("SETUP");
+	console.log(viewMngr.m_bitmapManager.m_managerAvailable);
+	console.log(viewMngr.m_soundManager.m_managerAvailable);
+}
+
+
 function startApp()
 {
-	// Asynchronic bitmap loading.
 	viewMngr.loadBitmaps();
 }
 
 function bitmapsLoadCallback()
 {
-	//console.log(viewMngr.m_resourceManager.m_managerAvailable);
-	// Asynchronic bitmap loading.
-
-
 	viewMngr.loadSounds();
 }
 
 function soundsLoadCallback()
 {
 	console.log("controller: sounds loaded");
-
+	console.log(viewMngr.m_bitmapManager.m_managerAvailable);
+	console.log(viewMngr.m_soundManager.m_managerAvailable);
 	//Test image and sound
-	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_resourceManager.getImage(0), 0,0, 1);
+	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
 	//viewMngr.m_soundManager.play(0);	
 
 //	viewMngr.m_soundManager.playSoundTest();	
@@ -295,7 +300,7 @@ function doAppStateIntro_Logic()
 	*/
 
 	// Creeate
-	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_resourceManager);
+	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_bitmapManager);
 	//m_treeNode.setY(this.m_canvas.height - 87);
 	m_treeNode.setY(viewMngr.m_canvasEx.m_canvas.height-111);
 	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);

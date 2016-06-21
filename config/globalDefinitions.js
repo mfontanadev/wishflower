@@ -18,7 +18,7 @@ var global_sound_definition = [
 ];
 
 // All bitmaps used by de app. ResourceManager will preload all of them.
-var global_image_definition = 
+var global_bitmap_definition = 
 [
     'glif-left-arrow.png',
     'glif-right-arrow.png',

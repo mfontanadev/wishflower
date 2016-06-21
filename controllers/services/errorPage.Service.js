@@ -103,7 +103,7 @@ function initializeControls()
 	btnMoveDownControl.setImage("glif-down-arrow.png");
 	btnMoveDownControl._fontSize = 12;
 	btnMoveDownControl._onClick = this.btnMoveDownControl_controller;
-		btnMoveDownControl.setPlaceholderText("hol222a");
+	btnMoveDownControl.setPlaceholderText("hol222a");
 	btnMoveDownControl._visible = false;
 
 	inpGenericInput = new CanvasControl();
@@ -120,7 +120,7 @@ function startApp()
 	m_resourceManager = new ResourceManager();
 	m_resourceManager.initWith
 	(
-		global_image_definition,
+		global_bitmap_definition,
 		// Al terminar de cargar las images ejecutar la funcion.
 		function()
 		{
