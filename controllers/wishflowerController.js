@@ -23,20 +23,19 @@ window.onload = function()
 	bitmapManager.setProgressBar(viewMngr.getProgressBar());
 	bitmapManager.setProgressBarMessage("Loading bitmpas");
 	bitmapManager.setFilenamesArray(global_bitmap_definition);
-	//bitmapManager.setOnLoadedEventListener(bitmapsLoadCallback);
 
 	// Enable using sounds
 	var soundManager = viewMngr.createSoundManager();
 	soundManager.setProgressBar(viewMngr.getProgressBar());
 	soundManager.setProgressBarMessage("Loading sounds");
 	soundManager.setFilenamesArray(global_sound_definition);
-	//soundManager.setOnLoadedEventListener(soundsLoadCallback);
 
-	viewMngr.performFullResourcesLoad(this.setupApp);
+	// Do this after Canvas and Sound were created.
+	viewMngr.initializeMouseManager();
 
 	//startApp();
+	viewMngr.performFullResourcesLoad(this.startApp);
 	render();
-
 };
 
 function initializeControls() 
@@ -108,35 +107,20 @@ function initializeControls()
 	linkToPage._visible = false;
 }
 
-function setupApp()
+function startApp()
 {
 	console.log("SETUP");
 	console.log(viewMngr.m_bitmapManager.m_managerAvailable);
 	console.log(viewMngr.m_soundManager.m_managerAvailable);
-}
 
-
-function startApp()
-{
-	viewMngr.loadBitmaps();
-}
-
-function bitmapsLoadCallback()
-{
-	viewMngr.loadSounds();
+	//Test image and sound
+	//console.log("controller: test sound and image");
+	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
+	//viewMngr.m_soundManager.playSoundTest();	
 }
 
 function soundsLoadCallback()
 {
-	console.log("controller: sounds loaded");
-	console.log(viewMngr.m_bitmapManager.m_managerAvailable);
-	console.log(viewMngr.m_soundManager.m_managerAvailable);
-	//Test image and sound
-	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
-	//viewMngr.m_soundManager.play(0);	
-
-//	viewMngr.m_soundManager.playSoundTest();	
-//	console.log(viewMngr.m_soundManager.m_managerAvailable);
 /*
 	m_mouseManager = new MouseManager();
 	m_mouseManager.initWith(viewMngr.m_canvasEx.m_canvas, m_soundManager);
