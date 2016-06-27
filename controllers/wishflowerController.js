@@ -19,13 +19,13 @@ window.onload = function()
 	console.log(viewMngr);
 
 	// Enable using bitmaps
-	var bitmapManager = viewMngr.createBitmapManager();
+	var bitmapManager = viewMngr.getBitmapManagerInstance();
 	bitmapManager.setProgressBar(viewMngr.getProgressBar());
 	bitmapManager.setProgressBarMessage("Loading bitmpas");
 	bitmapManager.setFilenamesArray(global_bitmap_definition);
 
 	// Enable using sounds
-	var soundManager = viewMngr.createSoundManager();
+	var soundManager = viewMngr.getSoundManagerInstance();
 	soundManager.setProgressBar(viewMngr.getProgressBar());
 	soundManager.setProgressBarMessage("Loading sounds");
 	soundManager.setFilenamesArray(global_sound_definition);
@@ -33,111 +33,34 @@ window.onload = function()
 	// Do this after Canvas and Sound were created.
 	viewMngr.initializeMouseManager();
 
+	// Initialize keyboard functionality
+	viewMngr.initializeKeyboardManager(true);
+
 	//startApp();
-	viewMngr.performFullResourcesLoad(this.startApp);
+	viewMngr.performFullResourcesLoad(this.appSetup);
+
 	render();
 };
 
-function initializeControls() 
+function appSetup()
 {
-	tw = viewMngr.m_canvasEx.m_canvas.width;
-	th = viewMngr.m_canvasEx.m_canvas.height;
-
-	bw = 50;
-	bh = 30;
-	bc = 4;
-
- 
-    lblKeyPathControl = new CanvasControl();
-	lblKeyPathControl.initLabelStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2.5), th - 22 - (bh * 3), bw * 2.5, bh, "");
-	lblKeyPathControl._fontSize = 14;
-	lblKeyPathControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
-	lblKeyPathControl._visible = false;
-
-	btnMoveLeftControl = new CanvasControl();
-	btnMoveLeftControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
-	btnMoveLeftControl.setImage("glif-left-arrow.png");
-	btnMoveLeftControl._onClick = this.btnMoveLeftControl_controller;
-	btnMoveLeftControl._visible = false;
-	
-	btnMoveRightControl = new CanvasControl();
-	btnMoveRightControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, ">");
-	btnMoveRightControl.setImage("glif-right-arrow.png");
-	btnMoveRightControl._onClick = this.btnMoveRightControl_controller;
-	btnMoveRightControl._visible = false;
-
-	btnSubControl = new CanvasControl();
-	btnSubControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) - bw -20, th - 17 - (bh * 2), 30, bh, "");
-	btnSubControl.setImage("glif-sub.png");
-	btnSubControl._onClick = this.btnSubControl_controller;
-	btnSubControl._visible = false;
-
-	btnAddControl = new CanvasControl();
-	btnAddControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, 30) + bw + 20, th - 17 - (bh * 2), 30, bh, "+");
-	btnAddControl.setImage("glif-add.png");
-	btnAddControl._onClick = this.btnAddControl_controller;
-	btnAddControl._visible = false;
-	
-	btnSendWish = new CanvasControl();
-	btnSendWish.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "Send wish");
-	btnSendWish._fontSize = 12;
-	btnSendWish._onClick = this.btnSendWish_controller;
-	btnSendWish._visible = false;
-
-	btnMoveDownControl = new CanvasControl();
-	btnMoveDownControl.initButtonStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 2), th - 17 - (bh * 2), bw * 2, bh, "");
-	btnMoveDownControl.setImage("glif-down-arrow.png");
-	btnMoveDownControl._fontSize = 12;
-	btnMoveDownControl._onClick = this.btnMoveDownControl_controller;
-	btnMoveDownControl.setPlaceholderText("hol222a");
-	btnMoveDownControl._visible = false;
-
-	inpGenericInput = new CanvasControl();
-	inpGenericInput.initInputStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
-	inpGenericInput._fontSize = 12;
-	inpGenericInput.setPlaceholderText("Write your wish and send it.");
-	//inpGenericInput._onSubmit = this.btnSendWish_controller;
-	inpGenericInput._visible = false;
-
-	linkToPage = new CanvasControl();
-	linkToPage.initLabelStyle(viewMngr.m_canvasEx.m_canvas, getCX(tw, bw * 4), th - 10, bw * 4, 10, "(http://wishflower.herokuviewMngr.com)");
-	linkToPage.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
-	linkToPage._fontSize = 10;
-	linkToPage._textJustify = 0;	
-	linkToPage._visible = false;
-}
-
-function startApp()
-{
-	console.log("SETUP");
-	console.log(viewMngr.m_bitmapManager.m_managerAvailable);
-	console.log(viewMngr.m_soundManager.m_managerAvailable);
+	console.log("--------------------------------appSetup--------------------------------");
+	console.log("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);
+	console.log("sound manager available:" + viewMngr.m_soundManager.m_managerAvailable);
 
 	//Test image and sound
 	//console.log("controller: test sound and image");
 	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
 	//viewMngr.m_soundManager.playSoundTest();	
-}
-
-function soundsLoadCallback()
-{
-/*
-	m_mouseManager = new MouseManager();
-	m_mouseManager.initWith(viewMngr.m_canvasEx.m_canvas, m_soundManager);
-
-	// Init keykoard manager
-	m_keyboardManager = new KeyboardManager();
-	m_keyboardManager.initWithDefaultCallbaks(true);
 
 	// debug settings
 	m_appState = MainLoopState.C_APP_STATE_INTRO;
-	doAppStateIntro_Logic();
+	//doAppStateIntro_Logic();
 
 	// Init timer counter.
-	m_startTime = (new Date()).getTime();
+	//m_startTime = (new Date()).getTime();
 
-	animate();
-	*/
+	//animate();
 }
 
 // Game loop

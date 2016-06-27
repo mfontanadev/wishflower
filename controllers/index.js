@@ -2,6 +2,10 @@ module.exports = function(app)
 {
 	// CONTEXTS
 
+	// ACTIVITIES
+	app.get ('/activities/wishflowerPlayActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/wishflowerPlayActivity.js');});
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});
