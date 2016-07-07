@@ -523,23 +523,7 @@
 			"file": "controllers/wishflowerController.js",
 			"settings":
 			{
-				"buffer_size": 12435,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lib/chel-1.0.1-dist/js/viewManager.js",
-			"settings":
-			{
-				"buffer_size": 4684,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lib/chel-1.0.1-dist/js/mouseManager.js",
-			"settings":
-			{
-				"buffer_size": 4610,
+				"buffer_size": 9293,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,23 +531,31 @@
 			"file": "controllers/wishflowerContext.js",
 			"settings":
 			{
-				"buffer_size": 89,
+				"buffer_size": 786,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/chel-1.0.1-dist/js/soundManager.js",
+			"file": "lib/chel-1.0.1-dist/js/viewManager.js",
 			"settings":
 			{
-				"buffer_size": 6280,
+				"buffer_size": 5861,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/chel-1.0.1-dist/js/bitmapManager.js",
+			"file": "views/wishflowerView.html",
 			"settings":
 			{
-				"buffer_size": 4566,
+				"buffer_size": 2050,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config/globalDefinitions.js",
+			"settings":
+			{
+				"buffer_size": 1082,
 				"line_ending": "Windows"
 			}
 		}
@@ -629,6 +621,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
@@ -640,26 +633,31 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Route.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Service.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/resourceManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerApplication.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Service.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/views/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/services/wishflower.ServiceMock.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
@@ -762,12 +760,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/Ctree/test.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/_back/private/editorController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/data/game_data.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/classes/glc.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/helpers/helpers.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/consts.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/lib/chel-1.0.0-dist/js/keyboardManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/framework/consts.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/data/game_data.js"
 	],
 	"find":
 	{
@@ -788,6 +781,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"m_appState",
+			"doAppStateIntro_Logic",
+			"m_lblInfoControl",
+			"C_APP_STATE_WAITING_USER_NAME",
+			"doAppStateIntro_Logic",
+			"startApp",
+			"render",
+			"updateTimer",
+			"doAppStateIntro_Logic",
+			"console",
+			"initWith",
+			"ownerKeyboardManager",
+			"m_startTime",
+			"doAppStateIntro_Logic",
+			"createMouseManager",
+			"createSoundManager",
 			"owner",
 			"m_mouseClick",
 			"m_managerAvailable",
@@ -899,23 +908,7 @@
 			"_placeHolderText",
 			"_placeHo",
 			"_placeHolderColor",
-			"btnAddControl",
-			"m_refresh",
-			"onRefresh",
-			"_imageLoaded",
-			"infocon",
-			"doAppStateIntro_Logic",
-			"lblInfoControl",
-			"server",
-			"btnContinue_controller",
-			"onsu",
-			"onsub",
-			"oncli",
-			"lblInfoControl",
-			"btnContinue",
-			"_onSubmit",
-			"createRootNode",
-			"C_NODE_TYPE_ROOT"
+			"btnAddControl"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1016,7 +1009,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1025,15 +1018,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12435,
+						"buffer_size": 9293,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								730,
-								730
+								2254,
+								2254
 							]
 						],
 						"settings":
@@ -1042,85 +1035,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 159.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "lib/chel-1.0.1-dist/js/viewManager.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4684,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4165,
-								4165
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 465.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "lib/chel-1.0.1-dist/js/mouseManager.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4610,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								553,
-								575
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 54.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
+					"buffer": 1,
 					"file": "controllers/wishflowerContext.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89,
+						"buffer_size": 786,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								737,
+								737
 							]
 						],
 						"settings":
@@ -1128,27 +1063,27 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 36.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "lib/chel-1.0.1-dist/js/soundManager.js",
+					"buffer": 2,
+					"file": "lib/chel-1.0.1-dist/js/viewManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6280,
+						"buffer_size": 5861,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								591,
-								564
+								5861,
+								5861
 							]
 						],
 						"settings":
@@ -1156,33 +1091,33 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 3337.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "lib/chel-1.0.1-dist/js/bitmapManager.js",
+					"buffer": 3,
+					"file": "views/wishflowerView.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4566,
+						"buffer_size": 2050,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1861,
+								1861
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -1191,13 +1126,43 @@
 					},
 					"stack_index": 3,
 					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "config/globalDefinitions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1082,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								263,
+								230
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
 				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1238,7 +1203,7 @@
 	"project": "app-bf.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

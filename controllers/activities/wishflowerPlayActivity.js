@@ -1,11 +1,14 @@
-function WishflowerPlayActivity() 
+function WishflowerPlayActivity(_id) 
 { 
+	this.m_id = _id;
 };
 
-WishflowerPlayActivity.prototype.init = function ()
+WishflowerPlayActivity.prototype.initialize = function ()
 {
-
+	console.log("WishflowerPlayActivity");
 };
+
+
 
 /*
 function initializeControls() 

@@ -9,10 +9,11 @@ var m_rememberWishText = '';
 var m_renderTime = 0;
 var m_sampleLogicRate = 0;
 // ******************************************************************
-// Entry point
+// Create and init HTML page helper objects.
 // ******************************************************************
 window.onload = function()
 {
+	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas');
 	viewMngr.enableProgressBarWhenLoadingResources();
@@ -36,15 +37,17 @@ window.onload = function()
 	// Initialize keyboard functionality
 	viewMngr.initializeKeyboardManager(true);
 
-	//startApp();
-	viewMngr.performFullResourcesLoad(this.appSetup);
+	// Load all resources and trigger (loaded or not) aplication setup. 
+	viewMngr.performFullResourcesLoad(this.appInitContext);
 
-	render();
+	//render();
 };
 
-function appSetup()
+function appInitContext()
 {
-	console.log("--------------------------------appSetup--------------------------------");
+	viewMngr.getProgressBar()._visible = false;
+
+	console.log("--------------------------------appInitContext--------------------------------");
 	console.log("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);
 	console.log("sound manager available:" + viewMngr.m_soundManager.m_managerAvailable);
 
@@ -53,14 +56,11 @@ function appSetup()
 	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
 	//viewMngr.m_soundManager.playSoundTest();	
 
-	// debug settings
-	m_appState = MainLoopState.C_APP_STATE_INTRO;
-	//doAppStateIntro_Logic();
+	var dataContext = new WishflowerContext();
+	viewMngr.initializeDataContext(dataContext);
+ 	viewMngr.initializeActivities();
 
-	// Init timer counter.
-	//m_startTime = (new Date()).getTime();
-
-	//animate();
+	viewMngr.setCurrentActivityByID(WishflowerContext.C_ACTIVITY_ABOUT);
 }
 
 // Game loop
@@ -193,30 +193,20 @@ window.requestAnimFrame = (function(callback)
 // ************************************
 function doAppStateIntro_Logic()
 {
-	m_appState = MainLoopState.C_APP_STATE_WAITING_USER_NAME;
 
-	//viewMngr.m_lblInfoControl._visible = false;
-
-	/*
-    lblKeyPathControl._visible = true;
-    btnMoveLeftControl._visible = true
-    btnMoveRightControl._visible = true
-    btnSendWish._visible = true
-    inpGenericInput._visible = true
-	linkToPage._visible = true
-	*/
-
-	// Creeate
+/*
 	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_bitmapManager);
 	//m_treeNode.setY(this.m_canvas.height - 87);
 	m_treeNode.setY(viewMngr.m_canvasEx.m_canvas.height-111);
 	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);
 	m_treeNode.reset();
-	updateTreeData();
+*/
 
-	onRefresh();
+	//updateTreeData();
 
-	console.log()
+	//onRefresh();
+
+	//console.log()
 
 }
 

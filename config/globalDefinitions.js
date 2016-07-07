@@ -6,6 +6,7 @@ function MainLoopState()
 { 
 }
 
+MainLoopState.C_APP_STATE_NOT_SET = 0;
 MainLoopState.C_APP_STATE_INTRO = 1;
 MainLoopState.C_APP_STATE_WAITING_USER_NAME = 2;
 MainLoopState.C_APP_STATE_LOOKING_WISHES = 3;
