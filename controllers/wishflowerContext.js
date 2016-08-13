@@ -2,6 +2,7 @@ WishflowerContext.self = null;
 
 WishflowerContext.C_ACTIVITY_PLAY = 0;
 WishflowerContext.C_ACTIVITY_ABOUT = 1;
+WishflowerContext.C_ACTIVITY_LADYBUG_TEST = 2;
 
 function WishflowerContext() 
 { 
@@ -35,6 +36,7 @@ function WishflowerContext()
 
 		result.push(new WishflowerPlayActivity(WishflowerContext.C_ACTIVITY_PLAY, this.m_viewParent));
 		result.push(new WishflowerAboutActivity(WishflowerContext.C_ACTIVITY_ABOUT, this.m_viewParent));
+		result.push(new WishflowerLadybugTestActivity(WishflowerContext.C_ACTIVITY_LADYBUG_TEST, this.m_viewParent));
 
 		return result;
 	};

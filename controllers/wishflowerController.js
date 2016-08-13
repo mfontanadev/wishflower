@@ -1,41 +1,15 @@
 var viewMngr = null;
 
 // ******************************************************************
-// App vars
-// ******************************************************************
-var m_treeNode = new TreeNode();
-var m_refresh = true;
-var m_rememberWishText = '';
-var m_renderTime = 0;
-var m_sampleLogicRate = 0;
-
-var m_canvas = null;
-var m_context = null;
-
-	
-var m_elapsedTime;
-var m_startTime;
-var m_sampleLogicRate = 1;
-var m_sampleRenderRate = 1;
-
-var myWindow = null;
-
-// ******************************************************************
 // Create and init HTML page helper objects.
 // ******************************************************************
 window.onload = function()
 {
-	/*
-	m_canvas = document.getElementById('idCanvas');
-	m_context = m_canvas.getContext('2d'); 	
-	myWindow = window;
-	*/
-
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas');
 	viewMngr.enableProgressBarWhenLoadingResources();
-	console.log(viewMngr);
+	msglog(viewMngr);
 
 	// Enable using bitmaps
 	var bitmapManager = viewMngr.getBitmapManagerInstance();
@@ -57,36 +31,18 @@ window.onload = function()
 
 	// Load all resources and trigger (loaded or not) aplication setup. 
 	viewMngr.performFullResourcesLoad(this.appInitContext);
-
-/*
-	myWindow.requestAnimFrame = (function(callback)
-	{
-		return window.requestAnimationFrame ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		window.oRequestAnimationFrame ||
-		window.msRequestAnimationFrame ||
-		function(callback)
-		{
-		  window.setTimeout(callback, 1);
-		};
-	})();
-
-
-	animate();
-*/
 };
 
 function appInitContext()
 {
 	viewMngr.getProgressBar()._visible = false;
 
-	console.log("--------------------------------appInitContext--------------------------------");
-	console.log("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);
-	console.log("sound manager available:" + viewMngr.m_soundManager.m_managerAvailable);
+	msglog("--------------------------------appInitContext--------------------------------");
+	msglog("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);
+	msglog("sound manager available:" + viewMngr.m_soundManager.m_managerAvailable);
 
 	//Test image and sound
-	//console.log("controller: test sound and image");
+	//msglog("controller: test sound and image");
 	//drawImageTransparent(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, viewMngr.m_bitmapManager.getImage(0), 0,0, 1);
 	//viewMngr.m_soundManager.playSoundTest();	
 
@@ -95,158 +51,13 @@ function appInitContext()
  	viewMngr.initializeActivities();
 
  	// Start animation loop.
-	viewMngr.setCurrentActivityByID(WishflowerContext.C_ACTIVITY_ABOUT);
+	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_TEST);
 	viewMngr.animationCycle();	
 }
 
 /*
-// Game loop
-
-function animate()
-{
-	// updates
-	if (updateTimer() == true)
-	{
-
-		// handle inputs
-		//handleInputs();
-
-		// game logic
-		//implementGameLogic();
-
-		// render
-		//render();
-	}
-
-	// log
-	//if (C_LOG === true)
-	{
-		var message = '';
-		message += "FPS: " + "logic=," + m_sampleLogicRate + ", render=" + m_sampleRenderRate + ",  " + Date.now() ;	 
-		//message += 'Mouse position: ' + m_mouseManager.m_mousePosX + ',' + m_mouseManager.m_mousePosY + "," +  m_mouseManager.m_mouseClick + ", fps=" + Math.round(m_elapsedTime,2);
-		writeMessageXY(m_context, message, 60, 40, C_DEBUG_MODE);
-		//console.log( Date.now());
-	}
-
-	// request new frame
-	requestAnimFrame(function() { animate(); });
-}
-
-// Update timer.
-function updateTimer()
-{
-	var result = false;
-	
-	//var currentDate = (new Date()).getTime();
-	var currentDate = Date.now();
-	
-	m_elapsedTime = currentDate - m_startTime;
-	m_startTime = currentDate;
-
-	if (m_renderTime >= C_FPS_MS || m_renderTime == -1)
-	{
-		m_renderTime = 0;
-		result = true;
-	}
-
-	m_renderTime += m_elapsedTime;
-	
-	return result;	
-}
-
-// Get cycle time
-function getElapsedTime()
-{
-	return m_elapsedTime;
-}
-
-/*
-// Handle input
-function handleInputs()
-{	
-	m_keyboardManager.implementGameLogic();
- 	m_treeNode.handleInputs();
-}
-
-// Implement game logic.
-function implementGameLogic()
-{
-	var dt = Date.now();
-
-    m_treeNode.implementGameLogic();
-	m_sampleLogicRate = Date.now() - dt;
-}
-
-
-// Render
-function render()
-{
-	var dt = Date.now();
-
-	// clear
-	if (m_refresh === true)
-	{
-        viewMngr.m_canvasEx.m_context.clearRect(0, 0, viewMngr.m_canvasEx.m_canvas.width, viewMngr.m_canvasEx.m_canvas.height);
-        //renderRectangle(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, 0,0,viewMngr.m_canvasEx.m_canvas.width, viewMngr.m_canvasEx.m_canvas.height);
-        m_treeNode.render();
-	}
-
-	renderControls();
-
-	m_refresh = true;
-
-	m_sampleRenderRate = Date.now() - dt;
-}
-
-/*
-function renderControls()
-{
-    viewMngr.m_lblInfoControl.render();
-
-    lblKeyPathControl.render();
-    btnSubControl.render();
-    btnAddControl.render();
-
-    btnMoveLeftControl.render();
-    btnMoveRightControl.render();
-
-    btnSendWish.render();
-    btnMoveDownControl.render();
-
-    inpGenericInput.render();
-	linkToPage.render();
-
-}
-*/
-
-// Looping callback
-
-/*
 // STATEMACHINE
 // ************************************
-function doAppStateIntro_Logic()
-{
-
-
-	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_bitmapManager);
-	//m_treeNode.setY(this.m_canvas.height - 87);
-	m_treeNode.setY(viewMngr.m_canvasEx.m_canvas.height-111);
-	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);
-	m_treeNode.reset();
-
-
-	//updateTreeData();
-
-	//onRefresh();
-
-	//console.log()
-
-}
-
-function onRefresh()
-{
-	m_refresh = true;
-}
 
 // CONTROLS LOGIC
 // ************************************
@@ -414,19 +225,19 @@ function updateTreeData()
 
 function callWebService(_type, _servicePath, _callback)
 {
-	console.log("CallWebService request:" + _servicePath);
+	msglog("CallWebService request:" + _servicePath);
 
 	$.ajax({
 	   url: '//' + viewMngr.m_hostname + '/' + _servicePath,
 	   error: function() 
 	   {
-	     	console.log("CallWebService: error");
+	     	msglog("CallWebService: error");
 	   		if (typeof _callback !== 'undefined')
 	   			_callback("ËRROR");
 	   },
 	   success: function(data) 
 	   {
-	   		console.log("CallWebService response:" + data);
+	   		msglog("CallWebService response:" + data);
 	   		if (typeof _callback !== 'undefined')
 	   			_callback(data);
 	   },

@@ -9,6 +9,9 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerAboutActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerAboutActivity.js');});
 
+	app.get ('/controllers/activities/wishflowerLadybugTestActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugTestActivity.js');});
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});
@@ -34,6 +37,9 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/treeNode.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/treeNode.js');});
+
+	app.get ('/controllers/entities/ladybug.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/ladybug.js');});
 
 	// HELPERS
 	app.get ('/controllers/entities/keypair.js', 

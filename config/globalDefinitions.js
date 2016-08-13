@@ -30,7 +30,14 @@ var global_bitmap_definition =
     'ctree_root2.png',
     'ctree_root3.png',
     'ctree_branch.png',
-    'ctree_leave.png'
+    'ctree_leave.png',
+    'ladybug.png',
+    'ladybug_elytra.png',
+    'ladybug_under.png',
+    'ladybug_walk_left.png',
+    'ladybug_walk_right.png',
+    'ladybug_wing.png',
+    'log.png'
 ];
 
 if (typeof module !== 'undefined' && module !== null)
