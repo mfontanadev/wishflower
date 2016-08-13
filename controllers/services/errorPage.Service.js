@@ -285,6 +285,7 @@ function renderControls()
 }
 
 // Looping callback
+/*
 window.requestAnimFrame = (function(callback)
 {
 	return window.requestAnimationFrame ||
@@ -297,6 +298,7 @@ window.requestAnimFrame = (function(callback)
 	  window.setTimeout(callback, 1);
 	};
 })();
+*/
 
 // STATEMACHINE
 // ************************************

@@ -26,7 +26,6 @@ function WishflowerContext()
 
 		// Data that is shared between all activities.
 		this.m_viewParent = _parentView;
-
 	};
 
 	WishflowerContext.prototype.createActivities = function ()
@@ -34,8 +33,8 @@ function WishflowerContext()
 		// Create activity objetcs and hold them in parent view.
 		var result = new Array();
 
-		result.push(new WishflowerPlayActivity(WishflowerContext.C_ACTIVITY_PLAY));
-		result.push(new WishflowerAboutActivity(WishflowerContext.C_ACTIVITY_ABOUT));
+		result.push(new WishflowerPlayActivity(WishflowerContext.C_ACTIVITY_PLAY, this.m_viewParent));
+		result.push(new WishflowerAboutActivity(WishflowerContext.C_ACTIVITY_ABOUT, this.m_viewParent));
 
 		return result;
 	};

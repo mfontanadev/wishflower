@@ -41,8 +41,7 @@ TreeNode.m_treeCursor = null;
 
 function TreeNode() 
 {
-    this.m_canvas = null;
-    this.m_context = null;
+    this.m_viewParent = null;
 
     this.m_nodeType = "undef";
     this.m_parent = null;
@@ -72,7 +71,6 @@ function TreeNode()
     this.m_branchDir = -1;
 
     this.m_composedLeaveImg = null;
-    this.m_resourceManager = null;
 
     this.m_scalarImageWidth = 0;
     this.m_scalarImageHeight = 0;
@@ -81,16 +79,14 @@ function TreeNode()
     this.m_fadingCounter = 0;
     this.m_fadingScalar = TreeNode.C_FADING_MAX_VALUE;
 
-    TreeNode.prototype.initWithRootAndBranch = function (_canvas, _context, _resourceManager) 
+    TreeNode.prototype.initWithRootAndBranch = function (_viewParent) 
     {
+        this.m_viewParent = _viewParent;
         this.m_nodeType = TreeNode.C_NODE_TYPE_MAIN;
-        this.m_resourceManager = _resourceManager;
-        this.m_canvas = _canvas;
-        this.m_context = _context;
         this.m_parent = null;
 
-        this.setX(this.m_canvas.width / 2);
-        this.setY(this.m_canvas.height - 70);
+        this.setX(this.m_viewParent.m_canvasEx.m_canvasWidth / 2);
+        this.setY(this.m_viewParent.m_canvasEx.m_canvasHeight - 70);
 
         this.initLeaveImage();
         this.loadImages();
@@ -136,16 +132,17 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_resourceManager.getImageByName('ctree_root3.png');
-        TreeNode.branchImg = this.m_resourceManager.getImageByName('ctree_branch.png');
-        TreeNode.leaveImg = this.m_resourceManager.getImageByName('ctree_leave.png');
+        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
+        TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
+        TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
     };
 
     TreeNode.prototype.handleInputs = function () 
     {
-        if (m_keyboardManager.isKeyDown(C_KEY_SPACE) === true && m_keyboardManager.isKeyDown(C_KEY_SHIFT) === true)
+        if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true && 
+            this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT) === true)
         {
-            m_keyboardManager.disableUntilKeyUp(C_KEY_SPACE);
+            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_SPACE);
             this.dump();
         }
     };
@@ -369,6 +366,7 @@ function TreeNode()
     {
         var nodeItem = this.createNodeWithDefaults();
 
+        nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_ROOT;
         nodeItem.m_width = 70;
         nodeItem.m_height = 20;
@@ -382,6 +380,7 @@ function TreeNode()
     {
         var nodeItem = this.createNodeWithDefaults();
 
+        nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
         nodeItem.m_maxHeight = 80;
@@ -398,6 +397,7 @@ function TreeNode()
     {
         var nodeItem = this.createNodeWithDefaults();
 
+        nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_LEAVE;
         nodeItem.m_maxWidth = 3;
         nodeItem.m_maxHeight = 20;
@@ -410,9 +410,7 @@ function TreeNode()
     {
         var nodeItem = new TreeNode();
 
-        nodeItem.m_canvas = this.m_canvas;
-        nodeItem.m_context = this.m_context;
-        nodeItem.m_resourceManager = this.m_resourceManager;
+        nodeItem.m_viewParent = null;
         nodeItem.m_parent = null;
 
         nodeItem.m_width = 0;
@@ -462,26 +460,38 @@ function TreeNode()
 
 	TreeNode.prototype.renderRoot = function () 
     {
-        renderRectangleFilled(this.m_canvas, this.m_context, this.m_x1 - (this.m_width / 2), this.m_y1 - this.m_height, this.m_width, this.m_height, 'orange');
+        renderRectangleFilled(  this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x1 - (this.m_width / 2), this.m_y1 - this.m_height, 
+                                this.m_width, this.m_height, 'orange');
 	};
 	   
     TreeNode.prototype.renderBranch = function () 
     {
         var branchColor = rgbaToColor(137, 64, 25, 0.8);
-		renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, branchColor, 1, this.m_width);
+		renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
+                        this.m_viewParent.m_canvasEx.m_context, 
+                        this.m_x1, this.m_y1, this.m_x2, this.m_y2, branchColor, 1, this.m_width);
     };
     
     TreeNode.prototype.renderLeave = function () 
     {
-        renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
+        renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
+                        this.m_viewParent.m_canvasEx.m_context, 
+                        this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
 		
         if (this.m_wish !== '')
-            renderCircleNotFill(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 4, 'green');
+            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x2, this.m_y2, 4, 'green');
     };
 
     TreeNode.prototype.renderRootImage = function () 
     {
-        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.rootImg, this.m_x1, this.m_y1, 0, 1, this.m_scalarImageHeight);
+        drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                            this.m_viewParent.m_canvasEx.m_context, 
+                                            TreeNode.rootImg, 
+                                            this.m_x1, this.m_y1, 0, 1, this.m_scalarImageHeight);
     };
 
     TreeNode.prototype.renderBranchImage = function () 
@@ -491,7 +501,10 @@ function TreeNode()
         if (this.isNodeVisibleByCursor() === false)
             imgAlpha = 0.2;
 
-        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.branchImg, this.m_x1, this.m_y1, this.getFinalAngle(), imgAlpha, this.m_scalarImageHeight);
+        drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                            this.m_viewParent.m_canvasEx.m_context, 
+                                            TreeNode.branchImg, 
+                                            this.m_x1, this.m_y1, this.getFinalAngle(), imgAlpha, this.m_scalarImageHeight);
     };
 	
     TreeNode.prototype.renderLeaveImage = function () 
@@ -501,35 +514,65 @@ function TreeNode()
         if (this.isNodeVisibleByCursor() === false)
             imgAlpha = 0.2;
 
-        drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
-        //drawImageRotationTransparentScaled(this.m_canvas, this.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
+        drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                            this.m_viewParent.m_canvasEx.m_context, 
+                                            TreeNode.leaveImg, 
+                                            this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        //drawImageRotationTransparentScaled(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
     };
 
     TreeNode.prototype.renderIndicators = function () 
     {
         if (this.m_nodeType === TreeNode.C_NODE_TYPE_ROOT) 
         {
-            renderCircleNotFill(this.m_canvas, this.m_context, this.m_x1, this.m_y1, 3, 'blue');
-            renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
-            renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'red');
+            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x1, this.m_y1, 3, 'blue');
+            
+            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
+            
+            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x2, this.m_y2, 1, 'red');
         }
         else if (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH) 
         {
-            renderCircleNotFill(this.m_canvas, this.m_context, this.m_x1, this.m_y1, 3, 'blue');
-            renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
-            renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'red');
+            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x1, this.m_y1, 3, 'blue');
+            
+            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
+            
+            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x2, this.m_y2, 1, 'red');
         }
         else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE) 
         {
-            renderCircleNotFill(this.m_canvas, this.m_context, this.m_x1, this.m_y1, 3, 'blue');
-            renderLineWidth(this.m_canvas, this.m_context, this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1,  1);
+            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x1, this.m_y1, 3, 'blue');
+            
+            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1,  1);
         
             if (this.m_wish !== '')
-                renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'red');
+            {
+                renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
+                                this.m_viewParent.m_canvasEx.m_context, 
+                                this.m_x2, this.m_y2, 1, 'red');
+            }
         }
         else if (this.m_nodeType === TreeNode.C_NODE_TYPE_MAIN) 
         {
-            renderCircle(this.m_canvas, this.m_context, this.m_x2, this.m_y2, 1, 'brown');
+            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
+                            this.m_viewParent.m_canvasEx.m_context, 
+                            this.m_x2, this.m_y2, 1, 'brown');
         }
     };
 
@@ -547,8 +590,8 @@ function TreeNode()
     TreeNode.prototype.setParent = function (_parentNode) 
     {
         this.m_parent = _parentNode;
-        this.m_canvas = _parentNode.m_canvas;
-        this.m_context = _parentNode.m_context;
+        //this.m_viewParent.m_canvasEx.m_canvas = _parentNode.m_viewParent.m_canvasEx.m_canvas;
+        //this.m_viewParent.m_canvasEx.m_context = _parentNode.m_context;
 
         this.recalculateTargetPointAndChilds();
     };

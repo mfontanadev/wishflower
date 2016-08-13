@@ -8,11 +8,29 @@ var m_refresh = true;
 var m_rememberWishText = '';
 var m_renderTime = 0;
 var m_sampleLogicRate = 0;
+
+var m_canvas = null;
+var m_context = null;
+
+	
+var m_elapsedTime;
+var m_startTime;
+var m_sampleLogicRate = 1;
+var m_sampleRenderRate = 1;
+
+var myWindow = null;
+
 // ******************************************************************
 // Create and init HTML page helper objects.
 // ******************************************************************
 window.onload = function()
 {
+	/*
+	m_canvas = document.getElementById('idCanvas');
+	m_context = m_canvas.getContext('2d'); 	
+	myWindow = window;
+	*/
+
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas');
@@ -40,7 +58,23 @@ window.onload = function()
 	// Load all resources and trigger (loaded or not) aplication setup. 
 	viewMngr.performFullResourcesLoad(this.appInitContext);
 
-	//render();
+/*
+	myWindow.requestAnimFrame = (function(callback)
+	{
+		return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function(callback)
+		{
+		  window.setTimeout(callback, 1);
+		};
+	})();
+
+
+	animate();
+*/
 };
 
 function appInitContext()
@@ -60,32 +94,38 @@ function appInitContext()
 	viewMngr.initializeDataContext(dataContext);
  	viewMngr.initializeActivities();
 
+ 	// Start animation loop.
 	viewMngr.setCurrentActivityByID(WishflowerContext.C_ACTIVITY_ABOUT);
+	viewMngr.animationCycle();	
 }
 
+/*
 // Game loop
+
 function animate()
 {
 	// updates
 	if (updateTimer() == true)
 	{
+
 		// handle inputs
-		handleInputs();
+		//handleInputs();
 
 		// game logic
-		implementGameLogic();
+		//implementGameLogic();
 
 		// render
-		render();
+		//render();
 	}
 
 	// log
-	if (C_LOG === true)
+	//if (C_LOG === true)
 	{
 		var message = '';
-		message += "FPS: " + "logic=," + m_sampleLogicRate + ", render=" + m_sampleRenderRate + ",  ";	 
-		message += 'Mouse position: ' + m_mouseManager.m_mousePosX + ',' + m_mouseManager.m_mousePosY + "," +  m_mouseManager.m_mouseClick + ", fps=" + Math.round(m_elapsedTime,2);
-		//writeMessageXY(m_context, message, 60, 40, C_DEBUG_MODE);
+		message += "FPS: " + "logic=," + m_sampleLogicRate + ", render=" + m_sampleRenderRate + ",  " + Date.now() ;	 
+		//message += 'Mouse position: ' + m_mouseManager.m_mousePosX + ',' + m_mouseManager.m_mousePosY + "," +  m_mouseManager.m_mouseClick + ", fps=" + Math.round(m_elapsedTime,2);
+		writeMessageXY(m_context, message, 60, 40, C_DEBUG_MODE);
+		//console.log( Date.now());
 	}
 
 	// request new frame
@@ -120,6 +160,7 @@ function getElapsedTime()
 	return m_elapsedTime;
 }
 
+/*
 // Handle input
 function handleInputs()
 {	
@@ -135,6 +176,7 @@ function implementGameLogic()
     m_treeNode.implementGameLogic();
 	m_sampleLogicRate = Date.now() - dt;
 }
+
 
 // Render
 function render()
@@ -156,10 +198,11 @@ function render()
 	m_sampleRenderRate = Date.now() - dt;
 }
 
+/*
 function renderControls()
 {
     viewMngr.m_lblInfoControl.render();
-/*
+
     lblKeyPathControl.render();
     btnSubControl.render();
     btnAddControl.render();
@@ -172,35 +215,25 @@ function renderControls()
 
     inpGenericInput.render();
 	linkToPage.render();
-*/
+
 }
+*/
 
 // Looping callback
-window.requestAnimFrame = (function(callback)
-{
-	return window.requestAnimationFrame ||
-	window.webkitRequestAnimationFrame ||
-	window.mozRequestAnimationFrame ||
-	window.oRequestAnimationFrame ||
-	window.msRequestAnimationFrame ||
-	function(callback)
-	{
-	  window.setTimeout(callback, 1);
-	};
-})();
 
+/*
 // STATEMACHINE
 // ************************************
 function doAppStateIntro_Logic()
 {
 
-/*
+
 	m_treeNode.initWithRootAndBranch(viewMngr.m_canvasEx.m_canvas, viewMngr.m_canvasEx.m_context, m_bitmapManager);
 	//m_treeNode.setY(this.m_canvas.height - 87);
 	m_treeNode.setY(viewMngr.m_canvasEx.m_canvas.height-111);
 	m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_WAITING_DATA);
 	m_treeNode.reset();
-*/
+
 
 	//updateTreeData();
 
@@ -401,3 +434,4 @@ function callWebService(_type, _servicePath, _callback)
 	});
 }
 
+*/
