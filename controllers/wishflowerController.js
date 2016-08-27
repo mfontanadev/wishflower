@@ -17,6 +17,9 @@ window.onload = function()
 	bitmapManager.setProgressBarMessage("Loading bitmpas");
 	bitmapManager.setFilenamesArray(global_bitmap_definition);
 
+	var bitmapFilter = new BitmapFilter();
+	bitmapManager.setBitmapFilter(document, bitmapFilter.noiseAndTransparentFilter);
+
 	// Enable using sounds
 	var soundManager = viewMngr.getSoundManagerInstance();
 	soundManager.setProgressBar(viewMngr.getProgressBar());

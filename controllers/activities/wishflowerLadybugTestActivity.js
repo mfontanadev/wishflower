@@ -51,23 +51,25 @@ WishflowerLadybugTestActivity.prototype.implementGameLogic = function ()
 
 WishflowerLadybugTestActivity.prototype.render = function ()
 {
-	this.m_ladybug.render();
-
-
     drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
                                     	this.m_viewParent.m_canvasEx.m_context, 
                                     	this.m_grass_img, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.width / 2, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.height, 
                                     	0, 0.7, 0.9);
+    
     drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
                                     	this.m_viewParent.m_canvasEx.m_context, 
                                     	this.m_log_img, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.width / 2, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.height - ((this.m_log_img.height / 5) * 0.2), 
                                     	0, 1, 0.2);
-xº
-    //console.log(this.m_viewParent.m_canvasEx.m_canvasHeight);
+/*
+    renderCircle( this.m_viewParent.m_canvasEx.m_canvas, 
+                                    	this.m_viewParent.m_canvasEx.m_context, 
+                                    	100,100, 
+                                    	300, "red");*/
+	this.m_ladybug.render();
 	this.renderControls();
 };
 

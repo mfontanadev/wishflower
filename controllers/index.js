@@ -41,6 +41,9 @@ module.exports = function(app)
 	app.get ('/controllers/entities/ladybug.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/ladybug.js');});
 
+	app.get ('/controllers/entities/bitmapFilter.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/bitmapFilter.js');});
+
 	// HELPERS
 	app.get ('/controllers/entities/keypair.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/keypair.js');});
