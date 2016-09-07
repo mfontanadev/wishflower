@@ -21,7 +21,7 @@ require('./views')(app);
 require('./controllers')(app);
 require('./models')(app);
 
-require('./lib/chel-1.0.1-dist')(app);
+require('./lib/chel-dist')(app);
 require('./lib/sound-0.6.1-dist/js')(app);
 require('./lib/jquery-1.11.2-min/js')(app);
 require('./config')(app);

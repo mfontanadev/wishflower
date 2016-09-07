@@ -9,7 +9,7 @@ if (typeof require != 'undefined')
 
 	reqKeyPair = require(__basePath + "/controllers/entities/keypair.js");
 	reqFlower = require(__basePath + "/controllers/entities/flower.js");
-    reqChLib = require(__basePath + "/lib/chel-1.0.1-dist/js/chlib.js");
+    reqChLib = require(__basePath + "/lib/chel-dist/js/chlib.js");
 }
 
 function ServerOrchesta() 

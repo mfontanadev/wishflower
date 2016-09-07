@@ -4,7 +4,7 @@ var reqChLib = null;
 if (typeof require != 'undefined')
 {
 	reqGlobalDefinitions = require(__basePath + "/config/globalDefinitions.js");
-    reqChLib = require(__basePath + "/lib/chel-1.0.1-dist/js/chlib.js");
+    reqChLib = require(__basePath + "/lib/chel-dist/js/chlib.js");
 }
 
 Flower.C_SUBTYPE_NOT_SET = 0;
