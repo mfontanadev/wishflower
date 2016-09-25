@@ -44,6 +44,9 @@ module.exports = function(app)
 	app.get ('/controllers/entities/bitmapFilter.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/bitmapFilter.js');});
 
+	app.get ('/controllers/entities/animation.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/animation.js');});
+
 	// HELPERS
 	app.get ('/controllers/entities/keypair.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/keypair.js');});

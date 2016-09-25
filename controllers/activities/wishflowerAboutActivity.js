@@ -32,7 +32,7 @@ WishflowerAboutActivity.prototype.createControls = function ()
 	this.m_inpGenericInput._fontSize = 12;
 	this.m_inpGenericInput.setPlaceholderText("Write your wish and send it.");
 	this.m_inpGenericInput._onSubmit = this.inpGenericInput_submit;
-	this.m_inpGenericInput._visible = true;
+	this.m_inpGenericInput._visible = false;
 };
 
 WishflowerAboutActivity.prototype.onEnterActivity = function ()

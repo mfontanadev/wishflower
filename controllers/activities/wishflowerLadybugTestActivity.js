@@ -25,9 +25,6 @@ WishflowerLadybugTestActivity.prototype.initialize = function ()
     this.m_grass_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
     this.m_log_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('log.png');
 
-
-	console.log(this.m_log_img.height);
-
 	this.createControls();
 };
 

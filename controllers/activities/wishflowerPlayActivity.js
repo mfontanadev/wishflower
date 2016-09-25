@@ -95,7 +95,7 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	this.m_btnMoveDownControl._fontSize = 12;
 	this.m_btnMoveDownControl._onClick = this.m_btnMoveDownControl_controller;
 	this.m_btnMoveDownControl.setPlaceholderText("hol222a");
-	this.m_btnMoveDownControl._visible = true;
+	this.m_btnMoveDownControl._visible = false;
 
 	this.m_inpGenericInput = new CanvasControl();
 	this.m_inpGenericInput.initInputStyle(tmpCanvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
