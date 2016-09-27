@@ -8,6 +8,10 @@ Ladybug.C_LADYBUG_TYPE_ABOUT = 2;
 
 Ladybug.C_LADYBUG_ANGLE_INCREMENT = 10;
 Ladybug.C_LADYBUG_WALK_INCREMENT = 10;
+Ladybug.C_LADYBUG_SETTING_H_THRUST = 0.25;
+Ladybug.C_LADYBUG_SETTING_MAX_THRUST = 5;
+Ladybug.C_LADYBUG_SETTING_TORQUE = 6;
+
 
 Ladybug.C_ANIM_STAND = 0;
 Ladybug.C_ANIM_WALKING = 1;
@@ -32,6 +36,13 @@ function Ladybug()
 
     this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
     this.m_arrAnimations = new Array();
+
+    this.m_velocity =
+    {
+        x: 0,
+        y: 0,
+        a: 0
+    }
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -190,8 +201,10 @@ function Ladybug()
 
         if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT) === true)
         {
-            if (this.m_currentAnimationId === Ladybug.C_ANIM_STAND)
+            if (this.m_currentAnimationId === Ladybug.C_ANIM_STAND && 
+                Math.abs(this.m_angle - 90) < 30)
             {
+                this.m_angle = 90;
                 this.m_currentAnimationId = Ladybug.C_ANIM_OPENING;
                 this.m_arrAnimations[this.m_currentAnimationId].reset();
                 this.m_arrAnimations[this.m_currentAnimationId].start();
@@ -203,6 +216,28 @@ function Ladybug()
                 this.m_currentAnimationId = Ladybug.C_ANIM_FLYING;
                 this.m_arrAnimations[this.m_currentAnimationId].reset();
                 this.m_arrAnimations[this.m_currentAnimationId].start();
+
+                if (this.m_velocity.a === 0)
+                {
+                    this.m_velocity.a = this.m_angle;   
+                }
+            }
+            else if (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING)
+            {
+                if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT) === true)
+                {
+                    this.m_velocity.x = this.m_velocity.x - Ladybug.C_LADYBUG_SETTING_H_THRUST;           
+                }
+                if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT) === true)
+                {
+                    this.m_velocity.x = this.m_velocity.x + Ladybug.C_LADYBUG_SETTING_H_THRUST;           
+                }
+
+                if (this.m_velocity.x < -Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
+                    this.m_velocity.x = -Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
+                
+                if (this.m_velocity.x > Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
+                    this.m_velocity.x = Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
             }
         }
 
@@ -215,6 +250,10 @@ function Ladybug()
                 this.m_currentAnimationId = Ladybug.C_ANIM_CLOSING;
                 this.m_arrAnimations[this.m_currentAnimationId].reset();
                 this.m_arrAnimations[this.m_currentAnimationId].start();
+
+                this.m_velocity.x = 0;
+                this.m_velocity.y = 0;
+                this.m_angle = this.m_velocity.a;   
             }
             else if (this.m_currentAnimationId === Ladybug.C_ANIM_CLOSING && 
                  this.m_arrAnimations[this.m_currentAnimationId].hasEnded())
@@ -278,6 +317,10 @@ function Ladybug()
             this.m_viewParent.m_canvasEx.m_canvas, 
             this.m_viewParent.m_canvasEx.m_context,
             this.m_angle - 90, this.m_transparent, this.m_scale);
+
+        message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + ")"; 
+        writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
+
     };
 
     Ladybug.prototype.endFrameEvent = function (_parent) 
@@ -302,7 +345,14 @@ function Ladybug()
     }    
 
     Ladybug.prototype.moveLogic = function ()
-    { 
+    {   
+        this.m_cx = this.m_cx + this.m_velocity.x;
+        this.m_cy = this.m_cy + this.m_velocity.y;
+
+        if (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING)
+        {
+            this.m_angle = this.m_velocity.a - (this.m_velocity.x * Ladybug.C_LADYBUG_SETTING_TORQUE);
+        }
     }
 
     Ladybug.prototype.setAngle = function (_angle) 
