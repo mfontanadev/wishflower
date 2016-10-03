@@ -4,6 +4,7 @@ WishflowerContext.C_ACTIVITY_PLAY = 0;
 WishflowerContext.C_ACTIVITY_ABOUT = 1;
 WishflowerContext.C_ACTIVITY_LADYBUG_TEST = 2;
 WishflowerContext.C_ACTIVITY_MENU = 3;
+WishflowerContext.C_ACTIVITY_HELP_TEST = 4;
 
 function WishflowerContext() 
 { 
@@ -39,6 +40,7 @@ function WishflowerContext()
 		result.push(new WishflowerAboutActivity(WishflowerContext.C_ACTIVITY_ABOUT, this.m_viewParent));
 		result.push(new WishflowerLadybugTestActivity(WishflowerContext.C_ACTIVITY_LADYBUG_TEST, this.m_viewParent));
 		result.push(new WishflowerMenuActivity(WishflowerContext.C_ACTIVITY_MENU, this.m_viewParent));
+		result.push(new WishflowerHelpTestActivity(WishflowerContext.C_ACTIVITY_HELP_TEST, this.m_viewParent));
 
 		return result;
 	};

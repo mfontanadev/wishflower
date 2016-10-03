@@ -9,6 +9,7 @@ function WishflowerMenuActivity(_id, _viewParent)
 
 	this.m_btnGotoLadybugTestActivity = null;
 	this.m_btnGotoBackgroundTestActivity = null;
+	this.m_btnGotoHelpTestActivity = null;
 };
 
 WishflowerMenuActivity.prototype.initialize = function ()
@@ -38,6 +39,12 @@ WishflowerMenuActivity.prototype.createControls = function ()
 	this.m_btnGotoBackgroundTestActivity._fontSize = 12;
 	this.m_btnGotoBackgroundTestActivity._onClick = this.m_btnGotoBackgroundTestActivity_controller;
 	this.m_btnGotoBackgroundTestActivity._visible = false;
+
+	this.m_btnGotoHelpTestActivity = new CanvasControl();
+	this.m_btnGotoHelpTestActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 50 + bh * 1.5 * 3, bw, bh, "Help demo");
+	this.m_btnGotoHelpTestActivity._fontSize = 12;
+	this.m_btnGotoHelpTestActivity._onClick = this.m_btnGotoHelpTestActivity_controller;
+	this.m_btnGotoHelpTestActivity._visible = false;
 };
 
 WishflowerMenuActivity.prototype.onEnterActivity = function ()
@@ -47,6 +54,9 @@ WishflowerMenuActivity.prototype.onEnterActivity = function ()
 	
 	this.m_btnGotoBackgroundTestActivity._visible = true;
 	this.m_btnGotoBackgroundTestActivity._disable = false;
+
+	this.m_btnGotoHelpTestActivity._visible = true;
+	this.m_btnGotoHelpTestActivity._disable = false;
 };
 
 WishflowerMenuActivity.prototype.handleInputs = function ()
@@ -66,15 +76,35 @@ WishflowerMenuActivity.prototype.renderControls = function ()
 {
 	this.m_btnGotoLadybugTestActivity.render();
 	this.m_btnGotoBackgroundTestActivity.render();
+	this.m_btnGotoHelpTestActivity.render();
 };
 
 WishflowerMenuActivity.prototype.m_btnGotoLadybugTestActivity_controller = function (_e, _sender)
 {
 	console.log(_e);
 	console.log(_sender);
+	console.log("m_btnGotoLadybugTestActivity_controller");
+
 	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_TEST);	
 };
 
+WishflowerMenuActivity.prototype.m_btnGotoBackgroundTestActivity_controller = function (_e, _sender)
+{
+	console.log(_e);
+	console.log(_sender);
+	console.log("m_btnGotoBackgroundTestActivity_controller");
+	
+	//WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_TEST);	
+};
+
+WishflowerMenuActivity.prototype.m_btnGotoHelpTestActivity_controller = function (_e, _sender)
+{
+	console.log(_e);
+	console.log(_sender);
+	console.log("m_btnGotoHelpTestActivity_controller");
+
+	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_HELP_TEST);	
+};
 
 WishflowerMenuActivity.prototype.onLeaveActivity = function ()
 {
@@ -83,5 +113,8 @@ WishflowerMenuActivity.prototype.onLeaveActivity = function ()
 	
 	this.m_btnGotoBackgroundTestActivity._visible = false;
 	this.m_btnGotoBackgroundTestActivity._disable = true;
+
+	this.m_btnGotoHelpTestActivity._visible = false;
+	this.m_btnGotoHelpTestActivity._disable = true;
 };
 

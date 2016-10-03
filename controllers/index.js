@@ -15,6 +15,9 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerMenuActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerMenuActivity.js');});
 
+	app.get ('/controllers/activities/wishflowerHelpTestActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerHelpTestActivity.js');});
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});
