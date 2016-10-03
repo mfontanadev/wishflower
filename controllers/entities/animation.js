@@ -21,6 +21,8 @@ function Animation ()
 		
 		this.m_onStartFrameEvent = null;
 		this.m_onEndFrameEvent = null;
+		this.m_onEndAnimationEvent = null;
+		this.m_infiniteLoop = false;
 
 		this.m_rc = new chRect();
 	}
@@ -32,9 +34,19 @@ function Animation ()
 	Animation.prototype.implementGameLogic = function () 
 	{
 		var fireEndFrameEvent = false;
+		var fireEndAnimationEvent = false;
 
 		if (this.m_arrFrames[this.m_currentFrame].m_duration != 0)
 		{
+			if (this.hasEnded() === true)
+			{ 
+				if (this.m_infiniteLoop === true)
+				{
+					this.reset();
+					this.start();
+				}
+			}
+	
 			if (this.m_frameCounter >= this.m_arrFrames[this.m_currentFrame].m_duration )
 			{
 				this.m_frameCounter = 0;
@@ -44,6 +56,8 @@ function Animation ()
 				{
 					this.m_currentFrame = this.m_arrFrames.length - 1; 
 					this.m_frameInc = 0;
+
+					fireEndAnimationEvent = true;
 				}
 
 				fireEndFrameEvent = true;
@@ -59,6 +73,12 @@ function Animation ()
 			{
 				if (this.m_onEndFrameEvent !== null)
 					this.m_onEndFrameEvent(this.m_parent);
+			}
+
+			if (fireEndAnimationEvent === true)
+			{
+				if (this.m_onEndAnimationEvent !== null)
+					this.m_onEndAnimationEvent(this.m_parent);
 			}
 
 			this.m_frameCounter = this.m_frameCounter + this.m_frameInc;
@@ -128,7 +148,17 @@ function Animation ()
 		this.m_onStartFrameEvent = _callbackStart;
 		this.m_onEndFrameEvent = _callbackEnd;
 	}
-	
+
+	Animation.prototype.setOnEndAnimationEvent = function (_callbackEndAnimation) 
+	{ 
+		this.m_onEndAnimationEvent = _callbackEndAnimation;
+	}
+
+	Animation.prototype.setInfiniteLoop = function (_value) 
+	{ 
+		this.m_infiniteLoop = _value;
+	}
+
 	// ------------------------------------------
 	// User actions
 	// ------------------------------------------
