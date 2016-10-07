@@ -1,4 +1,4 @@
-WishflowerLadybugTestActivity.self
+WishflowerLadybugTestActivity.self = null;
 
 function WishflowerLadybugTestActivity(_id, _viewParent) 
 { 
@@ -21,6 +21,8 @@ function WishflowerLadybugTestActivity(_id, _viewParent)
 
 	this.m_grass_x = 0;
 	this.m_grass_y = 0;
+    
+    this.m_btnBack = null;
 };
 
 WishflowerLadybugTestActivity.prototype.initialize = function ()
@@ -43,26 +45,41 @@ WishflowerLadybugTestActivity.prototype.initialize = function ()
     this.m_ladybug.m_cx = this.m_logObj.x;
     this.m_ladybug.m_cy = this.m_logObj.y;
     this.m_ladybug.setWalkingRectangle(this.m_logObj.collitionRect);
+    this.m_ladybug.setAutoflight(true);
 
 	this.createControls();
 };
 
 WishflowerLadybugTestActivity.prototype.createControls = function ()
 {
+    var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
+
+    this.m_btnBack = new CanvasControl();
+    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 30, 30, "<");
+    this.m_btnBack._fontSize = 12;
+    this.m_btnBack._onClick = this.btnBack_controller;
+    this.m_btnBack._visible = true;
 };
 
 WishflowerLadybugTestActivity.prototype.onEnterActivity = function ()
 {
+    this.m_btnBack._visible = true;
+    this.m_btnBack._disable = false;
 };
 
 WishflowerLadybugTestActivity.prototype.handleInputs = function ()
 {
+    if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
+    {
+        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
+        this.btnBack_controller(null, null);   
+    }
+
 	this.m_ladybug.handleInputs();
 };
 
 WishflowerLadybugTestActivity.prototype.implementGameLogic = function ()
 {
-
 	this.m_ladybug.implementGameLogic();
 };
 
@@ -83,13 +100,22 @@ WishflowerLadybugTestActivity.prototype.render = function ()
                                     	0, 1, this.m_logObj.scale);
 
 	this.m_ladybug.render();
-	this.renderControls();
+	
+    this.renderControls();
 };
 
 WishflowerLadybugTestActivity.prototype.renderControls = function ()
 {
+    this.m_btnBack.render();
+};
+
+WishflowerLadybugTestActivity.prototype.btnBack_controller = function (_e, _sender)
+{
+    WishflowerLadybugTestActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_MENU);    
 };
 
 WishflowerLadybugTestActivity.prototype.onLeaveActivity = function ()
 {
+    this.m_btnBack._visible = false;
+    this.m_btnBack._disable = true;
 };

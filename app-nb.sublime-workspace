@@ -4,52 +4,80 @@
 		"selected_items":
 		[
 			[
-				"m_in",
-				"m_infiniteLoop"
-			],
-			[
-				"s",
-				"start"
+				"C_ANIM_",
+				"C_ANIM_OPENING"
 			],
 			[
 				"start",
-				"startAnimation"
+				"startFrameWalkEvent"
 			],
 			[
-				"is",
-				"isAnimation_STAND"
+				"C_ani",
+				"C_ANIM_STAND"
 			],
 			[
-				"C_ANIM_FL",
-				"C_ANIM_FLYING"
+				"C_a",
+				"C_ANIM_STAND"
 			],
 			[
-				"C_an",
-				"C_ANIM_ROTATING_RIGHT"
+				"C_",
+				"C_ANIM_MOVING"
 			],
 			[
-				"m_onEnd",
-				"m_onEndAnimationEvent"
+				"m_cu",
+				"m_currentAnimationId"
 			],
 			[
-				"in",
-				"inverse_x"
+				"m_ladybug_",
+				"m_ladybug_normal_img"
 			],
 			[
-				"inver",
-				"inverse_y"
+				"m_is",
+				"m_is_standing"
 			],
 			[
-				"C_la",
-				"C_LADYBUG_SETTING_TORQUE"
+				"m_fr",
+				"m_currentFrame"
 			],
 			[
-				"a",
-				"m_angle"
+				"prom",
+				"promCounter"
 			],
 			[
-				"m_on",
-				"m_onFilterCallback"
+				"m_la",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_ro",
+				"m_rotationDirection"
+			],
+			[
+				"Bit",
+				"BitmapManagerItem"
+			],
+			[
+				"set",
+				"setX"
+			],
+			[
+				"m_walkR",
+				"m_walkRight_img"
+			],
+			[
+				"m_wa",
+				"m_walking_frame_counter"
+			],
+			[
+				"m_le",
+				"m_walkLeft_img"
+			],
+			[
+				"wa",
+				"m_walking_frame"
+			],
+			[
+				"m_el",
+				"m_elytra_right_img"
 			],
 			[
 				"yel",
@@ -72,10 +100,6 @@
 				"loadingTimeout"
 			],
 			[
-				"set",
-				"setFilenamesArray"
-			],
-			[
 				"m_ke",
 				"m_keyPath"
 			]
@@ -84,29 +108,37 @@
 	"buffers":
 	[
 		{
-			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+			"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 89538,
+				"buffer_size": 2494,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
+			"file": "controllers/entities/poligonPath.js",
 			"settings":
 			{
-				"buffer_size": 86092,
-				"encoding": "Western (Windows 1252)",
+				"buffer_size": 1731,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+			"file": "controllers/wishflowerController.js",
 			"settings":
 			{
-				"buffer_size": 7780,
+				"buffer_size": 6071,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config/globalDefinitions.js",
+			"settings":
+			{
+				"buffer_size": 1316,
 				"line_ending": "Windows"
 			}
 		},
@@ -114,28 +146,7 @@
 			"file": "controllers/activities/wishflowerMenuActivity.js",
 			"settings":
 			{
-				"buffer_size": 2581,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "// TODO: make three high level function: 1-Walk from point a to b, 2-Fly from point c to d, 3-Rotate tita degress.\n\nLadybug.m_id = 10001000;\n\nLadybug.C_LADYBUG_TYPE_NOT_SET = 0;\nLadybug.C_LADYBUG_TYPE_WISHMASTER = 1;\nLadybug.C_LADYBUG_TYPE_ABOUT = 2;\n\nLadybug.C_LADYBUG_ANGLE_INCREMENT = 10;\nLadybug.C_LADYBUG_WALK_INCREMENT = 10;\nLadybug.C_LADYBUG_SETTING_H_THRUST = 0.25;\nLadybug.C_LADYBUG_SETTING_MAX_THRUST = 5;\nLadybug.C_LADYBUG_SETTING_TORQUE = 6;\nLadybug.C_VERTICAL_TOLERANCE_ANGLE = 30;\n\nLadybug.C_ANIM_STAND = 0;\nLadybug.C_ANIM_WALKING = 1;\nLadybug.C_ANIM_ROTATING_RIGHT = 2;\nLadybug.C_ANIM_ROTATING_LEFT = 3;\nLadybug.C_ANIM_OPENING = 4;\nLadybug.C_ANIM_CLOSING = 5;\nLadybug.C_ANIM_FLYING = 6;\n\nfunction Ladybug() \n{\n    this.m_viewParent = null;\n\n    this.m_type = Ladybug.C_LADYBUG_TYPE_NOT_SET;\n    this.m_cx = 0;\n    this.m_cy = 0;\n\n    this.m_angle = 90;\n    this.m_transparent = 1;\n    this.m_scale = 0.6;\n    this.m_rotationDirection = 1;\n\n    this.m_currentAnimationId = Ladybug.C_ANIM_STAND;\n    this.m_arrAnimations = new Array();\n\n    this.m_velocity =\n    {\n        x: 0,\n        y: 0,\n        a: 0\n    }\n\n    this.m_keyboard =\n    {\n        up: false,\n        down: false,\n        left: false,\n        right: false,\n        button1: false\n    }\n\n    Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) \n    {\n        this.m_viewParent = _viewParent;\n        this.m_nodeType = _ladyBugType;\n\n        this.m_cx = this.m_viewParent.m_canvasEx.m_canvasWidth / 2;\n        this.m_cy = 50  +this.m_viewParent.m_canvasEx.m_canvasHeight / 2;\n\n        this.setAnimations();\n   };\n\n    Ladybug.prototype.setAnimations = function () \n    {\n        var animation = null;\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_STAND, 0, 0);\n        this.addAnimationFrame(animation, 'ladybug_normal.png',     1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_WALKING, 0, 0);\n        animation.setOnChangeFrameListener(this.startFrameWalkEvent, null);\n        animation.setOnEndAnimationEvent(this.endWalkAnimationEvent);\n        this.addAnimationFrame(animation, 'ladybug_walk_left.png',  1);\n        this.addAnimationFrame(animation, 'ladybug_normal.png',     1);\n        this.addAnimationFrame(animation, 'ladybug_walk_right.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_normal.png',     1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_ROTATING_RIGHT, 0, 0);\n        animation.setOnChangeFrameListener(this.startFrameRotatingRigthEvent, null);\n        animation.setOnEndAnimationEvent(this.endRotatingAnimationEvent);\n        this.addAnimationFrame(animation, 'ladybug_walk_right.png',  1);\n        this.addAnimationFrame(animation, 'ladybug_normal.png',     1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_ROTATING_LEFT, 0, 0);\n        animation.setOnChangeFrameListener(this.startFrameRotatingLeftEvent, null);\n        animation.setOnEndAnimationEvent(this.endRotatingAnimationEvent);\n        this.addAnimationFrame(animation, 'ladybug_walk_left.png',  1);\n        this.addAnimationFrame(animation, 'ladybug_normal.png',     1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_OPENING, 0, 0);\n        this.addAnimationFrame(animation, 'ladybug_open_1.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_open_2.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_open_3.png', 1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_CLOSING, 0, 0);\n        animation.setOnEndAnimationEvent(this.endClosingAnimationEvent);\n        this.addAnimationFrame(animation, 'ladybug_open_3.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_open_2.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_open_1.png', 1);\n        this.m_arrAnimations.push(animation);\n\n        animation = new Animation();\n        animation.initWith(this, Ladybug.C_ANIM_FLYING, 0, 0);\n        animation.setInfiniteLoop(true);\n        this.addAnimationFrame(animation, 'ladybug_flying_1.png', 1);\n        this.addAnimationFrame(animation, 'ladybug_flying_2.png', 1);\n        this.m_arrAnimations.push(animation);\n    };\n\n    Ladybug.prototype.startFrameWalkEvent = function (_parent) \n    {\n        _parent.m_cx = _parent.m_cx + cosOf(Ladybug.C_LADYBUG_WALK_INCREMENT, _parent.m_angle); \n        _parent.m_cy = _parent.m_cy - sinOf(Ladybug.C_LADYBUG_WALK_INCREMENT, _parent.m_angle); \n    }    \n\n    Ladybug.prototype.startFrameRotatingRigthEvent = function (_parent) \n    {\n        _parent.setAngle(_parent.m_angle - Ladybug.C_LADYBUG_ANGLE_INCREMENT); \n    }    \n\n    Ladybug.prototype.startFrameRotatingLeftEvent = function (_parent) \n    {\n        _parent.setAngle(_parent.m_angle + Ladybug.C_LADYBUG_ANGLE_INCREMENT); \n    }   \n\n    Ladybug.prototype.endRotatingAnimationEvent = function (_parent) \n    {\n        _parent.setAnimation_STAND();\n    }    \n\n    Ladybug.prototype.endWalkAnimationEvent = function (_parent) \n    {\n        _parent.setAnimation_STAND();\n    }    \n\n    Ladybug.prototype.endClosingAnimationEvent = function (_parent) \n    {\n        _parent.setAnimation_STAND();\n    }    \n\n    Ladybug.prototype.addAnimationFrame = function (_animation, _imageName, _duration) \n    {\n        var tmpResource = this.m_viewParent.getBitmapManagerInstance().getImageByName(_imageName);\n\n        _animation.createFrame(tmpResource, 0, 0, tmpResource.width, tmpResource.height, 0, 0, 0, 0, _duration);\n    }    \n   \n    Ladybug.prototype.handleInputs = function () \n    {\n        this.m_keyboard.up = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_UP);\n        this.m_keyboard.down = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_DOWN);\n\n        this.m_keyboard.right = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT);\n        this.m_keyboard.left = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT);\n        if (this.m_keyboard.right === true && this.m_keyboard.left === true)\n        {\n            this.m_keyboard.right = false;\n            this.m_keyboard.left = false;      \n        }\n\n        this.m_keyboard.button1 = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT);\n    };\n\n    Ladybug.prototype.implementGameLogic = function () \n    {\n        this.moveLogic();\n\n        this.m_arrAnimations[this.m_currentAnimationId].implementGameLogic();   \n        this.m_arrAnimations[this.m_currentAnimationId].setPosition(this.m_cx, this.m_cy);\n    };\n\n    Ladybug.prototype.render = function () \n    {   \n        this.m_arrAnimations[this.m_currentAnimationId].render(\n            this.m_viewParent.m_canvasEx.m_canvas, \n            this.m_viewParent.m_canvasEx.m_context,\n            this.m_angle - 90, this.m_transparent, this.m_scale);\n                                                                                                 \n        message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + \")\"; \n        writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);\n    };\n\n    Ladybug.prototype.moveLogic = function ()\n    {   \n        if (this.isAnimation_FLYING() === true)\n        {\n            this.moveLogicFlying();\n        }\n        else if (this.isAnimation_STAND() === true)\n        {\n            this.moveLogicStand();\n        }\n        else if (this.isAnimation_OPENING() === true)\n        {\n            this.moveLogicOpening();\n        }\n\n        this.updatePosition();\n    }\n\n    Ladybug.prototype.updatePosition = function ()\n    {   \n        this.m_cx = this.m_cx + this.m_velocity.x;\n        this.m_cy = this.m_cy + this.m_velocity.y;\n\n        if (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING)\n        {\n            this.m_angle = this.m_velocity.a - (this.m_velocity.x * Ladybug.C_LADYBUG_SETTING_TORQUE);\n        }\n    }\n\n    Ladybug.prototype.moveLogicFlying = function ()\n    {   \n        if (this.m_keyboard.left === true)\n        {\n            this.flyLeft();\n        }\n        else if (this.m_keyboard.right === true)\n        {\n            this.flyRight();\n        }\n        else\n        {\n            this.m_velocity.x = this.m_velocity.x * 0.95;\n            if (Math.abs(this.m_velocity.x) < 0.25)\n                this.m_velocity.x = 0;\n\n            if (this.m_velocity.x < -Ladybug.C_LADYBUG_SETTING_MAX_THRUST)\n                this.m_velocity.x = -Ladybug.C_LADYBUG_SETTING_MAX_THRUST;\n            \n            if (this.m_velocity.x > Ladybug.C_LADYBUG_SETTING_MAX_THRUST)\n                this.m_velocity.x = Ladybug.C_LADYBUG_SETTING_MAX_THRUST;\n        }\n\n        if (this.m_keyboard.up === true)\n        {\n            this.flyUp();\n        }\n        else if (this.m_keyboard.down === true)\n        {\n            this.flyDown();\n        }\n        else\n        {\n            this.m_velocity.y = this.m_velocity.y * 0.95;\n            if (Math.abs(this.m_velocity.y) < 0.25)\n                this.m_velocity.y = 0;\n\n            if (this.m_velocity.y < -Ladybug.C_LADYBUG_SETTING_MAX_THRUST)\n                this.m_velocity.y = -Ladybug.C_LADYBUG_SETTING_MAX_THRUST;\n            \n            if (this.m_velocity.y > Ladybug.C_LADYBUG_SETTING_MAX_THRUST)\n                this.m_velocity.y = Ladybug.C_LADYBUG_SETTING_MAX_THRUST;\n        }\n\n        if (this.m_keyboard.button1 === false)\n        {\n            this.closeElytras();\n\n            this.m_velocity.x = 0;\n            this.m_velocity.y = 0;\n            this.m_angle = this.m_velocity.a;   \n            this.m_velocity.inverse_x = false;\n            this.m_velocity.inverse_y = false;\n        }\n    }\n\n    Ladybug.prototype.moveLogicStand = function ()\n    {   \n        if (this.m_keyboard.left === true)\n        {\n            this.rotateLeft();\n        }\n        else if (this.m_keyboard.right === true)\n        {\n            this.rotateRight();\n        }\n        else if (this.m_keyboard.up === true)\n        {\n            this.moveUp();\n        }\n        else if (this.m_keyboard.button1 === true)\n        {\n            this.openElytras();\n        }\n    }\n\n    Ladybug.prototype.moveLogicOpening = function ()\n    {   \n        if (this.m_keyboard.button1 === true)\n        {\n            this.flyingAnimation();\n        }\n        else\n        {\n            this.closeElytras();\n        }\n    }\n\n    Ladybug.prototype.flyLeft = function () \n    {\n        this.m_velocity.x = this.m_velocity.x - Ladybug.C_LADYBUG_SETTING_H_THRUST;           \n    };\n\n    Ladybug.prototype.flyRight = function () \n    {\n        this.m_velocity.x = this.m_velocity.x + Ladybug.C_LADYBUG_SETTING_H_THRUST;           \n    };\n\n    Ladybug.prototype.flyUp = function () \n    {\n        this.m_velocity.y = this.m_velocity.y - Ladybug.C_LADYBUG_SETTING_H_THRUST;           \n    };\n\n    Ladybug.prototype.flyDown = function () \n    {\n        this.m_velocity.y = this.m_velocity.y + Ladybug.C_LADYBUG_SETTING_H_THRUST;           \n    };\n\n    Ladybug.prototype.rotateLeft = function () \n    {\n        if (this.isAnimation_STAND() === true || this.m_currentAnimationId === Ladybug.C_ANIM_ROTATING_LEFT)\n        {\n            this.startAnimation(Ladybug.C_ANIM_ROTATING_LEFT);\n        }\n    };\n\n    Ladybug.prototype.rotateRight = function () \n    {\n        if (this.isAnimation_STAND() === true || this.m_currentAnimationId === Ladybug.C_ANIM_ROTATING_RIGHT)\n        {\n            this.startAnimation(Ladybug.C_ANIM_ROTATING_RIGHT);\n        }\n    };\n\n    Ladybug.prototype.moveUp = function () \n    {\n        if (this.isAnimation_STAND() === true || this.m_currentAnimationId === Ladybug.C_ANIM_WALKING)\n        {\n            this.startAnimation(Ladybug.C_ANIM_WALKING);\n        }\n    };\n\n    Ladybug.prototype.openElytras = function () \n    {\n        if (this.isAnimation_STAND() === true)\n        {\n            this.startAnimation(Ladybug.C_ANIM_OPENING);       \n        }\n    };\n\n    Ladybug.prototype.flyingAnimation = function () \n    {\n        if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true &&\n            this.startFlyingCheckSum() === true)\n        {\n            // Force ladubug flying animation start in 90 degress.\n            this.m_angle = 90;  \n            this.m_velocity.a = this.m_angle;   \n\n            this.startAnimation(Ladybug.C_ANIM_FLYING);       \n        }\n    }\n\n    Ladybug.prototype.closeElytras = function () \n    {\n        this.startAnimation(Ladybug.C_ANIM_CLOSING);       \n    }\n\n    Ladybug.prototype.startFlyingCheckSum = function () \n    {\n        return (Math.abs(this.m_angle - 90) < Ladybug.C_VERTICAL_TOLERANCE_ANGLE); \n    }\n\n    Ladybug.prototype.setAnimation_STAND = function () \n    {\n        this.m_currentAnimationId = Ladybug.C_ANIM_STAND;\n        this.m_arrAnimations[this.m_currentAnimationId].reset();  \n    };\n\n    Ladybug.prototype.isAnimation_STAND = function () \n    {\n        return (this.m_currentAnimationId === Ladybug.C_ANIM_STAND);\n    };\n\n    Ladybug.prototype.isAnimation_OPENING = function () \n    {\n        return (this.m_currentAnimationId === Ladybug.C_ANIM_OPENING);\n    };\n\n    Ladybug.prototype.startAnimation = function (_animationId) \n    {\n        if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)\n        {\n            this.m_currentAnimationId = _animationId;\n            this.m_arrAnimations[this.m_currentAnimationId].reset();\n            this.m_arrAnimations[this.m_currentAnimationId].start();\n        }\n    };\n\n    Ladybug.prototype.isAnimation_FLYING = function () \n    {\n        return (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING);\n    };\n\n\n    Ladybug.prototype.setAngle = function (_angle) \n    {\n        this.m_angle = _angle % 360;\n    };\n\n    Ladybug.prototype.reset = function () \n    {\n    };\n\n    Ladybug.prototype.dump = function () \n    {\n    };\n\n\n};\n\n\n\n",
-			"file": "controllers/entities/ladybug.js",
-			"file_size": 14463,
-			"file_write_time": 131198500758564063,
-			"settings":
-			{
-				"buffer_size": 14121,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/animation.js",
-			"settings":
-			{
-				"buffer_size": 7582,
-				"encoding": "UTF-8",
+				"buffer_size": 4571,
 				"line_ending": "Windows"
 			}
 		}
@@ -172,70 +183,84 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/HTML5/wishflower",
-		"/D/Work/HTML5/wishflower/config",
-		"/D/Work/HTML5/wishflower/controllers",
-		"/D/Work/HTML5/wishflower/controllers/activities",
-		"/D/Work/HTML5/wishflower/controllers/entities",
-		"/D/Work/HTML5/wishflower/lib",
-		"/D/Work/HTML5/wishflower/lib/chel-dist",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js",
-		"/D/Work/HTML5/wishflower/views"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public/assets",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views"
 	],
 	"file_history":
 	[
-		"/D/Work/HTML5/wishflower/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/serverOrchesta.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/soundManager.js",
+		"/C/Users/mfontana/Desktop/animation.txt",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/potion.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
+		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
 		"/D/Work/HTML5/wishflower/views/wishflowerView.html",
-		"/D/Work/HTML5/wishflower/controllers/entities/ladybug.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/joystickMngr.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/hero.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/consts.js",
-		"/D/Docs/Personal/Ideario.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/chlib.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
-		"/D/Docs/Personal/Agenda/Link.txt",
-		"/D/Docs/Personal/Agenda/links de interes.txt",
-		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
-		"/D/Work/HTML5/wishflower_test/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animated.js",
-		"/D/Work/HTML5/wishflower_test/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/Orchesta/_oldVersions/orchesta 2/index.js",
-		"/D/Work/HTML5/PoliticFight/trunk/data/guy.anim.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animation.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/viewPlay.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/canvasControl.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/bh.txt",
-		"/C/Users/R440/Google Drive/Laboral/bh.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/bitmapFilter.js",
-		"/D/Work/HTML5/wishflower/controllers/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
-		"/D/Work/HTML5/wishflower/views/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/index.js",
-		"/D/Work/HTML5/wishflower/index.js",
-		"/C/Users/R440/Downloads/halt_and_catch_fire_101_hdtv.srt",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin red.txt",
+		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
 		"/D/Bitdown/Tools/ultimo listado NB.txt",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/index.js",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/activities/wishflowerPlayActivity.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js",
 		"/D/Today/wishflower/background.html",
 		"/C/Users/R440/BitDownloads/Completed/Fullmetal Alchemist Brotherhood/IMPORTANTE.txt",
 		"/C/Users/R440/Google Drive/Resources/Nuevo documento de texto.txt",
 		"/D/Work/HTML5/wishflower/candidate/background.html",
+		"/D/Work/HTML5/wishflower/index.js",
 		"/D/Today/wishflower/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower/candidate/index.js",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/Nuevo documento de texto.txt",
@@ -250,16 +275,16 @@
 		"/D/Docs/Registros ONline.txt",
 		"/H/Mios/Programas/New Text Document.txt",
 		"/D/Docs/Personal/key.txt",
-		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
 		"/F/Nueva/IMGP1192.JPG",
 		"/F/Nueva/IMGP1130.JPG",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/resourceManager.js",
+		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
+		"/D/Work/HTML5/wishflower/views/index.js",
 		"/D/Work/HTML5/Orchesta/orchesta/config/globalDefinitions.js",
 		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/package.json",
-		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
 		"/C/Users/R440/Downloads/Nueva carpeta/Credits.txt",
 		"/C/Users/R440/AppData/Local/Temp/Rar$DI01.746/researching.txt",
 		"/D/Work/HTML5/wishflower/app-bf.sublime-project",
@@ -274,9 +299,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower"
 		]
 	},
 	"find_state":
@@ -284,42 +310,106 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"startFly",
-			"hasEnded",
-			"endFlyingAnimationEvent",
-			"m_velocity.a",
-			"closeElytras",
-			"flyLeft",
-			"setAnima",
-			"Ladybug.C_ANIM_CLOSING",
-			"C_ANIM_OPENING",
-			"isAnimation_OPENING",
-			"moveLogicOpening",
-			"startFlying",
-			"moveLogicStand",
-			"isAnimation_OPENING",
-			"openElytras",
-			"C_LADYBUG_ANGLE_INCREMENT",
-			"C_LADYBUG_SETTING_TORQUE",
-			"m_frameCounter",
-			"C_ANIM_STAND",
-			"endFrameWalkEvent",
-			"m_onEndAnimationEvent",
-			"endRotatingAnimationEvent",
+			"m_paths",
+			"log",
+			"_PoligonPath_",
+			"Ladybug",
+			"m_walkingZoneRectangle",
+			"colli",
+			"m_btnBack_controller",
+			"WishflowerHelpTestActivity",
+			"console",
+			"WishflowerHelpTestActivity",
+			"m_btnGotoBackgroundTestActivity",
+			"m_btnGotoBackgroundTestActivity_controller",
+			"m_btnBack_controller",
+			"inpGenericInput",
+			"m_btnGotoBackgroundTestActivity_controller",
+			"m_btnGotoLadybugTestActivity",
+			"auto",
+			"WishflowerHelpTestpActivity",
+			"WishflowerMenuActivity",
+			"WishflowerHelTestpActivity",
+			"WishflowerHelpTestActivity",
+			"WishflowerHelTestpActivity",
+			"C_ACTIVITY_HELP_TEST",
+			"WishflowerHelpActivity",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"WishflowerMenuActivity",
+			"WishflowerAboutActivity",
+			"WishflowerLadybugTestActivity",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"setCurrentActivityByID",
+			"onEnterActivity",
+			"C_ACTIVITY_PLAY",
+			"bc",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"console",
+			"m_ladybug_frame_index",
 			"startFrameRotatingRigthEvent",
-			"endFrameEvent",
-			"m_invalidateInput",
-			"m_travelH",
-			"jaguar",
-			"drawImageRotationTransparentScaled",
-			"imgd",
-			"m_onPostProcessCallback",
-			"_height",
-			"_width",
+			"90",
+			"startFrameEvent",
+			"m_log_img",
+			"m_onStartFrameEvent",
+			"console",
+			"m_onStartFrameEvent",
+			"m_onEndFrameEvent",
+			"m_onStartFrameEvent",
+			"startFrameEvent",
+			"m_onStartFrameEvent",
+			"m_onChangeFrameCallback",
+			"m_animated",
+			"m_onChangeFrameCallback",
+			"callback",
+			"m_cx",
+			"m_incX",
+			"m_ladybug_current_frame",
+			"m_angle",
+			"flip",
+			"m_frameInc",
+			"resource",
+			"_resource",
+			"stSetAnimation",
+			"m_rc",
+			"m_pivotX",
+			"m_resourceId",
+			"m_type",
+			"m_class",
 			"m_id",
-			"setFilenamesArray",
-			"WishflowerContext",
-			"context",
+			"parseAnimationId",
+			"m_pivotY",
+			"elapse",
+			"m_elapsedTime",
+			"m_mouseManager",
+			"guy_bad_janimjs",
+			"m_is_rotating",
+			"m_walking_frame_index",
+			"m_walking_frame_img",
+			"m_walkLeft_img",
+			"_img",
+			"m_walking_frame_index",
+			"_img",
+			"m_img",
+			"}",
+			"m_elytra_left_img",
+			"chel-1.0.1",
+			"-1.0.1",
+			"chel-1.0.1-dist",
+			"-1.0.1",
+			"under",
+			"vector",
+			"point",
+			"m_wing_img",
+			"calculateTargetX",
+			"drawImageRotationTransparentScaled",
+			"setAngle",
+			"m_onPostProcessCallback",
+			"m_items",
+			"setX",
+			"currentD",
+			"width",
+			"currentDate",
+			"drawImageRotationTransparentScaled",
 			"m_scaleX",
 			"width",
 			"Ladybug.ladybug",
@@ -351,6 +441,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -361,104 +452,104 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+					"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89538,
+						"buffer_size": 2494,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1,
-								1
+								1969,
+								1969
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
+					"file": "controllers/entities/poligonPath.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 86092,
+						"buffer_size": 1731,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1197,
-								1211
+								705,
+								705
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+					"file": "controllers/wishflowerController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7780,
+						"buffer_size": 6071,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								267,
-								301
+								2020,
+								2020
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 360.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "controllers/activities/wishflowerMenuActivity.js",
+					"file": "config/globalDefinitions.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2581,
+						"buffer_size": 1316,
 						"regions":
 						{
 						},
@@ -472,60 +563,31 @@
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "controllers/entities/ladybug.js",
+					"file": "controllers/activities/wishflowerMenuActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14121,
+						"buffer_size": 4571,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7243,
-								7243
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2880.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "controllers/entities/animation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7582,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								953,
-								953
+								3815,
+								3851
 							]
 						],
 						"settings":
@@ -533,11 +595,11 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 315.0,
+						"translation.x": -0.0,
+						"translation.y": 1215.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -549,7 +611,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -574,6 +636,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -620,7 +686,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 245.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

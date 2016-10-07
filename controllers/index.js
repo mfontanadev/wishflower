@@ -18,6 +18,9 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerHelpTestActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerHelpTestActivity.js');});
 
+	app.get ('/controllers/activities/wishflowerLadybugWalkingPathActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugWalkingPathActivity.js');});
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});
@@ -52,6 +55,9 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/animation.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/animation.js');});
+
+	app.get ('/controllers/entities/poligonPath.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/poligonPath.js');});
 
 	// HELPERS
 	app.get ('/controllers/entities/keypair.js', 
