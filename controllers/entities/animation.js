@@ -109,23 +109,31 @@ function Animation ()
 
 	Animation.prototype.collisionRectangle = function () 
 	{
+		return collisionRectangleScaled(1);
+	}
+
+	Animation.prototype.collisionRectangleScaled = function (_scale) 
+	{
 		var midRad = 0;
 		
-		this.m_rc.m_x1 = this.m_x * 2;
-		this.m_rc.m_y1 = this.m_y * 2;
+		var middleWidth = this.m_arrFrames[this.m_currentFrame].m_w * _scale / 2;
+		var middleHeight = this.m_arrFrames[this.m_currentFrame].m_h * _scale / 2;
+
+		this.m_rc.m_x1 = this.m_x - middleWidth;
+		this.m_rc.m_y1 = this.m_y - middleHeight;
+		
 		if (this.m_flip > 0)
 		{
-			this.m_rc.m_x2 = this.m_rc.m_x1 + this.m_arrFrames[this.m_currentFrame].m_w * 2;
-			this.m_rc.m_y2 = this.m_rc.m_y1 + this.m_arrFrames[this.m_currentFrame].m_h * 2;
+			this.m_rc.m_x2 = this.m_x + middleWidth;
+			this.m_rc.m_y2 = this.m_y + middleHeight;
 		}
 		else
 		{
-			this.m_rc.m_x2 = this.m_rc.m_x1 - this.m_arrFrames[this.m_currentFrame].m_w * 2;
-			this.m_rc.m_y2 = this.m_rc.m_y1 + this.m_arrFrames[this.m_currentFrame].m_h * 2;
+			this.m_rc.m_x2 = this.m_x - middleWidth;
+			this.m_rc.m_y2 = this.m_y + middleHeight;
 		}
 		return this.m_rc; 
 	}
-
 	
 	Animation.prototype.fLog = function () 
 	{ 

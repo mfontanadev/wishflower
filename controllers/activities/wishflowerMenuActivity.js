@@ -29,7 +29,7 @@ WishflowerMenuActivity.prototype.createControls = function ()
 	bh = 30;
 
 	this.m_btnGotoLadybugTestActivity = new CanvasControl();
-	this.m_btnGotoLadybugTestActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 50 + bh * 1.5 * 1, bw, bh, "Ladybug demo");
+	this.m_btnGotoLadybugTestActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 50 + bh * 1.5 * 1, bw, bh, "Ladybug controls demo");
 	this.m_btnGotoLadybugTestActivity._fontSize = 12;
 	this.m_btnGotoLadybugTestActivity._onClick = this.m_btnGotoLadybugTestActivity_controller;
 	this.m_btnGotoLadybugTestActivity._visible = false;
@@ -96,7 +96,6 @@ WishflowerMenuActivity.prototype.m_btnGotoLadybugTestActivity_controller = funct
 
 WishflowerMenuActivity.prototype.m_btnGotoBackgroundTestActivity_controller = function (_e, _sender)
 {
-	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_TEST);	
 };
 
 WishflowerMenuActivity.prototype.m_btnGotoLadybugWalkingPathTestActivity_controller = function (_e, _sender)

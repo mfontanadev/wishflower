@@ -9,6 +9,8 @@ function WishflowerLadybugWalkingPathActivity(_id, _viewParent)
 
 	this.m_ladybug = null;
 	this.m_poligonPath = null;
+
+    this.m_background_img = null;
 };
 
 WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
@@ -18,14 +20,17 @@ WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
     this.m_poligonPath = new PoligonPath();
     this.m_poligonPath.init(this.m_viewParent);
     this.m_poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
-    this.m_poligonPath.addSegment(10, 50, 100, 150);
-    this.m_poligonPath.addSegment(100, 150, 50, 200);
+    this.m_poligonPath.addSegment(51, 36, 361, 287);
+    this.m_poligonPath.addSegment(361, 287, 353, 33);
+    this.m_poligonPath.addSegment(353, 33, 42, 287);
+    this.m_poligonPath.addSegment(42, 287, 51, 36);
 	
     this.m_ladybug = new Ladybug();
     this.m_ladybug.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
-    this.m_ladybug.m_cx = this.m_viewParent.m_canvasEx.m_canvas.width / 2;
-    this.m_ladybug.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height / 2;
 	this.m_ladybug.setPoligonPath(this.m_poligonPath);
+    this.m_ladybug.autowalkingSetPositionAndAngle();    // Set ladyBug initial position at the first point of path.
+
+    this.m_background_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('polygonpath_test_grass.png');
 
 	this.createControls();
 };
@@ -35,7 +40,7 @@ WishflowerLadybugWalkingPathActivity.prototype.createControls = function ()
     var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
 
     this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 30, 30, "<");
+    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
     this.m_btnBack._visible = true;
@@ -72,9 +77,14 @@ WishflowerLadybugWalkingPathActivity.prototype.implementGameLogic = function ()
 
 WishflowerLadybugWalkingPathActivity.prototype.render = function ()
 {
-	this.m_poligonPath.render();
-	this.m_ladybug.render();
-	
+    drawImageTransparent( this.m_viewParent.m_canvasEx.m_canvas, 
+                          this.m_viewParent.m_canvasEx.m_context, 
+                          this.m_background_img, 
+                          0, 0, 1);
+
+    this.m_poligonPath.render();
+    this.m_ladybug.render();
+
 	this.renderControls();
 };
 
@@ -94,3 +104,7 @@ WishflowerLadybugWalkingPathActivity.prototype.onLeaveActivity = function ()
 	this.m_btnBack._disable = true;
 };
 
+// TODO: start walking if we touch over ladybug.
+// DONE: add collition rectangle to ladybug (the rectangle depends of current frame)
+// TODO: make infinite loop poligon path.
+// TODO: add show/hide poligon path segments.

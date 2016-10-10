@@ -47,7 +47,7 @@ function PoligonPath()
                 this.m_viewParent.m_canvasEx.m_canvas, 
                 this.m_viewParent.m_canvasEx.m_context,
                 item.m_x1, item.m_y1, item.m_x2, item.m_y2,
-                "green", 1);
+                "red", 1);
 
             renderCircle(
                 this.m_viewParent.m_canvasEx.m_canvas, 

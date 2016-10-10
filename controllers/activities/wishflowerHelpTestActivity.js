@@ -22,7 +22,7 @@ WishflowerHelpTestActivity.prototype.createControls = function ()
     var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
 
     this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 30, 30, "<");
+    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
     this.m_btnBack._visible = true;

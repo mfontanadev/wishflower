@@ -37,6 +37,7 @@ function Ladybug()
     this.m_type = Ladybug.C_LADYBUG_TYPE_NOT_SET;
     this.m_cx = 0;
     this.m_cy = 0;
+    this.m_rc = new chRect();
 
     this.m_angle = 90;
     this.m_transparent = 1;
@@ -244,8 +245,14 @@ function Ladybug()
             this.m_viewParent.m_canvasEx.m_context,
             this.m_angle - 90, this.m_transparent, this.m_scale);
                                                                                                  
-        message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + ")"; 
-        writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
+        if (C_LOG === true)
+        {
+            message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + ")"; 
+            writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
+        }
+
+        renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
+        this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
     };
 
     // ****************************************
@@ -333,7 +340,7 @@ function Ladybug()
 
         if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE)
         {
-            this.autowalkingSettingAngle();
+            this.autowalkingSetPositionAndAngle();
             this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING;
         }
         else if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
@@ -547,7 +554,7 @@ function Ladybug()
     // ****************************************
     // PoligonPath logic 
     // ****************************************
-    Ladybug.prototype.autowalkingSettingAngle = function () 
+    Ladybug.prototype.autowalkingSetPositionAndAngle = function () 
     {
         var currentSegment = this.m_poligonPath.getCurrentSegment();
 
@@ -638,6 +645,13 @@ function Ladybug()
         this.m_walkingZoneRectangle.m_y2 = _notFlyingRectangle.m_y2;
 
         return this.m_walkingZoneRectangle; 
+    }
+
+    Ladybug.prototype.collisionRectangle = function () 
+    {
+        this.m_rc = this.m_arrAnimations[this.m_currentAnimationId].collisionRectangleScaled(this.m_scale);
+
+        return this.m_rc; 
     }
 };
 

@@ -39,7 +39,8 @@ var global_bitmap_definition =
     'ladybug_open_3.png',
     'ladybug_flying_1.png',
     'ladybug_flying_2.png',
-    'log.png'
+    'log.png',
+    'polygonpath_test_grass.png'
 ];
 
 if (typeof module !== 'undefined' && module !== null)
