@@ -338,6 +338,14 @@ function Ladybug()
             this.moveUp();
         }
 
+        if (this.m_autoWalkingState !== Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET)
+        {
+            this.autoWalkingLogic();
+        }
+    }
+
+    Ladybug.prototype.autoWalkingLogic = function ()
+    {   
         if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE)
         {
             this.autowalkingSetPositionAndAngle();
@@ -360,6 +368,17 @@ function Ladybug()
             else
             {
                 this.moveUp();    
+            }
+        }
+        else if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_POLIGON_END)
+        {
+            if (this.m_poligonPath.getInfiniteLoop() === true)
+            {
+                this.startPoligonWalking();      
+            }
+            else
+            {
+                this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET;
             }
         }
     }
@@ -605,6 +624,11 @@ function Ladybug()
     {
         this.m_poligonPath = _poligonPath;
     };
+
+    Ladybug.prototype.canStartPoligonWalking = function () 
+    {
+        return (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET);
+    }
 
     Ladybug.prototype.startPoligonWalking = function (_direction) 
     {

@@ -4,76 +4,144 @@
 		"selected_items":
 		[
 			[
-				"sli",
-				"slideVelocity"
+				"m_s",
+				"m_showSegmentLines"
 			],
 			[
-				"m_c",
-				"m_cy"
+				"C_LADYBUG_AUTOWALKING_",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
 			],
 			[
-				"c",
-				"m_cx"
+				"seg",
+				"segmentModule"
 			],
 			[
-				"heigh",
-				"heightScaled"
+				"m_a",
+				"m_autoWalkingState"
 			],
 			[
-				"wi",
-				"widthScaled"
+				"po",
+				"m_poligonPath"
 			],
 			[
-				"m_no",
-				"m_notFlyingZone"
+				"isIn",
+				"isInsideCurrentSegment"
 			],
 			[
-				"m_in",
-				"m_infiniteLoop"
+				"va",
+				"validateWalkMovement"
 			],
 			[
-				"s",
-				"start"
+				"C_au",
+				"C_LADYBUG_AUTOWALKING_STATE_WALKING"
 			],
 			[
-				"start",
-				"startAnimation"
+				"m_",
+				"m_poligonPath"
 			],
 			[
-				"is",
-				"isAnimation_STAND"
+				"C",
+				"C_POLIGONPATH_DIRECTION_NORMAL"
 			],
 			[
-				"C_ANIM_FL",
-				"C_ANIM_FLYING"
+				"m_au",
+				"m_autoWalkingState"
 			],
 			[
-				"C_an",
-				"C_ANIM_ROTATING_RIGHT"
+				"_y",
+				"_y2"
 			],
 			[
-				"m_onEnd",
-				"m_onEndAnimationEvent"
+				"_x",
+				"_x2"
 			],
 			[
-				"in",
-				"inverse_x"
-			],
-			[
-				"inver",
-				"inverse_y"
+				"_",
+				"_y1"
 			],
 			[
 				"C_la",
-				"C_LADYBUG_SETTING_TORQUE"
+				"C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE"
 			],
 			[
-				"a",
-				"m_angle"
+				"START",
+				"startAnimation"
 			],
 			[
-				"m_on",
-				"m_onFilterCallback"
+				"C_ANIM_",
+				"C_ANIM_OPENING"
+			],
+			[
+				"start",
+				"startFrameWalkEvent"
+			],
+			[
+				"C_ani",
+				"C_ANIM_STAND"
+			],
+			[
+				"C_a",
+				"C_ANIM_STAND"
+			],
+			[
+				"C_",
+				"C_ANIM_MOVING"
+			],
+			[
+				"m_cu",
+				"m_currentAnimationId"
+			],
+			[
+				"m_ladybug_",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_is",
+				"m_is_standing"
+			],
+			[
+				"m_fr",
+				"m_currentFrame"
+			],
+			[
+				"prom",
+				"promCounter"
+			],
+			[
+				"m_la",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_ro",
+				"m_rotationDirection"
+			],
+			[
+				"Bit",
+				"BitmapManagerItem"
+			],
+			[
+				"set",
+				"setX"
+			],
+			[
+				"m_walkR",
+				"m_walkRight_img"
+			],
+			[
+				"m_wa",
+				"m_walking_frame_counter"
+			],
+			[
+				"m_le",
+				"m_walkLeft_img"
+			],
+			[
+				"wa",
+				"m_walking_frame"
+			],
+			[
+				"m_el",
+				"m_elytra_right_img"
 			],
 			[
 				"yel",
@@ -84,20 +152,12 @@
 				"m_resourceManager"
 			],
 			[
-				"m_",
-				"m_canvasEx"
-			],
-			[
 				"Soun",
 				"SoundManager"
 			],
 			[
 				"loa",
 				"loadingTimeout"
-			],
-			[
-				"set",
-				"setFilenamesArray"
 			],
 			[
 				"m_ke",
@@ -108,47 +168,10 @@
 	"buffers":
 	[
 		{
-			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+			"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 89538,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
-			"settings":
-			{
-				"buffer_size": 86092,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "torrents heroine.\n\thttps://kat.ph/usearch/almerias/ \n\thttps://extratorrent.cc/profile/almerias/torrents/\nhttps://katorents.net/new/\n\nESTRENOS - online\n\tque\thttp://hentaihaven.org/shoujo-sect-innocent-lovers-episode-2/\n\n3d comics\nhttp://sxshentai.com/tag/futanari\nhttp://shentai.xyz/category/3d-comics/\n\nSUKEBEI 2\nhttps://www.nyaa.se/?page=torrentinfo&tid=374987\n\n\nwww.fucksuperheroes.\n\nhttp://svscomics.org/category/futanari-xxx\nhttp://www.fucksuperheroes.com/home.php?act=an4957.TubeCupURL\n\nPatreons \nFrom Rikolo 3d: - https://www.patreon.com/mangrowing?ty=h\nhttps://www.patreon.com/posts/4187377\nThre age of 3dx: http://thedude3dx.tumblr.com/\n\n+3db Pastel material 2.0+.mkv: interesante texturas, buscar mas sobre este studio\n\n+Buscar mas, es parecido al manga de pitonisas en el calaboso: [150130][ ピンクパイナップル]豚の如き山賊に捕らわれて処女を奪われる巨乳姫騎士＆女戦士～絶対チ○ポなんかに負けたりしない！！～ THE ANIMATION\n\n\n*Buscar mas de este hentai\n(C87) [Tiramisu Tart (Kazuhiro)] Kougyaku Ingi [Spanish] [InF]\nhttp://g.e-hentai.org/s/2e8c4bc580/850649-21\nhttp://g.e-hentai.org/s/6cb94a4ea2/854942-7\n\nonline: http://nhentai.net/artist/kazuhiro/\n\thttps://www.patreon.com/user?u=684001\n\tartista: hinase aya\n\tfuta: http://nhentai.net/g/141550/9/  (artista chinbotsu)\n\t\thttp://nhentai.net/g/141550/61/\n\t+Punikano: muy buena ilustracion. Buscar artista pyon-kti\n\tartista: *piririnegi\n\tartista: http://nhentai.net/artist/shimokata-kouzou/\n\tartista: Enjo Kosai\n\tartista:  Kai Hiroyuki\n\tBLACKADDER: http://www.nxtcomics.net/xfsearch/Blackadder/\n\tBIG JHONSON: http://yourbigjohnson.tumblr.com/post/127228256938/a-huge-hung-draenei-sent-by-the-evil-nerd\n\tVALNORESSA: http://valnoressa.tumblr.com/\t\n\tthe dude: http://thedude3dx.tumblr.com/\n\tdimitrys: http://www.dirtypornvids.com/shemales-8029.html\n\tkluplife: http://poruporuporu.tumblr.com/  (natural remedy)\n\thttp://juliojakerssfm.tumblr.com/\n\tMachinehead : cathedral of sins\n\twenajii: (lacto girl goblin)\n\tlowhide: http://nhentai.net/artist/lowhide/\n\tneromashin\n\thttp://nhentai.net/g/140315/\n\t+++++https://nhentai.net/g/142207/4/\n\t++++https://nhentai.net/g/160993/93/\n\t\thttps://nhentai.net/artist/fei/\n\t\thttps://nhentai.net/g/171034/39/\n\t++++artista: Shindol Suzuhane Suzu (monster hecho hentai Majuu Jouka Shoujo Utea): http://nhentai.net/artist/suzuhane-suzu/ \n\t3dzen: http://g.e-hentai.org/s/4ff2e6211d/865098-3 (esta en affect 3d)\n\thttp://nhentai.net/artist/hg-chagawa/\n\t++++http://nhentai.net/g/66920/13/\t\n\tMIZZVONJOVI:\n\trakujin\n\t++++http://nhentai.net/artist/chiba-tetsutarou/\n\tkazoku\n\tz-ton\nsumideros\n\thttp://www.naughtymachinima.com/videos\n\n\tdog\n\t\thttps://sumthindifrnt.tumblr.com/post/145672103214/while-hes-away-the-dog-will-play-webm\nonline videod:\n\n\tbuena pagina: http://esmatube.com/itm/3d_futanari_afterschoolspecial\n\t\nhttp://anal-lesbians.tumblr.com/post/128840258658\n\nvid: http://www.dirtypornvids.com/shemales-2726639.html\n\thttp://www.dirtypornvids.com/shemales-1482983.html\n\tclassroom: http://www.hardsextube.com/tranny/video/4308483/3d-shemale-babes\n\n\nMAnga bien dib\n\tSeitenkan\n\t\thttp://nhentai.net/g/146191/13/\n\t\t++http://nhentai.net/g/139760/91/\n\t\thttp://nhentai.net/g/97372/82/\n\t\t++http://nhentai.net/g/140315/10/  (artista de taimaning)\n\t\thttp://nhentai.net/artist/ariesu-watanabe/ (eggs)\n\t\tbakemono: http://g.e-hentai.org/g/868255/918fdca9ad/a\n\t\tbuscar anime de esto: https://hitomi.la/reader/834927.html#69\n\t\thttp://nhentai.net/g/122930/9/ (minotaur)\n\n\t\thttp://nhentai.net/artist/chan-shin-han/\n\n\n\tH\n\thttp://nhentai.net/g/145057/\n\n\nbest 3d\n\thttp://hentaihd.net/watch-video/hentai-3d-kyoudai-no-kankei-517.html\n\thttp://hentaimama.com/3D/God+Waiting+Site/\n\n\nTeena Lipoldino and Angel Rivas\nhttp://www.xvideos.com/video5418790/gorgeous_teen_fucks_her_friend_in_the_ass_with_a_huge_strapon\n\n\n\n\t\nbestiary\nhttp://nhentai.net/g/145010/16/\nhttp://nhentai.net/g/147594/23/\n\n\nseguir\nhttp://nhentai.net/g/148667/128/\n\nhttp://nhentai.net/g/148354/60/\t\n\n++http://nhentai.net/group/musashi-dou/\n\n++http://nhentai.net/g/143916/8/\n\thttp://g.e-hentai.org/tag/artist%3Amusashino+sekai/1\n\t\nhttp://nhentai.net/g/143811/\n\n\n\n\n\n\nalmeiras\n*Fansadox Collection 416 - Harem Horror Hell 5 - Irresistible - Predondo: \n\tel pdf tiene un listado de otros titulos publicados, hay algunos interesantes.\n\n3d devil\n\thttp://www.naughtymachinima.com/video/11787/sarah-returns\nhttp://www.xvideos.com/video1551329/shyla_stylez_shyla_taking_toys_and_dicks_in_her_ass\n\t\n\nhttp://www.xvideos.com/video8587813/annika_rubs_her_pussy_while_ashley_pounds_her_asshole_with_the_black_strap_on\n\n\nhttp://boards.4chan.org/t/thread/667392/3d-hentai\nhttp://www.xvideos.com/video17256849/anal_mandingo\n\nhttp://www.xvideos.com/video4987227/luxury_anal_threesome_in_sexy_stockings\nhttp://www.xvideos.com/video14913685/milfs_ava_addams_and_phoenix_marie_rips_asses_with_strapon\n\nhttp://www.zzcartoon.com/videos/nasty-monster-with-huge-cock.html\n\thetai chiroru ohyama\n\n\ngallerie\nhttp://g.e-hentai.org/g/872843/2a6b726628/?p=1\n\n\ninsects\nhttp://nhentai.net/g/129648/10/\nhttp://www.xvideos.com/video1363959/orgasmic_lesbian_babes_from_www.meanlesbos.com_clip15\n\n\n\n\n**http://g.e-hentai.org/s/632b6bb79b/503211-70\nhttp://www.xvideos.com/video10568341/candy_may_-_fuck_virgin_ass\n\nhttp://www.xvideos.com/video15878307/sweet_anal_slaves_02_amabella_honey_demon_isabella_clark_alisha_silver_am\n\n\n\nanimopron\nonagiart\nfatcat17\n*peta jensen : http://www.xvideos.com/video20454523/meet_horny_women_at_http_www.femalego.com_-_http_www.femalego.com_-\n\n\nb kaiman- she\n\nkendra lust\n\n\nver artista\n\t\thttps://nhentai.net/artist/akane-shuuhei/\nshanda fay\n\n\n\nhttps://nhentai.net/g/166282/6/\nhttps://nhentai.net/artist/akane-shuuhei/\nhttp://juliojakerssfm.tumblr.com/\n\thttp://www.nicovideo.jp/watch/1465779188\n\nhttp://g.e-hentai.org/g/855994/9e0884e01d/\n\n\n\nanipirateria : sitios que suministran animes\nhttp://aramajapan.com/news/otaku/anime/japanese-government-launches-manga-anime-guardians-anti-piracy-project/4736/\n\n\n\ntwice as nice: seguir la actualizacion\nhttp://g.e-hentai.org/g/939659/0f6204b779/?p=2\n\n\nanim 37 mins\nhttp://www.doujinblog.org/h-anime/%E5%90%8C%E4%BA%BA%E3%82%A2%E3%83%8B%E3%83%A1160615imp-%E5%A7%89%E5%BC%9F%E3%81%AE%E3%82%AB%E3%83%B3%E3%82%B1%E3%82%A43-fixed/\n\n\n\nhttp://g.e-hentai.org/s/a2db57eb6b/819689-41\n\nhttp://www.saishuu-hentai.net/main.htm\n\n\nver: [160615] [IMP] 姉弟のカンケイ3 [1140M]\n\thttp://c-imp.sblo.jp/\n\t\n\nhana o hana\njigachu wakini no\n\nhttp://www.xvideos.com/video13999111/puma_swede_delivers_a_big_strap_on_\n\n\nlwh2 ep 4\nhttp://www.shadbase.com/lara-with-horse-4/\n\n\n[Type.90] Himitsu no Anazono (Complete) [ENG]\n--https://nhentai.net/artist/tetsubirei/\n--https://nhentai.net/g/168316/24/F\n--https://nhentai.net/artist/uchida-koneri/\n\nhttp://peliculasenlinea2014.blogspot.com.ar/2012/09/el-ultimo-boy-scout-1991-latino-online.html\n\n\nhttps://nhentai.net/artist/souko-souji/\n\thttps://nhentai.net/g/67934/6/\n\nariella ferrera\nhttp://www.xvideos.com/video22423807/hardcore_bang_on_cam_with_mature_busty_lady_ariella_ferrera_clip-05\nAlyssa Lynn \n\n\nintrigue 3d\nhttp://imgur.com/a/R68gS\n\nsummer cunmings\n Dana Dearmond, \n\nbajar: http://sxshentai.com/missyb-a-very-futa-x-mas.html\n\thttp://sxshentai.com/category/videos\n\t\n***http://www.xvideos.com/video23042115/phoenix_marie_lesbian_anal_havoc_compilation_ava_addams_dana_dearmond_abella_d\n\n\n\nver 89 pags\nvisto https://nhentai.net/g/139138/\nvisto https://nhentai.net/g/149071/37/\n\n\nBAJANDO: 2KUNKY FOR YOU\nhttp://67.231.241.252/viewthread.php?tid=2034536&extra=&page=1\n\nART OF JAGUAR 880 SITE RIP\nhttp://shentai.xyz/category/art-of-jaguar/\n\nJAGUAR\nForma parte de un grupo de artista: www.xposh.com\nandes-studio.com\nartojjaguar.com\ndirtycomics.com\njabcomix.com\njkrcomics.com\njohnpersons.com\nlegiocomix.com\npoonnet.com\ntransartstudio.com\nunclesickey.com\n\n\n\nver\nhttp://www.dlsite.com/ecchi-eng/circle/profile/=/maker_id/RG22951.html",
-			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
-			"file_size": 8202,
-			"file_write_time": 131196800631801476,
-			"settings":
-			{
-				"buffer_size": 7742,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/activities/wishflowerMenuActivity.js",
-			"settings":
-			{
-				"buffer_size": 4571,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/activities/wishflowerLadybugTestActivity.js",
-			"settings":
-			{
-				"buffer_size": 3910,
+				"buffer_size": 3758,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -157,7 +180,16 @@
 			"file": "controllers/entities/ladybug.js",
 			"settings":
 			{
-				"buffer_size": 20639,
+				"buffer_size": 21701,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/poligonPath.js",
+			"settings":
+			{
+				"buffer_size": 5316,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -167,15 +199,6 @@
 			"settings":
 			{
 				"buffer_size": 29869,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/animation.js",
-			"settings":
-			{
-				"buffer_size": 7582,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -213,71 +236,85 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/HTML5/wishflower",
-		"/D/Work/HTML5/wishflower/config",
-		"/D/Work/HTML5/wishflower/controllers",
-		"/D/Work/HTML5/wishflower/controllers/activities",
-		"/D/Work/HTML5/wishflower/controllers/entities",
-		"/D/Work/HTML5/wishflower/lib",
-		"/D/Work/HTML5/wishflower/lib/chel-dist",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js",
-		"/D/Work/HTML5/wishflower/views"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public/assets",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views"
 	],
 	"file_history":
 	[
-		"/D/Docs/Personal/Agenda/Link.txt",
-		"/D/Docs/Personal/links de interes.txt",
-		"/D/Docs/Personal/Agenda/links de interes.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/chlib.js",
-		"/D/Work/HTML5/wishflower/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/animation.js",
+		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/serverOrchesta.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/soundManager.js",
+		"/C/Users/mfontana/Desktop/animation.txt",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/potion.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
+		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
 		"/D/Work/HTML5/wishflower/views/wishflowerView.html",
-		"/D/Work/HTML5/wishflower/controllers/entities/ladybug.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/joystickMngr.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/hero.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/consts.js",
-		"/D/Docs/Personal/Ideario.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
-		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
-		"/D/Work/HTML5/wishflower_test/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animated.js",
-		"/D/Work/HTML5/wishflower_test/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/Orchesta/_oldVersions/orchesta 2/index.js",
-		"/D/Work/HTML5/PoliticFight/trunk/data/guy.anim.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animation.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/viewPlay.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/canvasControl.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/bh.txt",
-		"/C/Users/R440/Google Drive/Laboral/bh.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/bitmapFilter.js",
-		"/D/Work/HTML5/wishflower/controllers/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
-		"/D/Work/HTML5/wishflower/views/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/index.js",
-		"/D/Work/HTML5/wishflower/index.js",
-		"/C/Users/R440/Downloads/halt_and_catch_fire_101_hdtv.srt",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin red.txt",
+		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
 		"/D/Bitdown/Tools/ultimo listado NB.txt",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/index.js",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/activities/wishflowerPlayActivity.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js",
 		"/D/Today/wishflower/background.html",
 		"/C/Users/R440/BitDownloads/Completed/Fullmetal Alchemist Brotherhood/IMPORTANTE.txt",
 		"/C/Users/R440/Google Drive/Resources/Nuevo documento de texto.txt",
 		"/D/Work/HTML5/wishflower/candidate/background.html",
+		"/D/Work/HTML5/wishflower/index.js",
 		"/D/Today/wishflower/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower/candidate/index.js",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/Nuevo documento de texto.txt",
@@ -292,16 +329,16 @@
 		"/D/Docs/Registros ONline.txt",
 		"/H/Mios/Programas/New Text Document.txt",
 		"/D/Docs/Personal/key.txt",
-		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
 		"/F/Nueva/IMGP1192.JPG",
 		"/F/Nueva/IMGP1130.JPG",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/resourceManager.js",
+		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
+		"/D/Work/HTML5/wishflower/views/index.js",
 		"/D/Work/HTML5/Orchesta/orchesta/config/globalDefinitions.js",
 		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/package.json",
-		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
 		"/C/Users/R440/Downloads/Nueva carpeta/Credits.txt",
 		"/C/Users/R440/AppData/Local/Temp/Rar$DI01.746/researching.txt",
 		"/D/Work/HTML5/wishflower/app-bf.sublime-project",
@@ -316,9 +353,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower"
 		]
 	},
 	"find_state":
@@ -326,77 +364,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"infoq",
-			"openElytras",
-			"moveLogicStand",
-			"m_walkingZoneRectangle",
-			"m_walkingZone",
-			"m_notFlyingRect",
-			"this",
-			"m_notFlyingRect",
-			"C_VERTICAL_TOLERANCE_ANGLE",
-			"log",
-			"collisionRectangle",
-			"startFly",
-			"hasEnded",
-			"endFlyingAnimationEvent",
-			"m_velocity.a",
-			"closeElytras",
-			"flyLeft",
-			"setAnima",
-			"Ladybug.C_ANIM_CLOSING",
-			"C_ANIM_OPENING",
-			"isAnimation_OPENING",
-			"moveLogicOpening",
-			"startFlying",
-			"moveLogicStand",
-			"isAnimation_OPENING",
-			"openElytras",
-			"C_LADYBUG_ANGLE_INCREMENT",
-			"C_LADYBUG_SETTING_TORQUE",
-			"m_frameCounter",
-			"C_ANIM_STAND",
-			"endFrameWalkEvent",
-			"m_onEndAnimationEvent",
-			"endRotatingAnimationEvent",
-			"startFrameRotatingRigthEvent",
-			"endFrameEvent",
-			"m_invalidateInput",
-			"m_travelH",
-			"jaguar",
-			"drawImageRotationTransparentScaled",
-			"imgd",
-			"m_onPostProcessCallback",
-			"_height",
-			"_width",
-			"m_id",
-			"setFilenamesArray",
-			"WishflowerContext",
-			"context",
-			"m_scaleX",
-			"width",
-			"Ladybug.ladybug",
-			"Ladybug.log",
-			"Ladybug.ladybug",
-			"cnv",
-			"ios",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"lblInfo",
-			"getIdByName",
-			"_soundName",
-			"_resourceName",
-			"m_managerAvailable",
-			"m_soundAvailable",
-			"setTimeout",
+			"showSegmentLines",
 			"console",
-			"m_totalSounds",
-			"msg",
-			"undef",
-			"hash",
-			"getHash"
+			"conso",
+			"consol",
+			"endWalkAnimationEvent",
+			"autowalkingSettingAngle",
+			"C_WALK_DIRECTION_NORMAL",
+			"C_WALK_START_TO_END",
+			"C_POLIGONPATH_",
+			"autowalkingSettingAngle",
+			"isAnimation_STAND",
+			"m_autoWalking",
+			"moveLogicStand",
+			"moveUp",
+			"moveLogicStand",
+			"m_autoWalkingState",
+			"moveLogicStand",
+			"auto",
+			"moveLogicStand",
+			"setani",
+			"setAnimation_STAND",
+			"start",
+			"STROKE_WIDTH",
+			"STROKE_WIDTH_RECTANGLE",
+			"STROKE_WIDTH_CIRCLE",
+			"STROKE_WIDTH_LINE",
+			"context.lineWidth",
+			"renderCircle",
+			"m_paths",
+			"log",
+			"_PoligonPath_",
+			"Ladybug",
+			"m_walkingZoneRectangle",
+			"colli",
+			"m_btnBack_controller",
+			"WishflowerHelpTestActivity",
+			"console",
+			"WishflowerHelpTestActivity",
+			"m_btnGotoBackgroundTestActivity",
+			"m_btnGotoBackgroundTestActivity_controller",
+			"m_btnBack_controller",
+			"inpGenericInput",
+			"m_btnGotoBackgroundTestActivity_controller",
+			"m_btnGotoLadybugTestActivity",
+			"auto",
+			"WishflowerHelpTestpActivity",
+			"WishflowerMenuActivity",
+			"WishflowerHelTestpActivity",
+			"WishflowerHelpTestActivity",
+			"WishflowerHelTestpActivity",
+			"C_ACTIVITY_HELP_TEST",
+			"WishflowerHelpActivity",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"WishflowerMenuActivity",
+			"WishflowerAboutActivity",
+			"WishflowerLadybugTestActivity",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"setCurrentActivityByID",
+			"onEnterActivity",
+			"C_ACTIVITY_PLAY",
+			"bc",
+			"C_ACTIVITY_LADYBUG_TEST",
+			"console",
+			"m_ladybug_frame_index",
+			"startFrameRotatingRigthEvent",
+			"90",
+			"startFrameEvent",
+			"m_log_img",
+			"m_onStartFrameEvent",
+			"console",
+			"m_onStartFrameEvent",
+			"m_onEndFrameEvent",
+			"m_onStartFrameEvent",
+			"startFrameEvent",
+			"m_onStartFrameEvent",
+			"m_onChangeFrameCallback",
+			"m_animated",
+			"m_onChangeFrameCallback",
+			"callback",
+			"m_cx",
+			"m_incX",
+			"m_ladybug_current_frame",
+			"m_angle",
+			"flip",
+			"m_frameInc",
+			"resource",
+			"_resource",
+			"stSetAnimation",
+			"m_rc",
+			"m_pivotX",
+			"m_resourceId",
+			"m_type",
+			"m_class",
+			"m_id",
+			"parseAnimationId",
+			"m_pivotY",
+			"elapse",
+			"m_elapsedTime",
+			"m_mouseManager",
+			"guy_bad_janimjs",
+			"m_is_rotating",
+			"m_walking_frame_index",
+			"m_walking_frame_img",
+			"m_walkLeft_img",
+			"_img",
+			"m_walking_frame_index",
+			"_img",
+			"m_img",
+			"}",
+			"m_elytra_left_img",
+			"chel-1.0.1",
+			"-1.0.1",
+			"chel-1.0.1-dist",
+			"-1.0.1",
+			"under",
+			"vector",
+			"point",
+			"m_wing_img",
+			"calculateTargetX",
+			"drawImageRotationTransparentScaled",
+			"setAngle",
+			"m_onPostProcessCallback",
+			"m_items",
+			"setX",
+			"currentD",
+			"width",
+			"currentDate",
+			"drawImageRotationTransparentScaled"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -404,6 +499,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -414,63 +510,63 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+					"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89538,
+						"buffer_size": 3758,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								61,
-								110
+								3720,
+								3720
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1455.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
+					"file": "controllers/entities/ladybug.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 86092,
+						"buffer_size": 21701,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								11590,
+								11590
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4995.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -478,28 +574,29 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+					"file": "controllers/entities/poligonPath.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7742,
+						"buffer_size": 5316,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1388,
-								1388
+								517,
+								517
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 660.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -507,95 +604,6 @@
 				},
 				{
 					"buffer": 3,
-					"file": "controllers/activities/wishflowerMenuActivity.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4571,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								274,
-								274
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "controllers/activities/wishflowerLadybugTestActivity.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3910,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1137,
-								1137
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 455.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "controllers/entities/ladybug.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20639,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9196,
-								9196
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3249.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "lib/chel-dist/js/chlib.js",
 					"semi_transient": false,
 					"settings":
@@ -607,8 +615,8 @@
 						"selection":
 						[
 							[
-								11346,
-								11370
+								13561,
+								13567
 							]
 						],
 						"settings":
@@ -617,39 +625,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6795.0,
+						"translation.y": 7813.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "controllers/entities/animation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7582,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1935,
-								1935
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1305.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -661,7 +640,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -686,6 +665,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -732,7 +715,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 245.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

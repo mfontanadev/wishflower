@@ -11,6 +11,8 @@ function WishflowerLadybugWalkingPathActivity(_id, _viewParent)
 	this.m_poligonPath = null;
 
     this.m_background_img = null;
+
+    this.m_startWalking = false;
 };
 
 WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
@@ -20,6 +22,9 @@ WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
     this.m_poligonPath = new PoligonPath();
     this.m_poligonPath.init(this.m_viewParent);
     this.m_poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
+    this.m_poligonPath.setInfitineLoop(false);
+    this.m_poligonPath.setSegmentLinesVisibility(true);
+
     this.m_poligonPath.addSegment(51, 36, 361, 287);
     this.m_poligonPath.addSegment(361, 287, 353, 33);
     this.m_poligonPath.addSegment(353, 33, 42, 287);
@@ -54,16 +59,25 @@ WishflowerLadybugWalkingPathActivity.prototype.onEnterActivity = function ()
 
 WishflowerLadybugWalkingPathActivity.prototype.handleInputs = function ()
 {
+	var mouse = this.m_viewParent.getMouseManagerInstance();
+	if (mouse.m_mouseClick === true && this.m_startWalking === false)
+	{
+		if (collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_ladybug.collisionRectangle()) === true)
+		{
+			this.m_startWalking = true;
+		}
+	}
+
 	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
         this.btnBack_controller(null, null);   
     }
 
-	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
+	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true && this.m_startWalking === false)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
-        this.m_ladybug.startPoligonWalking(Ladybug.C_WALK_DIRECTION_NORMAL);   
+		this.m_startWalking = true;
     }
 
 	//this.m_ladybug.handleInputs();
@@ -71,8 +85,18 @@ WishflowerLadybugWalkingPathActivity.prototype.handleInputs = function ()
 
 WishflowerLadybugWalkingPathActivity.prototype.implementGameLogic = function ()
 {
+	if (this.m_startWalking === true)
+	{
+        if (this.m_ladybug.canStartPoligonWalking() === true)
+        {
+			this.m_ladybug.startPoligonWalking(Ladybug.C_WALK_DIRECTION_NORMAL);   
+        }
+	}
+
 	this.m_poligonPath.implementGameLogic();
 	this.m_ladybug.implementGameLogic();
+
+	this.m_startWalking = false;
 };
 
 WishflowerLadybugWalkingPathActivity.prototype.render = function ()
@@ -103,8 +127,3 @@ WishflowerLadybugWalkingPathActivity.prototype.onLeaveActivity = function ()
 	this.m_btnBack._visible = false;
 	this.m_btnBack._disable = true;
 };
-
-// TODO: start walking if we touch over ladybug.
-// DONE: add collition rectangle to ladybug (the rectangle depends of current frame)
-// TODO: make infinite loop poligon path.
-// TODO: add show/hide poligon path segments.

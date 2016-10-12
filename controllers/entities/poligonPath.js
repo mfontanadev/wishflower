@@ -16,6 +16,8 @@ function PoligonPath()
     this.m_segments = new Array(); 
     this.m_currentSegment = 0;
     this.m_poligonDirection = PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL;
+    this.m_infitineLoop = false;
+    this.m_segmentLinesVisibility = false;
 
     PoligonPath.prototype.init = function (_viewParent) 
     {
@@ -32,29 +34,32 @@ function PoligonPath()
 
     PoligonPath.prototype.render = function () 
     {   
-        for (var i = 0; i < this.m_segments.length; i++) 
+        if (this.m_segmentLinesVisibility === true)
         {
-            item = this.m_segments[i];
+            for (var i = 0; i < this.m_segments.length; i++) 
+            {
+                item = this.m_segments[i];
 
-            renderCircleNotFill(
-                this.m_viewParent.m_canvasEx.m_canvas, 
-                this.m_viewParent.m_canvasEx.m_context,
-                item.m_x1, item.m_y1,
-                PoligonPath.C_POLIGONPATH_START_RADIOUS,
-                "black");
+                renderCircleNotFill(
+                    this.m_viewParent.m_canvasEx.m_canvas, 
+                    this.m_viewParent.m_canvasEx.m_context,
+                    item.m_x1, item.m_y1,
+                    PoligonPath.C_POLIGONPATH_START_RADIOUS,
+                    "black");
 
-            renderLine(
-                this.m_viewParent.m_canvasEx.m_canvas, 
-                this.m_viewParent.m_canvasEx.m_context,
-                item.m_x1, item.m_y1, item.m_x2, item.m_y2,
-                "red", 1);
+                renderLine(
+                    this.m_viewParent.m_canvasEx.m_canvas, 
+                    this.m_viewParent.m_canvasEx.m_context,
+                    item.m_x1, item.m_y1, item.m_x2, item.m_y2,
+                    "red", 1);
 
-            renderCircle(
-                this.m_viewParent.m_canvasEx.m_canvas, 
-                this.m_viewParent.m_canvasEx.m_context,
-                item.m_x2, item.m_y2,
-                PoligonPath.C_POLIGONPATH_END_RADIOUS,
-                "blue");
+                renderCircle(
+                    this.m_viewParent.m_canvasEx.m_canvas, 
+                    this.m_viewParent.m_canvasEx.m_context,
+                    item.m_x2, item.m_y2,
+                    PoligonPath.C_POLIGONPATH_END_RADIOUS,
+                    "blue");
+            }
         }
     };
 
@@ -144,6 +149,26 @@ function PoligonPath()
     PoligonPath.prototype.getDirection = function () 
     {   
         return this.m_poligonDirection;
+    };
+
+    PoligonPath.prototype.setInfitineLoop = function (_value) 
+    {   
+        this.m_infitineLoop = _value;
+    };
+
+    PoligonPath.prototype.getInfiniteLoop = function () 
+    {   
+        return this.m_infitineLoop;
+    };
+
+    PoligonPath.prototype.setSegmentLinesVisibility = function (_value) 
+    {   
+        this.m_segmentLinesVisibility = _value;
+    };
+
+    PoligonPath.prototype.getSegmentLinesVisibility = function () 
+    {   
+        return this.m_segmentLinesVisibility;
     };
 
     PoligonPath.prototype.reset = function () 
