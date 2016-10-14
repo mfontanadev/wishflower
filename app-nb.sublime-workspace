@@ -4,8 +4,28 @@
 		"selected_items":
 		[
 			[
+				"has",
+				"hasExtraParams"
+			],
+			[
+				"m_poli",
+				"m_poligonPathScale"
+			],
+			[
 				"m_s",
-				"m_showSegmentLines"
+				"m_scale1"
+			],
+			[
+				"m_sca",
+				"m_scale2"
+			],
+			[
+				"C_la",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
+			],
+			[
+				"m_pa",
+				"m_viewParent"
 			],
 			[
 				"C_LADYBUG_AUTOWALKING_",
@@ -58,10 +78,6 @@
 			[
 				"_",
 				"_y1"
-			],
-			[
-				"C_la",
-				"C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE"
 			],
 			[
 				"START",
@@ -171,16 +187,7 @@
 			"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 3758,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/ladybug.js",
-			"settings":
-			{
-				"buffer_size": 21701,
+				"buffer_size": 4157,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -189,16 +196,43 @@
 			"file": "controllers/entities/poligonPath.js",
 			"settings":
 			{
-				"buffer_size": 5316,
+				"buffer_size": 8853,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/chel-dist/js/chlib.js",
+			"file": "lib/chel-dist/js/bitmapManager.js",
 			"settings":
 			{
-				"buffer_size": 29869,
+				"buffer_size": 5489,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/ladybug.js",
+			"settings":
+			{
+				"buffer_size": 22892,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 1473 files for \"updateAngleScaleAlpha\"\n\nC:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower\\controllers\\entities\\ladybug.js:\n  156          if (_parent.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)\n  157          {\n  158:             _parent.updateAngleScaleAlpha();\n  159  \n  160              //console.log(\"currentScale:\" + _parent.m_poligonPath.getScaleAtCurrentPoint(_parent.m_cx, _parent.m_cy));\n  ...\n  598          }\n  599  \n  600:         this.updateAngleScaleAlpha();\n  601      }\n  602  \n  603:     Ladybug.prototype.updateAngleScaleAlpha = function () \n  604      {\n  605          var angle = this.m_poligonPath.getCurrentSegmentAngle();\n\n3 matches in 1 file\n",
+			"settings":
+			{
+				"buffer_size": 703,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "controllers/errorPageController.js",
+			"settings":
+			{
+				"buffer_size": 1139,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -252,17 +286,22 @@
 	],
 	"file_history":
 	[
-		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
@@ -271,7 +310,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
@@ -364,6 +402,31 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"updateScaleAlpha",
+			"alpha",
+			"updateAngleScaleAlpha",
+			"getscale",
+			"this.m_scale",
+			"m_alpha",
+			"getModuleFromStartingSegmentToPoint",
+			" _y",
+			"getModuleFromStartingSegmentToPoint",
+			"updateAngleScaleAlpha",
+			"autowalkingUpdateLadybugMetrics",
+			"metrixs",
+			"m_transparent",
+			"autowalkingSetPositionAndAngle",
+			"angle",
+			"getModuleFromStartingSegmentToPoint",
+			"getCurrentSegmentModule",
+			"getModileFromStartingSegmentToPoint",
+			"init",
+			"m_segments",
+			"click",
+			"C_LADYBUG_AUTOWALKING_STATE_NOT_SET",
+			"colli",
+			"collition",
+			"getMouse",
 			"showSegmentLines",
 			"console",
 			"conso",
@@ -466,32 +529,7 @@
 			"guy_bad_janimjs",
 			"m_is_rotating",
 			"m_walking_frame_index",
-			"m_walking_frame_img",
-			"m_walkLeft_img",
-			"_img",
-			"m_walking_frame_index",
-			"_img",
-			"m_img",
-			"}",
-			"m_elytra_left_img",
-			"chel-1.0.1",
-			"-1.0.1",
-			"chel-1.0.1-dist",
-			"-1.0.1",
-			"under",
-			"vector",
-			"point",
-			"m_wing_img",
-			"calculateTargetX",
-			"drawImageRotationTransparentScaled",
-			"setAngle",
-			"m_onPostProcessCallback",
-			"m_items",
-			"setX",
-			"currentD",
-			"width",
-			"currentDate",
-			"drawImageRotationTransparentScaled"
+			"m_walking_frame_img"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -519,15 +557,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3758,
+						"buffer_size": 4157,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3720,
-								3720
+								832,
+								832
 							]
 						],
 						"settings":
@@ -536,7 +574,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1455.0,
+						"translation.y": 81.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -544,49 +582,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "controllers/entities/ladybug.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 21701,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11590,
-								11590
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4995.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "controllers/entities/poligonPath.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5316,
+						"buffer_size": 8853,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								517,
-								517
+								5866,
+								5866
 							]
 						],
 						"settings":
@@ -596,27 +604,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2591.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "lib/chel-dist/js/chlib.js",
+					"buffer": 2,
+					"file": "lib/chel-dist/js/bitmapManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 29869,
+						"buffer_size": 5489,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13561,
-								13567
+								3699,
+								3699
 							]
 						],
 						"settings":
@@ -625,10 +633,122 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7813.0,
+						"translation.y": 3015.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "controllers/entities/ladybug.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22892,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19753,
+								19753
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8750.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 703,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										275,
+										296
+									],
+									[
+										485,
+										506
+									],
+									[
+										560,
+										581
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								574,
+								574
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "controllers/errorPageController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1139,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								79,
+								79
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]

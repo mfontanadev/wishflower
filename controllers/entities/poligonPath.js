@@ -65,8 +65,17 @@ function PoligonPath()
 
     PoligonPath.prototype.addSegment = function (_x1, _y1, _x2, _y2) 
     {   
-        var tmpLine = new chRect();
-        tmpLine.initWith(_x1, _y1, _x2, _y2);
+        var tmpLine = new PoligonSegment();
+        tmpLine.init(_x1, _y1, _x2, _y2);
+
+        this.m_segments.push(tmpLine);
+        this.reset();
+    };
+
+    PoligonPath.prototype.addSegmentExtraParams = function (_x1, _y1, _scale1, _alpha1, _x2, _y2, _scale2, _alpha2) 
+    {   
+        var tmpLine = new PoligonSegment();
+        tmpLine.initWithExtraParams(_x1, _y1, _scale1, _alpha1, _x2, _y2, _scale2, _alpha2);
 
         this.m_segments.push(tmpLine);
         this.reset();
@@ -94,12 +103,10 @@ function PoligonPath()
 
     PoligonPath.prototype.getCurrentSegmentModule = function () 
     {   
-        var currentSegment = this.getCurrentSegment();
-
-        return modulo(currentSegment.m_x1, currentSegment.m_y1, currentSegment.m_x2, currentSegment.m_y2);
+        return this.getCurrentSegment().module();
     };
 
-    PoligonPath.prototype.getModileFromStartingSegmentToPoint = function (_x, _y) 
+    PoligonPath.prototype.getModuleFromVertice = function (_x, _y) 
     {   
         var currentSegment = this.getCurrentSegment();
 
@@ -171,6 +178,48 @@ function PoligonPath()
         return this.m_segmentLinesVisibility;
     };
 
+    PoligonPath.prototype.getScaleAtCurrentPoint = function (_x, _y) 
+    {   
+        var moduleRatio = this.getModuleRatioRectifiedByDirection(_x, _y);
+        return this.getCurrentSegment().getInterpolatedScale(moduleRatio);
+    };
+
+    PoligonPath.prototype.getAlphaAtCurrentPoint = function (_x, _y) 
+    {   
+        var moduleRatio = this.getModuleRatioRectifiedByDirection(_x, _y);
+        return this.getCurrentSegment().getInterpolatedAlpha(moduleRatio);
+    };
+
+    // For Scale and Alpha if segments direction is INVERSE we must use
+    // 1 - moduleRatio. 
+    PoligonPath.prototype.getModuleRatioRectifiedByDirection = function (_x, _y) 
+    {   
+        var moduleRatio = this.getModuleRatio(_x, _y);
+
+        if (this.m_poligonDirection === PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE)
+        {
+            moduleRatio = 1 - moduleRatio;
+        }
+
+        return moduleRatio;
+    }
+
+    PoligonPath.prototype.getModuleRatio = function (_x, _y) 
+    {   
+        var segmentModule = this.getCurrentSegment().module(); 
+        var moduleAtPoint = this.getModuleFromVertice(_x, _y);
+        var ratio = moduleAtPoint / segmentModule;
+
+        // Avoid a corner case, when we make validations to next movement beyond end point
+        // the distance from initial point is greater than segment module.
+        if (ratio > 1)
+        {
+            ratio = 1; 
+        }
+
+        return ratio;
+    };
+
     PoligonPath.prototype.reset = function () 
     {   
         if (this.m_poligonDirection === PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL)
@@ -186,6 +235,86 @@ function PoligonPath()
     PoligonPath.prototype.dump = function () 
     {
     };
+};
+
+// Auxiliar class
+// Class Segment
+function PoligonSegment() 
+{ 
+    PoligonSegment.prototype.init = function (_x1, _y1, _x2, _y2)
+    {
+        this.m_x1 = _x1;
+        this.m_y1 = _y1;
+        this.m_scale1 = 1;
+        this.m_alpha1 = 1;
+
+        this.m_x2 = _x2;
+        this.m_y2 = _y2;
+        this.m_scale2 = 1;
+        this.m_alpha2 = 1;
+
+        this.m_extraParams = false; 
+    };
+
+    PoligonSegment.prototype.initWithExtraParams = function (_x1, _y1, _scale1, _alpha1, _x2, _y2, _scale2, _alpha2)
+    {
+        this.m_x1 = _x1;
+        this.m_y1 = _y1;
+        this.m_scale1 = _scale1;
+        this.m_alpha1 = _alpha1;
+
+        this.m_x2 = _x2;
+        this.m_y2 = _y2;
+        this.m_scale2 = _scale2;
+        this.m_alpha2 = _alpha2;
+
+        this.m_extraParams = true; 
+    };
+    
+    PoligonSegment.prototype.module = function ()
+    {
+        return modulo(this.m_x1, this.m_y1, this.m_x2, this.m_y2);
+    };
+
+    PoligonSegment.prototype.deltaScale = function ()
+    {
+        return this.m_scale2 - this.m_scale1;
+    };
+
+    PoligonSegment.prototype.getInterpolatedScale = function (_interpolationValue)
+    {
+        return (this.deltaScale() * _interpolationValue) + this.m_scale1;
+    };
+       
+    PoligonSegment.prototype.deltaAlpha = function ()
+    {
+        return this.m_alpha2 - this.m_alpha1;
+    };
+
+    PoligonSegment.prototype.getInterpolatedAlpha = function (_interpolationValue)
+    {
+        return (this.deltaAlpha() * _interpolationValue) + this.m_alpha1;
+    };
+
+    PoligonSegment.prototype.hasExtraParams = function ()
+    {
+        return (this.m_extraParams === true);
+    };
+
+    PoligonSegment.prototype.fLog = function () 
+    { 
+        var logText = "PoligonSegment: " +
+        "m_x1=" + this.m_x1 + ", " +
+        "m_y1=" + this.m_y1 + ", " + 
+        "m_scale1=" + this.m_scale1 + ", " + 
+        "m_alpha1=" + this.m_alpha1 + ", " + 
+        "m_x2=" + this.m_x2 + ", " + 
+        "m_y2=" + this.m_y2 + ", " + 
+        "m_scale2=" + this.m_scale2 + ", " + 
+        "m_alpha2=" + this.m_alpha2 + "; "; 
+        
+        return logText;
+    }; 
 };
 
 

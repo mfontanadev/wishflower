@@ -40,7 +40,7 @@ function Ladybug()
     this.m_rc = new chRect();
 
     this.m_angle = 90;
-    this.m_transparent = 1;
+    this.m_alpha = 1;
     this.m_scale = Ladybug.C_LADYBUG_SCALE;
     this.m_rotationDirection = 1;
 
@@ -152,6 +152,11 @@ function Ladybug()
             _parent.m_cx = _parent.m_cx + incX; 
             _parent.m_cy = _parent.m_cy + incY; 
         }
+        
+        if (_parent.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
+        {
+            _parent.updateScaleAlpha();
+        }
     }    
 
     Ladybug.prototype.isAValidMovement = function (_incX, _incY) 
@@ -171,7 +176,7 @@ function Ladybug()
         var result = true;
 
         var segmentModule = this.m_poligonPath.getCurrentSegmentModule();
-        var ladyBugDistante = this.m_poligonPath.getModileFromStartingSegmentToPoint(this.m_cx, this.m_cy);
+        var ladyBugDistante = this.m_poligonPath.getModuleFromVertice(this.m_cx, this.m_cy);
 
         if (ladyBugDistante > segmentModule)
             result = false;
@@ -243,7 +248,7 @@ function Ladybug()
         this.m_arrAnimations[this.m_currentAnimationId].render(
             this.m_viewParent.m_canvasEx.m_canvas, 
             this.m_viewParent.m_canvasEx.m_context,
-            this.m_angle - 90, this.m_transparent, this.m_scale);
+            this.m_angle - 90, this.m_alpha, this.m_scale);
                                                                                                  
         if (C_LOG === true)
         {
@@ -348,7 +353,7 @@ function Ladybug()
     {   
         if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE)
         {
-            this.autowalkingSetPositionAndAngle();
+            this.autowalkingUpdateLadybugMetrics();
             this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING;
         }
         else if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
@@ -573,7 +578,7 @@ function Ladybug()
     // ****************************************
     // PoligonPath logic 
     // ****************************************
-    Ladybug.prototype.autowalkingSetPositionAndAngle = function () 
+    Ladybug.prototype.autowalkingUpdateLadybugMetrics = function () 
     {
         var currentSegment = this.m_poligonPath.getCurrentSegment();
 
@@ -590,6 +595,20 @@ function Ladybug()
 
         var angle = this.m_poligonPath.getCurrentSegmentAngle();
         this.setAngle(angle);
+
+        this.updateScaleAlpha();
+    }
+
+    Ladybug.prototype.updateScaleAlpha = function () 
+    {
+        if (this.m_poligonPath.getCurrentSegment().hasExtraParams() === true)
+        {
+            var scale = this.m_poligonPath.getScaleAtCurrentPoint(this.m_cx, this.m_cy);
+            this.m_scale = scale;
+
+            var alpha = this.m_poligonPath.getAlphaAtCurrentPoint(this.m_cx, this.m_cy);
+            this.m_alpha = alpha;
+        }
     };
 
     // ****************************************
