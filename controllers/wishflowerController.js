@@ -17,8 +17,8 @@ window.onload = function()
 	bitmapManager.setProgressBarMessage("Loading bitmpas");
 	bitmapManager.setFilenamesArray(global_bitmap_definition);
 
-	var bitmapFilter = new BitmapFilter();
-	bitmapManager.setBitmapFilter(document, bitmapFilter.noiseAndTransparentFilter);
+	//var bitmapFilter = new BitmapFilter();
+	//bitmapManager.setBitmapFilter(document, bitmapFilter.noiseAndTransparentFilter);
 
 	// Enable using sounds
 	var soundManager = viewMngr.getSoundManagerInstance();
@@ -54,8 +54,8 @@ function appInitContext()
  	viewMngr.initializeActivities();
 
  	// Start animation loop.
-	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_WALKING_PATH_TEST);
-	//viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_TEST);
+	//viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST);
+	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_MENU);
 	viewMngr.animationCycle();	
 }
 

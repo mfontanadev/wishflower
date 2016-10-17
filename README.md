@@ -1,7 +1,7 @@
-## This is an Orchesta simulator, it was created to learn about node-js, socket-io and heroku.
-Explanation in few words, the app let you join to a virtual orchesta, you phone or your pc will plays the instrument sounds.
+## This an genetic tree simulator and a user interactive game. It was created to learn about node-js, socket-io and heroku.
+Explanation in few words, the app let you send a text (wish) and upload it (using a ladybug iteractive interface) to a tree. When wish is uploaded it becomes in a wishflower.
 
-Enjoy at: https://orchesta.herokuapp.com/
+Enjoy at: https://wishflower.herokuapp.com/
 
 ## Documentation
 

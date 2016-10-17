@@ -19,9 +19,9 @@ WishflowerAboutActivity.prototype.initialize = function ()
 
 WishflowerAboutActivity.prototype.createControls = function ()
 {
-	var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
-	var tw = tmpCanvas.width;
-	var th = tmpCanvas.height;
+	var tmpCanvas = this.m_viewParent.m_canvasEx;
+	var tw = tmpCanvas.m_canvas.width;
+	var th = tmpCanvas.m_canvas.height;
 
 	bw = 50;
 	bh = 30;

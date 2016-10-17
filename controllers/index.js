@@ -21,6 +21,9 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerLadybugWalkingPathActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugWalkingPathActivity.js');});
 
+	app.get ('/controllers/activities/wishflowerImageFilterTestActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerImageFilterTestActivity.js');});
+
 	// MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
 		function (req, res) {res.sendFile(__dirname + '/errorPageController.js');});

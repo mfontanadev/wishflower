@@ -42,7 +42,7 @@ WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
 
 WishflowerLadybugWalkingPathActivity.prototype.createControls = function ()
 {
-    var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
+    var tmpCanvas = this.m_viewParent.m_canvasEx;
 
     this.m_btnBack = new CanvasControl();
     this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");

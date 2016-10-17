@@ -1,17 +1,24 @@
 function BitmapFilter() 
 { 
-	BitmapFilter.prototype.noiseAndTransparentFilter = function(_document, _image, _index)
+	BitmapFilter.prototype.noiseAndTransparentFilter = function(_document, _bitmapManagerItem)
 	{
-		var imgWidth = _image.width;
-		var imgHeight = _image.height;
+		var imgWidth = _bitmapManagerItem.m_originalBitmap.width;
+		var imgHeight = _bitmapManagerItem.m_originalBitmap.height;
 
-		var cvn = _document.createElement('canvas');
-		cvn.width = imgWidth;
-		cvn.height = imgHeight;
-		cvn.id = "imageFiltered_" + _index;
+		var canvasName = "imageFiltered_" + _bitmapManagerItem.m_itemIndex;
+	
+		if (_bitmapManagerItem.m_bufferElement === null)
+		{
+			_bitmapManagerItem.m_bufferElement = _document.createElement('canvas');
+		}
 
-	    var ctx = cvn.getContext('2d'); 
-	    ctx.drawImage(_image, 0, 0);
+		_bitmapManagerItem.m_bufferElement.width = imgWidth;
+		_bitmapManagerItem.m_bufferElement.height = imgHeight;
+		_bitmapManagerItem.m_bufferElement.id = canvasName;
+
+	    var ctx = _bitmapManagerItem.m_bufferElement.getContext('2d'); 
+	    ctx.clearRect(0, 0, imgWidth, imgHeight);	// clear previous image if canvas was recicled.
+	    ctx.drawImage(_bitmapManagerItem.m_originalBitmap, 0, 0);
 
 	    var imgData = ctx.getImageData(0, 0, imgWidth, imgHeight);
 	    var pix = imgData.data;
@@ -31,7 +38,7 @@ function BitmapFilter()
 	    // Draw the ImageData at the given (x,y) coordinates.
 	    ctx.putImageData(imgData, 0, 0);
 
-	    return cvn;
+	    return _bitmapManagerItem.m_bufferElement;
 	};
 };
 

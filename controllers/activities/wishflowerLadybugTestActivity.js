@@ -16,6 +16,7 @@ function WishflowerLadybugTestActivity(_id, _viewParent)
         x: 0,
         y: 0,
         scale: 0.2,
+        alpha: 1,
         collitionRect : new chRect()
     }
 
@@ -52,7 +53,7 @@ WishflowerLadybugTestActivity.prototype.initialize = function ()
 
 WishflowerLadybugTestActivity.prototype.createControls = function ()
 {
-    var tmpCanvas = this.m_viewParent.m_canvasEx.m_canvas;
+    var tmpCanvas = this.m_viewParent.m_canvasEx;
 
     this.m_btnBack = new CanvasControl();
     this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");
@@ -97,7 +98,7 @@ WishflowerLadybugTestActivity.prototype.render = function ()
                                     	this.m_logObj.image, 
                                     	this.m_logObj.x, 
                                     	this.m_logObj.y, 
-                                    	0, 1, this.m_logObj.scale);
+                                    	0, this.m_logObj.alpha, this.m_logObj.scale);
 
 	this.m_ladybug.render();
 	
