@@ -4,8 +4,16 @@
 		"selected_items":
 		[
 			[
+				"_in",
+				"_infitineLoop"
+			],
+			[
+				"get",
+				"getSoundByName"
+			],
+			[
 				"m_",
-				"m_originalBitmap"
+				"m_items"
 			],
 			[
 				"item",
@@ -158,19 +166,10 @@
 			}
 		},
 		{
-			"file": "lib/chel-dist/js/canvasControl.js",
+			"file": "lib/chel-dist/js/consts.js",
 			"settings":
 			{
-				"buffer_size": 22996,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/wishflowerController.js",
-			"settings":
-			{
-				"buffer_size": 6134,
+				"buffer_size": 410,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -208,18 +207,37 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/HTML5/wishflower",
-		"/D/Work/HTML5/wishflower/config",
-		"/D/Work/HTML5/wishflower/controllers",
-		"/D/Work/HTML5/wishflower/controllers/activities",
-		"/D/Work/HTML5/wishflower/controllers/entities",
-		"/D/Work/HTML5/wishflower/lib",
-		"/D/Work/HTML5/wishflower/lib/chel-dist",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js",
-		"/D/Work/HTML5/wishflower/views"
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/config",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/entities",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js"
 	],
 	"file_history":
 	[
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/errorPageController.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/viewManager.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/soundManager.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/entities/ladybug.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/config/globalDefinitions.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/bitmapManager.js",
+		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.0-dist/js/soundManager.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/D/Work/HTML5/PoliticFight/trunk/framework/sndManager.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/consts.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/wishflowerController.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/canvasControl.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/chlib.js",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/History.md",
+		"/D/Docs/Baufest_Mios/Proyectos/BH/hcf.txt",
+		"/C/Users/R440/BitDownloads/Completed/notas sobre series/htc.txt",
+		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
+		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
+		"/C/Users/R440/BitDownloads/Completed/Halt and Catch Fire S01E04 HDTV x264-KILLERS[ettv]/halt.and.catch.fire.s01e04.hdtv.x264-killers.txt",
+		"/C/Users/R440/BitDownloads/Completed/Mr.Robot.Season.1.Complete.720p.WEBdl.EN-SUB.x264-[MULVAcoded]/Mr.Robot.S01E06.br4ve-trave1er.1080p.WEB-DL.DD5.1.H.264-NTb.srt",
 		"/D/Bitdown/Tools/ultimo listado NB.txt",
 		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
 		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
@@ -256,7 +274,6 @@
 		"/D/Work/HTML5/PoliticFight/trunk/framework/joystickMngr.js",
 		"/D/Work/HTML5/PoliticFight/trunk/framework/consts.js",
 		"/D/Docs/Personal/Ideario.txt",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
 		"/D/Work/HTML5/wishflower_test/controllers/errorPageController.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
 		"/D/Work/HTML5/PoliticFight/trunk/classes/animated.js",
@@ -334,6 +351,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console",
+			"arr",
+			"m_soundList",
+			"m_arrAudio",
+			"m_items",
+			"soundLi",
+			"m_soundList",
+			"soundmana",
+			"endClosingAnimationEvent",
+			"scale",
 			"version",
 			"console",
 			"m_backgroundFiltered_img",
@@ -461,7 +488,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -491,7 +518,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -507,8 +534,8 @@
 						"selection":
 						[
 							[
-								6626,
-								6629
+								2095,
+								2064
 							]
 						],
 						"settings":
@@ -517,66 +544,35 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2860.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "lib/chel-dist/js/canvasControl.js",
+					"file": "lib/chel-dist/js/consts.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22996,
+						"buffer_size": 410,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								162,
+								162
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "controllers/wishflowerController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6134,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2172,
-								2172
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

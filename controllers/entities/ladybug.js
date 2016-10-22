@@ -121,6 +121,7 @@ function Ladybug()
 
         animation = new Animation();
         animation.initWith(this, Ladybug.C_ANIM_OPENING, 0, 0);
+        animation.setOnEndAnimationEvent(this.endOpeningAnimationEvent);
         this.addAnimationFrame(animation, 'ladybug_open_1.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_2.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_3.png', 1);
@@ -204,8 +205,16 @@ function Ladybug()
         _parent.forceAnimation_STAND();
     }    
 
+    Ladybug.prototype.endOpeningAnimationEvent = function (_parent) 
+    {
+        var sndId = _parent.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+        _parent.m_viewParent.getSoundManagerInstance().play(sndId, true);
+    }    
+
     Ladybug.prototype.endClosingAnimationEvent = function (_parent) 
     {
+        var sndId = _parent.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+        _parent.m_viewParent.getSoundManagerInstance().stop(sndId);
         _parent.forceAnimation_STAND();
     }    
 

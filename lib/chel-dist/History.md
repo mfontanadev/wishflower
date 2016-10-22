@@ -1,3 +1,15 @@
+
+// ControlCanvas v3.6: BUG FIX: Mouse not working when canvas is scaled
+//                     REFACTOR: no more canvas, it was replace for canvasEx, this solved mouse scale problems
+1.0.3 / 2016-18-10
+===================
+  * deps: ControlCanvas@3.6
+    - Fix: Mouse not working when canvas is scaled
+    - Refactor: no more canvas, it was replace for canvasEx, this solved mouse scale problems
+
+  * deps: ChLib@1.1
+    - Fix: ChCanvas class now has m_scaleX, m_scaleY setted properly.
+
 1.0.2 / 2016-09-05
 ===================
   * deps: ControlCanvas@3.5
