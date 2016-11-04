@@ -4,120 +4,204 @@
 		"selected_items":
 		[
 			[
-				"_in",
-				"_infitineLoop"
+				"isPoligonPathOfType",
+				"isPoligonPathOfTypeFlying"
+			],
+			[
+				"is",
+				"isPoligonPathOfTypeFlying"
 			],
 			[
 				"get",
-				"getSoundByName"
+				"getXYByPercent"
 			],
 			[
-				"m_",
-				"m_items"
-			],
-			[
-				"item",
-				"itemIndex"
-			],
-			[
-				"m_item",
-				"m_itemIndex"
-			],
-			[
-				"_can",
-				"_canvasEx"
-			],
-			[
-				"str",
-				"strSC"
-			],
-			[
-				"m_ac",
-				"m_scale"
+				"C_LADYBUG_POLIGONPATH_STATE_",
+				"C_LADYBUG_POLIGONPATH_STATE_FLYING"
 			],
 			[
 				"m",
-				"middleHeight"
+				"m_x1"
 			],
 			[
-				"mi",
-				"middleWidth"
+				"m_",
+				"m_x2"
+			],
+			[
+				"move",
+				"moveUp"
+			],
+			[
+				"isPo",
+				"isPoligonPathRunning"
+			],
+			[
+				"C_LADYBUG_POLIGONPATH_",
+				"C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS"
+			],
+			[
+				"ca",
+				"canvasName"
+			],
+			[
+				"ima",
+				"imageId"
+			],
+			[
+				"mod",
+				"moduleRatio"
+			],
+			[
+				"has",
+				"hasExtraParams"
+			],
+			[
+				"m_poli",
+				"m_poligonPathScale"
+			],
+			[
+				"m_s",
+				"m_scale1"
+			],
+			[
+				"m_sca",
+				"m_scale2"
+			],
+			[
+				"C_la",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
 			],
 			[
 				"m_pa",
 				"m_viewParent"
 			],
 			[
-				"sli",
-				"slideVelocity"
+				"C_LADYBUG_AUTOWALKING_",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
 			],
 			[
-				"m_c",
-				"m_cy"
+				"seg",
+				"segmentModule"
 			],
 			[
-				"c",
-				"m_cx"
+				"m_a",
+				"m_autoWalkingState"
 			],
 			[
-				"heigh",
-				"heightScaled"
+				"po",
+				"m_poligonPath"
 			],
 			[
-				"wi",
-				"widthScaled"
+				"isIn",
+				"isInsideCurrentSegment"
 			],
 			[
-				"m_no",
-				"m_notFlyingZone"
+				"va",
+				"validateWalkMovement"
 			],
 			[
-				"m_in",
-				"m_infiniteLoop"
+				"C_au",
+				"C_LADYBUG_AUTOWALKING_STATE_WALKING"
 			],
 			[
-				"s",
-				"start"
+				"C",
+				"C_POLIGONPATH_DIRECTION_NORMAL"
 			],
 			[
-				"start",
+				"m_au",
+				"m_autoWalkingState"
+			],
+			[
+				"_y",
+				"_y2"
+			],
+			[
+				"_x",
+				"_x2"
+			],
+			[
+				"_",
+				"_y1"
+			],
+			[
+				"START",
 				"startAnimation"
 			],
 			[
-				"is",
-				"isAnimation_STAND"
+				"C_ANIM_",
+				"C_ANIM_OPENING"
 			],
 			[
-				"C_ANIM_FL",
-				"C_ANIM_FLYING"
+				"start",
+				"startFrameWalkEvent"
 			],
 			[
-				"C_an",
-				"C_ANIM_ROTATING_RIGHT"
+				"C_ani",
+				"C_ANIM_STAND"
 			],
 			[
-				"m_onEnd",
-				"m_onEndAnimationEvent"
+				"C_a",
+				"C_ANIM_STAND"
 			],
 			[
-				"in",
-				"inverse_x"
+				"C_",
+				"C_ANIM_MOVING"
 			],
 			[
-				"inver",
-				"inverse_y"
+				"m_cu",
+				"m_currentAnimationId"
 			],
 			[
-				"C_la",
-				"C_LADYBUG_SETTING_TORQUE"
+				"m_ladybug_",
+				"m_ladybug_normal_img"
 			],
 			[
-				"a",
-				"m_angle"
+				"m_is",
+				"m_is_standing"
 			],
 			[
-				"m_on",
-				"m_onFilterCallback"
+				"m_fr",
+				"m_currentFrame"
+			],
+			[
+				"prom",
+				"promCounter"
+			],
+			[
+				"m_la",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_ro",
+				"m_rotationDirection"
+			],
+			[
+				"Bit",
+				"BitmapManagerItem"
+			],
+			[
+				"set",
+				"setX"
+			],
+			[
+				"m_walkR",
+				"m_walkRight_img"
+			],
+			[
+				"m_wa",
+				"m_walking_frame_counter"
+			],
+			[
+				"m_le",
+				"m_walkLeft_img"
+			],
+			[
+				"wa",
+				"m_walking_frame"
+			],
+			[
+				"m_el",
+				"m_elytra_right_img"
 			],
 			[
 				"yel",
@@ -136,10 +220,6 @@
 				"loadingTimeout"
 			],
 			[
-				"set",
-				"setFilenamesArray"
-			],
-			[
 				"m_ke",
 				"m_keyPath"
 			]
@@ -148,29 +228,46 @@
 	"buffers":
 	[
 		{
-			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+			"file": "controllers/entities/ladybug.js",
 			"settings":
 			{
-				"buffer_size": 89538,
+				"buffer_size": 26738,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+			"file": "controllers/activities/wishflowerLadybugFlyingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 7738,
+				"buffer_size": 4015,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/chel-dist/js/consts.js",
+			"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 410,
+				"buffer_size": 3992,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/poligonPath.js",
+			"settings":
+			{
+				"buffer_size": 10569,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/wishflowerContext.js",
+			"settings":
+			{
+				"buffer_size": 2014,
 				"line_ending": "Windows"
 			}
 		}
@@ -207,103 +304,97 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/config",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/entities",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/public/assets",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views"
 	],
 	"file_history":
 	[
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/soundManager.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/entities/ladybug.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/config/globalDefinitions.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/bitmapManager.js",
-		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.0-dist/js/soundManager.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/sndManager.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/consts.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/wishflowerController.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/canvasControl.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/chlib.js",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/History.md",
-		"/D/Docs/Baufest_Mios/Proyectos/BH/hcf.txt",
-		"/C/Users/R440/BitDownloads/Completed/notas sobre series/htc.txt",
-		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
-		"/C/Users/R440/BitDownloads/Completed/Halt and Catch Fire S01E04 HDTV x264-KILLERS[ettv]/halt.and.catch.fire.s01e04.hdtv.x264-killers.txt",
-		"/C/Users/R440/BitDownloads/Completed/Mr.Robot.Season.1.Complete.720p.WEBdl.EN-SUB.x264-[MULVAcoded]/Mr.Robot.S01E06.br4ve-trave1er.1080p.WEB-DL.DD5.1.H.264-NTb.srt",
-		"/D/Bitdown/Tools/ultimo listado NB.txt",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
-		"/D/Work/HTML5/wishflower/views/wishflowerView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugFlyingPathActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/History.md",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
+		"/C/Users/mfontana/Downloads/criminal case against-you  I78 ITQ-KL4.rar",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/README.md",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/canvasControl.js",
+		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/serverOrchesta.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/soundManager.js",
+		"/C/Users/mfontana/Desktop/animation.txt",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/potion.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
 		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/bitmapManager.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/bitmapFilter.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/consts.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerMenuActivity.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/chlib.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/mouseManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-dist/js/canvasControl.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerAboutActivity.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Docs/Registros ONline.txt",
-		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.0-dist/js/mouseManager.js",
-		"/D/Work/HTML5/Orchesta/orchesta/controllers/interpeterController.js",
-		"/D/Work/HTML5/wishflower/controllers/errorPageController.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/hero.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/animation.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/ladybug.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animation.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/poligonPath.js",
-		"/D/Work/HTML5/wishflower/controllers/entities/keypair.js",
-		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
-		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Docs/Personal/Agenda/Link.txt",
-		"/D/Docs/Personal/links de interes.txt",
-		"/D/Docs/Personal/Agenda/links de interes.txt",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/joystickMngr.js",
-		"/D/Work/HTML5/PoliticFight/trunk/framework/consts.js",
-		"/D/Docs/Personal/Ideario.txt",
-		"/D/Work/HTML5/wishflower_test/controllers/errorPageController.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/animated.js",
-		"/D/Work/HTML5/wishflower_test/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Work/HTML5/Orchesta/_oldVersions/orchesta 2/index.js",
-		"/D/Work/HTML5/PoliticFight/trunk/data/guy.anim.js",
-		"/D/Work/HTML5/PoliticFight/trunk/classes/viewPlay.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/bh.txt",
-		"/C/Users/R440/Google Drive/Laboral/bh.txt",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
-		"/D/Work/HTML5/wishflower/controllers/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
-		"/D/Work/HTML5/wishflower/views/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/index.js",
-		"/D/Work/HTML5/wishflower/index.js",
-		"/C/Users/R440/Downloads/halt_and_catch_fire_101_hdtv.srt",
+		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
+		"/D/Work/HTML5/wishflower/views/wishflowerView.html",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin red.txt",
+		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
+		"/D/Bitdown/Tools/ultimo listado NB.txt",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/background.html",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/index.js",
+		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/activities/wishflowerPlayActivity.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js",
 		"/D/Today/wishflower/background.html",
 		"/C/Users/R440/BitDownloads/Completed/Fullmetal Alchemist Brotherhood/IMPORTANTE.txt",
 		"/C/Users/R440/Google Drive/Resources/Nuevo documento de texto.txt",
 		"/D/Work/HTML5/wishflower/candidate/background.html",
+		"/D/Work/HTML5/wishflower/index.js",
 		"/D/Today/wishflower/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower/candidate/index.js",
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/Nuevo documento de texto.txt",
@@ -315,14 +406,16 @@
 		"/D/Work/HTML5/Treninto/trunk/classes/viewIntro.js",
 		"/D/Restauracion/Instrucciones.txt",
 		"/D/Work/HTML5/Treninto/trunk/treninto.html",
+		"/D/Docs/Registros ONline.txt",
 		"/H/Mios/Programas/New Text Document.txt",
 		"/D/Docs/Personal/key.txt",
-		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
 		"/F/Nueva/IMGP1192.JPG",
 		"/F/Nueva/IMGP1130.JPG",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/resourceManager.js",
+		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
+		"/D/Work/HTML5/wishflower/views/index.js",
 		"/D/Work/HTML5/Orchesta/orchesta/config/globalDefinitions.js",
 		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/soundManager.js",
 		"/D/Work/HTML5/wishflower/package.json",
@@ -343,7 +436,7 @@
 		"height": 90.0,
 		"where_history":
 		[
-			""
+			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower"
 		]
 	},
 	"find_state":
@@ -351,126 +444,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"console",
-			"arr",
-			"m_soundList",
-			"m_arrAudio",
-			"m_items",
-			"soundLi",
-			"m_soundList",
-			"soundmana",
-			"endClosingAnimationEvent",
+			"TO DO",
+			"setAtStartPosition",
+			"poligonPathUpdateLadybugMetrics",
+			"updateScaleAlpha",
 			"scale",
-			"version",
-			"console",
-			"m_backgroundFiltered_img",
-			"m_backWround_img",
-			"conso",
-			"initDefault",
-			"bufferElement",
-			"alt",
-			"canvas",
-			".to",
-			"net",
-			"console",
-			"self.m_canvasEx.m",
-			"this.m_canvasEx.",
-			"m_canvasEx.m_scaleY",
-			"m_canvasEx.m_scaleX",
-			"scale",
-			"self._canvasEx",
-			"self._canvas",
-			"mousePos",
-			"_canvas",
-			"scale",
-			"m_canvasEx",
-			"m_canvas",
-			"m_canvasEx",
-			"mouse",
-			"drawImageRotationTransparentScaled",
-			"this.m_flip",
-			"m_rc",
-			"chre",
-			"m_btnGotoBackgroundTestActivity_controller",
-			"this.m_btnBack.initButtonStyle(tmpCanvas",
-			"angle",
-			"autowalkingSettingAngle",
-			"Velocity (",
-			"\"Velo",
-			"velocity",
-			"C_LOG",
-			"drawIma",
-			"infoq",
-			"openElytras",
-			"moveLogicStand",
-			"m_walkingZoneRectangle",
-			"m_walkingZone",
-			"m_notFlyingRect",
-			"this",
-			"m_notFlyingRect",
-			"C_VERTICAL_TOLERANCE_ANGLE",
-			"log",
-			"collisionRectangle",
-			"startFly",
-			"hasEnded",
-			"endFlyingAnimationEvent",
-			"m_velocity.a",
-			"closeElytras",
-			"flyLeft",
-			"setAnima",
-			"Ladybug.C_ANIM_CLOSING",
-			"C_ANIM_OPENING",
-			"isAnimation_OPENING",
+			"poligonPathUpdateLadybugMetrics",
+			"90",
+			"poligonPathUpdateLadybugMetrics",
+			"setAngle",
+			"poligonPathUpdateLadybugMetrics",
+			"startFlyingCheckSum",
+			"flyingAnimation",
 			"moveLogicOpening",
-			"startFlying",
-			"moveLogicStand",
-			"isAnimation_OPENING",
+			"poligonPathFlyingLogic",
+			"poligonPathLogic",
+			"C_LADYBUG_POLIGONPATH_STATE_FLYING",
+			"fdf",
+			"isLadybugInPoligonPathMode",
+			"isPoligonPathRunning",
+			"isPoligonPathWalking",
+			"isPoligonPathflying",
+			"C_LADYBUG_POLIGONPATH_STATE_FLYING",
+			"has",
 			"openElytras",
-			"C_LADYBUG_ANGLE_INCREMENT",
-			"C_LADYBUG_SETTING_TORQUE",
-			"m_frameCounter",
-			"C_ANIM_STAND",
-			"endFrameWalkEvent",
-			"m_onEndAnimationEvent",
-			"endRotatingAnimationEvent",
-			"startFrameRotatingRigthEvent",
-			"endFrameEvent",
-			"m_invalidateInput",
-			"m_travelH",
-			"jaguar",
-			"drawImageRotationTransparentScaled",
-			"imgd",
-			"m_onPostProcessCallback",
-			"_height",
-			"_width",
-			"m_id",
-			"setFilenamesArray",
-			"WishflowerContext",
-			"context",
-			"m_scaleX",
-			"width",
-			"Ladybug.ladybug",
-			"Ladybug.log",
-			"Ladybug.ladybug",
-			"cnv",
-			"ios",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"lblInfo",
-			"getIdByName",
-			"_soundName",
-			"_resourceName",
-			"m_managerAvailable",
-			"m_soundAvailable",
-			"setTimeout",
+			"C_POLIGONPATH_DIRECTION_NORMAL",
+			"getVectorAngle",
+			"getInterpolatedScale",
+			"openElytras",
+			"force",
+			"Force ladubug",
+			"infi",
+			"flyingAnimation",
+			"moveLogicOpening",
+			"moveLogicFlying",
+			"sound",
+			"openElytras",
+			"poligonPathFlyingLogic",
+			"poligonPathLogic",
 			"console",
-			"m_totalSounds",
-			"msg",
-			"undef",
-			"hash",
-			"getHash"
+			"consoe",
+			"this.m_keyboard.up",
+			"}",
+			"this.m_keyboard.up",
+			"moveup",
+			"poligonPathLogic",
+			"m_keyboard.up",
+			"moveup",
+			"moveUp",
+			"poligonPathWalkingLogic",
+			"poligonPathLogic",
+			"endOpeningAnimationEvent",
+			"moveLogicStand",
+			"moveLogicOpening",
+			"isInWalkingZone",
+			"openElytras",
+			"poligonPathLogic",
+			"C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE",
+			"poligonPathLogic",
+			"C_LADYBUG_POLIGONPATH_STATE_WALKING",
+			"C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP",
+			"C_LADYBUG_POLIGONPATH_STATE_POLIGON_END",
+			"C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END",
+			"canStartPoligonWalking",
+			"dir",
+			"autowalkingUpdateLadybugMetrics",
+			"autowal",
+			"m_autoWalkingDirection",
+			"autowal",
+			"autoWalkingLogic",
+			"C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE",
+			"AUTOWA",
+			"AUTO",
+			"C_LADYBUG_AUTOWALKING_STATE_WALKING",
+			"m_autoWalkingState",
+			"C_LADYBUG_AUTOWALKING_STATE_POLIGON_END",
+			"C_LADYBUG_AUTOWALKING_STATE_SEGMENT_END",
+			"C_LADYBUG_AUTOWALKING_STATE_SEGMENT_STOP",
+			"C_LADYBUG_AUTOWALKING_STATE_WALKING",
+			"C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE",
+			"C_LADYBUG_AUTOWALKING_STATE_NOT_SET",
+			"autowal",
+			"AUTOWALKING",
+			"autowalk",
+			"autowalkingUpdateLadybugMetrics",
+			"m_parent",
+			"_parent",
+			"m_currentAnimationId",
+			"addAnimationFrame",
+			"C_LADYBUG_AUTOWALKING_STATE_WALKING",
+			"C_LADYBUG_AUTOWALKING_STATE_SEGMENT_END",
+			"m_arrAnimations",
+			"render(",
+			"m_ladybug",
+			"addAnimationFrame",
+			"bh * 1.2",
+			"50 + bh",
+			"bh * 1.5",
+			"wishflowerLadybugFlyingPathActivity",
+			"m_btnGotoLadybugWalkingPathTestActivity",
+			"C_ACTIVITY_LADYBUG_WALKING_PATH_TEST",
+			"WishflowerLadybugWalkingPathActivity",
+			"TODO",
+			"TODO:",
+			"TODO",
+			"filtrado",
+			"m_items",
+			"drawImageRotationTransparentScaled",
+			"m_btnGotoLadybugWalkingPathTestActivity_controller",
+			"wishflowerImageFilterTestActivity",
+			"wishflowerImageFilterTestActWvity",
+			"WishflowerLadybugTestActivity",
+			"wishflowerImageFilterTestActivity",
+			"WishflowerLadybugWalkingPathActivity",
+			"console",
+			"consoe",
+			"getModuleRatio",
+			"updateScaleAlpha",
+			"alpha",
+			"updateAngleScaleAlpha",
+			"getscale",
+			"this.m_scale",
+			"m_alpha",
+			"getModuleFromStartingSegmentToPoint",
+			" _y",
+			"getModuleFromStartingSegmentToPoint",
+			"updateAngleScaleAlpha",
+			"autowalkingUpdateLadybugMetrics",
+			"metrixs"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -478,6 +579,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -488,63 +590,64 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+					"file": "controllers/entities/ladybug.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89538,
+						"buffer_size": 26738,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11,
-								52
+								23819,
+								23819
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8006.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+					"file": "controllers/activities/wishflowerLadybugFlyingPathActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7738,
+						"buffer_size": 4015,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2095,
-								2064
+								644,
+								644
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.x": -0.0,
+						"translation.y": 251.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -552,19 +655,79 @@
 				},
 				{
 					"buffer": 2,
-					"file": "lib/chel-dist/js/consts.js",
+					"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 410,
+						"buffer_size": 3992,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								162,
-								162
+								1224,
+								1224
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 206.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "controllers/entities/poligonPath.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9299,
+								9299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3239.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "controllers/wishflowerContext.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2014,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								450,
+								450
 							]
 						],
 						"settings":
@@ -575,7 +738,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -587,7 +750,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -612,6 +775,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -620,7 +787,7 @@
 	"project": "app-nb.sublime-project",
 	"replace":
 	{
-		"height": 38.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -653,14 +820,24 @@
 	"selected_group": 0,
 	"settings":
 	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		]
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 264.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
+		"max_columns": 1
 	}
 }

@@ -220,6 +220,16 @@ function PoligonPath()
         return ratio;
     };
 
+    PoligonPath.prototype.getXYByPercent = function (_percent) 
+    {   
+        if (this.m_poligonDirection === PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE)
+        {
+            _percent = 100 - _percent;
+        }
+
+        return this.getCurrentSegment().getXYByPercent(_percent);
+    };
+
     PoligonPath.prototype.reset = function () 
     {   
         if (this.m_poligonDirection === PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL)
@@ -300,6 +310,67 @@ function PoligonSegment()
     {
         return (this.m_extraParams === true);
     };
+
+    PoligonSegment.prototype.getRatioX = function ()
+    {
+        var module = this.module();
+
+        if (module === 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return (this.m_x2 - this.m_x1) / module;
+        }
+    };
+
+    PoligonSegment.prototype.getDeltaX = function ()
+    {
+        return this.m_x2 - this.m_x1;
+    }
+
+    PoligonSegment.prototype.getDeltaY = function ()
+    {
+        return this.m_y2 - this.m_y1;
+    }
+
+    PoligonSegment.prototype.getRatioX = function ()
+    {
+        var module = this.module();
+
+        if (module === 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return this.getDeltaX() / module;
+        }
+    };
+
+    PoligonSegment.prototype.getRatioY = function ()
+    {
+        var module = this.module();
+
+        if (module === 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return this.getDeltaY() / module;
+        }
+    };
+
+    PoligonSegment.prototype.getXYByPercent = function (_percent)
+    {
+        var resultX = (this.getDeltaX() * _percent / 100) + this.m_x1;
+        var resultY = (this.getDeltaY() * _percent / 100) + this.m_y1;
+
+        return ({x: resultX, y: resultY});
+    };
+
 
     PoligonSegment.prototype.fLog = function () 
     { 

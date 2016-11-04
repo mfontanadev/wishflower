@@ -7,6 +7,7 @@ WishflowerContext.C_ACTIVITY_MENU = 3;
 WishflowerContext.C_ACTIVITY_HELP_TEST = 4;
 WishflowerContext.C_ACTIVITY_LADYBUG_WALKING_PATH_TEST = 5;
 WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST = 6;
+WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST = 7;
 
 function WishflowerContext() 
 { 
@@ -45,6 +46,7 @@ function WishflowerContext()
 		result.push(new WishflowerHelpTestActivity(WishflowerContext.C_ACTIVITY_HELP_TEST, this.m_viewParent));
 		result.push(new WishflowerLadybugWalkingPathActivity(WishflowerContext.C_ACTIVITY_LADYBUG_WALKING_PATH_TEST, this.m_viewParent));
 		result.push(new WishflowerImageFilterTestActivity(WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST, this.m_viewParent));
+		result.push(new WishflowerLadybugFlyingPathActivity(WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST, this.m_viewParent));
 
 		return result;
 	};

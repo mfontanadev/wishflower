@@ -11,7 +11,7 @@ function WishflowerImageFilterTestActivity(_id, _viewParent)
 
 WishflowerImageFilterTestActivity.prototype.initialize = function ()
 {
-    console.log("wishflowerImageFilterTestActivity");
+    console.log("WishflowerImageFilterTestActivity");
 
     this.m_background_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
 
