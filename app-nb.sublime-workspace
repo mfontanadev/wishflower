@@ -151,7 +151,7 @@
 			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
 			"settings":
 			{
-				"buffer_size": 89538,
+				"buffer_size": 89541,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -160,17 +160,19 @@
 			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
 			"settings":
 			{
-				"buffer_size": 7738,
+				"buffer_size": 8859,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "// Framework constants to developmet process\n// **********************************************************************\n\nvar C_DEBUG_MODE = true;\nvar C_LOG = false;\nvar C_FPS_RENDER = 25;\nvar C_PIXEL_SIZE = 1; \nvar C_FPS_MS = 1000 / C_FPS_RENDER;\nvar C_AVOID_RENDER = true;\n\t\nvar C_DEBUG_SHOW_LINES = false;\nvar C_SHOW_METRICS = false;\nvar C_DEBUG_SHOW_JOYSTICK = false;\nvar C_RENDER_COLLISION_RECT = false;\n\n\n\t\n\n",
 			"file": "lib/chel-dist/js/consts.js",
+			"file_size": 426,
+			"file_write_time": 131213199362100349,
 			"settings":
 			{
-				"buffer_size": 410,
-				"encoding": "UTF-8",
+				"buffer_size": 412,
 				"line_ending": "Windows"
 			}
 		}
@@ -218,6 +220,22 @@
 	],
 	"file_history":
 	[
+		"/D/Restauracion/Instrucciones.txt",
+		"/C/Users/R440/Google Drive/Laboral/Baufest/Diplomado Xamarin/notes.txt",
+		"/D/Docs/Registros ONline.txt",
+		"/D/Docs/links.txt",
+		"/D/Docs/Personal/Agenda/Link.txt",
+		"/D/Docs/Baufest_Mios/Personal/Privado/Agenda/Link.txt",
+		"/D/Docs/Personal/links de interes.txt",
+		"/D/Docs/Personal/Finan/Economian del hogar/whopaid/android/_back/03_08_2016/Spent.txt",
+		"/D/Docs/Personal/Agenda.txt",
+		"/C/Users/R440/Downloads/javascript-state-machine-master/javascript-state-machine-master/demo/demo.js",
+		"/C/Users/R440/Downloads/javascript-state-machine-master/javascript-state-machine-master/state-machine.js",
+		"/C/Users/R440/Downloads/javascript-state-machine-master/javascript-state-machine-master/state-machine.min.js",
+		"/C/Users/R440/Downloads/January 2014.txt",
+		"/C/Users/R440/Downloads/Presupuesto instalación caldera (Mauricio Fontana) - vdanielzana@gmail.com - Gmail (2) (1).html",
+		"/C/Users/R440/Downloads/Presupuesto instalación caldera (Mauricio Fontana) - vdanielzana@gmail.com - Gmail (2).html",
+		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
 		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/errorPageController.js",
 		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/viewManager.js",
 		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/lib/chel-dist/js/soundManager.js",
@@ -235,7 +253,6 @@
 		"/D/Docs/Baufest_Mios/Proyectos/BH/hcf.txt",
 		"/C/Users/R440/BitDownloads/Completed/notas sobre series/htc.txt",
 		"/D/Work/HTML5/wishflower_prj/trunk/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
-		"/C/Users/R440/Google Drive/Laboral/Baufest/Banco Hipotecario/bh.txt",
 		"/C/Users/R440/BitDownloads/Completed/Halt and Catch Fire S01E04 HDTV x264-KILLERS[ettv]/halt.and.catch.fire.s01e04.hdtv.x264-killers.txt",
 		"/C/Users/R440/BitDownloads/Completed/Mr.Robot.Season.1.Complete.720p.WEBdl.EN-SUB.x264-[MULVAcoded]/Mr.Robot.S01E06.br4ve-trave1er.1080p.WEB-DL.DD5.1.H.264-NTb.srt",
 		"/D/Bitdown/Tools/ultimo listado NB.txt",
@@ -256,7 +273,6 @@
 		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerAboutActivity.js",
 		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
-		"/D/Docs/Registros ONline.txt",
 		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.0-dist/js/mouseManager.js",
 		"/D/Work/HTML5/Orchesta/orchesta/controllers/interpeterController.js",
 		"/D/Work/HTML5/wishflower/controllers/errorPageController.js",
@@ -268,8 +284,6 @@
 		"/D/Work/HTML5/wishflower/controllers/entities/keypair.js",
 		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
 		"/D/Work/HTML5/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Docs/Personal/Agenda/Link.txt",
-		"/D/Docs/Personal/links de interes.txt",
 		"/D/Docs/Personal/Agenda/links de interes.txt",
 		"/D/Work/HTML5/PoliticFight/trunk/framework/joystickMngr.js",
 		"/D/Work/HTML5/PoliticFight/trunk/framework/consts.js",
@@ -313,7 +327,6 @@
 		"/D/Work/HTML5/Treninto/trunk/classes/viewPlay.js",
 		"/D/Work/HTML5/Treninto/trunk/classes/maze.js",
 		"/D/Work/HTML5/Treninto/trunk/classes/viewIntro.js",
-		"/D/Restauracion/Instrucciones.txt",
 		"/D/Work/HTML5/Treninto/trunk/treninto.html",
 		"/H/Mios/Programas/New Text Document.txt",
 		"/D/Docs/Personal/key.txt",
@@ -343,6 +356,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"D:\\Docs",
 			""
 		]
 	},
@@ -351,6 +365,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"xamarin",
+			"facebook",
+			"aristoteles",
+			"face",
+			"to",
+			"map",
+			"buildEvent",
+			"name",
+			"buildEvent",
+			"fsm",
+			"target",
+			"can",
+			"git",
+			"third",
+			"thirs",
 			"console",
 			"arr",
 			"m_soundList",
@@ -463,14 +492,7 @@
 			"_soundName",
 			"_resourceName",
 			"m_managerAvailable",
-			"m_soundAvailable",
-			"setTimeout",
-			"console",
-			"m_totalSounds",
-			"msg",
-			"undef",
-			"hash",
-			"getHash"
+			"m_soundAvailable"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -497,15 +519,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89538,
+						"buffer_size": 89541,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11,
-								52
+								89424,
+								89424
 							]
 						],
 						"settings":
@@ -515,7 +537,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 27795.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -527,15 +549,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7738,
+						"buffer_size": 8859,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2095,
-								2064
+								8859,
+								8859
 							]
 						],
 						"settings":
@@ -544,7 +566,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 3797.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -556,15 +578,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 410,
+						"buffer_size": 412,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								162,
-								162
+								408,
+								408
 							]
 						],
 						"settings":
