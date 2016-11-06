@@ -23,12 +23,18 @@ Ladybug.C_ANIM_OPENING = 4;
 Ladybug.C_ANIM_CLOSING = 5;
 Ladybug.C_ANIM_FLYING = 6;
 
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET = 0;
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE = 1;
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING = 2;
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_SEGMENT_STOP = 3;
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_SEGMENT_END = 4;
-Ladybug.C_LADYBUG_AUTOWALKING_STATE_POLIGON_END = 5;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET = -1;
+
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE = 0;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING = 1;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP = 2;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END = 3;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END = 4;
+
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE = 5;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS = 6;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING = 7;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING = 8;
 
 function Ladybug() 
 {
@@ -67,7 +73,7 @@ function Ladybug()
     this.m_autoflight = false;
 
     this.m_poligonPath = null;
-    this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET;
+    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
     this.m_currentSegment = 0;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
@@ -121,7 +127,6 @@ function Ladybug()
 
         animation = new Animation();
         animation.initWith(this, Ladybug.C_ANIM_OPENING, 0, 0);
-        animation.setOnEndAnimationEvent(this.endOpeningAnimationEvent);
         this.addAnimationFrame(animation, 'ladybug_open_1.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_2.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_3.png', 1);
@@ -154,7 +159,7 @@ function Ladybug()
             _parent.m_cy = _parent.m_cy + incY; 
         }
         
-        if (_parent.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
+        if (_parent.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING)
         {
             _parent.updateScaleAlpha();
         }
@@ -164,7 +169,7 @@ function Ladybug()
     {
         var result = true;
 
-        if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
+        if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING)
         {
             result = this.isInsideCurrentSegment(_incX, _incY);
         }
@@ -205,12 +210,6 @@ function Ladybug()
         _parent.forceAnimation_STAND();
     }    
 
-    Ladybug.prototype.endOpeningAnimationEvent = function (_parent) 
-    {
-        var sndId = _parent.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
-        _parent.m_viewParent.getSoundManagerInstance().play(sndId, true);
-    }    
-
     Ladybug.prototype.endClosingAnimationEvent = function (_parent) 
     {
         var sndId = _parent.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
@@ -232,7 +231,6 @@ function Ladybug()
     {
         this.m_keyboard.up = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_UP);
         this.m_keyboard.down = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_DOWN);
-
         this.m_keyboard.right = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT);
         this.m_keyboard.left = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT);
         if (this.m_keyboard.right === true && this.m_keyboard.left === true)
@@ -246,8 +244,15 @@ function Ladybug()
 
     Ladybug.prototype.implementGameLogic = function () 
     {
-        this.moveLogic();
-
+        if (this.isLadybugInPoligonPathState() === true)
+        {
+            this.poligonPathLogic();
+        }
+        else
+        {
+            this.moveLogic();
+        }
+        
         this.m_arrAnimations[this.m_currentAnimationId].implementGameLogic();   
         this.m_arrAnimations[this.m_currentAnimationId].setPosition(this.m_cx, this.m_cy);
     };
@@ -350,50 +355,6 @@ function Ladybug()
         else if (this.m_keyboard.up === true)
         {
             this.moveUp();
-        }
-
-        if (this.m_autoWalkingState !== Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET)
-        {
-            this.autoWalkingLogic();
-        }
-    }
-
-    Ladybug.prototype.autoWalkingLogic = function ()
-    {   
-        if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE)
-        {
-            this.autowalkingUpdateLadybugMetrics();
-            this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING;
-        }
-        else if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_WALKING)
-        {
-            if (this.isInsideCurrentSegment() === false &&
-                this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
-            {
-                if (this.m_poligonPath.nextSegment() === true)
-                {
-                    this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE;            
-                }
-                else
-                {
-                    this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_POLIGON_END;           
-                }
-            }
-            else
-            {
-                this.moveUp();    
-            }
-        }
-        else if (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_POLIGON_END)
-        {
-            if (this.m_poligonPath.getInfiniteLoop() === true)
-            {
-                this.startPoligonWalking();      
-            }
-            else
-            {
-                this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET;
-            }
         }
     }
 
@@ -560,8 +521,9 @@ function Ladybug()
         if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true &&
             this.startFlyingCheckSum() === true)
         {
-            // Force ladubug flying animation start in 90 degress.
-            //this.m_angle = 90;  
+            var sndId = this.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+            this.m_viewParent.getSoundManagerInstance().play(sndId, true);
+
             this.m_velocity.a = this.m_angle;   
 
             this.startAnimation(Ladybug.C_ANIM_FLYING);       
@@ -587,7 +549,7 @@ function Ladybug()
     // ****************************************
     // PoligonPath logic 
     // ****************************************
-    Ladybug.prototype.autowalkingUpdateLadybugMetrics = function () 
+    Ladybug.prototype.setAtCurrentSegmentStartPosition = function () 
     {
         var currentSegment = this.m_poligonPath.getCurrentSegment();
 
@@ -619,6 +581,143 @@ function Ladybug()
             this.m_alpha = alpha;
         }
     };
+
+    Ladybug.prototype.poligonPathLogic = function ()
+    {   
+        if (this.isPoligonPathOfTypeWalking() === true)
+        {
+            this.poligonPathWalkingLogic();
+        }
+        else if (this.isPoligonPathOfTypeFlying() === true)
+        {
+            this.poligonPathFlyingLogic();
+        }
+    };
+
+    Ladybug.prototype.isLadybugInPoligonPathState = function ()
+    {
+        return this.m_poligonPathState !== null && this.m_poligonPathState !== Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
+    }
+
+    Ladybug.prototype.isPoligonPathOfTypeWalking = function ()
+    {   
+        if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    Ladybug.prototype.isPoligonPathOfTypeFlying = function ()
+    {   
+        if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    Ladybug.prototype.poligonPathWalkingLogic = function ()
+    {   
+        if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE)
+        {
+            this.setAtCurrentSegmentStartPosition();
+            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING;
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING)
+        {
+            if (this.isInsideCurrentSegment() === false &&
+                this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+            {
+                if (this.m_poligonPath.nextSegment() === true)
+                {
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE;            
+                }
+                else
+                {
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END;           
+                }
+            }
+            else
+            {
+                this.moveUp();  
+            }
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END)
+        {
+            if (this.m_poligonPath.getInfiniteLoop() === true)
+            {
+                this.startPoligonWalking();      
+            }
+            else
+            {
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
+            }
+        }
+    }
+
+    Ladybug.prototype.poligonPathFlyingLogic = function ()
+    {   
+        if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE)
+        {
+            this.setAtCurrentSegmentStartPosition();
+            this.setAngle(90);
+            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS;
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS)
+        {
+            if (this.isAnimation_STAND() === true)
+            {
+                this.openElytras();
+            }
+            else if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+            {
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING;
+                this.flyingAnimation();
+                this.m_poligonPathPercentCounter = 0;
+            }
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING)
+        {
+            var pointInSegment = this.m_poligonPath.getXYByPercent(this.m_poligonPathPercentCounter);
+            
+            console.log(pointInSegment);
+            
+            this.m_cx = pointInSegment.x;
+            this.m_cy = pointInSegment.y;
+            this.updateScaleAlpha();
+
+            if (this.m_poligonPathPercentCounter === 100)
+            {
+                this.m_poligonPathPercentCounter = 0;  
+
+                if (this.m_poligonPath.nextSegment() === false)
+                {
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING;
+                }  
+            }
+            else
+            {
+                this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + 1; 
+            }
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING)
+        {
+            //TO DO: close elytras. 
+        }
+    }
 
     // ****************************************
     // User interface.
@@ -653,19 +752,32 @@ function Ladybug()
         this.m_poligonPath = _poligonPath;
     };
 
-    Ladybug.prototype.canStartPoligonWalking = function () 
+    Ladybug.prototype.isPoligonPathStarted = function () 
     {
-        return (this.m_autoWalkingState === Ladybug.C_LADYBUG_AUTOWALKING_STATE_NOT_SET);
+        return (this.m_poligonPathState !== Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET);
     }
 
-    Ladybug.prototype.startPoligonWalking = function (_direction) 
+    Ladybug.prototype.startPoligonWalking = function () 
     {
         if (this.m_poligonPath !== null)
         {
-            this.m_autoWalkingState = Ladybug.C_LADYBUG_AUTOWALKING_STATE_SETTING_ANGLE;
-            this.m_autoWalkingDirection = _direction;
+            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE;
             this.m_poligonPath.reset();
         }
+    };
+
+    Ladybug.prototype.startPoligonFlying = function () 
+    {
+        if (this.m_poligonPath !== null)
+        {
+            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE;
+            this.m_poligonPath.reset();
+        }
+    };
+
+    Ladybug.prototype.getPoligonPath = function () 
+    {
+        return this.m_poligonPath;
     };
 
     // ****************************************

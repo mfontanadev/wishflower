@@ -1,6 +1,7 @@
+WORKING
+===================
+  * TODO: Add animation class to chLib js. 
 
-// ControlCanvas v3.6: BUG FIX: Mouse not working when canvas is scaled
-//                     REFACTOR: no more canvas, it was replace for canvasEx, this solved mouse scale problems
 1.0.3 / 2016-18-10
 ===================
   * deps: ControlCanvas@3.6
