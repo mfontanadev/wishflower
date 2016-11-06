@@ -371,6 +371,20 @@ function PoligonSegment()
         return ({x: resultX, y: resultY});
     };
 
+    PoligonSegment.prototype.getPercentIncrement = function (_pixels)
+    {
+        var module = this.module();
+
+        if (module === 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return 100 * _pixels / module;
+        }
+    };
+
 
     PoligonSegment.prototype.fLog = function () 
     { 

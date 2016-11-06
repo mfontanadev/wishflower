@@ -34,7 +34,8 @@ Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END = 4;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE = 5;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS = 6;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING = 7;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING = 8;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS = 8;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING = 9;
 
 function Ladybug() 
 {
@@ -619,7 +620,9 @@ function Ladybug()
     {   
         if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING)
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING)
         {
             return true;
         }
@@ -705,17 +708,29 @@ function Ladybug()
 
                 if (this.m_poligonPath.nextSegment() === false)
                 {
-                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING;
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS;
                 }  
             }
             else
             {
-                this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + 1; 
+                this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + 10; 
+            }
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS)
+        {
+            if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+            {
+                //TO DO: close elytras.
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING;
+                this.closeElytras();
             }
         }
         else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING)
         {
-            //TO DO: close elytras. 
+            if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+            {
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
+            }
         }
     }
 
