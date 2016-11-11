@@ -55,8 +55,8 @@ function appInitContext()
 
  	// Start animation loop.
 	//viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST);
-	//viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_MENU);
-	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST);
+	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_MENU);
+	//viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST);
 	viewMngr.animationCycle();	
 }
 

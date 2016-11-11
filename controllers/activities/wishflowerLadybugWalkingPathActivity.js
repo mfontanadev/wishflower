@@ -93,6 +93,11 @@ WishflowerLadybugWalkingPathActivity.prototype.implementGameLogic = function ()
         }
 	}
 
+    if (this.m_ladybug.isPoligonPathFinished() === true)
+    {
+        this.m_ladybug.endUsingPoligonPath();   
+    }
+
 	this.m_poligonPath.implementGameLogic();
 	this.m_ladybug.implementGameLogic();
 

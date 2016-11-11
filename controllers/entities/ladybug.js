@@ -27,15 +27,16 @@ Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET = -1;
 
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE = 0;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING = 1;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP = 2;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END = 3;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END = 4;
 
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE = 5;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS = 6;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING = 7;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS = 8;
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING = 9;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE = 2;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS = 3;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING = 4;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS = 5;
+
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT = 6; 
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH = 7;
+
+Ladybug.C_FLYING_STEP_INCREMENT = 5;
 
 function Ladybug() 
 {
@@ -245,7 +246,7 @@ function Ladybug()
 
     Ladybug.prototype.implementGameLogic = function () 
     {
-        if (this.isLadybugInPoligonPathState() === true)
+        if (this.isPoligonPathStarted() === true)
         {
             this.poligonPathLogic();
         }
@@ -595,7 +596,7 @@ function Ladybug()
         }
     };
 
-    Ladybug.prototype.isLadybugInPoligonPathState = function ()
+    Ladybug.prototype.isPoligonPathStarted = function ()
     {
         return this.m_poligonPathState !== null && this.m_poligonPathState !== Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
     }
@@ -604,9 +605,8 @@ function Ladybug()
     {   
         if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END)
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH)
         {
             return true;
         }
@@ -620,9 +620,10 @@ function Ladybug()
     {   
         if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING)
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH)
         {
             return true;
         }
@@ -650,7 +651,7 @@ function Ladybug()
                 }
                 else
                 {
-                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END;           
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT;           
                 }
             }
             else
@@ -658,15 +659,15 @@ function Ladybug()
                 this.moveUp();  
             }
         }
-        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_POLIGON_END)
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT)
         {
-            if (this.m_poligonPath.getInfiniteLoop() === true)
+            if (this.m_poligonPath.isInfiniteLoop() === true)
             {
                 this.startPoligonWalking();      
             }
             else
             {
-                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH;
             }
         }
     }
@@ -687,49 +688,46 @@ function Ladybug()
             }
             else if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
             {
-                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING;
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING;
                 this.flyingAnimation();
                 this.m_poligonPathPercentCounter = 0;
             }
         }
-        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_FLYING)
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING)
         {
             var pointInSegment = this.m_poligonPath.getXYByPercent(this.m_poligonPathPercentCounter);
-            
-            console.log(pointInSegment);
             
             this.m_cx = pointInSegment.x;
             this.m_cy = pointInSegment.y;
             this.updateScaleAlpha();
 
-            if (this.m_poligonPathPercentCounter === 100)
+            if (this.m_poligonPathPercentCounter >= 100)
             {
                 this.m_poligonPathPercentCounter = 0;  
 
                 if (this.m_poligonPath.nextSegment() === false)
                 {
-                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS;
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT;
                 }  
             }
             else
             {
-                this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + 10; 
+                this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + this.m_poligonPath.getCurrentSegment().getPercentIncrement(Ladybug.C_FLYING_STEP_INCREMENT); 
+            }
+        }
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT)
+        {
+            if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+            {
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS;
+                this.closeElytras();
             }
         }
         else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS)
         {
             if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
             {
-                //TO DO: close elytras.
-                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING;
-                this.closeElytras();
-            }
-        }
-        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_FLYING)
-        {
-            if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
-            {
-                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
+                this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH;
             }
         }
     }
@@ -767,9 +765,9 @@ function Ladybug()
         this.m_poligonPath = _poligonPath;
     };
 
-    Ladybug.prototype.isPoligonPathStarted = function () 
+    Ladybug.prototype.isPoligonPathFinished = function () 
     {
-        return (this.m_poligonPathState !== Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET);
+        return (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH);
     }
 
     Ladybug.prototype.startPoligonWalking = function () 
@@ -793,6 +791,11 @@ function Ladybug()
     Ladybug.prototype.getPoligonPath = function () 
     {
         return this.m_poligonPath;
+    };
+
+    Ladybug.prototype.endUsingPoligonPath = function () 
+    {
+        this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
     };
 
     // ****************************************

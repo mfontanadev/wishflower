@@ -163,7 +163,7 @@ function PoligonPath()
         this.m_infitineLoop = _value;
     };
 
-    PoligonPath.prototype.getInfiniteLoop = function () 
+    PoligonPath.prototype.isInfiniteLoop = function () 
     {   
         return this.m_infitineLoop;
     };

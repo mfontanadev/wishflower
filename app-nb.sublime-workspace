@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"C_LADYBUG_POLIGONPATH_STATE_",
+				"C_LADYBUG_POLIGONPATH_STATE_NOT_SET"
+			],
+			[
+				"m_po",
+				"m_poligonPathState"
+			],
+			[
 				"isPoligonPathOfType",
 				"isPoligonPathOfTypeFlying"
 			],
@@ -14,10 +22,6 @@
 			[
 				"get",
 				"getXYByPercent"
-			],
-			[
-				"C_LADYBUG_POLIGONPATH_STATE_",
-				"C_LADYBUG_POLIGONPATH_STATE_FLYING"
 			],
 			[
 				"m",
@@ -231,7 +235,7 @@
 			"file": "controllers/entities/ladybug.js",
 			"settings":
 			{
-				"buffer_size": 26738,
+				"buffer_size": 27672,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -240,16 +244,7 @@
 			"file": "controllers/activities/wishflowerLadybugFlyingPathActivity.js",
 			"settings":
 			{
-				"buffer_size": 4015,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
-			"settings":
-			{
-				"buffer_size": 3992,
+				"buffer_size": 4134,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -258,16 +253,8 @@
 			"file": "controllers/entities/poligonPath.js",
 			"settings":
 			{
-				"buffer_size": 10569,
+				"buffer_size": 10833,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/wishflowerContext.js",
-			"settings":
-			{
-				"buffer_size": 2014,
 				"line_ending": "Windows"
 			}
 		}
@@ -320,15 +307,17 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/db.json",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugFlyingPathActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugFlyingPathActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
@@ -357,7 +346,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
@@ -444,6 +432,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"amazo",
+			"getPercentIncrement",
+			"poligonPathLogic",
+			"isLadybugInPoligonPathState",
+			"poligonPathLogic",
+			"isLadybugInPoligonPathState",
+			"not_set",
+			"not-se",
+			"isPoligonPathStarted",
+			"isLadybugInPoligonPathState",
+			"C_LADYBUG_POLIGONPATH_STATE_NOT_SET",
+			"isPoligonPathStarted",
+			"startPoligonWalking",
+			"setAtCurrentSegmentStartPosition",
+			"C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE",
+			"C_ANIM_STAND",
+			"C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT",
+			"C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS",
+			"C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT",
+			"C_LADYBUG_POLIGONPATH_STATE_WALKING",
+			"C_LADYBUG_POLIGONPATH_STATE_END_PATH",
+			"C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS",
+			"C_LADYBUG_POLIGONPATH_STATE_START_FLYING",
+			"C_LADYBUG_POLIGONPATH_STATE_FLYING",
+			"C_LADYBUG_POLIGONPATH_STATE_END_FLYING",
+			"C_LADYBUG_POLIGONPATH_STATE_NOT_SET",
+			"C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT",
+			"C_LADYBUG_POLIGONPATH_STATE_POLIGON_END",
+			"C_LADYBUG_POLIGONPATH_STATE_WALKING",
+			"C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE",
+			"C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT",
+			"C_LADYBUG_POLIGONPATH_STATE_END_FLYING",
+			"C_LADYBUG_POLIGONPATH_STATE_WALKING",
+			"C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE",
+			"C_LADYBUG_POLIGONPATH_STATE_SEGMENT_END",
+			"C_LADYBUG_POLIGONPATH_STATE_SEGMENT_STOP",
+			"C_LADYBUG_POLIGONPATH_STATE_POLIGON_END",
+			"C_LADYBUG_POLIGONPATH_STATE_NOT_SET",
+			"getInfiniteLoop",
 			"TO DO",
 			"setAtStartPosition",
 			"poligonPathUpdateLadybugMetrics",
@@ -532,46 +559,7 @@
 			"_parent",
 			"m_currentAnimationId",
 			"addAnimationFrame",
-			"C_LADYBUG_AUTOWALKING_STATE_WALKING",
-			"C_LADYBUG_AUTOWALKING_STATE_SEGMENT_END",
-			"m_arrAnimations",
-			"render(",
-			"m_ladybug",
-			"addAnimationFrame",
-			"bh * 1.2",
-			"50 + bh",
-			"bh * 1.5",
-			"wishflowerLadybugFlyingPathActivity",
-			"m_btnGotoLadybugWalkingPathTestActivity",
-			"C_ACTIVITY_LADYBUG_WALKING_PATH_TEST",
-			"WishflowerLadybugWalkingPathActivity",
-			"TODO",
-			"TODO:",
-			"TODO",
-			"filtrado",
-			"m_items",
-			"drawImageRotationTransparentScaled",
-			"m_btnGotoLadybugWalkingPathTestActivity_controller",
-			"wishflowerImageFilterTestActivity",
-			"wishflowerImageFilterTestActWvity",
-			"WishflowerLadybugTestActivity",
-			"wishflowerImageFilterTestActivity",
-			"WishflowerLadybugWalkingPathActivity",
-			"console",
-			"consoe",
-			"getModuleRatio",
-			"updateScaleAlpha",
-			"alpha",
-			"updateAngleScaleAlpha",
-			"getscale",
-			"this.m_scale",
-			"m_alpha",
-			"getModuleFromStartingSegmentToPoint",
-			" _y",
-			"getModuleFromStartingSegmentToPoint",
-			"updateAngleScaleAlpha",
-			"autowalkingUpdateLadybugMetrics",
-			"metrixs"
+			"C_LADYBUG_AUTOWALKING_STATE_WALKING"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -590,7 +578,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -599,15 +587,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 26738,
+						"buffer_size": 27672,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23819,
-								23819
+								1306,
+								1306
 							]
 						],
 						"settings":
@@ -617,10 +605,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8006.0,
+						"translation.y": 221.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -629,15 +617,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4015,
+						"buffer_size": 4134,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								644,
-								644
+								274,
+								274
 							]
 						],
 						"settings":
@@ -645,100 +633,42 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 251.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controllers/activities/wishflowerLadybugWalkingPathActivity.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3992,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1224,
-								1224
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 206.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "controllers/entities/poligonPath.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10569,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9299,
-								9299
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3239.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "controllers/wishflowerContext.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2014,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								450,
-								450
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "controllers/entities/poligonPath.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10116,
+								10135
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5395.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
