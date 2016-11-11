@@ -8,8 +8,8 @@ TreeNode.C_FADING_IN = 1;
 TreeNode.C_FADING_OUT = 2;
 TreeNode.C_FADING_MAX_VALUE = 0.3;
 
-TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 4;
-TreeNode.C_GENERATION_LEAVE_QTTY = 2;
+TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 7;
+TreeNode.C_GENERATION_LEAVE_QTTY = 3;
 TreeNode.DEBUG = false;
 
 TreeNode.composedLeaveImg = null;
@@ -240,7 +240,7 @@ function TreeNode()
             {
                 var branch = null;
 				
-                /*
+                
 				branch = this.createBranchNode();
                 branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * 1);
                 branch.setHeightScalar(0.95);
@@ -254,8 +254,8 @@ function TreeNode()
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                */
-
+                
+                /*
                 branch = this.createBranchNode();
                 branch.m_hash = '<';
                 branch.setAngle(50 * 1);
@@ -271,7 +271,7 @@ function TreeNode()
                 branch.m_maxHeight = this.m_maxHeight * 0.8;
                 branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                
+                */            
 				
 				branch.m_pertAngle = branch.m_pertAngle * 0.5;
 				this.incrementGenerationPosition();

@@ -46,6 +46,7 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	bh = 30;
 	bc = 4;
 
+	/*
 	this.m_inpGenericInput = new CanvasControl();
 	this.m_inpGenericInput.initInputStyle(tmpCanvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
 	this.m_inpGenericInput._fontSize = 12;
@@ -95,7 +96,7 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	this.m_btnMoveDownControl._fontSize = 12;
 	this.m_btnMoveDownControl._onClick = this.m_btnMoveDownControl_controller;
 	this.m_btnMoveDownControl.setPlaceholderText("hol222a");
-	this.m_btnMoveDownControl._visible = true;
+	this.m_btnMoveDownControl._visible = false;
 
 	this.m_inpGenericInput = new CanvasControl();
 	this.m_inpGenericInput.initInputStyle(tmpCanvas, getCX(tw, bw * 4), th - 12 - (bh * 1), bw * 4, bh, "");
@@ -109,13 +110,13 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	this.m_linkToPage.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
 	this.m_linkToPage._fontSize = 10;
 	this.m_linkToPage._textJustify = 0;	
-	this.m_linkToPage._visible = false;
+	this.m_linkToPage._visible = false;*/
 
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_inpGenericInput._visible = true;
+	//this.m_inpGenericInput._visible = true;
 };
 
 WishflowerPlayActivity.prototype.handleInputs = function ()
@@ -132,7 +133,7 @@ WishflowerPlayActivity.prototype.render = function ()
 {
 	this.m_treeNode.render();
 
-	this.renderControls();
+	//this.renderControls();
 };
 
 WishflowerPlayActivity.prototype.renderControls = function ()
@@ -151,6 +152,7 @@ WishflowerPlayActivity.prototype.renderControls = function ()
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
+	/*
 	this.m_inpGenericInput._visible = true;
 	this.m_lblKeyPathControl._visible = true;
 	this.m_btnMoveLeftControl._visible = true;
@@ -160,7 +162,7 @@ WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 	this.m_btnSendWish._visible = true;
 	this.m_btnMoveDownControl._visible = true;
 	this.m_inpGenericInput._visible = true;
-	this.m_linkToPage._visible = true;
+	this.m_linkToPage._visible = true;*/
 };
 
 /*
