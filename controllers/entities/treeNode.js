@@ -9,7 +9,7 @@ TreeNode.C_FADING_OUT = 2;
 TreeNode.C_FADING_MAX_VALUE = 0.3;
 
 TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 7;
-TreeNode.C_GENERATION_LEAVE_QTTY = 3;
+TreeNode.C_GENERATION_LEAVE_QTTY = 5;
 TreeNode.DEBUG = false;
 
 TreeNode.composedLeaveImg = null;
@@ -302,6 +302,7 @@ function TreeNode()
 
                     noiseangle = chRandom(10);
                     leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
+                    leave.m_fadingStatus = TreeNode.C_FADING_IN;
                     leave.setAngle( leaveAngle + noiseangle);
                     leave.setHeightScalar(1);
                     this.addChild(leave);
