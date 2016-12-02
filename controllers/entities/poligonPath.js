@@ -242,6 +242,11 @@ function PoligonPath()
         }
     };
 
+    PoligonPath.prototype.clearSegments = function () 
+    {   
+        chClearArray( this.m_segments);
+    };
+
     PoligonPath.prototype.dump = function () 
     {
     };

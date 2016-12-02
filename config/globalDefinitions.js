@@ -45,6 +45,11 @@ var global_bitmap_definition =
     'callout_main_2.png'
 ];
 
+function Globals() 
+{ 
+}
+Globals.C_START_POSITION_PERCENT = 40;
+
 if (typeof module !== 'undefined' && module !== null)
 {
 	module.exports = MainLoopState;

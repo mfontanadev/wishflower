@@ -1,5 +1,3 @@
-// TODO: make three high level function: 1-Walk from point a to b, 2-Fly from point c to d, 3-Rotate tita degress.
-
 Ladybug.m_id = 10001000;
 
 Ladybug.C_LADYBUG_TYPE_NOT_SET = 0;
@@ -77,6 +75,8 @@ function Ladybug()
     this.m_poligonPath = null;
     this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
     this.m_currentSegment = 0;
+
+    this.m_visible = true;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -261,19 +261,22 @@ function Ladybug()
 
     Ladybug.prototype.render = function () 
     {   
-        this.m_arrAnimations[this.m_currentAnimationId].render(
-            this.m_viewParent.m_canvasEx.m_canvas, 
-            this.m_viewParent.m_canvasEx.m_context,
-            this.m_angle - 90, this.m_alpha, this.m_scale);
-                                                                                                 
-        if (C_LOG === true)
+        if (this.m_visible === true)
         {
-            message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + ")"; 
-            writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
-        }
+            this.m_arrAnimations[this.m_currentAnimationId].render(
+                this.m_viewParent.m_canvasEx.m_canvas, 
+                this.m_viewParent.m_canvasEx.m_context,
+                this.m_angle - 90, this.m_alpha, this.m_scale);
+                                                                                                     
+            if (C_LOG === true)
+            {
+                message = 'Velocity (' + this.m_velocity.x + ',' + this.m_velocity.y + ")"; 
+                writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
+            }
 
-        renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
-        this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+            renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+        }
     };
 
     // ****************************************
@@ -835,6 +838,26 @@ function Ladybug()
 
         return this.m_rc; 
     }
+
+    Ladybug.prototype.setVisible = function (_value) 
+    {
+        this.m_visible = _value;
+    }
+
+    Ladybug.prototype.getVisible = function () 
+    {
+        return this.m_visible;
+    }
+
+    Ladybug.prototype.getScaleToSpecificWidth = function (_width) 
+    {
+        var realWidth = 213;
+        var realHeight = 191;
+
+        return _width / realWidth; 
+    }
+
+
 };
 
 

@@ -23,11 +23,10 @@ TreeNode.m_wishes = null;
 TreeNode.C_TREE_STATUS_NOT_SET = 0;
 TreeNode.C_TREE_STATUS_WAITING_DATA = 1;
 TreeNode.C_TREE_STATUS_RENDERING = 2;
-//TreeNode.C_TREE_NEW_WISH_ANIMATION = 3;
-TreeNode.m_treeSta1tus = TreeNode.C_TREE_STATUS_NOT_SET;
 
 TreeNode.m_treeCursorHash = '';
 TreeNode.m_treeCursor = null;
+TreeNode.m_treeGrowedBranchs = 0;
 
 // Resultados del benchmark (generation = 13; leaves = 6, totBranch = 4096, totLeaves = 24576):
 // Funcion ImplemtLogic = tarda 12 milis en su pico de creación, luego en recorrer tarda 2 milis.
@@ -84,9 +83,9 @@ function TreeNode()
         this.m_viewParent = _viewParent;
         this.m_nodeType = TreeNode.C_NODE_TYPE_MAIN;
         this.m_parent = null;
-
-        this.setX(this.m_viewParent.m_canvasEx.m_canvasWidth / 2);
-        this.setY(this.m_viewParent.m_canvasEx.m_canvasHeight - 70);
+    
+        this.setX(this.m_viewParent.m_canvasEx.m_canvas.width / 2);
+        this.setY(this.m_viewParent.m_canvasEx.m_canvas.height - 70);
 
         this.initLeaveImage();
         this.loadImages();
@@ -171,6 +170,14 @@ function TreeNode()
                 }
 
                 this.recalculateTargetPointAndChilds();
+
+                // Optimization to know if the tree is still growing (only branches)
+                // Each time a branch reaches its max height add one to the global variable m_treeGrowedBranchs.
+                // Then we can checkj this number against calculated branches in the tree.                
+                if (this.isBranchStillGrowing() === false)
+                {
+                    TreeNode.m_treeGrowedBranchs = TreeNode.m_treeGrowedBranchs + 1;
+                }
             }
 
             // Wind
@@ -197,7 +204,6 @@ function TreeNode()
 
     TreeNode.prototype.implementWishflowerFade = function ()
     {
-        
         if (this.m_fadingStatus === TreeNode.C_FADING_IN)
         {
             this.m_fadingCounter++;
@@ -226,7 +232,7 @@ function TreeNode()
     TreeNode.prototype.calculateFadingScalar = function ()
     {
         return ((1 - TreeNode.C_FADING_MAX_VALUE) * (this.m_fadingCounter / 100)) + TreeNode.C_FADING_MAX_VALUE;  
-    }
+    };
 
     TreeNode.prototype.validateAndAddANewChild = function ()
     {
@@ -310,14 +316,13 @@ function TreeNode()
                 this.incrementGenerationPosition();
             }
         }
-    }
-
+    };
 
     TreeNode.prototype.canABranchGrowup = function ()
     {
         return (this.m_height < this.m_maxHeight && 
                 this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
-    }
+    };
 
     TreeNode.prototype.areWeReachedCurrentGenerationPosition = function (_percentPosition)
     {
@@ -329,17 +334,17 @@ function TreeNode()
     	}
 
         return false; 
-    }
+    };
 
     TreeNode.prototype.getGrowingRatio = function ()
     {
     	return (this.m_height / this.m_maxHeight);
-    }
+    };
 
     TreeNode.prototype.getCurrentGenerationPosition = function ()
     {
    		return this.m_arrGenerationPositions[this.m_generatorIndex];
-    }
+    };
     
     TreeNode.prototype.incrementGenerationPosition = function ()
     {
@@ -347,20 +352,25 @@ function TreeNode()
     	{
     		this.m_generatorIndex++;
     	}
-    }
+    };
 
 
     TreeNode.prototype.canALeaveGrowup = function ()
     {
         return (this.m_height < this.m_maxHeight && 
                 this.m_level === TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION + 1);
-    }
+    };
 
     TreeNode.prototype.canABranchExpand = function ()
     {
         return (this.m_width < this.m_maxWidth && 
                 this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
-    }
+    };
+
+    TreeNode.prototype.isBranchStillGrowing = function ()
+    {
+        return (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH && this.m_height > 0 && this.m_height < this.m_maxHeight);
+    };
 
     TreeNode.prototype.createRootNode = function ()
     {
@@ -722,7 +732,7 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x=" + this.m_x1 + ", y=" + this.m_y1 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
+        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x1=" + this.m_x1 + ", y1=" + this.m_y1 + ",x2=" + this.m_x2 + ",y2=" + this.m_y2 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
         console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
     };
 
@@ -743,14 +753,26 @@ function TreeNode()
 
     TreeNode.prototype.info = function () 
     {
-        var retTotalFinalBranchs = Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 2);
-        var retTotalLeaves = retTotalFinalBranchs * TreeNode.C_GENERATION_LEAVE_QTTY;
+        var retTotalBranches = this.totalBranches();
+        var retTotalLastLevelBranches = this.totalFinalBranches();
+        var retTotalLeaves = retTotalLastLevelBranches * TreeNode.C_GENERATION_LEAVE_QTTY;
 
-        console.log("Total final branchs: " + retTotalFinalBranchs);
+        console.log("Total branches: " + retTotalBranches);
+        console.log("Total last level branches: " + retTotalLastLevelBranches);
         console.log("Total leaves: " + retTotalLeaves);
 
-        return ({totalBranchs: retTotalFinalBranchs, totalLeaves: retTotalLeaves});
+        return ({totalBranches: retTotalBranches, otalBranchs: retTotalLastLevelBranches, totalLeaves: retTotalLeaves});
     };
+
+    TreeNode.prototype.totalFinalBranches = function () 
+    {
+        return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 2);
+    }
+
+    TreeNode.prototype.totalBranches = function () 
+    {
+        return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 1) - 1;
+    }
 
     TreeNode.prototype.findNodeByKeyPath = function (_keyPath) 
     {
@@ -940,7 +962,21 @@ function TreeNode()
         }
     };
 
-}
+    TreeNode.prototype.isTreeBranchesStillGrowing = function () 
+    {
+        return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
+    };
 
+    TreeNode.prototype.getFirstBranch = function () 
+    {
+        var result = null;
+        if (this.m_nodes !== null && 
+            this.m_nodes[0] !== null &&
+            this.m_nodes[0].m_nodes[0] !== null)
+        {
+            result = this.m_nodes[0].m_nodes[0]; 
+        }
 
-
+        return result;
+    };
+};

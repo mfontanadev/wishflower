@@ -65,9 +65,16 @@ module.exports = function(app)
 	app.get ('/controllers/entities/poligonPath.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/poligonPath.js');});
 
+	app.get ('/controllers/entities/background.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/background.js');});
+
 	// HELPERS
 	app.get ('/controllers/entities/keypair.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/keypair.js');});
+
+	// FLOWS
+	app.get ('/controllers/entities/playFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/playFlow.js');});
 
 	// SERVICES
 	require('./services/wishflower.Route.js')(app);
