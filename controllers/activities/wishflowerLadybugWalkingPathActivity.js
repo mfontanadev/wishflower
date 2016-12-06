@@ -25,7 +25,11 @@ WishflowerLadybugWalkingPathActivity.prototype.initialize = function ()
     this.m_poligonPath.setInfitineLoop(false);
     this.m_poligonPath.setSegmentLinesVisibility(true);
 
-    this.m_poligonPath.addSegmentExtraParams(51, 30, 0.1, 0.5, 361, 287, 0.2, 1);
+    var tmpSegment = new PoligonSegment();
+    tmpSegment.initWithExtraParams(51, 30, 0.1, 0.5, 361, 287, 0.2, 1);
+    tmpSegment.setVelocityRatio(0.5);
+    this.m_poligonPath.addSegmentObject(tmpSegment);
+
     this.m_poligonPath.addSegment(361, 287, 353, 33);
     this.m_poligonPath.addSegment(353, 33, 42, 287);
     this.m_poligonPath.addSegment(42, 287, 51, 30);

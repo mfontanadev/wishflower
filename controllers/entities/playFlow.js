@@ -94,9 +94,11 @@ function PlayFlow()
             var trunkWidth = this.m_activity.m_ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); 
 
             this.m_activity.m_poligonPath.clearSegments();
-            this.m_activity.m_poligonPath.addSegmentExtraParams(
-                trunkNode.m_x1, trunkNode.m_y1, 0.01, 0.5, 
-                ladyBugStartPosition.x, ladyBugStartPosition.y, trunkWidth, 1);
+        
+            var tmpSegment = new PoligonSegment();
+            tmpSegment.initWithExtraParams(trunkNode.m_x1, trunkNode.m_y1, 0.01, 0.5, ladyBugStartPosition.x, ladyBugStartPosition.y, trunkWidth, 1);
+            tmpSegment.setVelocityRatio(0.2);
+            this.m_activity.m_poligonPath.addSegmentObject(tmpSegment);
 
             // Activate ladybug walking.
             this.m_activity.m_ladybug.setAtCurrentSegmentStartPosition();   

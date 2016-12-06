@@ -62,6 +62,12 @@ function PoligonPath()
             }
         }
     };
+    
+    PoligonPath.prototype.addSegmentObject = function (_segment) 
+    {
+        this.m_segments.push(_segment);
+        this.reset();
+    }
 
     PoligonPath.prototype.addSegment = function (_x1, _y1, _x2, _y2) 
     {   
@@ -268,6 +274,8 @@ function PoligonSegment()
         this.m_scale2 = 1;
         this.m_alpha2 = 1;
 
+        this.m_velocityRatio = 1;
+
         this.m_extraParams = false; 
     };
 
@@ -284,6 +292,8 @@ function PoligonSegment()
         this.m_alpha2 = _alpha2;
 
         this.m_extraParams = true; 
+
+        this.m_velocityRatio = 1;
     };
     
     PoligonSegment.prototype.module = function ()
@@ -390,6 +400,15 @@ function PoligonSegment()
         }
     };
 
+    PoligonSegment.prototype.getVelocityRatio = function ()
+    {
+        return this.m_velocityRatio;    
+    };
+
+    PoligonSegment.prototype.setVelocityRatio = function (_velocityRatio)
+    {
+        this.m_velocityRatio = _velocityRatio;    
+    };
 
     PoligonSegment.prototype.fLog = function () 
     { 
@@ -401,7 +420,8 @@ function PoligonSegment()
         "m_x2=" + this.m_x2 + ", " + 
         "m_y2=" + this.m_y2 + ", " + 
         "m_scale2=" + this.m_scale2 + ", " + 
-        "m_alpha2=" + this.m_alpha2 + "; "; 
+        "m_alpha2=" + this.m_alpha2 + ", "; 
+        "m_velocityRatio=" + this.m_velocityRatio + "; "; 
         
         return logText;
     }; 

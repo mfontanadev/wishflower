@@ -53,6 +53,8 @@ function Ladybug()
     this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
     this.m_arrAnimations = new Array();
 
+    this.m_walkingVelocity = Ladybug.C_LADYBUG_WALK_INCREMENT;
+
     this.m_velocity =
     {
         x: 0,
@@ -152,8 +154,16 @@ function Ladybug()
 
     Ladybug.prototype.startFrameWalkEvent = function (_parent) 
     {
-        var incX = cosOf(Ladybug.C_LADYBUG_WALK_INCREMENT, _parent.m_angle);
-        var incY = sinOf(Ladybug.C_LADYBUG_WALK_INCREMENT, _parent.m_angle) * -1;
+        var velocityRatio = 1;
+
+        if (_parent.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING)
+        {
+            velocityRatio = _parent.m_poligonPath.getCurrentSegment().getVelocityRatio();
+            console.log(velocityRatio);
+        }
+
+        var incX = cosOf(Ladybug.C_LADYBUG_WALK_INCREMENT * velocityRatio, _parent.m_angle);
+        var incY = sinOf(Ladybug.C_LADYBUG_WALK_INCREMENT * velocityRatio, _parent.m_angle) * -1;
 
         if (_parent.isAValidMovement() === true)
         {
