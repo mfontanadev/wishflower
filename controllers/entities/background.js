@@ -81,26 +81,28 @@ function Background()
 
     Background.prototype.drawBackgroundOnCanvas = function (_context) 
     {
+        var horizon = 0.72;
+
         var grYellow = _context.createLinearGradient(0, 0, 0, _context.canvas.height);
         grYellow.addColorStop(0, 'rgba(255,110,2,0.0)');
-        grYellow.addColorStop(0.56, 'rgba(247,230,64,0.7)');
-        grYellow.addColorStop(0.61, 'rgba(224,224,173,1)');
-        grYellow.addColorStop(0.71, 'rgba(255,255,255,0)');
+        grYellow.addColorStop(horizon - 0.1, 'rgba(247,230,64,0.7)');
+        grYellow.addColorStop(horizon, 'rgba(224,224,173,1)');
+        grYellow.addColorStop(horizon + 0.08, 'rgba(255,255,255,0)');
         _context.fillStyle = grYellow;
         _context.fillRect(0, 0, _context.canvas.width, _context.canvas.height);
 
-        var gradientHeight = _context.canvas.height * (61 / 100);
+        var gradientHeight = _context.canvas.height * horizon;
         var grRed = _context.createLinearGradient(0, 0, 0, gradientHeight);
         grRed.addColorStop(0, 'rgba(242,74,71,1)');
-        grRed.addColorStop(0.35, 'rgba(242,74,71,0.9)');
+        grRed.addColorStop(horizon - 0.26, 'rgba(242,74,71,0.9)');
         grRed.addColorStop(1, 'rgba(255,255,255,0)');
         _context.fillStyle = grRed;
         _context.fillRect(0, 0, _context.canvas.width, gradientHeight);
 
-        var gradientHeight = _context.canvas.height * (61 / 100);
+        var gradientHeight = _context.canvas.height * horizon;
         var grGreen = _context.createLinearGradient(0, gradientHeight, 0, _context.canvas.height);
         grGreen.addColorStop(0, 'rgba(224,224,173,0.9)');
-        grGreen.addColorStop(0.15, 'rgba(206,211,155,1)');
+        grGreen.addColorStop(horizon - 0.46, 'rgba(206,211,155,1)');
         grGreen.addColorStop(1, 'rgba(36,124,96,1)');
         _context.fillStyle = grGreen;
         _context.fillRect(0, gradientHeight, _context.canvas.width, _context.canvas.height);
