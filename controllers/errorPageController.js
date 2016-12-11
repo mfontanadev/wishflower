@@ -33,7 +33,7 @@ function initializeControls()
 	bw = 100;
 
 	lblInfoControl = new CanvasControl();
-	lblInfoControl.initLabelStyle(m_canvas, getCX(tw, bw * 3), (th / 2) - 30, bw * 3, 30, "Wrong credentials.");
+	lblInfoControl.initLabelStyle(/*usar canvasEs*/, getCX(tw, bw * 3), (th / 2) - 30, bw * 3, 30, "Wrong credentials.");
 	lblInfoControl._fontSize = 14;
 	lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_RED);
 	lblInfoControl._visible = true;

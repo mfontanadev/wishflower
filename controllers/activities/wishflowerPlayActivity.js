@@ -41,15 +41,14 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	var th = tmpCanvas.height;
 
 	this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");
+    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
 	this.m_btnBack._onClick = this.btnBack_controller;
-	this.m_btnBack._visible = true;
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
+	this.m_btnBack._visible = false;
 	this.m_btnBack._disable = false;
 };
 

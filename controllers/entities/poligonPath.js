@@ -40,25 +40,28 @@ function PoligonPath()
             {
                 item = this.m_segments[i];
 
-                renderCircleNotFill(
-                    this.m_viewParent.m_canvasEx.m_canvas, 
-                    this.m_viewParent.m_canvasEx.m_context,
-                    item.m_x1, item.m_y1,
-                    PoligonPath.C_POLIGONPATH_START_RADIOUS,
-                    "black");
+                if (C_DEBUG_SHOW_LINES === true)
+                {
+                    renderCircleNotFill(
+                        this.m_viewParent.m_canvasEx.m_canvas, 
+                        this.m_viewParent.m_canvasEx.m_context,
+                        item.m_x1, item.m_y1,
+                        PoligonPath.C_POLIGONPATH_START_RADIOUS,
+                        "black");
 
-                renderLine(
-                    this.m_viewParent.m_canvasEx.m_canvas, 
-                    this.m_viewParent.m_canvasEx.m_context,
-                    item.m_x1, item.m_y1, item.m_x2, item.m_y2,
-                    "red", 1);
+                    renderLine(
+                        this.m_viewParent.m_canvasEx.m_canvas, 
+                        this.m_viewParent.m_canvasEx.m_context,
+                        item.m_x1, item.m_y1, item.m_x2, item.m_y2,
+                        "red", 1);
 
-                renderCircle(
-                    this.m_viewParent.m_canvasEx.m_canvas, 
-                    this.m_viewParent.m_canvasEx.m_context,
-                    item.m_x2, item.m_y2,
-                    PoligonPath.C_POLIGONPATH_END_RADIOUS,
-                    "blue");
+                    renderCircle(
+                        this.m_viewParent.m_canvasEx.m_canvas, 
+                        this.m_viewParent.m_canvasEx.m_context,
+                        item.m_x2, item.m_y2,
+                        PoligonPath.C_POLIGONPATH_END_RADIOUS,
+                        "blue");
+                }
             }
         }
     };

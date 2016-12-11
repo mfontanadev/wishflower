@@ -57,49 +57,49 @@ function initializeControls()
 	bc = 4;
 
     lblInfoControl = new CanvasControl();
-	lblInfoControl.initLabelStyle(m_canvas, ((m_canvas.width/bc)*2) - (bw*3 / 2), 1, bw * 3, bh, "");
+	lblInfoControl.initLabelStyle(/*usar canvasEs*/, ((m_canvas.width/bc)*2) - (bw*3 / 2), 1, bw * 3, bh, "");
 	lblInfoControl._fontSize = 12;
 	lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
 	lblInfoControl._visible = true;
 
     lblKeyPathControl = new CanvasControl();
-	lblKeyPathControl.initLabelStyle(m_canvas, getCX(tw, bw * 2.5), th - 10 - (bh * 3), bw * 2.5, bh, "> > > > > > > 1");
+	lblKeyPathControl.initLabelStyle(/*usar canvasEs*/, getCX(tw, bw * 2.5), th - 10 - (bh * 3), bw * 2.5, bh, "> > > > > > > 1");
 	lblKeyPathControl._fontSize = 14;
 	lblKeyPathControl.setTheme(CanvasControl.C_THEME_TYPE_GREEN);
 	lblKeyPathControl._visible = true;
 
 	btnMoveLeftControl = new CanvasControl();
-	btnMoveLeftControl.initButtonStyle(m_canvas, getCX(tw, 30) - bw -20, th - 5 - (bh * 2), 30, bh, "");
+	btnMoveLeftControl.initButtonStyle(/*usar canvasEs*/, getCX(tw, 30) - bw -20, th - 5 - (bh * 2), 30, bh, "");
 	btnMoveLeftControl.setImage("glif-left-arrow.png");
 	btnMoveLeftControl._onClick = this.btnMoveLeftControl_controller;
 	btnMoveLeftControl._visible = true;
 	
 	btnMoveRightControl = new CanvasControl();
-	btnMoveRightControl.initButtonStyle(m_canvas, getCX(tw, 30) + bw + 20, th - 5 - (bh * 2), 30, bh, "");
+	btnMoveRightControl.initButtonStyle(/*usar canvasEs*/, getCX(tw, 30) + bw + 20, th - 5 - (bh * 2), 30, bh, "");
 	btnMoveRightControl.setImage("glif-right-arrow.png");
 	btnMoveRightControl._onClick = this.btnMoveRightControl_controller;
 	btnMoveRightControl._visible = true;
 
 	btnSubControl = new CanvasControl();
-	btnSubControl.initButtonStyle(m_canvas, getCX(tw, 30) + bw + 20, th - 5 - (bh * 2), 30, bh, "");
+	btnSubControl.initButtonStyle(/*usar canvasEs*/, getCX(tw, 30) + bw + 20, th - 5 - (bh * 2), 30, bh, "");
 	btnSubControl.setImage("glif-sub.png");
 	btnSubControl._onClick = this.btnSubControl_controller;
 	btnSubControl._visible = false;
 
 	btnAddControl = new CanvasControl();
-	btnAddControl.initButtonStyle(m_canvas, getCX(tw, 30) - bw -20, th - 5 - (bh * 2), 30, bh, "");
+	btnAddControl.initButtonStyle(/*usar canvasEs*/, getCX(tw, 30) - bw -20, th - 5 - (bh * 2), 30, bh, "");
 	btnAddControl.setImage("glif-add.png");
 	btnAddControl._onClick = this.btnAddControl_controller;
 	btnAddControl._visible = false;
 	
 	btnSendWish = new CanvasControl();
-	btnSendWish.initButtonStyle(m_canvas, getCX(tw, bw * 2), th - 5 - (bh * 2), bw * 2, bh, "Send wish");
+	btnSendWish.initButtonStyle(/*usar canvasEs*/, getCX(tw, bw * 2), th - 5 - (bh * 2), bw * 2, bh, "Send wish");
 	btnSendWish._fontSize = 12;
 	btnSendWish._onClick = this.btnSendWish_controller;
 	btnSendWish._visible = true;
 
 	btnMoveDownControl = new CanvasControl();
-	btnMoveDownControl.initButtonStyle(m_canvas, getCX(tw, bw * 2), th - 5 - (bh * 2), bw * 2, bh, "");
+	btnMoveDownControl.initButtonStyle(/*usar canvasEs*/, getCX(tw, bw * 2), th - 5 - (bh * 2), bw * 2, bh, "");
 	btnMoveDownControl.setImage("glif-down-arrow.png");
 	btnMoveDownControl._fontSize = 12;
 	btnMoveDownControl._onClick = this.btnMoveDownControl_controller;
@@ -107,7 +107,7 @@ function initializeControls()
 	btnMoveDownControl._visible = false;
 
 	inpGenericInput = new CanvasControl();
-	inpGenericInput.initInputStyle(m_canvas, getCX(tw, bw * 4), th - 1 - (bh * 1), bw * 4, bh, "");
+	inpGenericInput.initInputStyle(/*usar canvasEs*/, getCX(tw, bw * 4), th - 1 - (bh * 1), bw * 4, bh, "");
 	inpGenericInput._fontSize = 12;
 	inpGenericInput.setPlaceholderText("Write your wish and send it.");
 	//inpGenericInput._onSubmit = this.btnSendWish_controller;

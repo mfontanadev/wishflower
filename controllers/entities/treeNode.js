@@ -8,7 +8,7 @@ TreeNode.C_FADING_IN = 1;
 TreeNode.C_FADING_OUT = 2;
 TreeNode.C_FADING_MAX_VALUE = 0.3;
 
-TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 4;
+TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 8;
 TreeNode.C_GENERATION_LEAVE_QTTY = 2;
 TreeNode.DEBUG = false;
 
@@ -85,7 +85,7 @@ function TreeNode()
         this.m_parent = null;
     
         this.setX(this.m_viewParent.m_canvasEx.m_canvas.width / 2);
-        this.setY(this.m_viewParent.m_canvasEx.m_canvas.height - 70);
+        this.setY(this.m_viewParent.m_canvasEx.m_canvas.height);
 
         this.initLeaveImage();
         this.loadImages();
@@ -98,7 +98,7 @@ function TreeNode()
         var branch = this.createBranchNode();
         // link the main branch a little bit lower from top, 
         // this simulates the tree is inserted in the root. 
-        branch.setHeightScalar(0.3);     
+        branch.setHeightScalar(0.1);     
         branch.m_hash = 'T';
         root.addChild(branch);
 
@@ -131,7 +131,7 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
+        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root4.png');
         TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
     };
@@ -246,38 +246,38 @@ function TreeNode()
             {
                 var branch = null;
 				
-                /*
+                
 				branch = this.createBranchNode();
                 branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * 1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(30)) / 100);
+                branch.setHeightScalar(0.88);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
                 branch = this.createBranchNode();
                 branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * -1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+                branch.setHeightScalar(0.88);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                */
-
+                
+                /*
                 branch = this.createBranchNode();
                 branch.m_hash = '<';
-                branch.setAngle(50 * 1);
+                branch.setAngle(10 * 1);
                 branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.8;
+                branch.m_maxHeight = this.m_maxHeight * 0.72;
                 branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
                 branch = this.createBranchNode();
                 branch.m_hash = '>';
-                branch.setAngle(50 * -1);
+                branch.setAngle(10 * -1);
                 branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.8;
+                branch.m_maxHeight = this.m_maxHeight * 0.72;
                 branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                
+                */
 				
 				branch.m_pertAngle = branch.m_pertAngle * 0.5;
 				this.incrementGenerationPosition();
@@ -378,8 +378,8 @@ function TreeNode()
 
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_ROOT;
-        nodeItem.m_width = 70;
-        nodeItem.m_height = 20;
+        nodeItem.m_width = 308 / 2;
+        nodeItem.m_height = 71 / 2;
         nodeItem.m_maxWidth = nodeItem.m_width;
         nodeItem.m_maxHeight = nodeItem.m_height;
 
@@ -393,7 +393,7 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
-        nodeItem.m_maxHeight = 80;
+        nodeItem.m_maxHeight = 140;
 		nodeItem.m_pertAngle = 20;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
@@ -410,9 +410,10 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_LEAVE;
         nodeItem.m_maxWidth = 3;
-        nodeItem.m_maxHeight = 20;
+        nodeItem.m_maxHeight = 40;
 		nodeItem.m_pertAngle = 20;
-		
+        nodeItem.m_fadingStatus = TreeNode.C_FADING_IN;
+	
         return nodeItem;
     };
 

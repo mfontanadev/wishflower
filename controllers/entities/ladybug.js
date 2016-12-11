@@ -284,8 +284,11 @@ function Ladybug()
                 writeMessageXY(this.m_viewParent.m_canvasEx.m_context, message, 60, 70, C_DEBUG_MODE);
             }
 
-            renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
-            this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+            if (C_RENDER_COLLISION_RECT === true)
+            {
+                renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
+                this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+            }
         }
     };
 

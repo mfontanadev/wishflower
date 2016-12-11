@@ -29,6 +29,7 @@ var global_bitmap_definition =
     'ctree_root.png',
     'ctree_root2.png',
     'ctree_root3.png',
+    'ctree_root4.png',
     'ctree_branch.png',
     'ctree_leave.png',
     'ladybug_normal.png',
@@ -42,7 +43,8 @@ var global_bitmap_definition =
     'log.png',
     'polygonpath_test_grass.png',
     'callout_main_1.png',
-    'callout_main_2.png'
+    'callout_main_2.png',
+    'treereference.png'
 ];
 
 function Globals() 

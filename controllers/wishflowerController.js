@@ -7,9 +7,8 @@ window.onload = function()
 {
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
-	viewMngr.initCanvasById('idCanvas', true);
+	viewMngr.initCanvasById('idCanvas', false);
 	viewMngr.enableProgressBarWhenLoadingResources();
-	msglog(viewMngr);
 
 	// Enable using bitmaps
 	var bitmapManager = viewMngr.getBitmapManagerInstance();
@@ -38,7 +37,7 @@ window.onload = function()
 
 function appInitContext()
 {
-	viewMngr.getProgressBar()._visible = false;
+	viewMngr.getProgressBar()._visible = true;
 
 	msglog("--------------------------------appInitContext--------------------------------");
 	msglog("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);

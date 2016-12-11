@@ -62,7 +62,7 @@ function PlayFlow()
     {
         this.m_activity.m_tree = new TreeNode();
         this.m_activity.m_tree.initWithRootAndBranch(this.m_viewParent);
-        this.m_activity.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height - 50);
+        this.m_activity.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height * (8.5/10));
         this.m_activity.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
         this.m_activity.m_tree.reset(); 
 
@@ -83,6 +83,8 @@ function PlayFlow()
     PlayFlow.prototype.state_APPSTATE_TREE_GROWING = function () 
     {
         // Events
+        return;
+        
         if (this.m_activity.m_tree.isTreeBranchesStillGrowing() === false)
         {
             // Make a path from root to the middle of tree's first branch.
@@ -96,7 +98,7 @@ function PlayFlow()
             this.m_activity.m_poligonPath.clearSegments();
         
             var tmpSegment = new PoligonSegment();
-            tmpSegment.initWithExtraParams(trunkNode.m_x1, trunkNode.m_y1, 0.01, 0.5, ladyBugStartPosition.x, ladyBugStartPosition.y, trunkWidth, 1);
+            tmpSegment.initWithExtraParams(trunkNode.m_x1, trunkNode.m_y1 + 20, 0.01, 0.5, ladyBugStartPosition.x, ladyBugStartPosition.y, trunkWidth, 1);
             tmpSegment.setVelocityRatio(0.2);
             this.m_activity.m_poligonPath.addSegmentObject(tmpSegment);
 
