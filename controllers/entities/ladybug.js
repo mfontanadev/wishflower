@@ -227,7 +227,7 @@ function Ladybug()
         var sndId = _parent.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
         _parent.m_viewParent.getSoundManagerInstance().stop(sndId);
         _parent.forceAnimation_STAND();
-    }    
+    }
 
     Ladybug.prototype.addAnimationFrame = function (_animation, _imageName, _duration) 
     {

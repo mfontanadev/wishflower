@@ -59,7 +59,9 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
         this.btnBack_controller(null, null);   
     }
-	//this.m_tree.handleInputs();
+	
+    if (this.m_tree !== null)
+		this.m_tree.handleInputs();
 };
 
 WishflowerPlayActivity.prototype.implementGameLogic = function ()

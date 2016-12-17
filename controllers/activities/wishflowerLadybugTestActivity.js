@@ -33,7 +33,7 @@ WishflowerLadybugTestActivity.prototype.initialize = function ()
     this.m_grass_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
     this.m_trunkObj.image = this.m_viewParent.getBitmapManagerInstance().getImageByName('log.png');
     this.m_trunkObj.x = this.m_viewParent.m_canvasEx.m_canvas.width / 2;
-    this.m_trunkObj.y =- ((this.m_trunkObj.image.height / 5) * this.m_trunkObj.scale);
+    this.m_trunkObj.y = this.m_viewParent.m_canvasEx.m_canvas.height - ((this.m_trunkObj.image.height / 5) * this.m_trunkObj.scale);
     updateRectangleWithScale(
         this.m_trunkObj.image, 
         this.m_trunkObj.x, 
@@ -91,7 +91,7 @@ WishflowerLadybugTestActivity.prototype.render = function ()
                                     	this.m_grass_img, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.width / 2, 
                                     	this.m_viewParent.m_canvasEx.m_canvas.height, 
-                                    	0, 0.7, 0.9);
+                                    	0, 1, 1);
     
     drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
                                     	this.m_viewParent.m_canvasEx.m_context, 
@@ -119,4 +119,6 @@ WishflowerLadybugTestActivity.prototype.onLeaveActivity = function ()
 {
     this.m_btnBack._visible = false;
     this.m_btnBack._disable = true;
+
+    this.m_ladybug.endClosingAnimationEvent(this.m_ladybug); 
 };

@@ -161,7 +161,21 @@ function TreeNode()
             if (this.canABranchGrowup() === true)
             {
                 this.m_height = this.m_height + 1; 
-                
+         
+                var width = this.m_viewParent.m_canvasEx.m_canvas.width;
+                if (this.m_x1 < width * 0.2 || this.m_x1 > width * 0.8)
+                {
+                    //this.m_angle
+                    if (this.m_angle < 0)
+                    {
+                        this.setAngle(this.m_angle-=2);
+                    }   
+                    else
+                    {
+                        this.setAngle(this.m_angle+=2);
+                    } 
+                }
+
                 this.validateAndAddANewChild();
 
                 if (this.canABranchExpand() === true)
@@ -244,20 +258,22 @@ function TreeNode()
 
             if (bAddBranch === true) 
             {
+                var pert = 10 * (this.m_level - 1); 
                 var branch = null;
-				
                 
 				branch = this.createBranchNode();
-                branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * 1);
+                branch.m_hash = '<';
+                branch.setAngle((30 + chRandomWithNeg(pert)) * 1);
                 branch.setHeightScalar(0.88);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
                 branch = this.createBranchNode();
-                branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * -1);
+                branch.m_hash = '>';
+                branch.setAngle((30 + chRandomWithNeg(pert)) * -1);
                 branch.setHeightScalar(0.88);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
                 
@@ -279,7 +295,7 @@ function TreeNode()
                 this.addChild(branch);
                 */
 				
-				branch.m_pertAngle = branch.m_pertAngle * 0.5;
+				branch.m_pertAngle = branch.m_pertAngle * 2;
 				this.incrementGenerationPosition();
 
             }
@@ -394,7 +410,7 @@ function TreeNode()
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
         nodeItem.m_maxHeight = 140;
-		nodeItem.m_pertAngle = 20;
+		nodeItem.m_pertAngle = 10;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
 		nodeItem.m_arrGenerationPositions.push(0.4);
