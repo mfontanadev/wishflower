@@ -52,6 +52,7 @@ function PlayFlow()
     {
         if (this.m_state !== PlayFlow.C_PLAYFLOW_APPSTATE_INITIALIZING)
         {
+            this.m_activity.m_background.render();
             this.m_activity.m_tree.render();
             this.m_activity.m_poligonPath.render();
             this.m_activity.m_ladybug.render();
@@ -85,6 +86,7 @@ function PlayFlow()
         // Events
         return;
         
+        /*
         if (this.m_activity.m_tree.isTreeBranchesStillGrowing() === false)
         {
             // Make a path from root to the middle of tree's first branch.
@@ -108,16 +110,13 @@ function PlayFlow()
             this.m_activity.m_ladybug.setVisible(true);
 
             this.setState(PlayFlow.C_PLAYFLOW_APPSTATE_USER_HELP);   
-        }
+        }*/
     }
 
     PlayFlow.prototype.setState = function (_state) 
     {
         this.m_state = _state;
     };
-
-
-
 };
 
 

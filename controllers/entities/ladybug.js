@@ -11,7 +11,7 @@ Ladybug.C_LADYBUG_SETTING_MAX_THRUST = 5;
 Ladybug.C_LADYBUG_SETTING_TORQUE = 6;
 Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE = 181;
 Ladybug.C_LADYBUG_MAX_SLIDE = 4;
-Ladybug.C_LADYBUG_SCALE = 0.20;
+Ladybug.C_LADYBUG_SCALE = WishflowerContext.C_LADYBUG_SCALE;
 
 Ladybug.C_ANIM_STAND = 0;
 Ladybug.C_ANIM_WALKING = 1;
@@ -31,10 +31,17 @@ Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS = 3;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING = 4;
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS = 5;
 
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT = 6; 
-Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH = 7;
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_WALK = 6; 
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_FLY = 7; 
+Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH = 8;
 
 Ladybug.C_FLYING_STEP_INCREMENT = 5;
+
+Ladybug.C_LADYBUG_ACTION_NORMAL = -1;
+Ladybug.C_LADYBUG_ACTION_GOING_TO_NEW_WISH = 1;
+Ladybug.C_LADYBUG_ACTION_FADING_OUT = 2;
+Ladybug.C_LADYBUG_ACTION_FADING_OUT_FINISHED = 3;
+
 
 function Ladybug() 
 {
@@ -79,6 +86,8 @@ function Ladybug()
     this.m_currentSegment = 0;
 
     this.m_visible = true;
+
+    this.m_action = Ladybug.C_LADYBUG_ACTION_NORMAL;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -267,6 +276,27 @@ function Ladybug()
         
         this.m_arrAnimations[this.m_currentAnimationId].implementGameLogic();   
         this.m_arrAnimations[this.m_currentAnimationId].setPosition(this.m_cx, this.m_cy);
+
+        if (this.m_action === Ladybug.C_LADYBUG_ACTION_FADING_OUT)
+        {
+            if (this.m_fadeStep > 0)
+            {
+                this.m_fadeStep = this.m_fadeStep - 1;
+            
+                if (this.m_fadeStep === 0)
+                {
+                    this.m_alpha = 0;
+                    this.m_scale = 0;
+                    this.m_action = Ladybug.C_LADYBUG_ACTION_FADING_OUT_FINISHED;
+                }
+                else
+                {
+                    this.m_alpha = this.m_alpha - this.m_fadeAplhaInc;
+                    this.m_scale = this.m_scale - this.m_fadeScaleInc;
+                }
+
+            }
+        }
     };
 
     Ladybug.prototype.render = function () 
@@ -288,6 +318,11 @@ function Ladybug()
             {
                 renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
                 this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+            }
+
+            if (this.m_poligonPath !== null)
+            {
+                this.m_poligonPath.render();    
             }
         }
     };
@@ -621,7 +656,7 @@ function Ladybug()
     {   
         if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_WALK ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH)
         {
             return true;
@@ -638,7 +673,7 @@ function Ladybug()
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_START_FLYING ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_CLOSE_ELYTRAS ||
-            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT ||
+            this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_FLY ||
             this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_END_PATH)
         {
             return true;
@@ -667,7 +702,7 @@ function Ladybug()
                 }
                 else
                 {
-                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT;           
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_WALK;           
                 }
             }
             else
@@ -675,7 +710,7 @@ function Ladybug()
                 this.moveUp();  
             }
         }
-        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT)
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_WALK)
         {
             if (this.m_poligonPath.isInfiniteLoop() === true)
             {
@@ -723,7 +758,7 @@ function Ladybug()
 
                 if (this.m_poligonPath.nextSegment() === false)
                 {
-                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT;
+                    this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_FLY;
                 }  
             }
             else
@@ -731,7 +766,7 @@ function Ladybug()
                 this.m_poligonPathPercentCounter = this.m_poligonPathPercentCounter + this.m_poligonPath.getCurrentSegment().getPercentIncrement(Ladybug.C_FLYING_STEP_INCREMENT); 
             }
         }
-        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT)
+        else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_REACHED_LAST_POINT_FLY)
         {
             if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
             {
@@ -749,6 +784,12 @@ function Ladybug()
     }
 
     // ****************************************
+    // Newwish incomming animation (Landing)
+    // ****************************************
+
+
+
+    // ****************************************
     // User interface.
     // ****************************************
     Ladybug.prototype.isAnimation_STAND = function () 
@@ -761,7 +802,7 @@ function Ladybug()
         return (this.m_currentAnimationId === Ladybug.C_ANIM_OPENING);
     };
 
-    Ladybug.prototype.isAnimation_FLYING = function () 
+    Ladybug.prototype.isAnimation_FLYING = function ()
     {
         return (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING);
     };
@@ -814,7 +855,135 @@ function Ladybug()
         this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
     };
 
-    // ****************************************
+    Ladybug.prototype.startNewWishAnimation = function (_background, _tree, _keyPath) 
+    {
+       var targetNode = _tree.findNodeByKeyPath(_keyPath);
+
+        console.log(targetNode);
+        if (targetNode === null)
+            return;
+
+        var _xTarget = targetNode.m_x1;
+        var _yTarget = targetNode.m_y1;
+
+        var trunkCenterX = _tree.getFirstBranch().m_x1;
+        var trunkWidth = _tree.getFirstBranch().m_maxWidth;
+        var topPosY = _tree.getFirstBranch().m_y1 - _tree.getFirstBranch().m_maxHeight;
+        var bottomPosY = _background.getHorizonPosY();
+
+        var leftSize = trunkCenterX - (trunkWidth / 2);
+        var leftCenterX = getCenterInIntervale(0, leftSize);
+        var rightSize = this.m_viewParent.m_canvasEx.m_canvas.width - (trunkCenterX + (trunkWidth / 2)); 
+        var rightCenterX = getCenterInIntervale(trunkCenterX + (trunkWidth / 2), this.m_viewParent.m_canvasEx.m_canvas.width);
+        
+        var paramLayersQuantity = 8;
+        var paramTopLayerSize = 0.8;
+        var paramBottomLayerSize = 0.2;
+
+        var currentSide = 0;
+        var startPointX = 0;
+        var layerHeight = (bottomPosY - topPosY) / paramLayersQuantity;
+        var layerWidth = 0
+        var randomWidth = 0;
+        var x1, x2, y1, y2;
+        var recX2, recY2;
+
+
+        var sideSize = 0;
+        if (chRandom(10) > 5)
+        {
+            sideSize = leftSize;
+            sideCenterX = leftCenterX;
+        }
+        else
+        {
+            sideSize = rightSize;
+            sideCenterX = rightCenterX;
+        }
+
+        // Lines
+        renderLine(
+        this.m_viewParent.m_canvasEx.m_canvas, 
+        this.m_viewParent.m_canvasEx.m_context,
+        0, topPosY, this.m_viewParent.m_canvasEx.m_canvas.width, topPosY,
+        "green", 1);
+
+        renderLine(
+        this.m_viewParent.m_canvasEx.m_canvas, 
+        this.m_viewParent.m_canvasEx.m_context,
+        0, bottomPosY, this.m_viewParent.m_canvasEx.m_canvas.width, bottomPosY,
+        "red", 1);
+
+        // Draw centers reference
+        renderCircle(
+        this.m_viewParent.m_canvasEx.m_canvas, 
+        this.m_viewParent.m_canvasEx.m_context,
+        leftCenterX, bottomPosY,
+        3,
+        "yellow");
+
+        renderCircle(
+        this.m_viewParent.m_canvasEx.m_canvas, 
+        this.m_viewParent.m_canvasEx.m_context,
+        rightCenterX, bottomPosY,
+        3,
+        "magenta");
+
+        //
+        var poligonPath = new PoligonPath();
+        poligonPath.init(this.m_viewParent);
+        poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
+        poligonPath.setInfitineLoop(false);
+        poligonPath.setSegmentLinesVisibility(false);
+
+        for (var i = 0; i < paramLayersQuantity; i++) 
+        {
+            layerWidth = sideSize * getInterpolatedValue(paramBottomLayerSize, paramTopLayerSize, paramLayersQuantity, i);
+            layerX1 = sideCenterX - (layerWidth / 2); 
+            layerY1 = bottomPosY - ((i + 1) * layerHeight); 
+
+            renderRectangle(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context,
+                layerX1, layerY1, layerWidth, layerHeight, "blue");
+
+            randomWidth = layerWidth / 5; 
+            if ((i % 2) === 0)
+            {
+                x1 = layerX1 + chRandom(randomWidth);
+                x2 = layerX1 + layerWidth - chRandom(randomWidth);
+            }
+            else
+            {
+                x1 = layerX1 + layerWidth - chRandom(randomWidth);
+                x2 = layerX1 + chRandom(randomWidth);    
+            }
+
+            y1 = layerY1 + layerHeight;
+            y2 = layerY1;
+
+            ladybugAlpha = getInterpolatedValue(0.1, 1, paramLayersQuantity, i);
+            ladybugSize = getInterpolatedValue(0.01, Ladybug.C_LADYBUG_SCALE, paramLayersQuantity, i);
+
+            if (i > 0)
+            {
+                poligonPath.addSegmentExtraParams(recX2, recY2, ladybugSize, ladybugAlpha, x2, y2, ladybugSize, ladybugAlpha);
+            }
+            else
+            {
+                poligonPath.addSegmentExtraParams(x1, y1, ladybugSize, ladybugAlpha, x2, y2, ladybugSize, ladybugAlpha);
+            }
+
+            recX2 = x2;
+            recY2 = y2;
+        }
+
+        poligonPath.addSegmentExtraParams(recX2, recY2, ladybugSize, ladybugAlpha, _xTarget, _yTarget, ladybugSize, ladybugAlpha);
+
+        this.setPoligonPath(poligonPath);
+        this.startPoligonFlying();
+
+        this.setVisible(true);
+    };
+
     // Default animated object helpers
     // ****************************************
     Ladybug.prototype.startAnimation = function (_animationId) 
@@ -870,7 +1039,31 @@ function Ladybug()
         return _width / realWidth; 
     }
 
+    Ladybug.prototype.fadeOutScaleAndAlpha = function (_steps) 
+    {
+        this.m_action = Ladybug.C_LADYBUG_ACTION_FADING_OUT;
+        this.m_fadeStep = _steps;
+        this.m_fadeAplhaInc = this.m_alpha / _steps;
+        this.m_fadeScaleInc = this.m_scale / _steps;
+    }
 
+    Ladybug.prototype.stopFadeOut = function () 
+    {
+        this.m_action = Ladybug.C_LADYBUG_ACTION_NORMAL;
+    }
+
+    Ladybug.prototype.isFadeOutFinished = function () 
+    {
+        if (this.m_action === Ladybug.C_LADYBUG_ACTION_FADING_OUT_FINISHED &&
+            this.m_scale === 0 && this.m_alpha === 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 

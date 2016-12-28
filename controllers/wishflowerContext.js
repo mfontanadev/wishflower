@@ -9,6 +9,8 @@ WishflowerContext.C_ACTIVITY_LADYBUG_WALKING_PATH_TEST = 5;
 WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST = 6;
 WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST = 7;
 
+WishflowerContext.C_LADYBUG_SCALE = 0.2;
+
 function WishflowerContext() 
 { 
 	WishflowerContext.self = this;

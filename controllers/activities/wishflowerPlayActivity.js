@@ -1,4 +1,4 @@
-WishflowerPlayActivity.self
+WishflowerPlayActivity.self = null;
 
 function WishflowerPlayActivity(_id, _viewParent) 
 { 
@@ -15,6 +15,9 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_btnBack = null;
 
 	this.m_background = null;
+
+	this.m_ladybugNewWish = null;
+
 };
 
 // Call this method once, reinitialization of values must be 
@@ -29,7 +32,10 @@ WishflowerPlayActivity.prototype.initialize = function ()
 
 	this.m_background = new Background();
 	this.m_background.init(this.m_viewParent);
-	//this.m_background.generateBackgroundBitmap();
+
+	this.m_ladybugNewWish = new Ladybug();
+    this.m_ladybugNewWish.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
+    this.m_ladybugNewWish.setVisible(false);
 
 	this.createControls();
 };
@@ -60,6 +66,14 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
         this.btnBack_controller(null, null);   
     }
 	
+	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
+    {
+        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
+        
+        //
+        this.triggerANewIncommingWish();
+    }
+	
     if (this.m_tree !== null)
 		this.m_tree.handleInputs();
 };
@@ -67,13 +81,26 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
 WishflowerPlayActivity.prototype.implementGameLogic = function ()
 {
 	this.m_flow.implementGameLogic();
+
+	this.m_ladybugNewWish.implementGameLogic();
+
+	if (this.m_ladybugNewWish.isPoligonPathFinished() === true)
+    {
+    	this.m_ladybugNewWish.endUsingPoligonPath();   
+        this.m_ladybugNewWish.fadeOutScaleAndAlpha(25 * 4);
+    }
+
+    if (this.m_ladybugNewWish.isFadeOutFinished() === true)
+    {
+    	this.m_ladybugNewWish.stopFadeOut();
+    }
 };
 
 WishflowerPlayActivity.prototype.render = function ()
 {
-	this.m_background.render();
-
 	this.m_flow.render();
+
+	this.m_ladybugNewWish.render();
 
 	this.renderControls();
 };
@@ -92,4 +119,9 @@ WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
     this.m_btnBack._visible = false;
     this.m_btnBack._disable = true;
+};
+
+WishflowerPlayActivity.prototype.triggerANewIncommingWish = function ()
+{
+	this.m_ladybugNewWish.startNewWishAnimation(this.m_background, this.m_tree, "<>2");
 };
