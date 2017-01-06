@@ -13,7 +13,8 @@ WishflowerImageFilterTestActivity.prototype.initialize = function ()
 {
     console.log("WishflowerImageFilterTestActivity");
 
-    this.m_background_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
+    // NOTE: we must take original bitmap because all bitmaps has a previous BitmapFiler applied at wishFlowerController.
+    this.m_background_img = this.m_viewParent.getBitmapManagerInstance().getOriginalImageByName('ctree_leave.png');
 
     var bitmapFilter = new BitmapFilter();
     this.m_backgroundFiltered_img = this.m_viewParent.getBitmapManagerInstance().applyFilterToImage(
