@@ -428,7 +428,7 @@ function TreeNode()
         nodeItem.m_maxWidth = 3;
         nodeItem.m_maxHeight = 40;
 		nodeItem.m_pertAngle = 20;
-        nodeItem.m_fadingStatus = TreeNode.C_FADING_IN;
+        nodeItem.m_fadingStatus = TreeNode.C_FADING_STOP;
 	
         return nodeItem;
     };

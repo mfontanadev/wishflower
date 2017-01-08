@@ -1,6 +1,7 @@
 Background.m_id = 10001001;
 
 Background.C_HORIZON = 0.78;
+Background.C_BORDER_WIDTH = 8;
 
 function Background() 
 {
@@ -26,7 +27,7 @@ function Background()
         this.m_background_reference = this.m_viewParent.getBitmapManagerInstance().getImageByName('treereference.png');
 
         this.createCanvasForBackground();
-        this.compositeBackground(this.m_bitmapManagerItem.m_originalBitmap.getContext('2d'));
+        this.compositeAllLayers(this.m_bitmapManagerItem.m_originalBitmap.getContext('2d'));
         this.applyFilter(this.m_bitmapFilter.noiseAndTransparentFilter);
     };
 
@@ -89,6 +90,13 @@ function Background()
         return this.m_bitmapManagerItem.m_originalBitmap;
     };
 
+    Background.prototype.compositeAllLayers = function (_context) 
+    {
+        this.compositeBackground(_context);
+        this.compositeFence(_context);
+        this.compositeBorder(_context);        
+    }
+
     Background.prototype.compositeBackground = function (_context) 
     {
         var h = _context.canvas.height;
@@ -115,20 +123,41 @@ function Background()
         grGreen.addColorStop(1, 'rgba(45,128,102,1)');
         _context.fillStyle = grGreen;
         _context.fillRect(0, 0, w, h);
+    };
 
-        var borderWidth = 8;
+    Background.prototype.compositeFence = function (_context) 
+    {
+        var w = _context.canvas.width;
+        var horizonPy =  this.getHorizonPosY();
+
+        var paramFenceHeight = 10;
+
+        for (var i = Background.C_BORDER_WIDTH; i < w - Background.C_BORDER_WIDTH; i+= 10) 
+        {
+            pert = chRandomWithNeg(1);
+            renderLineWidth(null, _context, i, horizonPy + paramFenceHeight, i, horizonPy - paramFenceHeight, "grey", 0.9 + (pert / 10), 1);
+            renderLineWidth(null, _context, i - 5, (horizonPy + paramFenceHeight / 3) + pert, i + 5, (horizonPy + paramFenceHeight / 3) + pert, "grey", 0.9 + (pert / 10), 1);
+            renderLineWidth(null, _context, i - 5, (horizonPy - paramFenceHeight / 4) + pert, i + 5, (horizonPy - paramFenceHeight / 4) + pert, "grey", 0.9 + (pert / 10), 1);
+        }
+    }    
+
+    Background.prototype.compositeBorder = function (_context) 
+    {
+        var h = _context.canvas.height;
+        var w = _context.canvas.width;
+
         var borderColor = 'rgba(255,255,255,1)';
 
-        renderRectangleFilled(null, _context, 0, 0, w, borderWidth, borderColor);
-        renderRectangleFilled(null, _context, 0, h - borderWidth, w, h, borderColor);
-        renderRectangleFilled(null, _context, 0, 0, borderWidth, h, borderColor);
-        renderRectangleFilled(null, _context, w - borderWidth, 0, w, h, borderColor);
+        renderRectangleFilled(null, _context, 0, 0, w, Background.C_BORDER_WIDTH, borderColor);
+        renderRectangleFilled(null, _context, 0, h - Background.C_BORDER_WIDTH, w, h, borderColor);
+        renderRectangleFilled(null, _context, 0, 0, Background.C_BORDER_WIDTH, h, borderColor);
+        renderRectangleFilled(null, _context, w - Background.C_BORDER_WIDTH, 0, w, h, borderColor);
 
-        renderCircle(null, _context, 0, 0, borderWidth * 2.5, borderColor);
-        renderCircle(null, _context, 0 + w, 0, borderWidth * 2.5, borderColor);
-        renderCircle(null, _context, 0, 0 + h, borderWidth * 2.5, borderColor);
-        renderCircle(null, _context, 0 + w, 0 + h, borderWidth * 2.5, borderColor);
-    };
+        renderCircle(null, _context, 0, 0, Background.C_BORDER_WIDTH * 2.5, borderColor);
+        renderCircle(null, _context, 0 + w, 0, Background.C_BORDER_WIDTH * 2.5, borderColor);
+        renderCircle(null, _context, 0, 0 + h, Background.C_BORDER_WIDTH * 2.5, borderColor);
+        renderCircle(null, _context, 0 + w, 0 + h, Background.C_BORDER_WIDTH * 2.5, borderColor);
+    }
 
     Background.prototype.applyFilter = function (_filter) 
     {
