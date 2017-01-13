@@ -25,10 +25,12 @@ function WishflowerServiceMock()
 	res += '{ "_id" : "007", "keyPath" : "<<2", "wish" : "<<2w8" }';
 	res += ']';
 
+	// Clear wish field.
 	this.m_wishes = JSON.parse(res);
 	for (var i = 0; i < this.m_wishes.length; i++) 
 	{
-		this.m_wishes[i].wish = '';
+		if (i !== 1)
+			this.m_wishes[i].wish = '';
 	}
 }
 
@@ -39,13 +41,13 @@ WishflowerServiceMock.prototype.wishflowerGetAll = function (_callback)
 	_callback(res);
 }
 
-WishflowerServiceMock.prototype.wishflowerGetById = function (_id, _callback)
+WishflowerServiceMock.prototype.wishflowerGetById = function (_keyPath, _callback)
 {
 	var res = "";
 
 	for (var i = 0; i < this.m_wishes.length; i++) 
 	{
-		if (this.m_wishes[i].keyPath === _id)
+		if (this.m_wishes[i].keyPath === _keyPath)
 		{
 			res = '[' + JSON.stringify(this.m_wishes[i]) + ']'; 
 		}
@@ -54,13 +56,13 @@ WishflowerServiceMock.prototype.wishflowerGetById = function (_id, _callback)
 	_callback(res);
 }
 
-WishflowerServiceMock.prototype.wishflowerAddById = function (_id, _wish, _callback)
+WishflowerServiceMock.prototype.wishflowerAddById = function (_keyPath, _wish, _callback)
 {
 	var res = "";
 
 	for (var i = 0; i < this.m_wishes.length; i++) 
 	{
-		if (this.m_wishes[i].keyPath === _id)
+		if (this.m_wishes[i].keyPath === _keyPath)
 		{
 			this.m_wishes[i].wish = _wish; 
 			res = '[' + JSON.stringify(this.m_wishes[i]) + ']'; 

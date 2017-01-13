@@ -87,7 +87,7 @@ function PlayFlow()
         return;
         
         /*
-        if (this.m_activity.m_tree.isTreeBranchesStillGrowing() === false)
+        if (this.m_activity.m_tree.areTreeBranchesStillGrowing() === false)
         {
             // Make a path from root to the middle of tree's first branch.
             var trunkNode = this.m_activity.m_tree.getFirstBranch();

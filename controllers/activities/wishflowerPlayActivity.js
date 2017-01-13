@@ -70,8 +70,14 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
         
-        //
         this.triggerANewIncommingWish();
+    }
+
+	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true)
+    {
+        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_SPACE);
+        
+        this.testUpdateTreeData();
     }
 	
     if (this.m_tree !== null)
@@ -125,3 +131,29 @@ WishflowerPlayActivity.prototype.triggerANewIncommingWish = function ()
 {
 	this.m_ladybugNewWish.startNewWishAnimation(this.m_background, this.m_tree, "<>2");
 };
+
+WishflowerPlayActivity.prototype.testUpdateTreeData = function ()
+{
+	callWebService
+	(
+		'GET',
+		'services/wishflowerGetAll', 
+	   	function(_errorCode)
+	   	{
+	   		msglog("CallWebService error:" + _errorCode);
+	   	},
+	   	function(_data)
+	   	{
+	   		//m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
+	  		
+	   		var arrWishes = JSON.parse(_data);
+	  		WishflowerPlayActivity.self.m_tree.updateWishes(arrWishes);
+
+	  		//setTimeout(updateTreeData, 5 * 1000); 		
+	  		console.log(WishflowerPlayActivity.self.m_tree.areCreatedAllLeaves());
+	   		console.log(_data);
+	   	}
+	);
+};
+
+

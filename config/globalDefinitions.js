@@ -44,7 +44,8 @@ var global_bitmap_definition =
     'polygonpath_test_grass.png',
     'callout_main_1.png',
     'callout_main_2.png',
-    'treereference.png'
+    'treereference.png',
+    'ctree_leave_closed.png'
 ];
 
 function Globals() 

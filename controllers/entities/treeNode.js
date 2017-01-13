@@ -16,6 +16,7 @@ TreeNode.composedLeaveImg = null;
 TreeNode.rootImg = null;
 TreeNode.branchImg = null;
 TreeNode.leaveImg = null;
+TreeNode.leaveClosedImg = null;
 TreeNode.resource = null;
 
 TreeNode.m_wishes = null;
@@ -27,16 +28,9 @@ TreeNode.C_TREE_STATUS_RENDERING = 2;
 TreeNode.m_treeCursorHash = '';
 TreeNode.m_treeCursor = null;
 TreeNode.m_treeGrowedBranchs = 0;
+TreeNode.m_treeGrowedLeaves = 0;
 
-// Resultados del benchmark (generation = 13; leaves = 6, totBranch = 4096, totLeaves = 24576):
-// Funcion ImplemtLogic = tarda 12 milis en su pico de creación, luego en recorrer tarda 2 milis.
-// Funcion Render (con circulos) = tarda 400 milis con todas las hojas.
-//                               = tarda 330 milis solo hojas.
-//                               = tarda 30 milis solo ramas.
-//                               = tarda 30 milis dibujar 3072 hijas.
-// Funcion Render (con img) = tarda 130 milis solo hojas.
-
-// Funcion Recalular siempre activa hace que ImplemtLogic = tarda 25 milis ( para 1024 y 6144 hojas)
+TreeNode.m_totalLeaves = 0;
 
 function TreeNode() 
 {
@@ -134,6 +128,7 @@ function TreeNode()
         TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root4.png');
         TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
+        TreeNode.leaveClosedImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave_closed.png');
     };
 
     TreeNode.prototype.handleInputs = function () 
@@ -213,6 +208,14 @@ function TreeNode()
             {
                 this.implementWishflowerFade();
             }
+
+            // Optimization to know if the tree is still growing (only leaves)
+            // Each time a leave reaches its max height add one to the global variable m_treeGrowedLeaves.
+            // Then we can checkj this number against calculated branches in the tree.                
+            if (this.isLeaveStillGrowing() === false)
+            {
+                TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
+            }
         }
     };
 
@@ -276,25 +279,7 @@ function TreeNode()
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                
-                /*
-                branch = this.createBranchNode();
-                branch.m_hash = '<';
-                branch.setAngle(10 * 1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.72;
-                branch.m_maxWidth = this.m_maxWidth - 2;
-                this.addChild(branch);
-
-                branch = this.createBranchNode();
-                branch.m_hash = '>';
-                branch.setAngle(10 * -1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.72;
-                branch.m_maxWidth = this.m_maxWidth - 2;
-                this.addChild(branch);
-                */
-				
+			
 				branch.m_pertAngle = branch.m_pertAngle * 2;
 				this.incrementGenerationPosition();
 
@@ -312,13 +297,6 @@ function TreeNode()
                 var noiseangle = 0;
             	for (var i = 0; i < TreeNode.C_GENERATION_LEAVE_QTTY; i++) 
             	{
-	                /*var leave = this.createLeaveNode();
-                    noiseangle = chRandom(10);
-                    leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
-	                leave.setAngle( leaveAngle + noiseangle);
-	                leave.setHeightScalar(1);
-	                this.addChild(leave);*/
-                    
                     var leave = this.createLeaveNode();
                     leave.m_hash = i + 1;
 
@@ -388,6 +366,11 @@ function TreeNode()
         return (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH && this.m_height > 0 && this.m_height < this.m_maxHeight);
     };
 
+    TreeNode.prototype.isLeaveStillGrowing = function ()
+    {
+        return (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE && this.m_height > 0 && this.m_height < this.m_maxHeight);
+    };
+
     TreeNode.prototype.createRootNode = function ()
     {
         var nodeItem = this.createNodeWithDefaults();
@@ -428,8 +411,10 @@ function TreeNode()
         nodeItem.m_maxWidth = 3;
         nodeItem.m_maxHeight = 40;
 		nodeItem.m_pertAngle = 20;
-        nodeItem.m_fadingStatus = TreeNode.C_FADING_IN;
+        nodeItem.m_fadingStatus = TreeNode.C_FADING_STOP;
 	
+        TreeNode.m_totalLeaves = TreeNode.m_totalLeaves + 1;
+
         return nodeItem;
     };
 
@@ -541,10 +526,21 @@ function TreeNode()
         if (this.isNodeVisibleByCursor() === false)
             imgAlpha = 0.2;
 
-        drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
-                                            this.m_viewParent.m_canvasEx.m_context, 
-                                            TreeNode.leaveImg, 
-                                            this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        if (this.m_wish !== '')
+        {
+            drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                                this.m_viewParent.m_canvasEx.m_context, 
+                                                TreeNode.leaveImg, 
+                                                this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        }
+        else
+        {
+            drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                                this.m_viewParent.m_canvasEx.m_context, 
+                                                TreeNode.leaveClosedImg, 
+                                                this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        }
+
         //drawImageRotationTransparentScaled(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
     };
 
@@ -830,8 +826,7 @@ function TreeNode()
             function(_item)
             {
                 var previosWish = _item.m_wish; 
-                _item.m_wish = '';
-
+                
                 for (var i = 0; i < TreeNode.m_wishes.length; i++) 
                 {
                     if (_item.getHash() === TreeNode.m_wishes[i].keyPath)
@@ -979,9 +974,19 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.isTreeBranchesStillGrowing = function () 
+    TreeNode.prototype.areTreeBranchesStillGrowing = function () 
     {
         return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
+    };
+
+    TreeNode.prototype.areTreeLeabesStillGrowing = function () 
+    {
+        return TreeNode.m_treeGrowedLeaves !== this.totalLeaves();
+    };
+
+    TreeNode.prototype.areCreatedAllLeaves = function () 
+    {
+        return TreeNode.m_totalLeaves === this.totalFinalBranches() * TreeNode.C_GENERATION_LEAVE_QTTY;
     };
 
     TreeNode.prototype.getFirstBranch = function () 

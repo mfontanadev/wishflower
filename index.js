@@ -66,5 +66,5 @@ else
 	);
 }
 
-
+// Test initial wish update.
 
