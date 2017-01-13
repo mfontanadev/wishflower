@@ -857,7 +857,7 @@ function Ladybug()
 
     Ladybug.prototype.startNewWishAnimation = function (_background, _tree, _keyPath) 
     {
-       var targetNode = _tree.findNodeByKeyPath(_keyPath);
+        var targetNode = _tree.findNodeByKeyPath(_keyPath);
 
         console.log(targetNode);
         if (targetNode === null)
@@ -976,7 +976,8 @@ function Ladybug()
             recY2 = y2;
         }
 
-        poligonPath.addSegmentExtraParams(recX2, recY2, ladybugSize, ladybugAlpha, _xTarget, _yTarget, ladybugSize, ladybugAlpha);
+        var ladybugFinalSize = this.getScaleToSpecificWidth(targetNode.m_maxWidth);
+        poligonPath.addSegmentExtraParams(recX2, recY2, ladybugSize, ladybugAlpha, _xTarget, _yTarget, ladybugFinalSize, ladybugAlpha);
 
         this.setPoligonPath(poligonPath);
         this.startPoligonFlying();
