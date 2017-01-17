@@ -1,5 +1,4 @@
 var reqKeyPair = null;
-var reqFlower = null;
 var protocolMessages = null;
 var reqChLib = null;
 
@@ -8,7 +7,6 @@ if (typeof require != 'undefined')
 	reqProtocolMessages = require(__basePath + "/controllers/server/protocolMessages.js");
 
 	reqKeyPair = require(__basePath + "/controllers/entities/keypair.js");
-	reqFlower = require(__basePath + "/controllers/entities/flower.js");
     reqChLib = require(__basePath + "/lib/chel-dist/js/chlib.js");
 }
 
@@ -278,18 +276,10 @@ ServerOrchesta.prototype.sendMessageToSelectedInstruments = function (_owner, _i
 /// HELPERS
 ServerOrchesta.prototype.addInstrument = function (_id, _name, _type, _subType)
 {
-	tmpInstruItem = new reqFlower();
-	tmpInstruItem.initWithFull(_id, _name, _type, _subType);
-	this.m_instruments.push(tmpInstruItem);
-	tmpInstruItem.log('Addin instrument:');
 }
 
 ServerOrchesta.prototype.addInstrumentState = function (_id, _name, _type, _subType, _state)
 {
-	tmpInstruItem = new reqFlower();
-	tmpInstruItem.initWithFullParams(_id, _name, _type, _subType, _state);
-	this.m_instruments.push(tmpInstruItem);
-	tmpInstruItem.log('Addin instrument:');
 }
 
 ServerOrchesta.prototype.getInstruments = function ()

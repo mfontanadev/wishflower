@@ -8,16 +8,8 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_viewParent = _viewParent; 
 
 	this.m_tree = null;
-	this.m_ladybug = null;
-	this.m_poligonPath = null;
-	this.m_flow = null;
 
-	this.m_btnBack = null;
-
-	this.m_background = null;
-
-	this.m_ladybugNewWish = null;
-
+	this.m_btnInfo = null;
 };
 
 // Call this method once, reinitialization of values must be 
@@ -26,16 +18,11 @@ WishflowerPlayActivity.prototype.initialize = function ()
 {
 	console.log("WishflowerPlayActivity");
 
-	this.m_flow = new PlayFlow();
-	this.m_flow.init(this.m_viewParent, this);
-	this.m_flow.setState(PlayFlow.C_PLAYFLOW_APPSTATE_INITIALIZING);
-
-	this.m_background = new Background();
-	this.m_background.init(this.m_viewParent);
-
-	this.m_ladybugNewWish = new Ladybug();
-    this.m_ladybugNewWish.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
-    this.m_ladybugNewWish.setVisible(false);
+    this.m_tree = new TreeNode();
+    this.m_tree.initWithRootAndBranch(this.m_viewParent);
+    this.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height * (8.5/10));
+    this.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
+    this.m_tree.reset(); 
 
 	this.createControls();
 };
@@ -46,31 +33,25 @@ WishflowerPlayActivity.prototype.createControls = function ()
 	var tw = tmpCanvas.width;
 	var th = tmpCanvas.height;
 
-	this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
-    this.m_btnBack._fontSize = 12;
-	this.m_btnBack._onClick = this.btnBack_controller;
+	this.m_btnInfo = new CanvasControl();
+    this.m_btnInfo.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
+    this.m_btnInfo._fontSize = 12;
+	this.m_btnInfo._onClick = this.btnInfo_controller;
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = false;
+	this.m_btnInfo._visible = false;
+	this.m_btnInfo._disable = false;
 };
 
 WishflowerPlayActivity.prototype.handleInputs = function ()
 {
-    if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
-    {
-        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
-        this.btnBack_controller(null, null);   
-    }
-	
 	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
         
-        this.triggerANewIncommingWish();
+        this.triggerAddENewWish();
     }
 
 	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true)
@@ -86,50 +67,33 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
 
 WishflowerPlayActivity.prototype.implementGameLogic = function ()
 {
-	this.m_flow.implementGameLogic();
-
-	this.m_ladybugNewWish.implementGameLogic();
-
-	if (this.m_ladybugNewWish.isPoligonPathFinished() === true)
-    {
-    	this.m_ladybugNewWish.endUsingPoligonPath();   
-        this.m_ladybugNewWish.fadeOutScaleAndAlpha(25 * 4);
-    }
-
-    if (this.m_ladybugNewWish.isFadeOutFinished() === true)
-    {
-    	this.m_ladybugNewWish.stopFadeOut();
-    }
+	this.m_tree.implementGameLogic();
 };
 
 WishflowerPlayActivity.prototype.render = function ()
 {
-	this.m_flow.render();
-
-	this.m_ladybugNewWish.render();
+	this.m_tree.render();
 
 	this.renderControls();
 };
 
 WishflowerPlayActivity.prototype.renderControls = function ()
 {
-	this.m_btnBack.render();
+	this.m_btnInfo.render();
 };
 
-WishflowerPlayActivity.prototype.btnBack_controller = function (_e, _sender)
+WishflowerPlayActivity.prototype.btnInfo_controller = function (_e, _sender)
 {
-    WishflowerPlayActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_MENU);    
 };
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
-    this.m_btnBack._visible = false;
-    this.m_btnBack._disable = true;
+    this.m_btnInfo._visible = false;
+    this.m_btnInfo._disable = true;
 };
 
-WishflowerPlayActivity.prototype.triggerANewIncommingWish = function ()
+WishflowerPlayActivity.prototype.triggerAddENewWish = function ()
 {
-	this.m_ladybugNewWish.startNewWishAnimation(this.m_background, this.m_tree, "<>2");
 };
 
 WishflowerPlayActivity.prototype.testUpdateTreeData = function ()
@@ -144,8 +108,6 @@ WishflowerPlayActivity.prototype.testUpdateTreeData = function ()
 	   	},
 	   	function(_data)
 	   	{
-	   		//m_treeNode.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
-	  		
 	   		var arrWishes = JSON.parse(_data);
 	  		WishflowerPlayActivity.self.m_tree.updateWishes(arrWishes);
 
