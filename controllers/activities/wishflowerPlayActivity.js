@@ -7,6 +7,7 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_id = _id;
 	this.m_viewParent = _viewParent; 
 
+	this.m_garden = null;
 	this.m_tree = null;
 
 	this.m_btnInfo = null;
@@ -23,6 +24,9 @@ WishflowerPlayActivity.prototype.initialize = function ()
     this.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height * (8.5/10));
     this.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
     this.m_tree.reset(); 
+
+    this.m_garden = new Garden();
+    this.m_garden.initWithViewAndTree(this.m_viewParent, this.m_tree);
 
 	this.createControls();
 };
@@ -43,6 +47,8 @@ WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
 	this.m_btnInfo._visible = false;
 	this.m_btnInfo._disable = false;
+
+	this.m_garden.starUpdateProcess();
 };
 
 WishflowerPlayActivity.prototype.handleInputs = function ()
@@ -51,23 +57,24 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
         
-        this.triggerAddENewWish();
+		this.m_garden.addWish("Mother Nature");
     }
 
 	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_SPACE);
-        
-        this.testUpdateTreeData();
+
+		this.m_garden.logCurrentTree();
     }
 	
-    if (this.m_tree !== null)
-		this.m_tree.handleInputs();
+	this.m_garden.handleInputs();
+	this.m_tree.handleInputs();
 };
 
 WishflowerPlayActivity.prototype.implementGameLogic = function ()
 {
 	this.m_tree.implementGameLogic();
+	this.m_garden.implementGameLogic();
 };
 
 WishflowerPlayActivity.prototype.render = function ()
@@ -92,30 +99,5 @@ WishflowerPlayActivity.prototype.onLeaveActivity = function ()
     this.m_btnInfo._disable = true;
 };
 
-WishflowerPlayActivity.prototype.triggerAddENewWish = function ()
-{
-};
-
-WishflowerPlayActivity.prototype.testUpdateTreeData = function ()
-{
-	callWebService
-	(
-		'GET',
-		'services/wishflowerGetAll', 
-	   	function(_errorCode)
-	   	{
-	   		msglog("CallWebService error:" + _errorCode);
-	   	},
-	   	function(_data)
-	   	{
-	   		var arrWishes = JSON.parse(_data);
-	  		WishflowerPlayActivity.self.m_tree.updateWishes(arrWishes);
-
-	  		//setTimeout(updateTreeData, 5 * 1000); 		
-	  		console.log(WishflowerPlayActivity.self.m_tree.areCreatedAllLeaves());
-	   		console.log(_data);
-	   	}
-	);
-};
 
 

@@ -45,16 +45,7 @@ dbBaseTest.open
 var io = require('socket.io').listen(app.listen(port));
 console.log("SOCKETIO: listening on port " + port );
 
-if (typeof io !== 'undefined')
-{
-	// Start socket server.
-	var reqServer = require("./controllers/server/serverOrchesta.js");
-	var reqServerInstance = new reqServer();  
-	reqServerInstance.initWithAppPortIO(app, port, io);
-	reqServerInstance.start(io);
-	console.log("SERVER: started");
-}
-else
+if (typeof io === 'undefined')
 {
 	app.listen
 	(
@@ -65,6 +56,4 @@ else
 		}
 	);
 }
-
-// Test initial wish update.
 

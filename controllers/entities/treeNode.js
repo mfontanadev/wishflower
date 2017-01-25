@@ -461,7 +461,7 @@ function TreeNode()
             }
             else if (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH) 
             {
-                this.renderBranchImage();                    
+                this.renderBranch();                    
             }
             else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE) 
             {
@@ -493,9 +493,11 @@ function TreeNode()
                         this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
 		
         if (this.m_wish !== '')
+        {
             renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
                                 this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x2, this.m_y2, 4, 'green');
+                                this.m_x2, this.m_y2, 20 * this.m_fadingScalar, 'green');
+        }
     };
 
     TreeNode.prototype.renderRootImage = function () 
@@ -537,7 +539,7 @@ function TreeNode()
         {
             drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
                                                 this.m_viewParent.m_canvasEx.m_context, 
-                                                TreeNode.leaveClosedImg, 
+                                                TreeNode.leaveImg, 
                                                 this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
         }
 
@@ -848,6 +850,11 @@ function TreeNode()
             }
         );
     };
+
+    TreeNode.prototype.getWishes = function () 
+    {
+        return TreeNode.m_wishes;
+    }
 
     TreeNode.prototype.getCursorHashFormatted = function () 
     {
