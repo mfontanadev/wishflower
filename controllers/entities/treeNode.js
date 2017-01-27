@@ -970,7 +970,7 @@ function TreeNode()
         return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
     };
 
-    TreeNode.prototype.areTreeLeabesStillGrowing = function () 
+    TreeNode.prototype.areTreeLeavesStillGrowing = function ()
     {
         return TreeNode.m_treeGrowedLeaves !== this.totalLeaves();
     };

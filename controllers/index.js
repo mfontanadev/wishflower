@@ -27,7 +27,10 @@ module.exports = function(app)
 	app.get ('/controllers/entities/garden.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/garden.js');});
 
-	// SERVICES
+    app.get ('/controllers/entities/ladybug.js',
+        function (req, res) {res.sendFile(__dirname + '/entities/ladybug.js');});
+
+    // SERVICES
 	require('./services/wishflower.Route.js')(app);
 
 	console.log("   controllers/index.js: OK");

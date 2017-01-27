@@ -23,7 +23,8 @@ var global_bitmap_definition =
     'ctree_root.png',
     'ctree_branch.png',
     'ctree_leave.png',
-    'ctree_leave_closed.png'
+    'ctree_leave_closed.png',
+    'ladybug.png'
 ];
 
 function Globals() 

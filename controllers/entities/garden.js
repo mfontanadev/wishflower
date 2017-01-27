@@ -59,9 +59,11 @@ function Garden()
             function(_data)
             {
                 var arrWishes = JSON.parse(_data);
-                Garden.self.m_currentTree.updateWishes(arrWishes);
 
-                //console.log(_data);
+                if (Garden.self.m_currentTree.areCreatedAllLeaves() === true)
+                {
+                    Garden.self.m_currentTree.updateWishes(arrWishes);
+                }
                 
                 Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY); 
              }
