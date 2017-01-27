@@ -10,8 +10,9 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_garden = null;
 	this.m_tree = null;
 
-	this.m_btnInfo = null;
-};
+	this.m_inputWish = null;
+	this.m_btnSendWish = null;
+}
 
 // Call this method once, reinitialization of values must be 
 // performed using reset() function.
@@ -34,36 +35,33 @@ WishflowerPlayActivity.prototype.initialize = function ()
 WishflowerPlayActivity.prototype.createControls = function ()
 {
 	var tmpCanvas = this.m_viewParent.m_canvasEx;
-	var tw = tmpCanvas.width;
-	var th = tmpCanvas.height;
+	var tw = tmpCanvas.m_canvas.width;
+	var th = tmpCanvas.m_canvas.height;
 
-	this.m_btnInfo = new CanvasControl();
-    this.m_btnInfo.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
-    this.m_btnInfo._fontSize = 12;
-	this.m_btnInfo._onClick = this.btnInfo_controller;
+	this.m_inputWish = new CanvasControl();
+    this.m_inputWish.initInputStyle(tmpCanvas, tw / 2 - 115, th * (8.5/10) + 5, 160, 25, "");
+    this.m_inputWish._fontSize = 12;
+
+	this.m_btnSendWish = new CanvasControl();
+    this.m_btnSendWish.initButtonStyle(tmpCanvas, tw / 2 + 55, th * (8.5/10) + 5, 60, 25, "SEND");
+    this.m_btnSendWish._fontSize = 12;
+	this.m_btnSendWish._onClick = this.btnSendWish_controller;
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnInfo._visible = false;
-	this.m_btnInfo._disable = false;
+	this.m_btnSendWish._visible = true;
+	this.m_btnSendWish._disable = true;
 
 	this.m_garden.starUpdateProcess();
 };
 
 WishflowerPlayActivity.prototype.handleInputs = function ()
 {
-	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
-    {
-        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
-        
-		this.m_garden.addWish("Mother Nature");
-    }
-
-	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true)
+	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SPACE) === true &&
+		this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_SPACE);
-
 		this.m_garden.logCurrentTree();
     }
 	
@@ -75,6 +73,7 @@ WishflowerPlayActivity.prototype.implementGameLogic = function ()
 {
 	this.m_tree.implementGameLogic();
 	this.m_garden.implementGameLogic();
+
 };
 
 WishflowerPlayActivity.prototype.render = function ()
@@ -86,17 +85,20 @@ WishflowerPlayActivity.prototype.render = function ()
 
 WishflowerPlayActivity.prototype.renderControls = function ()
 {
-	this.m_btnInfo.render();
+	this.m_btnSendWish.render();
+	this.m_inputWish.render();
 };
 
-WishflowerPlayActivity.prototype.btnInfo_controller = function (_e, _sender)
+WishflowerPlayActivity.prototype.btnSendWish_controller = function (_e, _sender)
 {
+	WishflowerPlayActivity.self.m_garden.addWish(WishflowerPlayActivity.self.m_inputWish.getText());
+	WishflowerPlayActivity.self.m_inputWish.setText("");
 };
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
-    this.m_btnInfo._visible = false;
-    this.m_btnInfo._disable = true;
+    this.m_btnSendWish._visible = false;
+    this.m_btnSendWish._disable = true;
 };
 
 

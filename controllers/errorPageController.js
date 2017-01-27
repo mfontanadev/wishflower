@@ -1,51 +1,35 @@
-// Graphics
-var m_canvas = null;
-var m_canvasWidth = 0;
-var m_canvasHeight = 0;
-var m_context = null;
-var m_textArea = null;
-var m_scaleX = 0;
-var m_scaleY = 0;			
+var viewMngr = null;
+var lblInfoControl = null;
 
 // ******************************************************************
-// Entry point
+// Create and init HTML page helper objects.
 // ******************************************************************
-	
-window.onload = function() 
+window.onload = function()
 {
-	// Init context.
-	m_canvas = document.getElementById('idCanvas');
-	m_context = m_canvas.getContext('2d');
-	m_textArea = document.getElementById('mytextarea_id');
-					
-	initResizing();
-	initializeControls();
+	// Create main view helper.
+	viewMngr = new ViewManager(document, window);
+	viewMngr.initCanvasById('idCanvas', false);
+	viewMngr.enableProgressBarWhenLoadingResources();
 
-	startApp();
-
-	render(m_canvas, m_context);
-};
-
-function initializeControls() 
-{
-	tw = m_canvas.width;
-	th = m_canvas.height;
-	bw = 100;
-
-	lblInfoControl = new CanvasControl();
-	lblInfoControl.initLabelStyle(/*usar canvasEs*/, getCX(tw, bw * 3), (th / 2) - 30, bw * 3, 30, "Wrong credentials.");
-	lblInfoControl._fontSize = 14;
-	lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_RED);
-	lblInfoControl._visible = true;
+	// Load all resources and trigger (loaded or not) aplication setup. 
+	viewMngr.performFullResourcesLoad(this.appInitContext);
 }
 
-function startApp() 
+function appInitContext()
 {
-	lblInfoControl.render();
+	var tmpCanvas = viewMngr.m_canvasEx;
+	var tw = tmpCanvas.m_canvas.width;
+	var th = tmpCanvas.m_canvas.height;
+
+	this.lblInfoControl = new CanvasControl();
+    this.lblInfoControl.initLabelStyle(tmpCanvas, tw / 2 - 200, th / 2, 400, 30, "Error: ");
+   	this.lblInfoControl.setTheme(CanvasControl.C_THEME_TYPE_RED);
+    this.lblInfoControl._fontSize = 18;
+
+    this.render();
 }
 
 function render()
 {
-   	m_context.clearRect(0, 0, m_canvas.width, m_canvas.height);
-	lblInfoControl.render();
+	this.lblInfoControl.render();
 }

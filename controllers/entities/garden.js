@@ -89,10 +89,10 @@ function Garden()
     Garden.prototype.logWishes = function () 
     {   
         console.log(Garden.self.m_currentTree.getWishes());
-    }
+    };
 
     Garden.prototype.logCurrentTree = function () 
     {   
         console.log(Garden.self.m_currentTree.dump());
-    }
-};
+    };
+}

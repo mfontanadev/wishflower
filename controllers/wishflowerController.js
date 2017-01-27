@@ -37,7 +37,7 @@ window.onload = function()
 
 function appInitContext()
 {
-	viewMngr.getProgressBar()._visible = true;
+	viewMngr.getProgressBar()._visible = false;
 
 	msglog("--------------------------------appInitContext--------------------------------");
 	msglog("bitmap manager available:" + viewMngr.m_bitmapManager.m_managerAvailable);

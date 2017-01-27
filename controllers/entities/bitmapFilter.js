@@ -39,6 +39,7 @@ function BitmapFilter()
 	    var ctx = _bitmapManagerItem.m_canvas.getContext('2d'); 
 	    var imgData = ctx.getImageData(0, 0, imgWidth, imgHeight);
 	    var pix = imgData.data;
+        var i = 0;
 
 	    // Loop over each pixel and invert the color.
 	    for (var y = 0; y < imgHeight ; y++) 
@@ -64,6 +65,7 @@ function BitmapFilter()
 	    var ctx = _bitmapManagerItem.m_canvas.getContext('2d'); 
 	    var imgData = ctx.getImageData(0, 0, imgWidth, imgHeight);
 	    var pix = imgData.data;
+        var i = 0;
 
 		// Loop over each pixel and invert the color.
 		for (var y = 0; y < imgHeight ; y++) 
@@ -99,6 +101,10 @@ function BitmapFilter()
 	    var ctx = _bitmapManagerItem.m_canvas.getContext('2d'); 
 	    var imgData = ctx.getImageData(0, 0, imgWidth, imgHeight);
 	    var pix = imgData.data;
+        var dx = 0;
+        var dy = 0;
+        var id = 0;
+        var i = 0;
 
 		// Loop over each pixel and invert the color.
 		for (var y = 1; y < imgHeight - 1; y++) 
@@ -127,5 +133,5 @@ function BitmapFilter()
 		// Draw the ImageData at the given (x,y) coordinates.
 		ctx.putImageData(imgData, 0, 0);
 	};
-};
+}
 
