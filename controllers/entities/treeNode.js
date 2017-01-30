@@ -48,7 +48,7 @@ function TreeNode()
     this.m_angle = 0;
     this.m_angleAcum = 0;
 
-	this.m_arrGenerationPositions = new Array();
+	this.m_arrGenerationPositions = [];
 	this.m_generatorIndex = 0;
 
     this.m_hash = '';
@@ -61,11 +61,7 @@ function TreeNode()
     this.m_maxHeight = 0;
 
 	this.m_pertAngle = 0;
-    this.m_branchDir = -1;
 
-    this.m_composedLeaveImg = null;
-
-    this.m_scalarImageWidth = 0;
     this.m_scalarImageHeight = 0;
 
     this.m_fadingStatus = TreeNode.C_FADING_STOP;
@@ -107,7 +103,7 @@ function TreeNode()
 
     TreeNode.prototype.initLeaveImage = function () 
     {
-        var size = 32
+        var size = 32;
 
         TreeNode.composedLeaveImg = document.createElement("canvas");
         TreeNode.composedLeaveImg.width = TreeNode.composedLeaveImg.height = size << 1;
@@ -244,7 +240,7 @@ function TreeNode()
 
             this.m_fadingScalar = this.calculateFadingScalar();
         }
-    }
+    };
 
     TreeNode.prototype.calculateFadingScalar = function ()
     {
@@ -253,10 +249,10 @@ function TreeNode()
 
     TreeNode.prototype.validateAndAddANewChild = function ()
     {
+        var bAddBranch = false;
+
         if (this.m_level + 1 <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION)
         {
-            var bAddBranch = false;
-            
             bAddBranch = this.areWeReachedCurrentGenerationPosition();
 
             if (bAddBranch === true) 
@@ -287,7 +283,6 @@ function TreeNode()
         }
         else if (this.m_level === TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION)
         {
-            var bAddBranch = false;
             bAddBranch = this.areWeReachedCurrentGenerationPosition();
 
             if (bAddBranch === true) 
@@ -305,8 +300,7 @@ function TreeNode()
                     leave.setAngle( leaveAngle + noiseangle);
                     leave.setHeightScalar(1);
                     this.addChild(leave);
-            	};
-
+                }
                 this.incrementGenerationPosition();
             }
         }
@@ -438,7 +432,7 @@ function TreeNode()
         nodeItem.m_fadingCounter = 0;
         nodeItem.m_fadingScalar = TreeNode.C_FADING_MAX_VALUE;
         return nodeItem;
-    }
+    };
 
     TreeNode.prototype.render = function () 
     {
@@ -493,9 +487,11 @@ function TreeNode()
                         this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
 		
         if (this.m_wish !== '')
+        {
             renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
                                 this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x2, this.m_y2, 4, 'green');
+                                this.m_x2, this.m_y2, 20 * this.m_fadingScalar, 'green');
+        }
     };
 
     TreeNode.prototype.renderRootImage = function () 
@@ -669,7 +665,6 @@ function TreeNode()
         this.m_x2 = this.m_x1 + this.calculateTargetX(1);
         this.m_y2 = this.m_y1 - this.calculateTargetY(1);
 
-        //this.m_scalarImageWidth = this.calculateScalarImageWidth(this.m_width);
         this.m_scalarImageHeight = this.calculateScalarImageHeight();
 
         for (var i = 0; i < this.m_nodes.length; i++) {
@@ -677,15 +672,7 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.calculateScalarImageWidth = function (_w) 
-    {
-        var ro = this.m_height * _heightScalar;
-        var angle = 90 + this.getFinalAngle();
-
-        return cosOf(ro, angle);
-    };
-
-    TreeNode.prototype.calculateScalarImageHeight = function () 
+    TreeNode.prototype.calculateScalarImageHeight = function ()
     {
         var result = 0;
 
@@ -780,12 +767,12 @@ function TreeNode()
     TreeNode.prototype.totalFinalBranches = function () 
     {
         return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 2);
-    }
+    };
 
     TreeNode.prototype.totalBranches = function () 
     {
         return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 1) - 1;
-    }
+    };
 
     TreeNode.prototype.findNodeByKeyPath = function (_keyPath) 
     {
@@ -847,6 +834,11 @@ function TreeNode()
                 }
             }
         );
+    };
+
+    TreeNode.prototype.getWishes = function () 
+    {
+        return TreeNode.m_wishes;
     };
 
     TreeNode.prototype.getCursorHashFormatted = function () 
@@ -933,8 +925,7 @@ function TreeNode()
     	}
     	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
     	{
-			var tmpNodeToGo = null;
-			var tmpHashToGo = TreeNode.m_treeCursor.m_parent.getHash();
+			var tmpNodeToGo = TreeNode.m_treeCursor.m_parent.getHash();
 
 			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) - 1); 
 			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
@@ -979,7 +970,7 @@ function TreeNode()
         return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
     };
 
-    TreeNode.prototype.areTreeLeabesStillGrowing = function () 
+    TreeNode.prototype.areTreeLeavesStillGrowing = function ()
     {
         return TreeNode.m_treeGrowedLeaves !== this.totalLeaves();
     };
@@ -1001,4 +992,4 @@ function TreeNode()
 
         return result;
     };
-};
+}

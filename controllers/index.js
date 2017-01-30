@@ -1,7 +1,5 @@
 module.exports = function(app)
 {
-	// CONTEXTS
-
 	// ACTIVITIES
 	app.get ('/controllers/activities/wishflowerPlayActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerPlayActivity.js');});
@@ -37,19 +35,7 @@ module.exports = function(app)
 	app.get ('/controllers/wishflowerContext.js', 
 		function (req, res) {res.sendFile(__dirname + '/wishflowerContext.js');});
 
-	app.get ('/controllers/wishflowerContext.js', 
-		function (req, res) {res.sendFile(__dirname + '/wishflowerContext.js');});
-
-	app.get ('/controllers/entities/flower.js', 
-		function (req, res) {res.sendFile(__dirname + '/entities/flower.js');});
-
-	app.get ('/controllers/server/protocolMessages.js', 
-		function (req, res) {res.sendFile(__dirname + '/server/protocolMessages.js');});
-
 	// ENTITIES
-	app.get ('/controllers/entities/requestMessages.js', 
-		function (req, res) {res.sendFile(__dirname + '/entities/requestMessages.js');});
-
 	app.get ('/controllers/entities/treeNode.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/treeNode.js');});
 
@@ -67,18 +53,12 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/background.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/background.js');});
-
-	// HELPERS
-	app.get ('/controllers/entities/keypair.js', 
-		function (req, res) {res.sendFile(__dirname + '/entities/keypair.js');});
-
 	// FLOWS
 	app.get ('/controllers/entities/playFlow.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/playFlow.js');});
 
 	// SERVICES
 	require('./services/wishflower.Route.js')(app);
-	require('./services/errorPage.Route.js')(app);
 
 	console.log("   controllers/index.js: OK");
 }

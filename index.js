@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/public/assets/snd'));
 // Database 
 var mongodb = require('mongodb');
 var server = new mongodb.Server("127.0.0.1", 27017, {});
-var dbBaseTest = new mongodb.Db('baseTest', server, {})
+var dbBaseTest = new mongodb.Db('wishFlowerDb', server, {});
 dbBaseTest.open
 (
 	function (error, client) 
@@ -45,16 +45,7 @@ dbBaseTest.open
 var io = require('socket.io').listen(app.listen(port));
 console.log("SOCKETIO: listening on port " + port );
 
-if (typeof io !== 'undefined')
-{
-	// Start socket server.
-	var reqServer = require("./controllers/server/serverOrchesta.js");
-	var reqServerInstance = new reqServer();  
-	reqServerInstance.initWithAppPortIO(app, port, io);
-	reqServerInstance.start(io);
-	console.log("SERVER: started");
-}
-else
+if (typeof io === 'undefined')
 {
 	app.listen
 	(
@@ -65,6 +56,4 @@ else
 		}
 	);
 }
-
-// Test initial wish update.
 

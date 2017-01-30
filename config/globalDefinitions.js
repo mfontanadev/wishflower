@@ -1,5 +1,4 @@
-var C_APPLICATION_TITLE_AND_VERSION = 'Wishflower (v1.0.0)';
-var C_REDIRECT_HEROKU_ADDRESS = '192.168.34.137:5000';
+var C_APPLICATION_TITLE_AND_VERSION = 'Wishflower (v1.0.0) mdb';
 
 // Definition of states for the machine of finite states used in app main loop. 
 function MainLoopState() 
