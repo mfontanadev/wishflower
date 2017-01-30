@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/public/assets/snd'));
 // Database 
 var mongodb = require('mongodb');
 var server = new mongodb.Server("127.0.0.1", 27017, {});
-var dbBaseTest = new mongodb.Db('baseTest', server, {})
+var dbBaseTest = new mongodb.Db('wishFlowerDb', server, {});
 dbBaseTest.open
 (
 	function (error, client) 

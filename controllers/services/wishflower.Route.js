@@ -28,6 +28,39 @@ module.exports = function(app)
 			);
 		});
 
+	app.get ('/services/wishflowerGetByKeyPath', function (req, res)
+		{
+			var wish = req.query.keyPath;
+
+			objWishFlowerService.wishflowerGetByKeyPath
+			(
+				wish,
+				function(result) {res.send(result);}
+			);
+		});
+
+		app.get ('/services/wishflowerGetByWish', function (req, res)
+    {
+        var id = req.query.wish;
+
+        objWishFlowerService.wishflowerGetByWish
+        (
+            id,
+            function(result) {res.send(result);}
+        );
+    });
+
+    app.post ('/services/wishflowerAddWish', function (req, res)
+    {
+        var wish = req.query.wish;
+
+        objWishFlowerService.wishflowerAddWish
+        (
+            wish,
+            function(result) {res.send(result);}
+        );
+    });
+
 	app.post ('/services/wishflowerAddById', function (req, res) 
 		{
 			var id = req.query.id;
@@ -41,14 +74,18 @@ module.exports = function(app)
 			);
 		});
 
-	app.post ('/services/wishflowerAddWish', function (req, res) 
-		{
-			var wish = req.query.wish;
+			app.post ('/services/wishflowerAddByKeyPath', function (req, res)
+    {
+        var keyPath = req.query.keyPath;
+        var wish = req.query.wish;
 
-			objWishFlowerService.wishflowerAddWish
-			(
-				wish,
-				function(result) {res.send(result);}
-			);
-		});
+        objWishFlowerService.wishflowerAddByKeyPath
+        (
+            keyPath,
+            wish,
+            function(result) {res.send(result);}
+        );
+    });
+
+
 }

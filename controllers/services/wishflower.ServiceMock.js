@@ -2,12 +2,12 @@ if (typeof require != "undefined")
 {
 }
 
-function WishflowerServiceMock() 
-{ 
+function WishflowerServiceMock()
+{
 	this.m_servicesCount = 0;
 
 	var res = "";
-	res += '[';	
+	res += '[';
 	res += '{ "_id" : "000", "keyPath" : ">>1", "wish" : ">>1w1" }';
 	res += ',';
 	res += '{ "_id" : "001", "keyPath" : ">>2", "wish" : ">>2w2" }';
@@ -27,67 +27,113 @@ function WishflowerServiceMock()
 
 	// Clear wish field.
 	this.m_wishes = JSON.parse(res);
-	for (var i = 0; i < this.m_wishes.length; i++) 
+	for (var i = 0; i < this.m_wishes.length; i++)
 	{
 		if (i !== 1)
 			this.m_wishes[i].wish = '';
 	}
 }
 
-WishflowerServiceMock.prototype.wishflowerGetAll = function (_callback) 
+WishflowerServiceMock.prototype.wishflowerGetAll = function (_callback)
 {
 	var res = "";
 	res = JSON.stringify(this.m_wishes);
 	_callback(res);
 }
 
-WishflowerServiceMock.prototype.wishflowerGetById = function (_keyPath, _callback)
+WishflowerServiceMock.prototype.wishflowerGetById = function (_id, _callback)
 {
 	var res = "";
 
-	for (var i = 0; i < this.m_wishes.length; i++) 
+	for (var i = 0; i < this.m_wishes.length; i++)
 	{
-		if (this.m_wishes[i].keyPath === _keyPath)
+		if (this.m_wishes[i]._id === _id)
 		{
-			res = '[' + JSON.stringify(this.m_wishes[i]) + ']'; 
+			res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
 		}
 	}
 
 	_callback(res);
 }
 
-WishflowerServiceMock.prototype.wishflowerAddById = function (_keyPath, _wish, _callback)
+WishflowerServiceMock.prototype.wishflowerGetByKeyPath = function(_keyPath, _callback)
 {
-	var res = "";
+    var res = "";
 
-	for (var i = 0; i < this.m_wishes.length; i++) 
-	{
-		if (this.m_wishes[i].keyPath === _keyPath)
-		{
-			this.m_wishes[i].wish = _wish; 
-			res = '[' + JSON.stringify(this.m_wishes[i]) + ']'; 
-		}
-	}
+    for (var i = 0; i < this.m_wishes.length; i++)
+    {
+        if (this.m_wishes[i].keyPath === _keyPath)
+        {
+            res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
+        }
+    }
 
-	_callback(res);
+    _callback(res);
+}
+
+WishflowerServiceMock.prototype.wishflowerGetByWish = function(_wish, _callback)
+{
+    var res = "";
+
+    for (var i = 0; i < this.m_wishes.length; i++)
+    {
+        if (this.m_wishes[i].wish === _wish)
+        {
+            res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
+        }
+    }
+
+    _callback(res);
 }
 
 WishflowerServiceMock.prototype.wishflowerAddWish = function (_wish, _callback)
 {
+    var res = "";
+
+    // Find an empty wishflower to hold our incomming wish.
+    for (var i = 0; i < this.m_wishes.length; i++)
+    {
+        if (this.m_wishes[i].wish === '')
+        {
+            this.m_wishes[i].wish = _wish;
+            res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
+            break;
+        }
+    }
+
+    _callback(res);
+}
+
+WishflowerServiceMock.prototype.wishflowerAddById = function (_id, _wish, _callback)
+{
 	var res = "";
 
-	// Find an empty wishflower to hold our incomming wish.
-	for (var i = 0; i < this.m_wishes.length; i++) 
+	for (var i = 0; i < this.m_wishes.length; i++)
 	{
-		if (this.m_wishes[i].wish === '')
+		if (this.m_wishes[i]._id === _id)
 		{
-			this.m_wishes[i].wish = _wish; 
-			res = '[' + JSON.stringify(this.m_wishes[i]) + ']'; 
-			break;
+			this.m_wishes[i].wish = _wish;
+			res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
 		}
 	}
 
 	_callback(res);
+}
+
+WishflowerServiceMock.prototype.wishflowerAddByKeyPath = function (_keyPath, _wish, _callback)
+{
+    var res = "";
+
+    for (var i = 0; i < this.m_wishes.length; i++)
+    {
+        if (this.m_wishes[i].keyPath === _keyPath)
+        {
+            this.m_wishes[i].wish = _wish;
+            res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
+        }
+    }
+
+    _callback(res);
 }
 
 WishflowerServiceMock.prototype.dump = function ()
