@@ -732,7 +732,6 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x1=" + this.m_x1 + ", y1=" + this.m_y1 + ",x2=" + this.m_x2 + ",y2=" + this.m_y2 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
         console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
     };
 

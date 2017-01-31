@@ -10,8 +10,6 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_garden = null;
 	this.m_tree = null;
 
-    this.m_ladybug = null;
-
     this.m_inputWish = null;
 	this.m_btnSendWish = null;
 }
@@ -52,8 +50,11 @@ WishflowerPlayActivity.prototype.createControls = function ()
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnSendWish._visible = true;
-	this.m_btnSendWish._disable = true;
+	this.m_inputWish._visible = false;
+	this.m_inputWish._disable = false;
+
+	this.m_btnSendWish._visible = false;
+	this.m_btnSendWish._disable = false;
 
 	this.m_garden.starUpdateProcess();
 };
@@ -73,17 +74,25 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
 
 WishflowerPlayActivity.prototype.implementGameLogic = function ()
 {
+	if (this.m_btnSendWish._visible === false &&         
+		this.m_tree.areCreatedAllLeaves() === true)
+	{
+		this.m_inputWish._visible = true;
+		this.m_inputWish._disable = true;
+
+		this.m_btnSendWish._visible = true;
+		this.m_btnSendWish._disable = true;
+	}
+
 	this.m_tree.implementGameLogic();
 	this.m_garden.implementGameLogic();
-    if (this.m_ladybug !== null)
-        this.m_ladybug.implementGameLogic();
 };
 
 WishflowerPlayActivity.prototype.render = function ()
 {
 	this.m_tree.render();
-    if (this.m_ladybug !== null)
-        this.m_ladybug.render();
+	this.m_garden.render();
+
 	this.renderControls();
 };
 
@@ -97,16 +106,10 @@ WishflowerPlayActivity.prototype.btnSendWish_controller = function (_e, _sender)
 {
 	WishflowerPlayActivity.self.m_garden.addWish(WishflowerPlayActivity.self.m_inputWish.getText());
 	WishflowerPlayActivity.self.m_inputWish.setText("");
-
-    WishflowerPlayActivity.self.m_ladybug = new Ladybug();
-    WishflowerPlayActivity.self.m_ladybug.initWithView(WishflowerPlayActivity.self.m_viewParent);
-    WishflowerPlayActivity.self.m_ladybug.travelToFlower(200,100);
 };
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
-    this.m_btnSendWish._visible = false;
-    this.m_btnSendWish._disable = true;
 };
 
 

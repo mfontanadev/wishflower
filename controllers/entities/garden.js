@@ -9,6 +9,7 @@ function Garden()
     this.m_viewParent = null;
     this.m_idProcessUpdate = null;
     this.m_currentTree = null;
+    this.m_incommingLadybugs = [];
 
     Garden.prototype.initWithViewAndTree = function (_viewParent, _tree) 
     {
@@ -22,10 +23,24 @@ function Garden()
 
     Garden.prototype.implementGameLogic = function () 
     {
+        for (var i = this.m_incommingLadybugs.length - 1; i >= 0; i--) 
+        {
+            this.m_incommingLadybugs[i].implementGameLogic();
+
+            // Remove item if it reaches travel's end.
+            if (this.m_incommingLadybugs[i].isTravelFinished() === true)
+            {
+                this.m_incommingLadybugs.splice(i,1);                
+            }
+        }
     };
 
     Garden.prototype.render = function () 
     {
+        for (var i = this.m_incommingLadybugs.length - 1; i >= 0; i--) 
+        {
+            this.m_incommingLadybugs[i].render();
+        }
     };
 
 
@@ -83,7 +98,21 @@ function Garden()
             },
             function(_data)
             {
-                console.log(_data);
+                if (_data === "")
+                {
+                    console.log("Wish not added, tree is full.");
+                }
+
+                // Get data from the added node to set ladybug x,y target positions.
+                var keyPath = JSON.parse(_data)[0].keyPath;
+                var currentNode = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
+
+                // Create a new flying ladybug.
+                var incommingLadybug = new Ladybug();
+                incommingLadybug.initWithView(Garden.self.m_viewParent);
+                incommingLadybug.travelToFlower(currentNode.m_x1, currentNode.m_y1);
+                incommingLadybug.startTravel();
+                Garden.self.m_incommingLadybugs.push(incommingLadybug);
             }
         );  
     };
