@@ -95,16 +95,16 @@ function Animation ()
 			this.m_arrFrames[this.m_currentFrame].m_w, this.m_arrFrames[this.m_currentFrame].m_h, 
 			this.m_x, this.m_y,
 			this.m_arrFrames[this.m_currentFrame].m_w, this.m_arrFrames[this.m_currentFrame].m_h,
-			1,this.m_flip); 
+			1, this.m_flip); 
 	}
 
 	Animation.prototype.render = function (_canvas, _context, _angle, _alpha, _scale)
 	{
-     	drawImageRotationTransparentScaled( _canvas, 
+     	drawImageRotationTransparentScaledFlip( _canvas, 
                                             _context, 
                                             this.m_arrFrames[this.m_currentFrame].m_resource, 
                                             this.m_x, this.m_y, 
-                                            _angle, _alpha, _scale);
+                                            _angle, _alpha, _scale, this.m_flip);
 	}
 
 	Animation.prototype.collisionRectangle = function () 
@@ -250,7 +250,7 @@ function Animation ()
 		this.m_y = _y - (this.m_arrFrames[this.m_currentFrame].m_h / 2) + this.m_arrFrames[this.m_currentFrame].m_offsetY;// - this.m_pivotY;	
 		this.m_flip = _flip;
 		
-		if (_flip == -1)
+		if (_flip === -1)
 		{
 			this.m_x = _x + (this.m_arrFrames[this.m_currentFrame].m_w / 2) - this.m_arrFrames[this.m_currentFrame].m_offsetX;
 		}
@@ -260,6 +260,18 @@ function Animation ()
 	{
 		this.m_x = _x;
 		this.m_y = _y;
+	}
+
+	Animation.prototype.flipHorizontal = function(_value)
+	{
+		if (_value === true)
+		{
+			this.m_flip = -1;
+		}
+		else
+		{
+			this.m_flip = 1;
+		}
 	}
 }
 	

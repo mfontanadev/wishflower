@@ -94,8 +94,8 @@ function Ladybug()
         this.m_viewParent = _viewParent;
         this.m_nodeType = _ladyBugType;
 
-        this.m_cx = this.m_viewParent.m_canvasEx.m_canvasWidth / 2;
-        this.m_cy = this.m_viewParent.m_canvasEx.m_canvasHeight / 2;
+        this.m_cx = this.m_viewParent.m_canvasEx.m_canvas.width / 2;
+        this.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height / 2;
 
         this.setAnimations();
     };
@@ -1065,6 +1065,16 @@ function Ladybug()
             return false;
         }
     }
+
+    Ladybug.prototype.getWidth = function () 
+    {
+        return this.collisionRectangle().width();
+    }    
+
+    Ladybug.prototype.getHeight = function () 
+    {
+        return this.collisionRectangle().height();
+    }    
 };
 
 

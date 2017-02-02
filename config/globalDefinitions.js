@@ -41,10 +41,35 @@ var global_bitmap_definition =
     'ladybug_flying_2.png',
     'log.png',
     'polygonpath_test_grass.png',
-    'callout_main_1.png',
-    'callout_main_2.png',
+    'callouts\\callout_main_1.png',
+    'callouts\\callout_main_2.png',
     'treereference.png',
-    'ctree_leave_closed.png'
+    'ctree_leave_closed.png',
+
+    'callouts\\callout_write_1.png',
+    'callouts\\callout_write_11.png',
+    'callouts\\callout_write_2.png',
+    'callouts\\callout_write_21.png',
+    'callouts\\callout_write_3.png',
+    'callouts\\callout_write_4.png',
+    'callouts\\callout_write_5.png',
+    'callouts\\callout_write_6.png',
+    'callouts\\callout_write_7.png',
+    'callouts\\callout_write_71.png',
+
+    'callouts\\callout_find_1.png',
+    'callouts\\callout_find_11.png',
+    'callouts\\callout_find_2.png',
+    'callouts\\callout_find_21.png',
+    'callouts\\callout_find_3.png',
+    'callouts\\callout_find_31.png',
+    'callouts\\callout_find_4.png',
+    'callouts\\callout_find_41.png',
+    'callouts\\callout_find_5.png',
+    'callouts\\callout_find_51.png',
+    'callouts\\callout_find_6.png',
+    'callouts\\callout_find_61.png'
+
 ];
 
 function Globals() 
