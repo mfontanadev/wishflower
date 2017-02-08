@@ -194,14 +194,14 @@ WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
 {
     this.m_ladybug.implementGameLogic();
 
-    var ladybugTouched = false;
+    // Check if clic event was raised.
+    var clicOnLadybug = false;
     var mouse = this.m_viewParent.getMouseManagerInstance();
     var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_ladybug.collisionRectangle()); 
 
     if (mouse.triggerClic(isMouseOnLadyBug) === true)
     {
-        ladybugTouched = true;
-        console.log("clic");
+        clicOnLadybug = true;
     }
 
     if (this.m_help_state === WishflowerHelpTestActivity.C_STATE_HELP_NOT_SET)
@@ -215,7 +215,7 @@ WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
     else if (this.m_help_state === WishflowerHelpTestActivity.C_STATE_HELP_MAIN)
     {
         // Wait ladybug touch.
-        if (ladybugTouched === true)
+        if (clicOnLadybug === true)
         {
             this.m_currentAnimationId = WishflowerHelpTestActivity.C_ANIMATION_WRITE;
             this.m_help_state = WishflowerHelpTestActivity.C_STATE_HELP_WRITE;
@@ -225,7 +225,7 @@ WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
 
             this.m_showMainHelp = false;
 
-            ladybugTouched = false;
+            clicOnLadybug = false;
         }
     }
     else if (this.m_help_state === WishflowerHelpTestActivity.C_STATE_HELP_WRITE)
@@ -240,11 +240,11 @@ WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
             this.m_arrAnimations[this.m_currentAnimationId].start();
         }
 
-        if (ladybugTouched === true)
+        if (clicOnLadybug === true)
         {
             this.m_help_state = WishflowerHelpTestActivity.C_STATE_EXIT;    
             
-            ladybugTouched = false;
+            clicOnLadybug = false;
         }
     }
     else if (this.m_help_state === WishflowerHelpTestActivity.C_STATE_HELP_FIND)
@@ -265,10 +265,10 @@ WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
             this.m_waitClickOnLadybugToExit = true;
         }
 
-        if (ladybugTouched === true)
+        if (clicOnLadybug === true)
         {
             this.m_help_state = WishflowerHelpTestActivity.C_STATE_EXIT;    
-            ladybugTouched = false;
+            clicOnLadybug = false;
         }
     }
     else if (this.m_help_state === WishflowerHelpTestActivity.C_STATE_EXIT)

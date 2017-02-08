@@ -12,7 +12,8 @@ function WishflowerMenuActivity(_id, _viewParent)
 	this.m_btnGotoLadybugWalkingPathTestActivity = null;
 	this.m_btnGotoHelpTestActivity = null;
 	this.m_btnGotoLadybugFlyingPathTestActivity = null;
-};
+    this.m_btnGotoLadybugIntroActivity = null;
+}
 
 WishflowerMenuActivity.prototype.initialize = function ()
 {
@@ -66,8 +67,14 @@ WishflowerMenuActivity.prototype.createControls = function ()
 	this.m_btnGotoLadybugFlyingPathTestActivity._onClick = this.m_btnGotoLadybugFlyingPathTestActivity_controller;
 	this.m_btnGotoLadybugFlyingPathTestActivity._visible = false;
 
+    this.m_btnGotoLadybugIntroActivity = new CanvasControl();
+    this.m_btnGotoLadybugIntroActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 10 + bh * 1.4 * 7, bw, bh, "Intro");
+    this.m_btnGotoLadybugIntroActivity._fontSize = 12;
+    this.m_btnGotoLadybugIntroActivity._onClick = this.m_btnGotoLadybugIntroActivity_controller;
+    this.m_btnGotoLadybugIntroActivity._visible = false;
+
 	this.m_btnGotoLadybugPlayActivity = new CanvasControl();
-	this.m_btnGotoLadybugPlayActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 10 + bh * 1.4 * 7, bw, bh, "PLAY");
+	this.m_btnGotoLadybugPlayActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 10 + bh * 1.4 * 8, bw, bh, "PLAY");
 	this.m_btnGotoLadybugPlayActivity._fontSize = 12;
 	this.m_btnGotoLadybugPlayActivity._onClick = this.m_btnGotoLadybugPlayActivity_controller;
 	this.m_btnGotoLadybugPlayActivity._visible = false;
@@ -93,8 +100,13 @@ WishflowerMenuActivity.prototype.onEnterActivity = function ()
 	this.m_btnGotoLadybugFlyingPathTestActivity._visible = true;
 	this.m_btnGotoLadybugFlyingPathTestActivity._disable = false;
 
-	this.m_btnGotoLadybugPlayActivity._visible = true;
+    this.m_btnGotoLadybugIntroActivity._visible = true;
+    this.m_btnGotoLadybugIntroActivity._disable = false;
+
+    this.m_btnGotoLadybugPlayActivity._visible = true;
 	this.m_btnGotoLadybugPlayActivity._disable = false;
+
+
 };
 
 WishflowerMenuActivity.prototype.handleInputs = function ()
@@ -118,6 +130,7 @@ WishflowerMenuActivity.prototype.renderControls = function ()
 	this.m_btnGotoLadybugFilterImageTestActivity.render();
 	this.m_btnGotoHelpTestActivity.render();
 	this.m_btnGotoLadybugFlyingPathTestActivity.render();
+    this.m_btnGotoLadybugIntroActivity.render();
 	this.m_btnGotoLadybugPlayActivity.render();
 };
 
@@ -155,6 +168,11 @@ WishflowerMenuActivity.prototype.m_btnGotoLadybugPlayActivity_controller = funct
 	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_PLAY);	
 };
 
+WishflowerMenuActivity.prototype.m_btnGotoLadybugIntroActivity_controller = function (_e, _sender)
+{
+    WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_INTRO);
+};
+
 WishflowerMenuActivity.prototype.onLeaveActivity = function ()
 {
 	this.m_btnGotoLadybugTestActivity._visible = false;
@@ -175,7 +193,10 @@ WishflowerMenuActivity.prototype.onLeaveActivity = function ()
 	this.m_btnGotoLadybugFlyingPathTestActivity._visible = false;
 	this.m_btnGotoLadybugFlyingPathTestActivity._disable = true;
 
-	this.m_btnGotoLadybugPlayActivity._visible = false;
+    this.m_btnGotoLadybugIntroActivity._visible = false;
+    this.m_btnGotoLadybugIntroActivity._disable = true;
+
+    this.m_btnGotoLadybugPlayActivity._visible = false;
 	this.m_btnGotoLadybugPlayActivity._disable = true;
 };
 
