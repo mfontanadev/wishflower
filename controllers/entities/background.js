@@ -1,5 +1,3 @@
-Background.m_id = 10001001;
-
 Background.C_HORIZON = 0.78;
 Background.C_BORDER_WIDTH = 8;
 

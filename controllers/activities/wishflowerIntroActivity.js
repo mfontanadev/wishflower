@@ -7,12 +7,18 @@ function WishflowerIntroActivity(_id, _viewParent)
 	this.m_id = _id;
 	this.m_viewParent = _viewParent; 
 
+	this.m_flow = null;
+
 	this.m_btnBack = null;
 }
 
 WishflowerIntroActivity.prototype.initialize = function ()
 {   
 	console.log("WishflowerIntroActivity");
+
+	this.m_flow = new IntroFlow();
+	this.m_flow.init(this.m_viewParent, this);
+	this.m_flow.setState(IntroFlow.C_INTRO_FLOW_APPSTATE_INITIALIZING);
 	
 	this.createControls();
 };
@@ -56,10 +62,13 @@ WishflowerIntroActivity.prototype.handleInputs = function ()
 
 WishflowerIntroActivity.prototype.implementGameLogic = function ()
 {
+	this.m_flow.implementGameLogic();
 };
 
 WishflowerIntroActivity.prototype.render = function ()
 {
+	this.m_flow.render();
+
 	this.renderControls();
 };
 

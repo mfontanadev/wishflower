@@ -1,9 +1,9 @@
-WishflowerHelpTestActivity.self = null;
+WishflowerHelpActivity.self = null;
 
 
-function WishflowerHelpTestActivity(_id, _viewParent)  
+function WishflowerHelpActivity(_id, _viewParent)  
 {
-	WishflowerHelpTestActivity.self = this;
+	WishflowerHelpActivity.self = this;
 
 	this.m_id = _id;
 	this.m_viewParent = _viewParent; 
@@ -13,9 +13,9 @@ function WishflowerHelpTestActivity(_id, _viewParent)
 	this.m_btnBack = null;
 };
 
-WishflowerHelpTestActivity.prototype.initialize = function ()
+WishflowerHelpActivity.prototype.initialize = function ()
 {   
-	console.log("WishflowerHelpTestActivity");
+	console.log("WishflowerHelpActivity");
 	this.m_flow = new HelpFlow();
 	this.m_flow.init(this.m_viewParent, this);
 	this.m_flow.setState(HelpFlow.C_HELP_FLOW_APPSTATE_INITIALIZING);
@@ -23,7 +23,7 @@ WishflowerHelpTestActivity.prototype.initialize = function ()
 	this.createControls();
 };
 
-WishflowerHelpTestActivity.prototype.createControls = function ()
+WishflowerHelpActivity.prototype.createControls = function ()
 {
     var tmpCanvas = this.m_viewParent.m_canvasEx;
 
@@ -36,13 +36,13 @@ WishflowerHelpTestActivity.prototype.createControls = function ()
 // ****************************************
 // Animation configuration
 // ****************************************
-WishflowerHelpTestActivity.prototype.onEnterActivity = function ()
+WishflowerHelpActivity.prototype.onEnterActivity = function ()
 {
 	this.m_btnBack._visible = true;
 	this.m_btnBack._disable = false;
 };
 
-WishflowerHelpTestActivity.prototype.handleInputs = function ()
+WishflowerHelpActivity.prototype.handleInputs = function ()
 {
 	var mouse = this.m_viewParent.getMouseManagerInstance();
 	if (mouse.m_mouseClick === true && this.m_startWalking === false)
@@ -60,31 +60,31 @@ WishflowerHelpTestActivity.prototype.handleInputs = function ()
     }
 };
 
-WishflowerHelpTestActivity.prototype.implementGameLogic = function ()
+WishflowerHelpActivity.prototype.implementGameLogic = function ()
 {
 	this.m_flow.implementGameLogic();
 
 };
 
-WishflowerHelpTestActivity.prototype.render = function ()
+WishflowerHelpActivity.prototype.render = function ()
 {
 	this.m_flow.render();
 
 	this.renderControls();
 };
 
-WishflowerHelpTestActivity.prototype.renderControls = function ()
+WishflowerHelpActivity.prototype.renderControls = function ()
 {
 	this.m_btnBack.render();
 };
 
-WishflowerHelpTestActivity.prototype.btnBack_controller = function (_e, _sender)
+WishflowerHelpActivity.prototype.btnBack_controller = function (_e, _sender)
 {
-	WishflowerHelpTestActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_MENU);	
+	WishflowerHelpActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_MENU);	
 };
 
 
-WishflowerHelpTestActivity.prototype.onLeaveActivity = function ()
+WishflowerHelpActivity.prototype.onLeaveActivity = function ()
 {
 	this.m_btnBack._visible = false;
 	this.m_btnBack._disable = true;

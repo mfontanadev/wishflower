@@ -30,9 +30,6 @@ WishflowerPlayActivity.prototype.initialize = function ()
 	this.m_flow.init(this.m_viewParent, this);
 	this.m_flow.setState(PlayFlow.C_PLAYFLOW_APPSTATE_INITIALIZING);
 
-	this.m_background = new Background();
-	this.m_background.init(this.m_viewParent);
-
 	this.m_ladybugNewWish = new Ladybug();
     this.m_ladybugNewWish.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
     this.m_ladybugNewWish.setVisible(false);

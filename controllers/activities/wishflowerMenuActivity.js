@@ -155,7 +155,7 @@ WishflowerMenuActivity.prototype.m_btnGotoLadybugFilterImageTestActivity_control
 
 WishflowerMenuActivity.prototype.m_btnGotoHelpTestActivity_controller = function (_e, _sender)
 {
-	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_HELP_TEST);	
+	WishflowerMenuActivity.self.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_HELP);	
 };
 
 WishflowerMenuActivity.prototype.m_btnGotoLadybugFlyingPathTestActivity_controller = function (_e, _sender)

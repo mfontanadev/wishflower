@@ -13,8 +13,8 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerMenuActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerMenuActivity.js');});
 
-	app.get ('/controllers/activities/wishflowerHelpTestActivity.js', 
-		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerHelpTestActivity.js');});
+	app.get ('/controllers/activities/wishflowerHelpActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerHelpActivity.js');});
 
 	app.get ('/controllers/activities/wishflowerLadybugWalkingPathActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugWalkingPathActivity.js');});
@@ -56,7 +56,17 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/background.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/background.js');});
+
+	app.get ('/controllers/entities/garden.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/garden.js');});
+	
 	// FLOWS
+	app.get ('/controllers/entities/introFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/introFlow.js');});
+
+	app.get ('/controllers/entities/helpFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/helpFlow.js');});
+
 	app.get ('/controllers/entities/playFlow.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/playFlow.js');});
 

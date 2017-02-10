@@ -1,5 +1,3 @@
-Ladybug.m_id = 10001000;
-
 Ladybug.C_LADYBUG_TYPE_NOT_SET = 0;
 Ladybug.C_LADYBUG_TYPE_WISHMASTER = 1;
 Ladybug.C_LADYBUG_TYPE_ABOUT = 2;
@@ -13,6 +11,7 @@ Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE = 181;
 Ladybug.C_LADYBUG_MAX_SLIDE = 4;
 Ladybug.C_LADYBUG_SCALE = WishflowerContext.C_LADYBUG_SCALE;
 
+Ladybug.C_ANIM_NOT_SET = -1;
 Ladybug.C_ANIM_STAND = 0;
 Ladybug.C_ANIM_WALKING = 1;
 Ladybug.C_ANIM_ROTATING_RIGHT = 2;
@@ -57,7 +56,7 @@ function Ladybug()
     this.m_scale = Ladybug.C_LADYBUG_SCALE;
     this.m_rotationDirection = 1;
 
-    this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
+    this.m_currentAnimationId = Ladybug.C_ANIM_NOT_SET;
     this.m_arrAnimations = new Array();
 
     this.m_walkingVelocity = Ladybug.C_LADYBUG_WALK_INCREMENT;
@@ -98,6 +97,8 @@ function Ladybug()
         this.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height / 2;
 
         this.setAnimations();
+
+        this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
     };
 
     // ****************************************
@@ -168,7 +169,6 @@ function Ladybug()
         if (_parent.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_WALKING)
         {
             velocityRatio = _parent.m_poligonPath.getCurrentSegment().getVelocityRatio();
-            console.log(velocityRatio);
         }
 
         var incX = cosOf(Ladybug.C_LADYBUG_WALK_INCREMENT * velocityRatio, _parent.m_angle);
@@ -1017,7 +1017,10 @@ function Ladybug()
 
     Ladybug.prototype.collisionRectangle = function () 
     {
-        this.m_rc = this.m_arrAnimations[this.m_currentAnimationId].collisionRectangleScaled(this.m_scale);
+        if (this.m_currentAnimationId !== Ladybug.C_ANIM_NOT_SET)
+        {
+            this.m_rc = this.m_arrAnimations[this.m_currentAnimationId].collisionRectangleScaled(this.m_scale);
+        }
 
         return this.m_rc; 
     }

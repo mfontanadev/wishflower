@@ -1,5 +1,3 @@
-PlayFlow.m_id = 10001001;
-
 PlayFlow.C_PLAYFLOW_NOT_SET = -1;
 
 PlayFlow.C_PLAYFLOW_APPSTATE_HELP = 0;
