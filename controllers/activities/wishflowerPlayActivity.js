@@ -105,6 +105,7 @@ WishflowerPlayActivity.prototype.renderControls = function ()
 WishflowerPlayActivity.prototype.btnSendWish_controller = function (_e, _sender)
 {
 	WishflowerPlayActivity.self.m_garden.addWish(WishflowerPlayActivity.self.m_inputWish.getText());
+
 	WishflowerPlayActivity.self.m_inputWish.setText("");
 };
 

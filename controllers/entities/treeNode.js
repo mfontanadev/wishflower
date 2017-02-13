@@ -802,7 +802,7 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.updateWishes = function (_wishesArray) 
+    TreeNode.prototype.updateWishes = function (_wishesArray, _callback) 
     {
         TreeNode.m_wishes = _wishesArray;
 
@@ -818,13 +818,18 @@ function TreeNode()
                     if (_item.getHash() === TreeNode.m_wishes[i].keyPath)
                     {
                         _item.m_wish = TreeNode.m_wishes[i].wish;
-                        break;
+                       break;
                     }
                 }
 
                 if (previosWish === '' && _item.m_wish !== '')
                 {
                     _item.m_fadingStatus = TreeNode.C_FADING_IN;
+
+                    if (typeof _callback !== 'undefined' && _callback !== null)
+                    {
+                        _callback(_item);
+                    }
                 }
 
                 if (previosWish !== '' && _item.m_wish === '')
@@ -971,7 +976,7 @@ function TreeNode()
 
     TreeNode.prototype.areTreeLeavesStillGrowing = function ()
     {
-        return TreeNode.m_treeGrowedLeaves !== this.totalLeaves();
+        return TreeNode.m_treeGrowedLeaves !== this.m_totalLeaves;
     };
 
     TreeNode.prototype.areCreatedAllLeaves = function () 

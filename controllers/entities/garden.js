@@ -10,6 +10,7 @@ function Garden()
     this.m_idProcessUpdate = null;
     this.m_currentTree = null;
     this.m_incommingLadybugs = [];
+    this.m_animeteNewIncommingWishes = false;
 
     Garden.prototype.initWithViewAndTree = function (_viewParent, _tree) 
     {
@@ -77,7 +78,8 @@ function Garden()
 
                 if (Garden.self.m_currentTree.areCreatedAllLeaves() === true)
                 {
-                    Garden.self.m_currentTree.updateWishes(arrWishes);
+                    Garden.self.m_currentTree.updateWishes(arrWishes, Garden.self.onUpdatedNode);
+                    Garden.self.m_animeteNewIncommingWishes = true;
                 }
                 
                 Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY); 
@@ -85,36 +87,59 @@ function Garden()
         );
     };
 
+    Garden.prototype.onUpdatedNode = function (_node) 
+    {  
+        if (Garden.self.m_animeteNewIncommingWishes === true)
+        {
+            // Create a new flying ladybug.
+            var incommingLadybug = new Ladybug();
+            incommingLadybug.initWithView(Garden.self.m_viewParent);
+            incommingLadybug.travelToFlower(_node.m_x1, _node.m_y1);
+            incommingLadybug.startTravel();
+            Garden.self.m_incommingLadybugs.push(incommingLadybug);
+        }
+    }
+
     Garden.prototype.addWish = function (_wishMessage) 
     {   
-        callWebService
-        (
-            'POST',
-            //'services/wishflowerAddById?id=>>1&wish=' + _wishMessage, 
-            'services/wishflowerAddWish?wish=' + _wishMessage, 
-            function(_errorCode)
-            {
-                msglog("CallWebService error:" + _errorCode);
-            },
-            function(_data)
-            {
-                if (_data === "")
+        if (_wishMessage === "")
+        {
+            console.log("Wish not added, empty wish.");
+        }
+        else
+        {
+            callWebService
+            (
+                'POST',
+                //'services/wishflowerAddById?id=>>1&wish=' + _wishMessage, 
+                'services/wishflowerAddWish?wish=' + _wishMessage, 
+                function(_errorCode)
                 {
-                    console.log("Wish not added, tree is full.");
+                    msglog("CallWebService error:" + _errorCode);
+                },
+                function(_data)
+                {
+                    if (_data === "")
+                    {
+                        console.log("Wish not added, tree is full.");
+                    }
+                    else
+                    {
+/*                        // Get data from the added node to set ladybug x,y target positions.
+                        var keyPath = JSON.parse(_data)[0].keyPath;
+                        var currentNode = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
+
+                        // Create a new flying ladybug.
+                        var incommingLadybug = new Ladybug();
+                        incommingLadybug.initWithView(Garden.self.m_viewParent);
+                        incommingLadybug.travelToFlower(currentNode.m_x1, currentNode.m_y1);
+                        incommingLadybug.startTravel();
+                        Garden.self.m_incommingLadybugs.push(incommingLadybug);
+*/
+                    }
                 }
-
-                // Get data from the added node to set ladybug x,y target positions.
-                var keyPath = JSON.parse(_data)[0].keyPath;
-                var currentNode = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
-
-                // Create a new flying ladybug.
-                var incommingLadybug = new Ladybug();
-                incommingLadybug.initWithView(Garden.self.m_viewParent);
-                incommingLadybug.travelToFlower(currentNode.m_x1, currentNode.m_y1);
-                incommingLadybug.startTravel();
-                Garden.self.m_incommingLadybugs.push(incommingLadybug);
-            }
-        );  
+            );  
+        }
     };
 
     Garden.prototype.logWishes = function () 
