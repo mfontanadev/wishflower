@@ -732,7 +732,6 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x1=" + this.m_x1 + ", y1=" + this.m_y1 + ",x2=" + this.m_x2 + ",y2=" + this.m_y2 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
         console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
     };
 
@@ -803,7 +802,7 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.updateWishes = function (_wishesArray) 
+    TreeNode.prototype.updateWishes = function (_wishesArray, _callback) 
     {
         TreeNode.m_wishes = _wishesArray;
 
@@ -819,13 +818,18 @@ function TreeNode()
                     if (_item.getHash() === TreeNode.m_wishes[i].keyPath)
                     {
                         _item.m_wish = TreeNode.m_wishes[i].wish;
-                        break;
+                       break;
                     }
                 }
 
                 if (previosWish === '' && _item.m_wish !== '')
                 {
                     _item.m_fadingStatus = TreeNode.C_FADING_IN;
+
+                    if (typeof _callback !== 'undefined' && _callback !== null)
+                    {
+                        _callback(_item);
+                    }
                 }
 
                 if (previosWish !== '' && _item.m_wish === '')
@@ -972,7 +976,7 @@ function TreeNode()
 
     TreeNode.prototype.areTreeLeavesStillGrowing = function ()
     {
-        return TreeNode.m_treeGrowedLeaves !== this.totalLeaves();
+        return TreeNode.m_treeGrowedLeaves !== this.m_totalLeaves;
     };
 
     TreeNode.prototype.areCreatedAllLeaves = function () 

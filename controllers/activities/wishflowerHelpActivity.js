@@ -58,6 +58,13 @@ WishflowerHelpActivity.prototype.handleInputs = function ()
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
         this.btnBack_controller(null, null);   
     }
+
+    if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
+    {
+        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
+
+		this.m_flow.m_garden.addWish("wish test");
+    }
 };
 
 WishflowerHelpActivity.prototype.implementGameLogic = function ()

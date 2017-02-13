@@ -47,7 +47,7 @@ function WishflowerContext()
         this.m_ladybug.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
 
         this.m_garden = new Garden();
-        this.m_garden.initWithViewAndTree(this.m_viewParent, this.m_tree);
+        this.m_garden.initWithViewAndTreeAndBackground(this.m_viewParent, this.m_tree, this.m_background);
 	};
 
 	WishflowerContext.prototype.createActivities = function ()

@@ -859,7 +859,6 @@ function Ladybug()
     {
         var targetNode = _tree.findNodeByKeyPath(_keyPath);
 
-        console.log(targetNode);
         if (targetNode === null)
             return;
 
@@ -901,33 +900,36 @@ function Ladybug()
             sideCenterX = rightCenterX;
         }
 
-        // Lines
-        renderLine(
-        this.m_viewParent.m_canvasEx.m_canvas, 
-        this.m_viewParent.m_canvasEx.m_context,
-        0, topPosY, this.m_viewParent.m_canvasEx.m_canvas.width, topPosY,
-        "green", 1);
+        if (C_DEBUG_SHOW_LINES === true)
+        {       
+            // Lines
+            renderLine(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            0, topPosY, this.m_viewParent.m_canvasEx.m_canvas.width, topPosY,
+            "green", 1);
 
-        renderLine(
-        this.m_viewParent.m_canvasEx.m_canvas, 
-        this.m_viewParent.m_canvasEx.m_context,
-        0, bottomPosY, this.m_viewParent.m_canvasEx.m_canvas.width, bottomPosY,
-        "red", 1);
+            renderLine(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            0, bottomPosY, this.m_viewParent.m_canvasEx.m_canvas.width, bottomPosY,
+            "red", 1);
 
-        // Draw centers reference
-        renderCircle(
-        this.m_viewParent.m_canvasEx.m_canvas, 
-        this.m_viewParent.m_canvasEx.m_context,
-        leftCenterX, bottomPosY,
-        3,
-        "yellow");
+            // Draw centers reference
+            renderCircle(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            leftCenterX, bottomPosY,
+            3,
+            "yellow");
 
-        renderCircle(
-        this.m_viewParent.m_canvasEx.m_canvas, 
-        this.m_viewParent.m_canvasEx.m_context,
-        rightCenterX, bottomPosY,
-        3,
-        "magenta");
+            renderCircle(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            rightCenterX, bottomPosY,
+            3,
+            "magenta");
+        }
 
         //
         var poligonPath = new PoligonPath();
@@ -942,8 +944,11 @@ function Ladybug()
             layerX1 = sideCenterX - (layerWidth / 2); 
             layerY1 = bottomPosY - ((i + 1) * layerHeight); 
 
-            renderRectangle(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context,
-                layerX1, layerY1, layerWidth, layerHeight, "blue");
+            if (C_DEBUG_SHOW_LINES === true)
+            {       
+                renderRectangle(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context,
+                    layerX1, layerY1, layerWidth, layerHeight, "blue");
+            }
 
             randomWidth = layerWidth / 5; 
             if ((i % 2) === 0)
