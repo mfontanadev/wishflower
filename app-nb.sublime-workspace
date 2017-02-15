@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"C_a",
+				"C_ANIM_NOT_SET"
+			],
+			[
+				"C_HELP_FLOW_APPSTATE_e",
+				"C_HELP_FLOW_APPSTATE_EXIT"
+			],
+			[
+				"C_help",
+				"C_HELP_FLOW_NOT_SET"
+			],
+			[
+				"C_HELP_FLOW_APPSTATE_HELP_",
+				"C_HELP_FLOW_APPSTATE_HELP_WRITE"
+			],
+			[
+				"C_STATE_HELP_",
+				"C_HELP_FLOW_APPSTATE_HELP_WRITE"
+			],
+			[
+				"C_STATE_",
+				"C_HELP_FLOW_APPSTATE_HELP_MAIN"
+			],
+			[
 				"leave",
 				"leaveClosedImg"
 			],
@@ -16,16 +40,8 @@
 				"m_showMainHelp"
 			],
 			[
-				"C_a",
-				"C_ANIMATION_MAIN_HELP"
-			],
-			[
 				"m_",
 				"m_flip"
-			],
-			[
-				"C_STATE_HELP_",
-				"C_STATE_HELP_WRITE"
 			],
 			[
 				"lbl",
@@ -49,7 +65,7 @@
 			],
 			[
 				"for",
-				"for	for (…) {…}"
+				"for\tfor (…) {…}"
 			],
 			[
 				"m_po",
@@ -283,19 +299,16 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "controllers/wishflowerController.js",
-			"settings":
-			{
-				"buffer_size": 2164,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 104.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -330,29 +343,42 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services"
+	],
 	"file_history":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerIntroActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/introFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/helpFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/background.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower - Copy/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerIntroActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/background.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
@@ -387,7 +413,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower-master/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/bitmapManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/guy_bad_j.anim.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/guy.sprites.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/animation.js",
@@ -410,7 +435,6 @@
 		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
@@ -457,9 +481,7 @@
 		"/D/Work/HTML5/Treninto/trunk/classes/viewIntro.js",
 		"/D/Restauracion/Instrucciones.txt",
 		"/D/Work/HTML5/Treninto/trunk/treninto.html",
-		"/D/Docs/Registros ONline.txt",
-		"/H/Mios/Programas/New Text Document.txt",
-		"/D/Docs/Personal/key.txt"
+		"/D/Docs/Registros ONline.txt"
 	],
 	"find":
 	{
@@ -478,6 +500,56 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console",
+			"stopUpdateProcess",
+			"C_DEBUG_SHOW_LINES",
+			"render",
+			"isTravelFinished",
+			"startTravel",
+			"isTraveling",
+			"startTravel",
+			"isTravelFinished",
+			"initWithViewAndTree",
+			"m_currentTree",
+			"C_FADING_STOP",
+			"C_FADING_IN",
+			"m_treeGrowedLeaves",
+			"m_totalLeaves",
+			"totalBranches",
+			"totalLeaves",
+			"wish",
+			"undef",
+			"type un",
+			"m_incommingLadybugs",
+			"WishflowerHelpActivity",
+			"WishflowerHelpTestActivity",
+			"C_ACTIVITY_HELP_TEST",
+			"m_help_state",
+			"m_showMainHelp",
+			"m_currentAnimationId",
+			"C_ANIMATION_FIND",
+			"C_ANIMATION_ID_FIND",
+			"C_ANIMATION_ID_WRITE",
+			"C_ANIMATION_WRITE",
+			"on_write",
+			"C_ANIMATION_WRITE",
+			"main_help",
+			"C_ANIMATION_ID_MAIN_HELP",
+			"C_ANIMATION_NOT_SET",
+			"m_currentAnimationId",
+			"initDefault",
+			"collisionRectangle",
+			"GETWI",
+			"collisionRectangle",
+			"C_HELP_FLOW_APPSTATE_FINISH",
+			"C_HELP_FLOW_APPSTATE_EXIT",
+			"WishflowerHelpTestActivity",
+			"state_APPSTATE_INITIALIZING",
+			"IntroFlow",
+			"_STATE_",
+			"C_ANIMATION_MAIN_HELP",
+			"C_INTRO",
+			"IntroFlow",
 			"C_ACTIVITY_HELP_TEST",
 			"m_btnGotoHelpTestActivity_controller",
 			"NAVI",
@@ -555,57 +627,7 @@
 			"setHeightScalar",
 			"C_FADING_MAX_VALUE",
 			"C_FADING_IN",
-			"Leave",
-			"createle",
-			"calculateScalarImageHeight",
-			"m_scalarImageHeight",
-			"triggerAddENewWish",
-			"HOLA",
-			"callWebService",
-			"KeyPair",
-			"orches",
-			"orchesta",
-			"serv",
-			"\"\"",
-			".png",
-			"10.1.80",
-			"execute",
-			"th",
-			"head",
-			"C_REDIRECT_HEROKU_ADDRESS",
-			"flow",
-			"btnBack_controller",
-			"m_btnBack",
-			"m_flow",
-			"reqFlower",
-			"Flower",
-			"totalFinalBranches",
-			"createLeaveNode",
-			"C_TREE_STATUS_RENDERING",
-			"m_treeStatus",
-			"C_TREE_STATUS_RENDERING",
-			"totalLeaves",
-			"isBranchStillGrowing",
-			"m_treeGrowedBranchs",
-			"isTreeBranchesStillGrowing",
-			"C_FADING_IN",
-			"renderLeaveImage",
-			"render = ",
-			"createLe",
-			"testUpdateTreeData",
-			"__mockDB",
-			"m_canvas",
-			"origina",
-			"PATENTE",
-			"mode",
-			"PORT",
-			"MODE",
-			"947197350",
-			"m_x1",
-			"isAnimation_FLYING",
-			"chRandom",
-			"m_viewParent",
-			"new "
+			"Leave"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -624,38 +646,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "controllers/wishflowerController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2164,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2130,
-								2130
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 405.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -698,6 +690,7 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
 	"project": "app-nb.sublime-project",
 	"replace":
 	{
@@ -707,6 +700,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -715,6 +709,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -723,11 +718,13 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
 		"width": 0.0
 	},
+	"selected_group": 0,
 	"settings":
 	{
 		"last_automatic_layout":
@@ -744,7 +741,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 311.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

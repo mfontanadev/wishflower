@@ -13,6 +13,7 @@ function WishflowerHelpActivity(_id, _viewParent)
 	this.m_btnBack = null;
 };
 
+
 WishflowerHelpActivity.prototype.initialize = function ()
 {   
 	console.log("WishflowerHelpActivity");
@@ -33,13 +34,12 @@ WishflowerHelpActivity.prototype.createControls = function ()
     this.m_btnBack._onClick = this.btnBack_controller;
 };
 
-// ****************************************
-// Animation configuration
-// ****************************************
 WishflowerHelpActivity.prototype.onEnterActivity = function ()
 {
 	this.m_btnBack._visible = true;
 	this.m_btnBack._disable = false;
+
+	this.m_flow.setAnimationsWithCurrentLadyBugOffset();
 };
 
 WishflowerHelpActivity.prototype.handleInputs = function ()
@@ -62,15 +62,12 @@ WishflowerHelpActivity.prototype.handleInputs = function ()
     if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
-
-		this.m_flow.m_garden.addWish("wish test");
     }
 };
 
 WishflowerHelpActivity.prototype.implementGameLogic = function ()
 {
 	this.m_flow.implementGameLogic();
-
 };
 
 WishflowerHelpActivity.prototype.render = function ()
@@ -96,4 +93,3 @@ WishflowerHelpActivity.prototype.onLeaveActivity = function ()
 	this.m_btnBack._visible = false;
 	this.m_btnBack._disable = true;
 };
-

@@ -317,7 +317,7 @@ function Ladybug()
             if (C_RENDER_COLLISION_RECT === true)
             {
                 renderCollitionRectangle(this.m_viewParent.m_canvasEx.m_canvas, 
-                this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'yellow')
+                this.m_viewParent.m_canvasEx.m_context, this.collisionRectangle(), 'magenta')
             }
 
             if (this.m_poligonPath !== null)
@@ -1083,6 +1083,18 @@ function Ladybug()
     {
         return this.collisionRectangle().height();
     }    
+
+    Ladybug.prototype.getWidthWithoutTransparencySpace = function () 
+    {
+        // 0.407 (percent of ladybug in the entire image) = 226 (ladybug in the center) / 555 (total width)
+        return this.collisionRectangle().width() * 0.407;
+    }    
+
+    Ladybug.prototype.getHeightWithoutTransparencySpace = function () 
+    {
+        // 0.682 (percent of ladybug in the entire image) = 176 (ladybug in the center) / 379 (total width)
+        return this.collisionRectangle().height() * 0.682;
+    }   
 };
 
 

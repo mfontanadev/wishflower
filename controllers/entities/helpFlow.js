@@ -38,24 +38,21 @@ function HelpFlow()
         this.m_ladybug = _viewParent.getDataContext().m_ladybug;
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
-
-        this.setAnimations();
     };
 
-    HelpFlow.prototype.setAnimations = function () 
+    HelpFlow.prototype.setAnimationsWithCurrentLadyBugOffset = function () 
     {
         var animation = null;
+        var pivot = null;
 
-        s_help = 0.5;
-        w_help = 314 * s_help;
-        h_help = 235 * s_help;
-        x_help = this.m_ladybug.m_cx;
-        y_help = this.m_ladybug.m_cy;
+        calloutXPos = this.m_ladybug.m_cx;
+        calloutYPos = this.m_ladybug.m_cy;
+        marginX = this.m_ladybug.getWidthWithoutTransparencySpace() / 1.5;
+        marginY = this.m_ladybug.getHeightWithoutTransparencySpace() / 1.5;
 
+        pivot = getOffsetsGivenAPivot(314, 235, 34, 167, 0.5);
         animation = new Animation();
-        offsetX = this.m_ladybug.getWidth();
-        offsetY = this.m_ladybug.getHeight();
-        animation.initWith(this, HelpFlow.C_ANIMATION_ID_MAIN_HELP, x_help - offsetX, y_help - offsetY / 2);
+        animation.initWith(this, HelpFlow.C_ANIMATION_ID_MAIN_HELP, calloutXPos + (pivot.x * -1) - marginX, calloutYPos + pivot.y);
         this.addAnimationFrame(animation, 'callout_main_1.png',  12);
         this.addAnimationFrame(animation, 'callout_main_2.png',  12);
         animation.setInfiniteLoop(true);
@@ -63,7 +60,7 @@ function HelpFlow()
         this.m_arrAnimations.push(animation);
 
         animation = new Animation();
-        animation.initWith(this, HelpFlow.C_ANIMATION_MAIN_WRITE, x_help + offsetX, y_help - offsetY / 1.5);
+        animation.initWith(this, HelpFlow.C_ANIMATION_MAIN_WRITE, calloutXPos + pivot.x + marginX, calloutYPos + pivot.y);
         this.addAnimationFrame(animation, 'callout_write_1.png',  12);
         this.addAnimationFrame(animation, 'callout_write_11.png',  12);
         this.addAnimationFrame(animation, 'callout_write_1.png',  12);
@@ -93,8 +90,9 @@ function HelpFlow()
         this.addAnimationFrame(animation, 'callout_write_7.png',  12);
         this.m_arrAnimations.push(animation);
 
+        pivot = getOffsetsGivenAPivot(314, 235, 34, 51, 0.5);
         animation = new Animation();
-        animation.initWith(this, HelpFlow.C_ANIMATION_MAIN_FIND, x_help + offsetX, y_help + offsetY);
+        animation.initWith(this, HelpFlow.C_ANIMATION_MAIN_FIND, calloutXPos + pivot.x + marginX, calloutYPos + pivot.y);
         this.addAnimationFrame(animation, 'callout_find_1.png',  12);
         this.addAnimationFrame(animation, 'callout_find_11.png',  12);
         this.addAnimationFrame(animation, 'callout_find_1.png',  12);
@@ -232,7 +230,7 @@ function HelpFlow()
             this.m_currentAnimationId = HelpFlow.C_ANIMATION_ID_NOT_SET;
             this.m_showMainHelp = false; 
 
-            this.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_PLAY_TEST);
+            this.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_PLAY);
         }
 
         if (this.m_currentAnimationId !== HelpFlow.C_ANIMATION_ID_NOT_SET)

@@ -105,6 +105,7 @@ function Animation ()
                                             this.m_arrFrames[this.m_currentFrame].m_resource, 
                                             this.m_x, this.m_y, 
                                             _angle, _alpha, _scale, this.m_flip);
+
 	}
 
 	Animation.prototype.collisionRectangle = function () 

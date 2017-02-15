@@ -12,6 +12,8 @@ function Garden()
     this.m_bakground = null;
     this.m_incommingLadybugs = [];
     this.m_animeteNewIncommingWishes = false;
+    // Used in IntroView screen to stop updating while help is running.
+    this.m_stopUpdatingProcessAfterUpdateWishes = false;
 
     Garden.prototype.initWithViewAndTreeAndBackground = function (_viewParent, _tree, _background) 
     {
@@ -47,6 +49,10 @@ function Garden()
         }
     };
 
+    Garden.prototype.stopUpdatingProcessAfterUpdateWishes = function () 
+    {
+        this.m_stopUpdatingProcessAfterUpdateWishes = true;
+    };
 
     Garden.prototype.starUpdateProcess = function () 
     {
@@ -56,7 +62,7 @@ function Garden()
         }
     };
 
-    Garden.prototype.stopUpdateProcess = function (_wish) 
+    Garden.prototype.stopUpdateProcess = function () 
     {
         if (this.m_idProcessUpdate !== null)
         {
@@ -83,9 +89,19 @@ function Garden()
                 {
                     Garden.self.m_currentTree.updateWishes(arrWishes, Garden.self.onUpdatedNode);
                     Garden.self.m_animeteNewIncommingWishes = true;
-                }
                 
-                Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY); 
+                    if (Garden.self.m_stopUpdatingProcessAfterUpdateWishes === true)
+                    {
+                        console.log("STOP PROCESS");
+                        Garden.self.stopUpdateProcess();
+                        Garden.self.m_stopUpdatingProcessAfterUpdateWishes = false;
+                    }
+                }
+                else
+                {           
+                    console.log("NEW UPDATE PROCESS");
+                    Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);
+                } 
              }
         );
     };

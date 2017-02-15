@@ -75,6 +75,7 @@ function IntroFlow()
         this.m_ladybug.setPoligonPath(this.m_poligonPath);
         this.m_ladybug.setVisible(false);
 
+        this.m_garden.stopUpdatingProcessAfterUpdateWishes();
         this.m_garden.starUpdateProcess();
 
         this.setState(IntroFlow.C_INTRO_FLOW_APPSTATE_TREE_GROWING);            
