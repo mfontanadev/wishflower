@@ -53,6 +53,6 @@ function appInitContext()
  	viewMngr.initializeActivities();
 
  	// Start animation loop.
-	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_INTRO);
+	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_MENU);
 	viewMngr.animationCycle();	
 }

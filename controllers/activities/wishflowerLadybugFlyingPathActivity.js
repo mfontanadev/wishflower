@@ -45,10 +45,9 @@ WishflowerLadybugFlyingPathActivity.prototype.createControls = function ()
     var tmpCanvas = this.m_viewParent.m_canvasEx;
 
     this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 5, 5, 15, 15, "<");
+    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
-    this.m_btnBack._visible = true;
 };
 
 WishflowerLadybugFlyingPathActivity.prototype.onEnterActivity = function ()
