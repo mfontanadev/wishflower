@@ -87,6 +87,7 @@ function Ladybug()
     this.m_visible = true;
 
     this.m_action = Ladybug.C_LADYBUG_ACTION_NORMAL;
+    this.m_scalePerturbationOnLadybugTouched = 1;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -261,6 +262,16 @@ function Ladybug()
         }
 
         this.m_keyboard.button1 = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT);
+
+        this.m_scalePerturbationOnLadybugTouched = 1;
+        var mouse = this.m_viewParent.getMouseManagerInstance();
+        if (mouse.m_mouseClick === true)
+        {
+            if (collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.collisionRectangle()) === true)
+            {
+                this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
+            }
+        }
     };
 
     Ladybug.prototype.implementGameLogic = function () 
@@ -306,7 +317,7 @@ function Ladybug()
             this.m_arrAnimations[this.m_currentAnimationId].render(
                 this.m_viewParent.m_canvasEx.m_canvas, 
                 this.m_viewParent.m_canvasEx.m_context,
-                this.m_angle - 90, this.m_alpha, this.m_scale);
+                this.m_angle - 90, this.m_alpha, this.m_scale * this.m_scalePerturbationOnLadybugTouched);
                                                                                                      
             if (C_LOG === true)
             {

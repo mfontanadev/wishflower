@@ -70,6 +70,8 @@ WishflowerMenuActivity.prototype.createControls = function ()
 	this.m_btnGotoLadybugPlayActivity.initButtonStyle(tmpCanvas, getCX(tw, bw), 10 + bh * 1.4 * 8, bw, bh, "PLAY");
 	this.m_btnGotoLadybugPlayActivity._fontSize = 12;
 	this.m_btnGotoLadybugPlayActivity._onClick = this.m_btnGotoLadybugPlayActivity_controller;
+
+	this.onLeaveActivity();
 };
 
 WishflowerMenuActivity.prototype.onEnterActivity = function ()
@@ -97,8 +99,6 @@ WishflowerMenuActivity.prototype.onEnterActivity = function ()
 
     this.m_btnGotoLadybugPlayActivity._visible = true;
 	this.m_btnGotoLadybugPlayActivity._disable = false;
-
-
 };
 
 WishflowerMenuActivity.prototype.handleInputs = function ()

@@ -65,7 +65,7 @@ function WishflowerContext()
 		result.push(new WishflowerImageFilterTestActivity(WishflowerContext.C_ACTIVITY_LADYBUG_IMAGE_FILTER_TEST, this.m_viewParent));
 		result.push(new WishflowerLadybugFlyingPathActivity(WishflowerContext.C_ACTIVITY_LADYBUG_FLYING_PATH_TEST, this.m_viewParent));
         result.push(new WishflowerIntroActivity(WishflowerContext.C_ACTIVITY_INTRO, this.m_viewParent));
-        result.push(new WishflowerIntroActivity(WishflowerContext.C_ACTIVITY_LADYBUG_INPUT_CONTROLS, this.m_viewParent));
+        result.push(new WishflowerInputControlsActivity(WishflowerContext.C_ACTIVITY_LADYBUG_INPUT_CONTROLS, this.m_viewParent));
         
 		return result;
 	};

@@ -25,6 +25,11 @@ var global_bitmap_definition =
     'glif-down-arrow.png',
     'glif-sub.png',
     'glif-add.png',
+
+    'icon_find.png',
+    'icon_write.png',
+    'icon_done.png',
+
     'ctree_root.png',
     'ctree_root2.png',
     'ctree_root3.png',

@@ -62,6 +62,9 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/garden.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/garden.js');});
+
+	app.get ('/controllers/entities/inputControl.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/inputControl.js');});
 	
 	// FLOWS
 	app.get ('/controllers/entities/introFlow.js', 

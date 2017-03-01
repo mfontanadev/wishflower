@@ -8,7 +8,8 @@ function WishflowerInputControlsActivity(_id, _viewParent)
 	this.m_id = _id;
 	this.m_viewParent = _viewParent; 
 
-	this.m_flow = null;
+	this.m_ladybug = null;
+	this.m_inputControlWrite = new InputControl();
 
 	this.m_btnBack = null;
 };
@@ -17,11 +18,14 @@ function WishflowerInputControlsActivity(_id, _viewParent)
 WishflowerInputControlsActivity.prototype.initialize = function ()
 {   
 	console.log("WishflowerInputControlsActivity");
-	this.m_flow = new HelpFlow();
-	this.m_flow.init(this.m_viewParent, this);
-	this.m_flow.setState(HelpFlow.C_HELP_FLOW_APPSTATE_INITIALIZING);
 	
 	this.createControls();
+
+    this.m_ladybug = new Ladybug();
+    this.m_ladybug.initWithType(this.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
+    this.m_ladybug.m_scale = this.m_ladybug.m_scale * 2;
+
+    this.m_inputControlWrite.initWithTypeLadybug(this.m_viewParent, InputControl.C_TYPE_WRITER, this.m_ladybug);
 };
 
 WishflowerInputControlsActivity.prototype.createControls = function ()
@@ -38,8 +42,6 @@ WishflowerInputControlsActivity.prototype.onEnterActivity = function ()
 {
 	this.m_btnBack._visible = true;
 	this.m_btnBack._disable = false;
-
-	this.m_flow.setAnimationsWithCurrentLadyBugOffset();
 };
 
 WishflowerInputControlsActivity.prototype.handleInputs = function ()
@@ -49,7 +51,6 @@ WishflowerInputControlsActivity.prototype.handleInputs = function ()
 	{
 		if (collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_ladybug.collisionRectangle()) === true)
 		{
-			//this.m_startWalking = true;
 		}
 	}
 
@@ -63,16 +64,21 @@ WishflowerInputControlsActivity.prototype.handleInputs = function ()
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
     }
+
+	this.m_inputControlWrite.handleInputs();
+    this.m_ladybug.handleInputs();
 };
 
 WishflowerInputControlsActivity.prototype.implementGameLogic = function ()
 {
-	this.m_flow.implementGameLogic();
+	this.m_inputControlWrite.implementGameLogic();
+	this.m_ladybug.implementGameLogic();
 };
 
 WishflowerInputControlsActivity.prototype.render = function ()
 {
-	this.m_flow.render();
+	this.m_ladybug.render();
+    this.m_inputControlWrite.render();
 
 	this.renderControls();
 };
