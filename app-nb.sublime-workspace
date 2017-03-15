@@ -4,30 +4,6 @@
 		"selected_items":
 		[
 			[
-				"m_",
-				"m_expandedSegment"
-			],
-			[
-				"m_pa",
-				"m_parentLadybug"
-			],
-			[
-				"C_STATE_",
-				"C_STATE_HIDDEN"
-			],
-			[
-				"C_sta",
-				"C_STATE_NOT_SET"
-			],
-			[
-				"C",
-				"C_BUTTON_EXPANDED_DISTANCE"
-			],
-			[
-				"C_TYPE_",
-				"C_TYPE_FINDER"
-			],
-			[
 				"C_a",
 				"C_ANIM_NOT_SET"
 			],
@@ -48,6 +24,10 @@
 				"C_HELP_FLOW_APPSTATE_HELP_WRITE"
 			],
 			[
+				"C_STATE_",
+				"C_HELP_FLOW_APPSTATE_HELP_MAIN"
+			],
+			[
 				"leave",
 				"leaveClosedImg"
 			],
@@ -58,6 +38,10 @@
 			[
 				"m_s",
 				"m_showMainHelp"
+			],
+			[
+				"m_",
+				"m_flip"
 			],
 			[
 				"lbl",
@@ -164,6 +148,10 @@
 				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
 			],
 			[
+				"m_pa",
+				"m_viewParent"
+			],
+			[
 				"C_LADYBUG_AUTOWALKING_",
 				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
 			],
@@ -190,6 +178,10 @@
 			[
 				"C_au",
 				"C_LADYBUG_AUTOWALKING_STATE_WALKING"
+			],
+			[
+				"C",
+				"C_POLIGONPATH_DIRECTION_NORMAL"
 			],
 			[
 				"m_au",
@@ -308,54 +300,29 @@
 	"buffers":
 	[
 		{
-			"file": "controllers/activities/wishflowerInputControlsActivity.js",
+			"file": "controllers/entities/introFlow.js",
 			"settings":
 			{
-				"buffer_size": 2838,
-				"encoding": "UTF-8",
+				"buffer_size": 3658,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "controllers/entities/inputControl.js",
+			"contents": " var express = require(\"express\");\nvar app = express();\nvar port = (process.env.PORT || 5000 );\nvar url = require('url');\n\n// Global definitions\nglobal.__basePath = __dirname;\nglobal.__mockDB = true;\n\n// Entry point.\napp.get(\"/\", function (req, res) {\n    res.sendFile(__dirname + '/views/' + 'wishflowerView.html');\n});\n\napp.get ('/favicon.ico', function (req, res) {\n\t\tres.send('/public/favicon.ico');\n});\n\n// Routes\nrequire('./views')(app);\nrequire('./controllers')(app);\nrequire('./models')(app);\n\nrequire('./lib/chel-dist')(app);\nrequire('./lib/sound-0.6.1-dist/js')(app);\nrequire('./lib/jquery-1.11.2-min/js')(app);\nrequire('./config')(app);\n\napp.use(express.static(__dirname + '/public/assets/img'));\napp.use(express.static(__dirname + '/public/assets/snd'));\n\n// Database \nvar mongodb = require('mongodb');\nvar server = new mongodb.Server(\"127.0.0.1\", 27017, {});\nvar dbBaseTest = new mongodb.Db('wishFlowerDb', server, {});\ndbBaseTest.open\n(\n\tfunction (error, client) \n\t{\n\t\tglobal.__dbClient = client;\n\t}\n);\n\n// Start socket listening.\nvar io = require('socket.io').listen(app.listen(port));\nconsole.log(\"SOCKETIO: listening on port \" + port );\n\nif (typeof io === 'undefined')\n{\n\tapp.listen\n\t(\n\t\tport, \n\t\tfunction() \n\t\t{\n\t\t\tconsole.log('LISTEN: listening on port ' + port);\n\t\t}\n\t);\n}\n\n",
+			"file": "index.js",
+			"file_size": 1352,
+			"file_write_time": 131302715117539467,
 			"settings":
 			{
-				"buffer_size": 5494,
-				"encoding": "UTF-8",
+				"buffer_size": 1294,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "controllers/entities/ladybug.js",
+			"file": "/C/workspace/Bunge/Wokspaces/cfs-ant/trunk/CFS/build.xml",
 			"settings":
 			{
-				"buffer_size": 36539,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lib/chel-dist/js/mouseManager.js",
-			"settings":
-			{
-				"buffer_size": 5906,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/helpFlow.js",
-			"settings":
-			{
-				"buffer_size": 12462,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/poligonPath.js",
-			"settings":
-			{
-				"buffer_size": 11625,
+				"buffer_size": 6826,
 				"line_ending": "Windows"
 			}
 		}
@@ -405,50 +372,32 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Carla/MauWork/wishflower",
-		"/C/Users/Carla/MauWork/wishflower/config",
-		"/C/Users/Carla/MauWork/wishflower/controllers",
-		"/C/Users/Carla/MauWork/wishflower/controllers/activities",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities",
-		"/C/Users/Carla/MauWork/wishflower/lib",
-		"/C/Users/Carla/MauWork/wishflower/lib/chel-dist",
-		"/C/Users/Carla/MauWork/wishflower/lib/chel-dist/js",
-		"/C/Users/Carla/MauWork/wishflower/public",
-		"/C/Users/Carla/MauWork/wishflower/public/assets",
-		"/C/Users/Carla/MauWork/wishflower/public/assets/img"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js"
 	],
 	"file_history":
 	[
-		"/C/Users/Carla/MauWork/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/playFlow.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/ladybug.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/poligonPath.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/animation.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/errorPageController.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/inputControl.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/index.js",
-		"/C/Users/Carla/MauWork/wishflower/views/wishflowerView.html",
-		"/C/Users/Carla/MauWork/wishflower/lib/chel-dist/js/chlib.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/wishflowerController.js",
-		"/C/Users/Carla/MauWork/wishflower/config/globalDefinitions.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/activities/wishflowerMenuActivity.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/helpFlow.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/introFlow.js",
-		"/C/Users/Carla/MauWork/wishflower/controllers/entities/garden.js",
+		"/C/workspace/Bunge/Wokspaces/WARBalanzas/branches/develop-WARBalanzas/src/main/resources/hibernate.cfg.xml",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/helpFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/background.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/introFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/helpFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower - Copy/controllers/entities/ladybug.js",
@@ -546,18 +495,33 @@
 		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/index.js",
 		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
 		"/D/Work/HTML5/wishflower_comp/last/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js"
+		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js",
+		"/D/Today/wishflower/background.html",
+		"/C/Users/R440/BitDownloads/Completed/Fullmetal Alchemist Brotherhood/IMPORTANTE.txt",
+		"/C/Users/R440/Google Drive/Resources/Nuevo documento de texto.txt",
+		"/D/Work/HTML5/wishflower/candidate/background.html",
+		"/D/Work/HTML5/wishflower/index.js",
+		"/D/Today/wishflower/wishflower/controllers/wishflowerController.js",
+		"/D/Work/HTML5/wishflower/candidate/index.js",
+		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/Nuevo documento de texto.txt",
+		"/D/Work/HTML5/background.html",
+		"/C/Tools/PhotoShop C1 Portable/Photoshop/Presets/Textures/Mountains 1.psd",
+		"/D/Work/HTML5/Orchesta/_oldVersions/orchesta 2/data/game_data.js",
+		"/D/Work/HTML5/Treninto/trunk/classes/viewPlay.js",
+		"/D/Work/HTML5/Treninto/trunk/classes/maze.js",
+		"/D/Work/HTML5/Treninto/trunk/classes/viewIntro.js",
+		"/D/Restauracion/Instrucciones.txt",
+		"/D/Work/HTML5/Treninto/trunk/treninto.html"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
 		"height": 90.0,
 		"where_history":
 		[
-			"C:\\Users\\Carla\\MauWork\\wishflower",
 			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower"
 		]
 	},
@@ -566,35 +530,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"triggerClic",
-			"render",
-			"m_scale",
-			"render",
-			"m_scale",
-			"iconSegmentCounter",
-			"m_expandedSegment",
-			"poligonPath",
-			"getvelo",
-			"m_poligonPath",
-			"RESET",
-			"reset (",
-			"reset(",
-			"reset()",
-			"startPoligonWalking",
-			"start",
-			"m_active",
-			"m_visible",
-			"m_inputControlWrite",
-			"collisionRectangle",
-			"collitionRec",
-			"getColl",
-			"addSegment",
-			"CLIC",
-			"CLICK",
-			"WishflowerInputControlsActivity",
-			"renderLi",
-			"updateRectangleWithScale",
-			"Ladybug",
 			"CONSOLE",
 			"x_help",
 			"width",
@@ -693,7 +628,36 @@
 			"C_ANIMATION_MAIN_HELP",
 			"clipImageTransparent",
 			"m_flip",
-			"clic"
+			"clic",
+			"collisionRectangle",
+			"renderCollitionRectangle",
+			"m_scale",
+			"width",
+			"velocity",
+			"m_counterCycles",
+			"m_counterFPS",
+			"m_counterCycles",
+			"redefinitionOfRequestAnimFrame",
+			"setTimeout",
+			"timeout",
+			"animationCycle",
+			"elapsedTime",
+			"m_counterCycles",
+			"235",
+			"314",
+			"setAnimations",
+			"TODO",
+			"to do",
+			"requestmess",
+			"protocolme",
+			"m_lblWish",
+			"cursor",
+			"background",
+			"C_THEME_TYPE_BORDERLESS",
+			"m_btnInfo",
+			"C_THEME_TYPE_BORDERLESS",
+			"wishes",
+			"m_currentTree"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -712,24 +676,54 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/activities/wishflowerInputControlsActivity.js",
+					"file": "controllers/entities/introFlow.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2838,
+						"buffer_size": 3658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1235,
-								1235
+								3044,
+								3069
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 995.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
 							]
 						],
 						"settings":
@@ -737,159 +731,40 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 495.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "controllers/entities/inputControl.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5494,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2975,
-								2975
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1215.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controllers/entities/ladybug.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 36539,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9904,
-								9904
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3806.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "lib/chel-dist/js/mouseManager.js",
+					"buffer": 2,
+					"file": "/C/workspace/Bunge/Wokspaces/cfs-ant/trunk/CFS/build.xml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5906,
+						"buffer_size": 6826,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5463,
-								5474
+								5713,
+								5713
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2694.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "controllers/entities/helpFlow.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12462,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7780,
-								8020
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2044.0,
+						"translation.y": 1125.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "controllers/entities/poligonPath.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11625,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8320,
-								8324
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5674.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -985,7 +860,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 244.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

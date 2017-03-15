@@ -77,8 +77,8 @@ WishflowerInputControlsActivity.prototype.implementGameLogic = function ()
 
 WishflowerInputControlsActivity.prototype.render = function ()
 {
-	this.m_ladybug.render();
     this.m_inputControlWrite.render();
+	this.m_ladybug.render();
 
 	this.renderControls();
 };
