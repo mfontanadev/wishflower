@@ -60,9 +60,7 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
     if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
-
-	this.m_flow.m_garden.addWish("wish test");
-
+		this.m_flow.m_garden.addWish("wish test");
     }
 };
 

@@ -8,17 +8,22 @@ InputControl.C_BUTTON_EXPANDED_DISTANCE = 120;      // Pixels.
 InputControl.C_BUTTON_COLLAPSED_DISTANCE = 50;      // Pixels.
 
 InputControl.C_STATE_NOT_SET = -1;
-InputControl.C_STATE_HIDDEN = 0;
-InputControl.C_STATE_SHOW_ICON = 1;
-InputControl.C_STATE_SELECTABLE = 2;
-InputControl.C_STATE_HIDE_ICON = 3;
-InputControl.C_STATE_ACTIVE = 4;
-InputControl.C_STATE_COLLAPSE_ICON = 5;
-InputControl.C_STATE_ACTION_FADEIN = 6;
-InputControl.C_STATE_ACTION_FADEOUT = 7;
-InputControl.C_STATE_EXPAND_ICON = 8;
-InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE = 9;
-InputControl.C_STATE_HIDE_ICON_FROM_COLLAPSED = 10;
+InputControl.C_STATE_HIDE = 0;
+InputControl.C_STATE_FADE_IN_SEGMENT = 1;
+InputControl.C_STATE_FADE_IN_ICON = 2;
+InputControl.C_STATE_SELECTABLE = 3;
+InputControl.C_STATE_HIDE_ICON = 4;
+InputControl.C_STATE_ACTIVE = 5;
+InputControl.C_STATE_COLLAPSE_ICON = 6;
+InputControl.C_STATE_ACTION_FADEIN = 7;
+InputControl.C_STATE_ACTION_FADEOUT = 8;
+InputControl.C_STATE_EXPAND_ICON = 9;
+InputControl.C_STATE_ICON_FADE_OUT = 10;
+InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE = 11;
+InputControl.C_STATE_HIDE_ICON_FROM_COLLAPSED = 12;
+
+InputControl.C_ICON_SCALE_RATIO = 10;
+InputControl.C_ACTION_ALPHA_RATIO = 10;
 
 function InputControl() 
 {
@@ -33,17 +38,17 @@ function InputControl()
     this.m_cy = 0;
     this.m_rc = new chRect();
 
+    this.m_icon = null;
     this.m_iconSegment = null;
     this.m_iconSegmentCounter = -1;
-
-    this.m_iconTouched = false;
-    this.m_ladybugTouched = false;
+    this.m_iconScale = 1;
 
     this.m_interpolatedSegmentPosition = null;
-    this.m_iconScale = 1;
-    this.m_button = null;
+    this.m_actionALpha = 0;
 
-    this.m_showActionControl = false;
+    this.m_ladybugTouched = false;
+    this.m_iconTouched = false;
+    this.m_returnPressed = false;
 
     InputControl.prototype.initWithTypeLadybug = function (_viewParent, _inputControlType, _parentLadybug) 
     {
@@ -57,13 +62,13 @@ function InputControl()
         this.m_cx = this.m_viewParent.m_canvasEx.m_canvas.width / 2;
         this.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height / 2;
 
-        this.m_button = new CanvasControl();
-        this.m_button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy - InputControl.C_BUTTON_EXPANDED_DISTANCE, 50, 50, "");
-        this.m_button.setImage('icon_write.png')
-        this.m_button.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
-        this.m_button._onClick = this.buttonClic_controller;
-        this.m_button._visible = false;
-        this.m_button._enabled = false;
+        this.m_icon = new CanvasControl();
+        this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy - InputControl.C_BUTTON_EXPANDED_DISTANCE, 50, 50, "");
+        this.m_icon.setImage('icon_write.png')
+        this.m_icon.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
+        this.m_icon._onClick = this.buttonClic_controller;
+        this.m_icon._visible = false;
+        this.m_icon._enabled = false;
 
         if (_inputControlType === InputControl.C_TYPE_WRITER)
         {
@@ -74,9 +79,9 @@ function InputControl()
         {
         }
 
-        this.m_state = InputControl.C_STATE_HIDDEN;
-
-        this.updateSegmentCounterDependences();
+        this.m_state = InputControl.C_STATE_HIDE;
+        this.initIconScale(0);
+        this.initActionAlpha(0);
     };
 
     // ****************************************
@@ -85,7 +90,8 @@ function InputControl()
     InputControl.prototype.handleInputs = function () 
     {
         var mouse = this.m_viewParent.getMouseManagerInstance();
-        if (this.m_state === InputControl.C_STATE_HIDDEN)
+        if (this.m_state === InputControl.C_STATE_HIDE ||
+            this.m_state === InputControl.C_STATE_ACTIVE)
         {
             var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_parentLadybug.collisionRectangle()); 
 
@@ -94,47 +100,123 @@ function InputControl()
                 this.m_ladybugTouched = true;
             }
         }
+        else
+        {
+            if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
+            {
+                this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
+                this.m_returnPressed = true;
+            }
+        }
     };
 
     InputControl.prototype.implementGameLogic = function () 
     {
-        if (this.m_state === InputControl.C_STATE_HIDDEN)
+        if (this.m_state === InputControl.C_STATE_HIDE)
         {
             if (this.m_ladybugTouched === true)
             {
-                this.setState(InputControl.C_STATE_SHOW_ICON);
-                this.m_button._visible = true;
-                this.m_button._enabled = false;
+                this.m_icon._visible = false;
+                this.m_iconSegmentCounter = 0;
+                this.setState(InputControl.C_STATE_FADE_IN_SEGMENT);
             }
         }
 
-        if (this.m_state === InputControl.C_STATE_SHOW_ICON)
+        if (this.m_state === InputControl.C_STATE_FADE_IN_SEGMENT)
         {
             this.m_iconSegmentCounter = this.m_iconSegmentCounter + 5;
             if (this.m_iconSegmentCounter >= 100)
             {
+                this.m_iconSegmentCounter = 100;
+
+                this.initIconScale(0);
+                this.updateIconPositionAtEndOfSegment();
+                this.m_icon._visible = true;
+
+                this.setState(InputControl.C_STATE_FADE_IN_ICON);
+            }       
+            this.calculateEndPointSegment();
+        }
+
+        if (this.m_state === InputControl.C_STATE_FADE_IN_ICON)
+        {
+            if (this.incrementIconScale() === false)
+            {
+                this.initIconScale(100);
+                this.m_icon._enabled = true;
+
                 this.setState(InputControl.C_STATE_SELECTABLE);
-                this.m_button._enabled = true;
             }
-            this.updateSegmentCounterDependences();
+            this.updateIconPositionAtEndOfSegment();
         }
 
         if (this.m_state === InputControl.C_STATE_SELECTABLE)
         {
             if (this.m_iconTouched === true)
             {
-                this.m_showActionControl = true;
-                this.m_button._enabled = false;
+                this.m_icon._enabled = false;
+                this.setState(InputControl.C_STATE_COLLAPSE_ICON);
             }
+        }
+
+        if (this.m_state === InputControl.C_STATE_COLLAPSE_ICON)
+        {
+            this.m_iconSegmentCounter = this.m_iconSegmentCounter - 5;
+            if (this.m_iconSegmentCounter <= 40)
+            {
+                this.initActionAlpha(0);
+                this.setState(InputControl.C_STATE_ACTION_FADEIN);
+            }            
+            this.updateIconPositionAtEndOfSegment();
+        }
+
+        if (this.m_state === InputControl.C_STATE_ACTION_FADEIN)
+        {
+            if (this.incrementActionAlpha() === false)
+            {
+                this.initActionAlpha(100);
+                this.setState(InputControl.C_STATE_ACTIVE);
+            }
+        }
+
+        if (this.m_state === InputControl.C_STATE_ACTIVE)
+        {
+            if (this.m_ladybugTouched === true)
+            {
+                this.m_icon._enabled = false;
+                this.setState(InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE);
+            }
+        }
+
+        if (this.m_state === InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE)
+        {
+            if (this.decrementActionAlpha() === false)
+            {
+                this.initActionAlpha(0);
+
+                this.setState(InputControl.C_STATE_ICON_FADE_OUT);
+            }
+        }
+
+        if (this.m_state === InputControl.C_STATE_ICON_FADE_OUT)
+        {
+            if (this.decrementIconScale() === false)
+            {
+                this.initIconScale(0);
+
+                this.setState(InputControl.C_STATE_HIDE);
+            }
+            this.updateIconPositionAtEndOfSegment();
         }
 
         this.m_ladybugTouched = false;
         this.m_iconTouched = false;
+        this.m_returnPressed = false;
     };
 
     InputControl.prototype.render = function () 
     {
-        if (this.m_state !== InputControl.C_STATE_HIDDEN)
+        if (this.m_state !== InputControl.C_STATE_HIDE)
         {
             renderLineWidth(
                 this.m_viewParent.m_canvasEx.m_canvas, 
@@ -145,51 +227,135 @@ function InputControl()
                 this.m_interpolatedSegmentPosition.y, 
                 "gray", 0.8, 2);
 
-            if (this.m_showActionControl === true)
-            {
-                renderRectangle(
-                    this.m_viewParent.m_canvasEx.m_canvas, 
-                    this.m_viewParent.m_canvasEx.m_context,
-                    this.m_interpolatedSegmentPosition.x-50,  this.m_interpolatedSegmentPosition.y-50, 100, 100);
-
-            }
-
-            this.m_button.render();       
+            this.renderActionControl();
+            this.m_icon.render();       
         }
        
+    };
+
+    InputControl.prototype.renderActionControl = function () 
+    {
+        if (this.m_state === InputControl.C_STATE_ACTION_FADEIN ||
+            this.m_state === InputControl.C_STATE_ACTIVE ||
+            this.m_state === InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE)
+        {
+            var actionControlAlpha = this.m_actionALpha / 5; 
+            rendeElipsisTransparent(
+                this.m_viewParent.m_canvasEx.m_canvas, 
+                this.m_viewParent.m_canvasEx.m_context,
+                this.m_interpolatedSegmentPosition.x,  this.m_interpolatedSegmentPosition.y - 50, 
+                actionControlAlpha, "red", 1);
+        }
     };
 
     InputControl.prototype.setState = function (_state) 
     {
         this.m_state = _state;
+        console.log(this.m_state);
     };
 
-    InputControl.prototype.updateSegmentCounterDependences = function () 
+    
+    InputControl.prototype.calculateEndPointSegment = function () 
     {
         this.m_interpolatedSegmentPosition = this.m_iconSegment.getXYByPercent(this.m_iconSegmentCounter);
-
-        this.m_iconScale = this.getIconScale();
-
-        this.m_button.setScale(this.m_iconScale);
-        this.m_button.setX(this.m_interpolatedSegmentPosition.x - this.m_button._width / 2);
-        this.m_button.setY(this.m_interpolatedSegmentPosition.y - this.m_button._height / 2);
     };
 
-    InputControl.prototype.getIconScale = function () 
+    InputControl.prototype.updateIconPositionAtEndOfSegment = function () 
     {
-        var result = 1;
+        this.calculateEndPointSegment();
+        this.m_icon.setX(this.m_interpolatedSegmentPosition.x - this.m_icon._width / 2);
+        this.m_icon.setY(this.m_interpolatedSegmentPosition.y - this.m_icon._height / 2);
+    }
 
-        if (this.m_iconSegmentCounter < 80)
-        {
-            result = this.m_iconSegmentCounter / 80;            
+    InputControl.prototype.initIconScale = function (_iconScale) 
+    {
+        this.m_iconScale = _iconScale;
+        this.applyIconScale();
+    }
+
+    InputControl.prototype.incrementIconScale = function () 
+    {
+        var result = true;
+
+        this.m_iconScale = this.m_iconScale + InputControl.C_ICON_SCALE_RATIO;
+        if (this.m_iconScale >= 100)
+        {        
+            this.m_iconScale = 100;
+            result = false;
         }
 
+        this.applyIconScale();
+
         return result;
-    };
+    }
+
+    InputControl.prototype.decrementIconScale = function () 
+    {
+        var result = true;
+
+        this.m_iconScale = this.m_iconScale - InputControl.C_ICON_SCALE_RATIO;
+        if (this.m_iconScale <= 0)
+        {
+            this.m_iconScale = 0;
+            result = false;
+        }
+
+        this.applyIconScale();
+    
+        return result;
+    }
+
+    InputControl.prototype.applyIconScale = function ()
+    {
+        this.m_icon.setScale(this.m_iconScale / 100);
+    }
+
+    InputControl.prototype.initActionAlpha = function (_actionAlpha) 
+    {
+        this.m_actionALpha = _actionAlpha;
+        this.applyActionAlpha();
+    }
+
+    InputControl.prototype.incrementActionAlpha = function () 
+    {
+        var result = true;
+
+        this.m_actionALpha = this.m_actionALpha + InputControl.C_ACTION_ALPHA_RATIO;
+        if (this.m_actionALpha >= 100)
+        {        
+            this.m_actionALpha = 100;
+            result = false;
+        }
+
+        this.applyActionAlpha();
+
+        return result;
+    }
+
+    InputControl.prototype.decrementActionAlpha = function () 
+    {
+        var result = true;
+
+        this.m_actionALpha = this.m_actionALpha - InputControl.C_ACTION_ALPHA_RATIO;
+        if (this.m_actionALpha <= 0)
+        {
+            this.m_actionALpha = 0;
+            result = false;
+        }
+
+        this.applyActionAlpha();
+    
+        return result;
+    }
+
+    InputControl.prototype.applyActionAlpha = function ()
+    {
+        //this.m_icon.setScale(this.m_iconScale / 100);
+    }
 
     InputControl.prototype.buttonClic_controller = function (_e, _sender)
     {
-        console.log("clic");
+        //console.log("clic");
         if (InputControl.self.m_state === InputControl.C_STATE_SELECTABLE)
         {
             InputControl.self.m_iconTouched = true;            
