@@ -280,6 +280,8 @@ function PoligonSegment()
         this.m_velocityRatio = 1;
 
         this.m_extraParams = false; 
+
+        this.m_rc = new chRect();
     };
 
     PoligonSegment.prototype.initWithExtraParams = function (_x1, _y1, _scale1, _alpha1, _x2, _y2, _scale2, _alpha2)
@@ -297,6 +299,8 @@ function PoligonSegment()
         this.m_extraParams = true; 
 
         this.m_velocityRatio = 1;
+
+        this.m_rc = new chRect();
     };
     
     PoligonSegment.prototype.module = function ()
@@ -412,7 +416,23 @@ function PoligonSegment()
     {
         this.m_velocityRatio = _velocityRatio;    
     };
+    
+    PoligonSegment.prototype.getStartPintCollitionRectangle = function (_halfSide) 
+    {
+        this.m_poligonDirection.m_rc.m_x1 = this.m_x1 - _halfSide;
+        this.m_poligonDirection.m_rc.m_y1 = this.m_y1 - _halfSide;
+        this.m_poligonDirection.m_rc.m_x2 = this.m_x1 + _halfSide;
+        this.m_poligonDirection.m_rc.m_y2 = this.m_y1 + _halfSide;
+    }
 
+    PoligonSegment.prototype.getEndPointCollitionRectangle = function (_halfSide) 
+    {
+        this.m_poligonDirection.m_rc.m_x1 = this.m_x2 - _halfSide;
+        this.m_poligonDirection.m_rc.m_y1 = this.m_y2 - _halfSide;
+        this.m_poligonDirection.m_rc.m_x2 = this.m_x2 + _halfSide;
+        this.m_poligonDirection.m_rc.m_y2 = this.m_y2 + _halfSide;
+    }
+    
     PoligonSegment.prototype.fLog = function () 
     { 
         var logText = "PoligonSegment: " +
