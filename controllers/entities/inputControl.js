@@ -36,7 +36,7 @@ function InputControl()
 
     this.m_cx = 0;
     this.m_cy = 0;
-    this.m_rc = new chRect();
+    this.m_rc = new ChRect();
 
     this.m_iconOK = null;
 
@@ -62,7 +62,6 @@ function InputControl()
 
     this.m_messageControl = null;
     this.m_keyPathControl = null;
-
 
     InputControl.prototype.initWithTypeLadybug = function (_viewParent, _inputControlType, _parentLadybug) 
     {
@@ -95,10 +94,18 @@ function InputControl()
             this.m_direction = 1;
             imageIcon = 'icon_find.png';
 
+            this.m_keyPathControl = new KeyPathControl();
+            this.m_keyPathControl.init(this.m_viewParent, this.m_parentLadybug);
+            this.m_keyPathControl.setX(this.m_cx);
+            this.m_keyPathControl.setY(this.m_cy);
+            this.m_keyPathControl.registerOnKeyUpListener(this, this.onKeyPathControlKeyUp);
+
+            /*
             this.m_keyPathControl = new CanvasControl();
             this.m_keyPathControl.initInputStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_viewParent.m_canvasEx.m_canvas.width * 0.2, 30, "");
             this.m_keyPathControl._fontSize = 16;
             this.m_keyPathControl.registerOnKeyUpListener(this, this.onKeyPathControlKeyUp);
+            */
         }
 
         this.m_icon = new CanvasControl();
@@ -355,7 +362,6 @@ function InputControl()
     {
         this.m_state = _state;
     };
-
     
     InputControl.prototype.calculateEndPointSegment = function () 
     {
@@ -383,13 +389,13 @@ function InputControl()
             this.m_keyPathControl.setX(this.m_interpolatedSegmentPosition.x - this.m_keyPathControl.getWidth() / 2);
             this.m_keyPathControl.setY(this.m_interpolatedSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_direction));
         }
-    }
+    };
 
     InputControl.prototype.initIconScale = function (_iconScale) 
     {
         this.m_iconScale = _iconScale;
         this.applyIconScale();
-    }
+    };
 
     InputControl.prototype.incrementIconScale = function () 
     {
@@ -405,7 +411,7 @@ function InputControl()
         this.applyIconScale();
 
         return result;
-    }
+    };
 
     InputControl.prototype.decrementIconScale = function () 
     {
@@ -421,19 +427,19 @@ function InputControl()
         this.applyIconScale();
     
         return result;
-    }
+    };
 
     InputControl.prototype.applyIconScale = function ()
     {
         this.m_icon.setScale(this.m_iconScale / 100);
         this.m_iconOK.setScale(this.m_iconScale / 100);
-    }
+    };
 
     InputControl.prototype.initActionAlpha = function (_actionAlpha) 
     {
         this.m_actionALpha = _actionAlpha;
         this.applyActionAlpha();
-    }
+    };
 
     InputControl.prototype.incrementActionAlpha = function () 
     {
@@ -449,7 +455,7 @@ function InputControl()
         this.applyActionAlpha();
 
         return result;
-    }
+    };
 
     InputControl.prototype.decrementActionAlpha = function () 
     {
@@ -464,7 +470,7 @@ function InputControl()
         this.applyActionAlpha();
     
         return result;
-    }
+    };
 
     InputControl.prototype.applyActionAlpha = function ()
     {
@@ -477,20 +483,11 @@ function InputControl()
         {
             this.m_keyPathControl.setAlpha(this.m_actionALpha / 100);
         }
-    }
+    };
 
     InputControl.prototype.buttonClic_controller = function (_e, _sender)
     {
         _sender._onClickParent.setIconTouched();
-    };
-
-    InputControl.prototype.setIconTouched = function ()
-    {
-        if (this.m_state === InputControl.C_STATE_SELECTABLE ||
-            this.m_state === InputControl.C_STATE_ACTIVE)
-        {
-            this.m_iconTouched = true;    
-        }
     };
 
     InputControl.prototype.buttonOKClic_controller = function (_e, _sender)
@@ -503,6 +500,15 @@ function InputControl()
         }
     };
 
+    InputControl.prototype.setIconTouched = function ()
+    {
+        if (this.m_state === InputControl.C_STATE_SELECTABLE ||
+            this.m_state === InputControl.C_STATE_ACTIVE)
+        {
+            this.m_iconTouched = true;    
+        }
+    };
+
     InputControl.prototype.setLadyBugTouched = function ()
     {
         if (this.m_state === InputControl.C_STATE_HIDE ||
@@ -511,19 +517,19 @@ function InputControl()
         {
             this.m_ladybugTouched = true;
         }
-    }    
+    };
 
     InputControl.prototype.showConfirmButton = function ()
     {
         this.m_showConfirmButton = true;
         this.updateConfirmButton();
-    }    
+    };
 
     InputControl.prototype.hideConfirmButton = function ()
     {
         this.m_showConfirmButton = false;
         this.updateConfirmButton();
-    }    
+    };
 
     InputControl.prototype.updateConfirmButton = function ()
     {
@@ -532,19 +538,19 @@ function InputControl()
 
         this.m_iconOK._visible = this.m_showConfirmButton;
         this.m_iconOK._enabled = this.m_showConfirmButton;
-    }
+    };
 
     InputControl.prototype.registerOnClick = function (_parent, _callBack)
     {
         this.m_onIconClickParent = _parent;      
         this.m_onIconClickCallback = _callBack;      
-    }   
+    };
 
     InputControl.prototype.registerOnConfirm = function (_parent, _callBack)
     {
         this.m_onConfirmationParent = _parent;      
         this.m_onConfirmationCallback = _callBack;      
-    }   
+    };
 
     InputControl.prototype.foreignIconClicked = function ()
     {
@@ -553,7 +559,7 @@ function InputControl()
             this.hideConfirmButton();
             this.setState(InputControl.C_STATE_ACTION_FADEOUT);
         }
-    }   
+    };
 
     InputControl.prototype.foreignConfirmClicked = function ()
     {
@@ -561,12 +567,12 @@ function InputControl()
         {
             this.setState(InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE);
         }
-    }   
+    };
 
     InputControl.prototype.onMessageControlKeyUp = function (_e, _sender)
     {
         _sender._onkeyUpParent.showConfirmButtonForMessageControl(_sender);
-    }   
+    };
 
     InputControl.prototype.showConfirmButtonForMessageControl = function (_sender)
     {
@@ -578,12 +584,12 @@ function InputControl()
         {
             this.hideConfirmButton();
         }
-    }    
+    };
 
     InputControl.prototype.onKeyPathControlKeyUp = function (_e, _sender)
     {
         _sender._onkeyUpParent.showConfirmButtonForKeyPathControl(_sender);
-    }  
+    };
 
     InputControl.prototype.showConfirmButtonForKeyPathControl = function (_sender)
     {
@@ -595,8 +601,7 @@ function InputControl()
         {
             this.hideConfirmButton();
         }
-    }   
-
+    };
 
     InputControl.prototype.getText = function ()
     {
@@ -614,7 +619,7 @@ function InputControl()
 
         return result;
     }    
-};
+}
 
 
 

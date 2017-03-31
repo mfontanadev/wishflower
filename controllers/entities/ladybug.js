@@ -49,7 +49,7 @@ function Ladybug()
     this.m_type = Ladybug.C_LADYBUG_TYPE_NOT_SET;
     this.m_cx = 0;
     this.m_cy = 0;
-    this.m_rc = new chRect();
+    this.m_rc = new ChRect();
 
     this.m_angle = 90;
     this.m_alpha = 1;
@@ -77,7 +77,7 @@ function Ladybug()
         button1: false
     }
 
-    this.m_walkingZoneRectangle = new chRect();
+    this.m_walkingZoneRectangle = new ChRect();
     this.m_autoflight = false;
 
     this.m_poligonPath = null;

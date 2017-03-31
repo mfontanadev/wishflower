@@ -281,7 +281,7 @@ function PoligonSegment()
 
         this.m_extraParams = false; 
 
-        this.m_rc = new chRect();
+        this.m_rc = new ChRect();
     };
 
     PoligonSegment.prototype.initWithExtraParams = function (_x1, _y1, _scale1, _alpha1, _x2, _y2, _scale2, _alpha2)
@@ -300,7 +300,7 @@ function PoligonSegment()
 
         this.m_velocityRatio = 1;
 
-        this.m_rc = new chRect();
+        this.m_rc = new ChRect();
     };
     
     PoligonSegment.prototype.module = function ()

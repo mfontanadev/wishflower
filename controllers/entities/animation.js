@@ -24,7 +24,7 @@ function Animation ()
 		this.m_onEndAnimationEvent = null;
 		this.m_infiniteLoop = false;
 
-		this.m_rc = new chRect();
+		this.m_rc = new ChRect();
 	}
 
 	Animation.prototype.handleInputs = function () 

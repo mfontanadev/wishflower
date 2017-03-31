@@ -17,7 +17,7 @@ function WishflowerLadybugTestActivity(_id, _viewParent)
         y: 0,
         scale: 0.2,
         alpha: 1,
-        collitionRect : new chRect()
+        collitionRect : new ChRect()
     }
 
 	this.m_grass_x = 0;

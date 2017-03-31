@@ -65,8 +65,11 @@ module.exports = function(app)
 
 	app.get ('/controllers/entities/inputControl.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/inputControl.js');});
-	
-	// FLOWS
+
+    app.get ('/controllers/entities/keyPathControl.js',
+        function (req, res) {res.sendFile(__dirname + '/entities/keyPathControl.js');});
+
+    // FLOWS
 	app.get ('/controllers/entities/introFlow.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/introFlow.js');});
 
