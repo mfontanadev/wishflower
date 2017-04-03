@@ -44,25 +44,100 @@ function KeyPathControl()
         for (var i = 0; i < 6; i++)
         {
             button = new CanvasControl();
-            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "<");
+            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+            button.setTag(i);
             button.setImage('glif-left-arrow.png');
+            button.registerOnClick(this, this.onLeftButtonClick);
             this.m_leftButtons.push(button);
 
             button = new CanvasControl();
-            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, ">");
+            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+            button.setTag(i);
             button.setImage('glif-right-arrow.png');
+            button.registerOnClick(this, this.onRightButtonClick);
             this.m_rightButtons.push(button);
-
-            this.m_keyPathState[i] = KeyPathControl.C_KEY_INDICATOR_LEFT;
         }
 
-        for (var i2 = 0; i2 < 3; i2++)
+        button = new CanvasControl();
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.setTag(1);
+        button.setImage('glif-flower_1.png');
+        button.registerOnClick(this, this.onNumberButtonClick);
+        this.m_numberButtons.push(button);
+
+        button = new CanvasControl();
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.setTag(2);
+        button.setImage('glif-flower_2.png');
+        button.registerOnClick(this, this.onNumberButtonClick);
+        this.m_numberButtons.push(button);
+
+        button = new CanvasControl();
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.setTag(3);
+        button.setImage('glif-flower_3.png');
+        button.registerOnClick(this, this.onNumberButtonClick);
+        this.m_numberButtons.push(button);
+
+        // Set states
+        this.setButtonState(0, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(1, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(2, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(3, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(4, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(5, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+    };
+
+    KeyPathControl.prototype.setButtonState = function(_index, _state)
+    {
+        // Show controls for specific state.
+        if (_state === KeyPathControl.C_KEY_INDICATOR_LEFT)
         {
-            button = new CanvasControl();
-            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, i2.toString());
-            this.m_numberButtons.push(button);
+            this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_LEFT;
+            this.m_leftButtons[_index]._visible = true;
+            this.m_leftButtons[_index]._enable = true;
+            this.m_rightButtons[_index]._visible = false;
+            this.m_rightButtons[_index]._enable = false;
         }
-        this.m_keyPathState[6] = KeyPathControl.C_KEY_INDICATOR_FLOWER_1;
+        else if (_state === KeyPathControl.C_KEY_INDICATOR_RIGHT)
+        {
+            this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_RIGHT;
+            this.m_rightButtons[_index]._visible = true;
+            this.m_rightButtons[_index]._enable = true;
+            this.m_leftButtons[_index]._visible = false;
+            this.m_leftButtons[_index]._enable = false;
+        }
+        else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_1)
+        {
+            this.resetNumberButtonsState();
+            this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_1;
+            this.m_numberButtons[0]._visible = true;
+            this.m_numberButtons[0]._enable = true;
+        }
+        else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_2)
+        {
+            this.resetNumberButtonsState();
+            this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_2;
+            this.m_numberButtons[1]._visible = true;
+            this.m_numberButtons[1]._enable = true;
+        }
+        else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_3)
+        {
+            this.resetNumberButtonsState();
+            this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_3;
+            this.m_numberButtons[2]._visible = true;
+            this.m_numberButtons[2]._enable = true;
+        }
+    };
+
+    KeyPathControl.prototype.resetNumberButtonsState = function ()
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            this.m_numberButtons[i]._visible = false;
+            this.m_numberButtons[i]._enable = false;
+        }
     };
 
     // ****************************************
@@ -80,48 +155,62 @@ function KeyPathControl()
     {
         for (var i = 0; i < 6; i++)
         {
-            if (this.m_keyPathState[i] === KeyPathControl.C_KEY_INDICATOR_LEFT)
-            {
-                this.m_leftButtons[i].render();
-            }
-            else if (this.m_keyPathState[i] === KeyPathControl.C_KEY_INDICATOR_RIGHT)
-            {
-                this.m_rightButtons[i].render();
-            }
+            this.m_leftButtons[i].render();
+            this.m_rightButtons[i].render();
         }
 
-        if (this.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_1)
-        {
-            this.m_numberButtons[0].render();
-        }
-        else if (this.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_2)
-        {
-            this.m_numberButtons[1].render();
-        }
-        else if (this.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_3)
-        {
-            this.m_numberButtons[2].render();
-        }
+        this.m_numberButtons[0].render();
+        this.m_numberButtons[1].render();
+        this.m_numberButtons[2].render();
     };
 
-    KeyPathControl.prototype.setState = function (_state)
+    KeyPathControl.prototype.onLeftButtonClick = function(_e, _sender)
     {
-        this.m_state = _state;
+        var tmpParent = _sender.getOnClickParent();
+        var tmpIndex = _sender.getTag()
+        tmpParent.setButtonState(tmpIndex, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+    };
+
+    KeyPathControl.prototype.onRightButtonClick = function(_e, _sender)
+    {
+        var tmpParent = _sender.getOnClickParent();
+        var tmpIndex = _sender.getTag()
+        tmpParent.setButtonState(tmpIndex, KeyPathControl.C_KEY_INDICATOR_LEFT);
+    };
+
+    KeyPathControl.prototype.onNumberButtonClick = function(_e, _sender)
+    {
+        var tmpParent = _sender.getOnClickParent();
+
+        if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_1)
+        {
+            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_2);
+        }
+        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_2)
+        {
+            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_3);
+        }
+        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_3)
+        {
+            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+        }
     };
 
     KeyPathControl.prototype.setX = function (_x)
     {
         this.m_cx = _x;
 
+        var padding = 5;
+        var dx = ((7 * KeyPathControl.C_CONTROL_SIZE) + (padding * 6)) / 2;
         for (var i = 0; i < 6; i++)
         {
-            this.m_leftButtons[i].setX(this.m_cx + i * 30);
-            this.m_rightButtons[i].setX(this.m_cx + i * 30);
+            this.m_leftButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
+            this.m_rightButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
         }
 
         for (var i2 = 0; i2 < 3; i2++)
         {
-            this.m_numberButtons[i2].setX(this.m_cx + ((6 + i) * 30));
+            this.m_numberButtons[i2].setX(this.m_cx - dx + (6 * (KeyPathControl.C_CONTROL_SIZE + padding)));
         }
     };
 
@@ -129,23 +218,34 @@ function KeyPathControl()
     {
         this.m_cy = _y;
 
+        var dy = (KeyPathControl.C_CONTROL_SIZE) / 2;
         for (var i = 0; i < 6; i++)
         {
-            this.m_leftButtons[i].setY(this.m_cy+20);
-            this.m_rightButtons[i].setY(this.m_cy-20);
+            this.m_leftButtons[i].setY(this.m_cy - dy);
+            this.m_rightButtons[i].setY(this.m_cy - dy);
         }
 
         for (var i2 = 0; i2 < 3; i2++)
         {
-            this.m_numberButtons[i2].setY(this.m_cy);
+            this.m_numberButtons[i2].setY(this.m_cy - dy);
         }
     };
 
     KeyPathControl.prototype.setAlpha = function (_alpha)
     {
         this.m_alpha = _alpha;
-        //this.m_buttonL.setAlpha(this.m_alpha);
-        //this.m_buttonR.setAlpha(this.m_alpha);
+        return;
+        for (var i = 0; i < 6; i++)
+        {
+            this.m_leftButtons[i].setAlpha(_alpha);
+            this.m_rightButtons[i].setAlpha(_alpha);
+        }
+
+        for (var i2 = 0; i2 < 3; i2++)
+        {
+            this.m_numberButtons[i2].setAlpha(_alpha);
+        }
+
     };
 
     KeyPathControl.prototype.getText = function ()

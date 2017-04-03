@@ -73,8 +73,11 @@ var global_bitmap_definition =
     'callouts\\callout_find_5.png',
     'callouts\\callout_find_51.png',
     'callouts\\callout_find_6.png',
-    'callouts\\callout_find_61.png'
+    'callouts\\callout_find_61.png',
 
+    'glif-flower_1.png',
+    'glif-flower_2.png',
+    'glif-flower_3.png'
 ];
 
 function Globals() 
