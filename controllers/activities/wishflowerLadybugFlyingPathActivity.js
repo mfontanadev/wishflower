@@ -15,9 +15,14 @@ function WishflowerLadybugFlyingPathActivity(_id, _viewParent)
     this.m_startWalking = false;
 };
 
+WishflowerLadybugFlyingPathActivity.prototype.getActivityName = function ()
+{   
+    return "WishflowerLadybugFlyingPathActivity";
+}
+
 WishflowerLadybugFlyingPathActivity.prototype.initialize = function ()
-{
-	console.log("WishflowerLadybugFlyingPathActivity");
+{   
+    console.log(this.getActivityName());
 
     this.m_poligonPath = new PoligonPath();
     this.m_poligonPath.init(this.m_viewParent);
@@ -48,12 +53,14 @@ WishflowerLadybugFlyingPathActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+    this.m_btnBack.setVisible(false);
+    this.m_btnBack.setEnabled(false);    
 };
 
 WishflowerLadybugFlyingPathActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+    this.m_btnBack.setVisible(true);
+    this.m_btnBack.setEnabled(true);
 };
 
 WishflowerLadybugFlyingPathActivity.prototype.handleInputs = function ()
@@ -129,6 +136,6 @@ WishflowerLadybugFlyingPathActivity.prototype.btnBack_controller = function (_e,
 
 WishflowerLadybugFlyingPathActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+    this.m_btnBack.setVisible(false);
+    this.m_btnBack.setEnabled(false);
 };

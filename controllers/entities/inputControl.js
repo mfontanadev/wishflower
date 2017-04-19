@@ -32,36 +32,35 @@ function InputControl()
     this.m_viewParent = null;
     this.m_type = InputControl.C_TYPE_NOT_SET;
     this.m_parentLadybug = null;
+    this.m_parentLadybugTouched = false;
     this.m_state = InputControl.C_STATE_NOT_SET;
 
     this.m_cx = 0;
     this.m_cy = 0;
     this.m_rc = new ChRect();
 
-    this.m_iconOK = null;
+    this.m_segment = null;
+    this.m_segmentCounter = -1;
+    this.m_endSegmentPosition = null;
+    this.m_segmentDirection = 0;
 
     this.m_icon = null;
-    this.m_iconSegment = null;
-    this.m_iconSegmentCounter = -1;
     this.m_iconScale = 1;
+    this.m_iconTouched = false;
     this.m_onIconClickCallback = null;
     this.m_onIconClickParent = null;
 
+    this.m_iconConfirmation = null;
+    this.m_iconConfirmationTouched = false;
     this.m_onConfirmationCallback = null;
-    this.m_onConfirmationCallback = null;
+    this.m_onConfirmationParent = null;
+    this.m_showIconConfirmButton = false;
 
-    this.m_interpolatedSegmentPosition = null;
-    this.m_actionALpha = 0;
-    this.m_showConfirmButton = false;
-
-    this.m_ladybugTouched = false;
-    this.m_iconTouched = false;
-    this.m_confirmationIconTouched = false;
-
-    this.m_direction = 0;
-
+    // Action controls.
     this.m_messageControl = null;
     this.m_keyPathControl = null;
+
+    this.m_actionControlALpha = 0;
 
     InputControl.prototype.initWithTypeLadybug = function (_viewParent, _inputControlType, _parentLadybug) 
     {
@@ -72,60 +71,53 @@ function InputControl()
         this.m_poligonPath = new PoligonPath();
         this.m_poligonPath.init(_viewParent);
 
-        //this.m_cx = this.m_viewParent.m_canvasEx.m_canvas.width / 2;
-        //this.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height / 2;
-        
         this.m_cx = this.m_parentLadybug.m_cx;
         this.m_cy = this.m_parentLadybug.m_cy;
          
         var imageIcon = "";
         if (_inputControlType === InputControl.C_TYPE_WRITER)
         {
-            this.m_direction = -1;
+            this.m_segmentDirection = -1;
             imageIcon = 'icon_write.png';
 
-            this.m_messageControl = new CanvasControl();
-            this.m_messageControl.initInputStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_viewParent.m_canvasEx.m_canvas.width * 0.8, 30, "");
-            this.m_messageControl._fontSize = 16;
-            this.m_messageControl.registerOnKeyUpListener(this, this.onMessageControlKeyUp);
+            this.m_messageControl = new MessageControl();
+            this.m_messageControl.init(this.m_viewParent, this.m_parentLadybug);
+            this.m_messageControl.setX(this.m_cx);
+            this.m_messageControl.setY(this.m_cy);
+            this.m_messageControl.registerOnEditionChangedListener(this, this.onMessageControlEditionChanged);
+
         }
         else if (_inputControlType === InputControl.C_TYPE_FINDER)
         {
-            this.m_direction = 1;
+            this.m_segmentDirection = 1;
             imageIcon = 'icon_find.png';
 
             this.m_keyPathControl = new KeyPathControl();
             this.m_keyPathControl.init(this.m_viewParent, this.m_parentLadybug);
             this.m_keyPathControl.setX(this.m_cx);
             this.m_keyPathControl.setY(this.m_cy);
-            this.m_keyPathControl.registerOnKeyUpListener(this, this.onKeyPathControlKeyUp);
+            this.m_keyPathControl.registerOnEditionChangedListener(this, this.onKeyPathControlEditionChanged);
 
-            /*
-            this.m_keyPathControl = new CanvasControl();
-            this.m_keyPathControl.initInputStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_viewParent.m_canvasEx.m_canvas.width * 0.2, 30, "");
-            this.m_keyPathControl._fontSize = 16;
-            this.m_keyPathControl.registerOnKeyUpListener(this, this.onKeyPathControlKeyUp);
-            */
         }
 
         this.m_icon = new CanvasControl();
-        this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_direction), 50, 50, "");
+        this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 50, 50, "");
         this.m_icon.setImage(imageIcon);
         this.m_icon.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_icon.registerOnClick(this, this.buttonClic_controller);
         this.m_icon._visible = false;
         this.m_icon._enabled = false;
 
-        this.m_iconOK = new CanvasControl();
-        this.m_iconOK.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_direction), 50, 50, "");
-        this.m_iconOK.setImage('icon_done.png');
-        this.m_iconOK.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
-        this.m_iconOK.registerOnClick(this, this.buttonOKClic_controller);
-        this.m_iconOK._visible = false;
-        this.m_iconOK._enabled = false;
+        this.m_iconConfirmation = new CanvasControl();
+        this.m_iconConfirmation.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 50, 50, "");
+        this.m_iconConfirmation.setImage('icon_done.png');
+        this.m_iconConfirmation.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
+        this.m_iconConfirmation.registerOnClick(this, this.buttonOKClic_controller);
+        this.m_iconConfirmation._visible = false;
+        this.m_iconConfirmation._enabled = false;
 
-        this.m_iconSegment = new PoligonSegment();
-        this.m_iconSegment.init(this.m_cx, this.m_cy, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_direction));
+        this.m_segment = new PoligonSegment();
+        this.m_segment.init(this.m_cx, this.m_cy, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection));
 
         this.m_state = InputControl.C_STATE_HIDE;
         this.initIconScale(0);
@@ -140,7 +132,7 @@ function InputControl()
     {
         /*
         var mouse = this.m_viewParent.getMouseManagerInstance();
-        var isMouseOnAction = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_iconSegment.getEndPointCollitionRectangle()); 
+        var isMouseOnAction = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_segment.getEndPointCollitionRectangle()); 
         if (mouse.m_clicDown === true && isMouseOnAction == true)
         {
 
@@ -167,25 +159,27 @@ function InputControl()
     {
         if (this.m_state === InputControl.C_STATE_HIDE)
         {
-            if (this.m_ladybugTouched === true)
+            if (this.m_parentLadybugTouched === true)
             {
                 this.m_icon._visible = false;
                 this.m_icon._enabled = false;
                 
-                this.m_iconOK._visible = false;
-                this.m_iconOK._enabled = false;
+                this.m_iconConfirmation._visible = false;
+                this.m_iconConfirmation._enabled = false;
 
-                this.m_iconSegmentCounter = 0;
+                this.m_segmentCounter = 0;
+
+                this.setInputControlEnabled(false);
                 this.setState(InputControl.C_STATE_FADE_IN_SEGMENT);
             }
         }
 
         if (this.m_state === InputControl.C_STATE_FADE_IN_SEGMENT)
         {
-            this.m_iconSegmentCounter = this.m_iconSegmentCounter + 5;
-            if (this.m_iconSegmentCounter >= 100)
+            this.m_segmentCounter = this.m_segmentCounter + 5;
+            if (this.m_segmentCounter >= 100)
             {
-                this.m_iconSegmentCounter = 100;
+                this.m_segmentCounter = 100;
 
                 this.initIconScale(0);
                 this.updateIconPositionAtEndOfSegment();
@@ -221,7 +215,7 @@ function InputControl()
                 this.setState(InputControl.C_STATE_COLLAPSE_ICON);
             }
 
-            if (this.m_ladybugTouched === true)
+            if (this.m_parentLadybugTouched === true)
             {
                 this.m_icon._enabled = false;
                 this.setState(InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE);
@@ -230,10 +224,11 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_COLLAPSE_ICON)
         {
-            this.m_iconSegmentCounter = this.m_iconSegmentCounter - 5;
-            if (this.m_iconSegmentCounter <= 40)
+            this.m_segmentCounter = this.m_segmentCounter - 5;
+            if (this.m_segmentCounter <= 40)
             {
                 this.initActionAlpha(0);
+                this.setInputControlEnabled(true);
                 this.setState(InputControl.C_STATE_ACTION_FADEIN);
             }            
             this.updateIconPositionAtEndOfSegment();
@@ -246,10 +241,10 @@ function InputControl()
                 this.initActionAlpha(100);
 
                 if (this.m_type === InputControl.C_TYPE_WRITER)
-                    this.showConfirmButtonForMessageControl(this.m_messageControl);
+                    this.showConfirmButtonControl(this.m_messageControl);
                 
                 if (this.m_type === InputControl.C_TYPE_FINDER)
-                    this.showConfirmButtonForKeyPathControl(this.m_keyPathControl);
+                    this.showConfirmButtonControl(this.m_keyPathControl);
 
                 this.setState(InputControl.C_STATE_ACTIVE);
             }
@@ -257,21 +252,21 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_ACTIVE)
         {
-            if (this.m_ladybugTouched === true)
+            if (this.m_parentLadybugTouched === true)
             {
                 this.m_icon._enabled = false;
                 this.hideConfirmButton();
                 this.setState(InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE);
             }
 
-            if (this.m_confirmationIconTouched === true)
+            if (this.m_iconConfirmationTouched === true)
             {
                 if (this.m_onConfirmationCallback !== null)
                 {
                     this.m_onConfirmationCallback(this.m_onConfirmationParent, this);    
                 }
 
-                this.m_iconOK._enabled = false;
+                this.m_iconConfirmation._enabled = false;
                 this.hideConfirmButton();
                 this.setState(InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE);
             }
@@ -289,10 +284,10 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_EXPAND_ICON)
         {
-            this.m_iconSegmentCounter = this.m_iconSegmentCounter + 5;
-            if (this.m_iconSegmentCounter >= 100)
+            this.m_segmentCounter = this.m_segmentCounter + 5;
+            if (this.m_segmentCounter >= 100)
             {
-                this.m_iconSegmentCounter = 100;
+                this.m_segmentCounter = 100;
 
                 this.updateIconPositionAtEndOfSegment();
                 this.setState(InputControl.C_STATE_SELECTABLE);
@@ -321,9 +316,9 @@ function InputControl()
             this.updateIconPositionAtEndOfSegment();
         }
 
-        this.m_ladybugTouched = false;
+        this.m_parentLadybugTouched = false;
         this.m_iconTouched = false;
-        this.m_confirmationIconTouched = false;            
+        this.m_iconConfirmationTouched = false;            
     };
 
     InputControl.prototype.render = function () 
@@ -333,15 +328,15 @@ function InputControl()
             renderLineWidth(
                 this.m_viewParent.m_canvasEx.m_canvas, 
                 this.m_viewParent.m_canvasEx.m_context,
-                this.m_iconSegment.m_x1,
-                this.m_iconSegment.m_y1,
-                this.m_interpolatedSegmentPosition.x,
-                this.m_interpolatedSegmentPosition.y, 
+                this.m_segment.m_x1,
+                this.m_segment.m_y1,
+                this.m_endSegmentPosition.x,
+                this.m_endSegmentPosition.y, 
                 "gray", 0.8, 2);
 
             this.renderActionControl();
             this.m_icon.render();       
-            this.m_iconOK.render();  
+            this.m_iconConfirmation.render();  
         }
     };
 
@@ -365,29 +360,29 @@ function InputControl()
     
     InputControl.prototype.calculateEndPointSegment = function () 
     {
-        this.m_interpolatedSegmentPosition = this.m_iconSegment.getXYByPercent(this.m_iconSegmentCounter);
+        this.m_endSegmentPosition = this.m_segment.getXYByPercent(this.m_segmentCounter);
     };
 
     InputControl.prototype.updateIconPositionAtEndOfSegment = function () 
     {
         this.calculateEndPointSegment();
 
-        this.m_icon.setX(this.m_interpolatedSegmentPosition.x - this.m_icon._width / 2);
-        this.m_icon.setY(this.m_interpolatedSegmentPosition.y - this.m_icon._height / 2);
+        this.m_icon.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
+        this.m_icon.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
 
-        this.m_iconOK.setX(this.m_interpolatedSegmentPosition.x - this.m_icon._width / 2);
-        this.m_iconOK.setY(this.m_interpolatedSegmentPosition.y - this.m_icon._height / 2);
+        this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
+        this.m_iconConfirmation.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
 
         if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
         {
-            this.m_messageControl.setX(this.m_interpolatedSegmentPosition.x - this.m_messageControl.getWidth() / 2);
-            this.m_messageControl.setY(this.m_interpolatedSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_direction));
+            this.m_messageControl.setX(this.m_endSegmentPosition.x - this.m_messageControl.getWidth() / 2);
+            this.m_messageControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_segmentDirection));
         }
 
         if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
         {
-            this.m_keyPathControl.setX(this.m_interpolatedSegmentPosition.x - this.m_keyPathControl.getWidth() / 2);
-            this.m_keyPathControl.setY(this.m_interpolatedSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_direction));
+            this.m_keyPathControl.setX(this.m_endSegmentPosition.x - this.m_keyPathControl.getWidth() / 2);
+            this.m_keyPathControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_segmentDirection));
         }
     };
 
@@ -432,12 +427,12 @@ function InputControl()
     InputControl.prototype.applyIconScale = function ()
     {
         this.m_icon.setScale(this.m_iconScale / 100);
-        this.m_iconOK.setScale(this.m_iconScale / 100);
+        this.m_iconConfirmation.setScale(this.m_iconScale / 100);
     };
 
     InputControl.prototype.initActionAlpha = function (_actionAlpha) 
     {
-        this.m_actionALpha = _actionAlpha;
+        this.m_actionControlALpha = _actionAlpha;
         this.applyActionAlpha();
     };
 
@@ -445,10 +440,10 @@ function InputControl()
     {
         var result = true;
 
-        this.m_actionALpha = this.m_actionALpha + InputControl.C_ACTION_ALPHA_RATIO;
-        if (this.m_actionALpha >= 100)
+        this.m_actionControlALpha = this.m_actionControlALpha + InputControl.C_ACTION_ALPHA_RATIO;
+        if (this.m_actionControlALpha >= 100)
         {        
-            this.m_actionALpha = 100;
+            this.m_actionControlALpha = 100;
             result = false;
         }
 
@@ -460,10 +455,10 @@ function InputControl()
     InputControl.prototype.decrementActionAlpha = function () 
     {
         var result = true;
-        this.m_actionALpha = this.m_actionALpha - InputControl.C_ACTION_ALPHA_RATIO;
-        if (this.m_actionALpha <= 0)
+        this.m_actionControlALpha = this.m_actionControlALpha - InputControl.C_ACTION_ALPHA_RATIO;
+        if (this.m_actionControlALpha <= 0)
         {
-            this.m_actionALpha = 0;
+            this.m_actionControlALpha = 0;
             result = false;
         }
 
@@ -476,12 +471,25 @@ function InputControl()
     {
         if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
         {
-            this.m_messageControl.setAlpha(this.m_actionALpha / 100);
+            this.m_messageControl.setAlpha(this.m_actionControlALpha / 100);
         }
 
         if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
         {
-            this.m_keyPathControl.setAlpha(this.m_actionALpha / 100);
+            this.m_keyPathControl.setAlpha(this.m_actionControlALpha / 100);
+        }
+    };
+
+    InputControl.prototype.setInputControlEnabled = function (_value)
+    {
+        if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
+        {
+            this.m_messageControl.setEnabled(_value);
+        }
+
+        if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
+        {
+            this.m_keyPathControl.setEnabled(_value);
         }
     };
 
@@ -496,7 +504,7 @@ function InputControl()
 
         if (parent.m_state === InputControl.C_STATE_ACTIVE)
         {
-            parent.m_confirmationIconTouched = true;            
+            parent.m_iconConfirmationTouched = true;            
         }
     };
 
@@ -509,35 +517,36 @@ function InputControl()
         }
     };
 
+
     InputControl.prototype.setLadyBugTouched = function ()
     {
         if (this.m_state === InputControl.C_STATE_HIDE ||
             this.m_state === InputControl.C_STATE_ACTIVE ||
             this.m_state === InputControl.C_STATE_SELECTABLE)
         {
-            this.m_ladybugTouched = true;
+            this.m_parentLadybugTouched = true;
         }
-    };
+    };    
 
     InputControl.prototype.showConfirmButton = function ()
     {
         this.m_showConfirmButton = true;
         this.updateConfirmButton();
-    };
+    };    
 
     InputControl.prototype.hideConfirmButton = function ()
     {
         this.m_showConfirmButton = false;
         this.updateConfirmButton();
-    };
+    };    
 
     InputControl.prototype.updateConfirmButton = function ()
     {
         this.m_icon._visible = !this.m_showConfirmButton;
         this.m_icon._enabled = !this.m_showConfirmButton;
 
-        this.m_iconOK._visible = this.m_showConfirmButton;
-        this.m_iconOK._enabled = this.m_showConfirmButton;
+        this.m_iconConfirmation._visible = this.m_showConfirmButton;
+        this.m_iconConfirmation._enabled = this.m_showConfirmButton;
     };
 
     InputControl.prototype.registerOnClick = function (_parent, _callBack)
@@ -569,31 +578,19 @@ function InputControl()
         }
     };
 
-    InputControl.prototype.onMessageControlKeyUp = function (_e, _sender)
+    InputControl.prototype.onMessageControlEditionChanged = function (_sender)
     {
-        _sender._onkeyUpParent.showConfirmButtonForMessageControl(_sender);
+        _sender.getOnEditionChangedParent().showConfirmButtonControl(_sender);
     };
 
-    InputControl.prototype.showConfirmButtonForMessageControl = function (_sender)
+    InputControl.prototype.onKeyPathControlEditionChanged = function (_sender)
     {
-        if (_sender !== null && _sender.getText() !== "")
-        {
-            this.showConfirmButton();
-        }
-        else
-        {
-            this.hideConfirmButton();
-        }
+        _sender.getOnEditionChangedParent().showConfirmButtonControl(_sender);
     };
 
-    InputControl.prototype.onKeyPathControlKeyUp = function (_e, _sender)
+    InputControl.prototype.showConfirmButtonControl = function (_sender)
     {
-        _sender._onkeyUpParent.showConfirmButtonForKeyPathControl(_sender);
-    };
-
-    InputControl.prototype.showConfirmButtonForKeyPathControl = function (_sender)
-    {
-        if (_sender !== null && _sender.getText() !== "")
+        if (_sender !== null && _sender.isEditionChanged() === true)
         {
             this.showConfirmButton();
         }

@@ -9,9 +9,15 @@ function WishflowerImageFilterTestActivity(_id, _viewParent)
    this.m_backgroundFiltered_img = null;
 };
 
+WishflowerImageFilterTestActivity.prototype.getActivityName = function ()
+{   
+  return "WishflowerImageFilterTestActivity";
+}
+
 WishflowerImageFilterTestActivity.prototype.initialize = function ()
-{
-    console.log("WishflowerImageFilterTestActivity");
+{   
+  console.log(this.getActivityName());
+
 
     // NOTE: we must take original bitmap because all bitmaps has a previous BitmapFiler applied at wishFlowerController.
     this.m_background_img = this.m_viewParent.getBitmapManagerInstance().getOriginalImageByName('ctree_leave.png');
@@ -33,12 +39,14 @@ WishflowerImageFilterTestActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnWack_controller;
+    this.m_btnBack.setVisible(false);
+    this.m_btnBack.setEnabled(false);
 };
 
 WishflowerImageFilterTestActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+  this.m_btnBack.setVisible(true);
+  this.m_btnBack.setEnabled(true);
 };
 
 WishflowerImageFilterTestActivity.prototype.handleInputs = function ()
@@ -81,6 +89,6 @@ WishflowerImageFilterTestActivity.prototype.btnBack_controller = function (_e, _
 
 WishflowerImageFilterTestActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+  this.m_btnBack.setVisible(false);
+  this.m_btnBack.setEnabled(false);
 };

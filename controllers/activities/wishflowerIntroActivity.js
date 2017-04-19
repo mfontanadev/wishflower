@@ -12,9 +12,14 @@ function WishflowerIntroActivity(_id, _viewParent)
 	this.m_btnBack = null;
 }
 
+WishflowerIntroActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerIntroActivity";
+}
+
 WishflowerIntroActivity.prototype.initialize = function ()
 {   
-	console.log("WishflowerIntroActivity");
+	console.log(this.getActivityName());
 
 	this.m_flow = new IntroFlow();
 	this.m_flow.init(this.m_viewParent, this);
@@ -31,6 +36,8 @@ WishflowerIntroActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+	this.m_btnBack.setVisible(false);
+	this.m_btnBack.setEnabled(false);
 };
 
 // ****************************************
@@ -38,8 +45,8 @@ WishflowerIntroActivity.prototype.createControls = function ()
 // ****************************************
 WishflowerIntroActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+  	this.m_btnBack.setVisible(true);
+  	this.m_btnBack.setEnabled(true);
 };
 
 WishflowerIntroActivity.prototype.handleInputs = function ()
@@ -84,7 +91,7 @@ WishflowerIntroActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerIntroActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
 

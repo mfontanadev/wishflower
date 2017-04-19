@@ -14,9 +14,15 @@ function WishflowerHelpActivity(_id, _viewParent)
 };
 
 
+WishflowerHelpActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerHelpActivity";
+}
+
 WishflowerHelpActivity.prototype.initialize = function ()
 {   
-	console.log("WishflowerHelpActivity");
+	console.log(this.getActivityName());
+	
 	this.m_flow = new HelpFlow();
 	this.m_flow.init(this.m_viewParent, this);
 	this.m_flow.setState(HelpFlow.C_HELP_FLOW_APPSTATE_INITIALIZING);
@@ -32,12 +38,14 @@ WishflowerHelpActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+	this.m_btnBack.setVisible(false);
+	this.m_btnBack.setEnabled(false);    
 };
 
 WishflowerHelpActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+	this.m_btnBack.setVisible(true);
+	this.m_btnBack.setEnabled(true);
 
 	this.m_flow.setAnimationsWithCurrentLadyBugOffset();
 };
@@ -90,6 +98,6 @@ WishflowerHelpActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerHelpActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+	this.m_btnBack.setVisible(false);
+	this.m_btnBack.setEnabled(false);
 };

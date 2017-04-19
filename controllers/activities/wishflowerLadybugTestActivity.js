@@ -26,9 +26,14 @@ function WishflowerLadybugTestActivity(_id, _viewParent)
     this.m_btnBack = null;
 };
 
+WishflowerLadybugTestActivity.prototype.getActivityName = function ()
+{   
+    return "WishflowerLadybugTestActivity";
+}
+
 WishflowerLadybugTestActivity.prototype.initialize = function ()
-{
-	console.log("WishflowerLadybugTestActivity");
+{   
+    console.log(this.getActivityName());
 
     this.m_grass_img = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
     this.m_trunkObj.image = this.m_viewParent.getBitmapManagerInstance().getImageByName('log.png');
@@ -59,12 +64,14 @@ WishflowerLadybugTestActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+    this.m_btnBack.setVisible(false);
+    this.m_btnBack.setEnabled(false);    
 };
 
 WishflowerLadybugTestActivity.prototype.onEnterActivity = function ()
 {
-    this.m_btnBack._visible = true;
-    this.m_btnBack._disable = false;
+    this.m_btnBack.setVisible(true);
+    this.m_btnBack.setEnabled(true);
 };
 
 WishflowerLadybugTestActivity.prototype.handleInputs = function ()
@@ -116,8 +123,8 @@ WishflowerLadybugTestActivity.prototype.btnBack_controller = function (_e, _send
 
 WishflowerLadybugTestActivity.prototype.onLeaveActivity = function ()
 {
-    this.m_btnBack._visible = false;
-    this.m_btnBack._disable = true;
+    this.m_btnBack.setVisible(false);
+    this.m_btnBack.setEnabled(false);
 
     this.m_ladybug.endClosingAnimationEvent(this.m_ladybug); 
 };

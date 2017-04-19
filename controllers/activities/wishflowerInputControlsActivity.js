@@ -16,9 +16,14 @@ function WishflowerInputControlsActivity(_id, _viewParent)
 };
 
 
+WishflowerInputControlsActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerInputControlsActivity";
+}
+
 WishflowerInputControlsActivity.prototype.initialize = function ()
 {   
-	console.log("WishflowerInputControlsActivity");
+	console.log(this.getActivityName());
 	
 	this.createControls();
 
@@ -44,12 +49,14 @@ WishflowerInputControlsActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);    
 };
 
 WishflowerInputControlsActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+  	this.m_btnBack.setVisible(true);
+  	this.m_btnBack.setEnabled(true);
 };
 
 WishflowerInputControlsActivity.prototype.handleInputs = function ()
@@ -137,6 +144,6 @@ WishflowerInputControlsActivity.prototype.onConfirmFinderClick = function (_pare
 
 WishflowerInputControlsActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };

@@ -15,9 +15,14 @@ function WishflowerMenuActivity(_id, _viewParent)
     this.m_btnGotoLadybugIntroActivity = null;
 }
 
+WishflowerMenuActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerMenuActivity";
+}
+
 WishflowerMenuActivity.prototype.initialize = function ()
-{
-	console.log("WishflowerMenuActivity");
+{   
+	console.log(this.getActivityName());
 	
 	this.createControls();
 };

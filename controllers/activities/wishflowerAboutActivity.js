@@ -10,9 +10,14 @@ function WishflowerAboutActivity(_id, _viewParent)
 	this.m_inpGenericInput = null;
 };
 
+WishflowerAboutActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerAboutActivity";
+}
+
 WishflowerAboutActivity.prototype.initialize = function ()
-{
-	console.log("WishflowerAboutActivity");
+{   
+	console.log(this.getActivityName());
 	
 	this.createControls();
 };

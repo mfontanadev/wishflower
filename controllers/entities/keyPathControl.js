@@ -32,8 +32,16 @@ function KeyPathControl()
     this.m_rightButtons = [];       // buttons ">"
     this.m_numberButtons = [];      // button "1", "2", "3"
 
+    this.m_onEditionChangedParent = null;
+    this.m_onEditionChanged = null;
+    this.m_editionChanged = false;
+
+    this.m_stopEventPropagation = false;
+
     KeyPathControl.prototype.init = function (_viewParent, _parentLadybug)
     {
+        this.m_stopEventPropagation = true;
+
         this.m_viewParent = _viewParent;
         this.m_parentLadybug = _parentLadybug;
 
@@ -87,6 +95,9 @@ function KeyPathControl()
         this.setButtonState(4, KeyPathControl.C_KEY_INDICATOR_LEFT);
         this.setButtonState(5, KeyPathControl.C_KEY_INDICATOR_LEFT);
         this.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+
+        this.setEnabled(false);
+        this.m_stopEventPropagation = false;
     };
 
     KeyPathControl.prototype.setButtonState = function(_index, _state)
@@ -99,6 +110,8 @@ function KeyPathControl()
             this.m_leftButtons[_index]._enable = true;
             this.m_rightButtons[_index]._visible = false;
             this.m_rightButtons[_index]._enable = false;
+
+            this.triggerOnEditionChangedEvent();
         }
         else if (_state === KeyPathControl.C_KEY_INDICATOR_RIGHT)
         {
@@ -107,6 +120,8 @@ function KeyPathControl()
             this.m_rightButtons[_index]._enable = true;
             this.m_leftButtons[_index]._visible = false;
             this.m_leftButtons[_index]._enable = false;
+
+            this.triggerOnEditionChangedEvent();
         }
         else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_1)
         {
@@ -114,6 +129,8 @@ function KeyPathControl()
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_1;
             this.m_numberButtons[0]._visible = true;
             this.m_numberButtons[0]._enable = true;
+
+            this.triggerOnEditionChangedEvent();            
         }
         else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_2)
         {
@@ -121,6 +138,8 @@ function KeyPathControl()
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_2;
             this.m_numberButtons[1]._visible = true;
             this.m_numberButtons[1]._enable = true;
+
+            this.triggerOnEditionChangedEvent();            
         }
         else if (_state === KeyPathControl.C_KEY_INDICATOR_FLOWER_3)
         {
@@ -128,6 +147,8 @@ function KeyPathControl()
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_3;
             this.m_numberButtons[2]._visible = true;
             this.m_numberButtons[2]._enable = true;
+
+            this.triggerOnEditionChangedEvent();            
         }
     };
 
@@ -139,6 +160,19 @@ function KeyPathControl()
             this.m_numberButtons[i]._enable = false;
         }
     };
+
+    KeyPathControl.prototype.triggerOnEditionChangedEvent = function ()
+    {
+        if (this.m_stopEventPropagation === true)
+            return;
+
+        if (this.m_onEditionChanged !== null)
+        {
+            this.m_editionChanged = true;
+            this.m_onEditionChanged(this);   
+        }
+    };
+
 
     // ****************************************
     // Main cicle: handleInputs, implementGameLogic, render
@@ -234,7 +268,7 @@ function KeyPathControl()
     KeyPathControl.prototype.setAlpha = function (_alpha)
     {
         this.m_alpha = _alpha;
-        return;
+
         for (var i = 0; i < 6; i++)
         {
             this.m_leftButtons[i].setAlpha(_alpha);
@@ -245,12 +279,32 @@ function KeyPathControl()
         {
             this.m_numberButtons[i2].setAlpha(_alpha);
         }
-
     };
 
     KeyPathControl.prototype.getText = function ()
     {
-        return "hola mundo";
+        var result = "";
+
+        for (var i = 0; i < 7; i++)
+        {
+            result = result + this.m_keyPathState[i].toString();
+        }
+
+        return result;
+    };
+
+    KeyPathControl.prototype.setEnabled = function (_value)
+    {
+        for (var i = 0; i < 6; i++)
+        {
+            this.m_leftButtons[i].setEnabled(_value);
+            this.m_rightButtons[i].setEnabled(_value);
+        }
+
+        for (var i2 = 0; i2 < 3; i2++)
+        {
+            this.m_numberButtons[i2].setEnabled(_value);
+        }
     };
 
     KeyPathControl.prototype.getWidth = function()
@@ -263,9 +317,21 @@ function KeyPathControl()
         return this.m_height;
     };
 
-    KeyPathControl.prototype.registerOnKeyUpListener = function(_parent, _callback)
+    KeyPathControl.prototype.registerOnEditionChangedListener = function(_parent, _callback)
     {
+        this.m_onEditionChangedParent = _parent;
+        this.m_onEditionChanged = _callback;
     };
+
+    KeyPathControl.prototype.getOnEditionChangedParent = function()
+    {
+        return this.m_onEditionChangedParent;
+    };  
+
+    KeyPathControl.prototype.isEditionChanged = function()
+    {
+        return this.m_editionChanged;
+    };  
 }
 
 

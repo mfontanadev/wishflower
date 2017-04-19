@@ -12,10 +12,14 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_btnBack = null;
 };
 
+WishflowerPlayActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerPlayActivity";
+}
 
 WishflowerPlayActivity.prototype.initialize = function ()
-{
-	console.log("WishflowerPlayActivity");
+{   
+	console.log(this.getActivityName());
 
 	this.m_flow = new PlayFlow();
 	this.m_flow.init(this.m_viewParent, this);
@@ -31,12 +35,15 @@ WishflowerPlayActivity.prototype.createControls = function ()
     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
     this.m_btnBack._fontSize = 12;
     this.m_btnBack._onClick = this.btnBack_controller;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack._visible = true;
-	this.m_btnBack._disable = false;
+  	this.m_btnBack.setVisible(true);
+  	this.m_btnBack.setEnabled(true);
+
 	this.m_flow.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
 };
 
@@ -88,6 +95,6 @@ WishflowerPlayActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack._visible = false;
-	this.m_btnBack._disable = true;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
