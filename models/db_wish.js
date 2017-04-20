@@ -71,6 +71,10 @@ function db_wish()
         // Pending implmentation.
     }
 
+    db_wish.prototype.wishflowerClearTree = function(_callback)
+    {
+        // Pending implmentation.
+    }
 
 }
 

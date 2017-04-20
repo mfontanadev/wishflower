@@ -152,6 +152,18 @@ WishflowerServiceMock.prototype.wishflowerAddByKeyPath = function (_keyPath, _wi
     _callback(res);
 }
 
+WishflowerServiceMock.prototype.wishflowerClearTree = function (_callback)
+{
+    var res = "";
+
+    for (var i = 0; i < this.m_wishes.length; i++)
+    {
+	    this.m_wishes[i].wish = "";
+    }
+
+    _callback(res);
+}
+
 WishflowerServiceMock.prototype.dump = function ()
 {
 	console.log(this.m_servicesCount);

@@ -67,7 +67,13 @@ WishflowerPlayActivity.prototype.handleInputs = function ()
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_SPACE);
 		this.m_garden.logCurrentTree();
     }
-	
+    
+    if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN) === true)
+    {
+        this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);
+        this.btnSendWish_controller(null, null);
+    }
+
 	this.m_garden.handleInputs();
 	this.m_tree.handleInputs();
 };

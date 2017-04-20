@@ -74,7 +74,7 @@ module.exports = function(app)
 			);
 		});
 
-			app.post ('/services/wishflowerAddByKeyPath', function (req, res)
+	app.post ('/services/wishflowerAddByKeyPath', function (req, res)
     {
         var keyPath = req.query.keyPath;
         var wish = req.query.wish;
@@ -87,5 +87,12 @@ module.exports = function(app)
         );
     });
 
+	app.post ('/services/wishflowerClearTree', function (req, res)
+    {
+        objWishFlowerService.wishflowerClearTree
+        (
+            function(result) {res.send(result);}
+        );
+    });
 
 }

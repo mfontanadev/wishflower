@@ -48,6 +48,11 @@ WishflowerService.prototype.wishflowerAddByKeyPath = function (_keyPath, _wish, 
     this.m_db_wish.wishflowerAddByKeyPath(_keyPath, _wish, _callback);
 }
 
+WishflowerService.prototype.wishflowerClearTree = function (_callback)
+{
+    this.m_db_wish.wishflowerClearTree(_callback);
+}
+
 WishflowerService.prototype.dump = function ()
 {
 	console.log(this.m_servicesCount);

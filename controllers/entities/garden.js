@@ -108,37 +108,48 @@ function Garden()
         }
         else
         {
-            callWebService
-            (
-                'POST',
-                //'services/wishflowerAddById?id=>>1&wish=' + _wishMessage, 
-                'services/wishflowerAddWish?wish=' + _wishMessage, 
-                function(_errorCode)
-                {
-                    msglog("CallWebService error:" + _errorCode);
-                },
-                function(_data)
-                {
-                    if (_data === "")
+            if (_wishMessage === "cleartree")
+            {
+                callWebService
+                (
+                    'POST',
+                    'services/wishflowerClearTree', 
+                    function(_errorCode)
                     {
-                        console.log("Wish not added, tree is full.");
-                    }
-                    else
+                        msglog("CallWebService error:" + _errorCode);
+                    },
+                    function(_data)
                     {
-/*                        // Get data from the added node to set ladybug x,y target positions.
-                        var keyPath = JSON.parse(_data)[0].keyPath;
-                        var currentNode = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
-
-                        // Create a new flying ladybug.
-                        var incommingLadybug = new Ladybug();
-                        incommingLadybug.initWithView(Garden.self.m_viewParent);
-                        incommingLadybug.travelToFlower(currentNode.m_x1, currentNode.m_y1);
-                        incommingLadybug.startTravel();
-                        Garden.self.m_incommingLadybugs.push(incommingLadybug);
-*/
+                        if (_data === "")
+                        {
+                            console.log("Wishtree is clear.");
+                        }
                     }
-                }
-            );  
+                );  
+            }
+            else
+            {
+                callWebService
+                (
+                    'POST',
+                    'services/wishflowerAddWish?wish=' + _wishMessage, 
+                    function(_errorCode)
+                    {
+                        msglog("CallWebService error:" + _errorCode);
+                    },
+                    function(_data)
+                    {
+                        if (_data === "")
+                        {
+                            console.log("Wish not added, tree is full.");
+                        }
+                        else
+                        {
+                            console.log("Wish added.");
+                        }
+                    }
+                );  
+            }
         }
     };
 
