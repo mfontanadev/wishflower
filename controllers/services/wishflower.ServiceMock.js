@@ -8,21 +8,37 @@ function WishflowerServiceMock()
 
 	var res = "";
 	res += '[';
-	res += '{ "_id" : "000", "keyPath" : ">>1", "wish" : ">>1w1" }';
+	res += '{ "_id" : "000", "keyPath" : ">>>1", "wish" : ">>>1w000" }';
 	res += ',';
-	res += '{ "_id" : "001", "keyPath" : ">>2", "wish" : ">>2w2" }';
+	res += '{ "_id" : "001", "keyPath" : ">>>2", "wish" : ">>>2w001" }';
 	res += ',';
-	res += '{ "_id" : "002", "keyPath" : "><1", "wish" : "><1w3" }';
+	res += '{ "_id" : "002", "keyPath" : ">><1", "wish" : ">><1w002" }';
 	res += ',';
-	res += '{ "_id" : "003", "keyPath" : "><2", "wish" : "><2w4" }';
+	res += '{ "_id" : "003", "keyPath" : ">><2", "wish" : ">><2w003" }';
 	res += ',';
-	res += '{ "_id" : "004", "keyPath" : "<>1", "wish" : "<>1w5" }';
+	res += '{ "_id" : "004", "keyPath" : "><>1", "wish" : "><>1w004" }';
 	res += ',';
-	res += '{ "_id" : "005", "keyPath" : "<>2", "wish" : "<>2w6" }';
+	res += '{ "_id" : "005", "keyPath" : "><>2", "wish" : "><>2w005" }';
 	res += ',';
-	res += '{ "_id" : "006", "keyPath" : "<<1", "wish" : "<<1w7" }';
+	res += '{ "_id" : "006", "keyPath" : "><<1", "wish" : "><<1w006" }';
 	res += ',';
-	res += '{ "_id" : "007", "keyPath" : "<<2", "wish" : "<<2w8" }';
+	res += '{ "_id" : "007", "keyPath" : "><<2", "wish" : "><<2w007" }';
+	res += ',';
+	res += '{ "_id" : "008", "keyPath" : "<>>1", "wish" : "<>>1w008" }';
+	res += ',';
+	res += '{ "_id" : "009", "keyPath" : "<>>2", "wish" : "<>>2w009" }';
+	res += ',';
+	res += '{ "_id" : "010", "keyPath" : "<><1", "wish" : "<><1w010" }';
+	res += ',';
+	res += '{ "_id" : "011", "keyPath" : "<><2", "wish" : "<><2w011" }';
+	res += ',';
+	res += '{ "_id" : "012", "keyPath" : "<<>1", "wish" : "<<>1w012" }';
+	res += ',';
+	res += '{ "_id" : "013", "keyPath" : "<<>2", "wish" : "<<>2w013" }';
+	res += ',';
+	res += '{ "_id" : "014", "keyPath" : "<<<1", "wish" : "<<<1w014" }';
+	res += ',';
+	res += '{ "_id" : "015", "keyPath" : "<<<2", "wish" : "<<<2w015" }';
 	res += ']';
 
 	// Clear wish field.
