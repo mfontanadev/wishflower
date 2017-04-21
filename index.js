@@ -5,7 +5,7 @@ var url = require('url');
 
 // Global definitions
 global.__basePath = __dirname;
-global.__mockDB = true;
+global.__mockDB = false;
 
 // Entry point.
 app.get("/", function (req, res) {
@@ -30,14 +30,18 @@ app.use(express.static(__dirname + '/public/assets/img'));
 app.use(express.static(__dirname + '/public/assets/snd'));
 
 // Database 
+var reqServices = require('./controllers/services/wishflower.Service'); 
 var mongodb = require('mongodb');
 var server = new mongodb.Server("127.0.0.1", 27017, {});
-var dbBaseTest = new mongodb.Db('wishFlowerDb', server, {});
+var dbBaseTest = new mongodb.Db('wishFlowerDB', server, {});
 dbBaseTest.open
 (
 	function (error, client) 
 	{
 		global.__dbClient = client;
+		var services = new reqServices();
+		services.init(global.__dbClient);
+		console.log('Database initialized.');
 	}
 );
 

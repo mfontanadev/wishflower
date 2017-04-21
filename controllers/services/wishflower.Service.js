@@ -3,7 +3,7 @@ var req_db_wish = null;
 
 if (typeof require != 'undefined')
 {
-	//req_db_wish_schema = require(__basePath + "/models/db_wish_schema.js");
+//	req_db_wish_schema = require(__basePath + "/models/db_wish_schema.js");
 	req_db_wish = require(__basePath + "/models/db_wish.js");
 }
 
@@ -11,6 +11,11 @@ function WishflowerService()
 { 
 	this.m_servicesCount = 0;
 	this.m_db_wish = new req_db_wish();
+}
+
+WishflowerService.prototype.init = function (_dbclient) 
+{
+	this.m_db_wish.initOnce(_dbclient);
 }
 
 WishflowerService.prototype.wishflowerGetAll = function (_callback) 
