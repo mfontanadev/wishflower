@@ -6,6 +6,7 @@ var url = require('url');
 // Global definitions
 global.__basePath = __dirname;
 global.__mockDB = false;
+global.__dbClient = null;
 
 // Entry point.
 app.get("/", function (req, res) {
@@ -38,10 +39,19 @@ dbBaseTest.open
 (
 	function (error, client) 
 	{
+		console.log('Database initializing.');
 		global.__dbClient = client;
-		var services = new reqServices();
-		services.init(global.__dbClient);
-		console.log('Database initialized.');
+
+		if (typeof global.__dbClient !== 'undefined' && global.__dbClient !== null)
+		{
+			var services = new reqServices();
+			services.init(global.__dbClient);
+			console.log('Database initialized.');
+		}
+		else
+		{
+			console.log('Database error:' + error);
+		}
 	}
 );
 

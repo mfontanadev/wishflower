@@ -6,12 +6,13 @@ function db_wish()
 	{		
 		//console.log("initOnce");
 	 	var collection = _dbclient.collection(db_wish.COLLECTION_NAME);
+		collection.drop();
 
 		var res = "";
 		res += '[';
 		res += '{"keyPath" : ">>>1", "wish" : "" }';
 		res += ',';
-		res += '{"keyPath" : ">>>2", "wish" : "2" }';
+		res += '{"keyPath" : ">>>2", "wish" : "WishTest" }';
 		res += ',';
 		res += '{"keyPath" : ">><1", "wish" : "" }';
 		res += ',';
@@ -48,6 +49,9 @@ function db_wish()
 		{
 			collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
 		}
+
+		//console.log("test update");
+		//this.wishflowerAddByKeyPath(">>>2", "updated", null);
 	}
 
 	db_wish.prototype.wishflowerGetAll = function(_callback)
@@ -89,8 +93,8 @@ function db_wish()
     db_wish.prototype.wishflowerGetByKeyPath = function(_keyPath, _callback)
     {
 		console.log("mongo wishflowerGetByKeyPath");
-
         // Pending implmentation.
+
     }
 
     db_wish.prototype.wishflowerGetByWish = function(_wish, _callback)
@@ -102,9 +106,12 @@ function db_wish()
 
     db_wish.prototype.wishflowerAddWish = function(_wish, _callback)
     {
+    	var _self = this;
 		console.log("mongo wishflowerAddWish");
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
+
+       	//_self.wishflowerAddByKeyPath(">>>1", _wish, null);
 
 		collection
 		.find()
@@ -112,13 +119,21 @@ function db_wish()
 		(
 			function(err, docs) 
 			{
-				for (var i = 0; i < docs.lenght; i++)
-				{
+			    var res = "";
 
-				}
+			    // Find an empty wishflower to hold our incomming wish.
+			    for (var i = 0; i < docs.length; i++)
+			    {
+			        if (docs[i].wish === '')
+			        {
+				       	_self.wishflowerAddByKeyPath(docs[i].keyPath, _wish + "doc", null);
+			            docs[i].wish = _wish;
+			            res = '[' + JSON.stringify(docs[i]) + ']';
+			            break;
+			        }
+			    }
 
-			    //_callback(JSON.stringify(docs));
-			    _callback("[]");
+			    _callback(res);
 			}
 		);
     }
@@ -127,35 +142,33 @@ function db_wish()
 	{
 		console.log("mongo wishflowerAddById");
 
-		var collection = __dbClient.collection('personas');
-		
-		collection
-		.find({'nombre': 'pepe'})
-		.toArray
-		(
-			function(err, docs) 
-			{
-				console.log("");
-				console.log(docs);
-				_callback(json(docs));
-			}
-		);
 	}
 
     db_wish.prototype.wishflowerAddByKeyPath = function(_keyPath, _wish, _callback)
     {
 		console.log("mongo wishflowerAddByKeyPath");
 
-        // Pending implmentation.
+	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
+
+		var result = null; 
+
+		result = collection.update
+		(
+		   { keyPath: _keyPath},
+		   {
+		      keyPath: _keyPath,
+		      wish: _wish
+		   }
+		)
+		console.log("find:" + _keyPath  +", wish:" + _wish);
+		console.log(result);
     }
 
     db_wish.prototype.wishflowerClearTree = function(_callback)
     {
-		//console.log("mongo wishflowerClearTree");
+		console.log("mongo wishflowerClearTree");
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
-
-		collection.drop();
 
 		this.initOnce(__dbClient);
 

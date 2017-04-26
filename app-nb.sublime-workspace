@@ -384,10 +384,28 @@
 	"buffers":
 	[
 		{
+			"file": "index.js",
+			"settings":
+			{
+				"buffer_size": 1479,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "models/db_wish.js",
+			"settings":
+			{
+				"buffer_size": 3565,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "controllers/services/wishflower.Service.js",
 			"settings":
 			{
-				"buffer_size": 1575,
+				"buffer_size": 1674,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -395,7 +413,8 @@
 			"file": "controllers/services/wishflower.ServiceMock.js",
 			"settings":
 			{
-				"buffer_size": 4160,
+				"buffer_size": 4268,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -451,7 +470,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models",
@@ -461,16 +479,18 @@
 	],
 	"file_history":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_wish_schema.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.ServiceMock.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Route.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.ServiceMock.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_wish.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Service.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_wish_schema.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_user.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
@@ -490,7 +510,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/introFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/keyPathControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/messageControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/inputControl.js",
@@ -516,7 +535,6 @@
 		"/C/workspace/Bunge/Wokspaces/cfs-simulators/Isla de Carga de Líquidos/IslaDeCargaSimulator - RyD - Test Automatizado - v3.js",
 		"/C/workspace/Bunge/Wokspaces/cfs-simulators/Isla de Carga de Líquidos/IslaDeCargaSimulator.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/errorPageView.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower-master/controllers/entities/db_wish.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/mongoose/node_modules/hooks-fixed/README.md",
@@ -607,6 +625,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"init",
+			"lenght",
+			"req_db_wish",
+			"db_wish_schema",
+			"[]",
+			"console",
 			"preOrder",
 			"wishflowerAddWish",
 			"wishflowerAddByKeyPath",
@@ -728,13 +752,7 @@
 			"self",
 			"_onClick",
 			"touched",
-			"m_ladybugTouched",
-			"C_STATE_ACTION_FADEOUT_TO_HIDE",
-			"initIconScale",
-			"updateIconPositionAtEndOfSegment",
-			"initIconScale",
-			"m_iconSegmentCounter",
-			"m_interpolatedSegmentPosition"
+			"m_ladybugTouched"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -759,19 +777,76 @@
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/services/wishflower.Service.js",
+					"file": "index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1575,
+						"buffer_size": 1479,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								449,
-								449
+								1180,
+								1184
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 320.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "models/db_wish.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3565,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								604,
+								604
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "controllers/services/wishflower.Service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1674,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								391,
+								391
 							]
 						],
 						"settings":
@@ -786,31 +861,32 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 3,
 					"file": "controllers/services/wishflower.ServiceMock.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4160,
+						"buffer_size": 4268,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								437,
-								437
+								1528,
+								1534
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1215.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
