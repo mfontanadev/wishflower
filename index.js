@@ -8,6 +8,12 @@ global.__basePath = __dirname;
 global.__mockDB = false;
 global.__dbClient = null;
 
+var reqGlobals = require('./config/globalDefinitions.js'); 
+global.__configDefinitions = new reqGlobals();
+
+//global.__treeLeves = 3;
+//global.__treeFlowers = 2;
+
 // Entry point.
 app.get("/", function (req, res) {
     res.sendFile(__dirname + '/views/' + 'wishflowerView.html');
@@ -31,29 +37,37 @@ app.use(express.static(__dirname + '/public/assets/img'));
 app.use(express.static(__dirname + '/public/assets/snd'));
 
 // Database 
-var reqServices = require('./controllers/services/wishflower.Service'); 
-var mongodb = require('mongodb');
-var server = new mongodb.Server("127.0.0.1", 27017, {});
-var dbBaseTest = new mongodb.Db('wishFlowerDB', server, {});
-dbBaseTest.open
-(
-	function (error, client) 
-	{
-		console.log('Database initializing.');
-		global.__dbClient = client;
+if (global.__mockDB === false)
+{
+	console.log('Database initializing.');
 
-		if (typeof global.__dbClient !== 'undefined' && global.__dbClient !== null)
+	var reqServices = require('./controllers/services/wishflower.Service'); 
+	var mongodb = require('mongodb');
+	var server = new mongodb.Server("127.0.0.1", 27017, {});
+	var dbBaseTest = new mongodb.Db('wishFlowerDB', server, {});
+	dbBaseTest.open
+	(
+		function (error, client) 
 		{
-			var services = new reqServices();
-			services.init(global.__dbClient);
-			console.log('Database initialized.');
+			global.__dbClient = client;
+
+			if (typeof global.__dbClient !== 'undefined' && global.__dbClient !== null)
+			{
+				var services = new reqServices();
+				services.init(global.__dbClient);
+				console.log('Database initialized.');
+			}
+			else
+			{
+				console.log('Database error:' + error);
+			}
 		}
-		else
-		{
-			console.log('Database error:' + error);
-		}
-	}
-);
+	);
+}
+else
+{
+	console.log('Database initialized (mock).');
+}
 
 // Start socket listening.
 var io = require('socket.io').listen(app.listen(port));

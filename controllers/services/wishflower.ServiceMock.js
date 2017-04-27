@@ -3,44 +3,18 @@ if (typeof require != "undefined")
 }
 function WishflowerServiceMock()
 {
+	this.m_wishes = null;
+
+	WishflowerServiceMock.prototype.init = function (_dbclient)
+	{
+		this.initOnce(null);
+	}
+
 	WishflowerServiceMock.prototype.initOnce = function (_dbclient)
 	{
-		this.m_servicesCount = 0;
+		console.log("mock initOnce");
 
-		var res = "";
-		res += '[';
-		res += '{ "_id" : "000", "keyPath" : ">>>1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "001", "keyPath" : ">>>2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "002", "keyPath" : ">><1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "003", "keyPath" : ">><2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "004", "keyPath" : "><>1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "005", "keyPath" : "><>2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "006", "keyPath" : "><<1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "007", "keyPath" : "><<2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "008", "keyPath" : "<>>1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "009", "keyPath" : "<>>2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "010", "keyPath" : "<><1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "011", "keyPath" : "<><2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "012", "keyPath" : "<<>1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "013", "keyPath" : "<<>2", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "014", "keyPath" : "<<<1", "wish" : "" }';
-		res += ',';
-		res += '{ "_id" : "015", "keyPath" : "<<<2", "wish" : "" }';
-		res += ']';
+		var res = this.automaticWishEntryGenerator(global.__treeLeves, global.__treeFlowers);
 
 		// Clear wish field.
 		this.m_wishes = JSON.parse(res);
@@ -51,16 +25,69 @@ function WishflowerServiceMock()
 		}
 	}
 
-	WishflowerServiceMock.prototype.wishflowerGetAll = function (_callback)
+	WishflowerServiceMock.prototype.automaticWishEntryGenerator = function (_levels, _flowersQty)
 	{
 		var res = "";
+		
+		res += '[';
+
+		// Generate in between data.
+		var levels = _levels;
+		var flowersQty = _flowersQty;
+		var totalIterations = Math.pow(2, levels); 
+
+		for (var i = 0; i < totalIterations; i++)
+		{
+			for (var li = 1; li <= flowersQty; li++)
+			{
+				keyPath = this.getHashKey(_levels, i, li);
+		
+				res += '{ "_id" : "000", "keyPath" : "' + keyPath + '", "wish" : "" }';
+				
+				// Avoid add last ",".
+				if (li !== flowersQty || i !== totalIterations - 1)
+					res += ',';
+			}
+		}
+
+		res += ']';
+
+		return res;
+	}
+
+	WishflowerServiceMock.prototype.getHashKey = function (_levels, _finalPos, _flowerNum)
+	{
+	    var result = "";
+
+	    var binary = _finalPos.toString(2);
+
+	    // Pad with 0.
+	    var binaryPadded = binary + "";
+	    while (binaryPadded.length < _levels) binaryPadded = "0" + binaryPadded;
+
+	    // Replace 0 by > and 1 by <
+	    var binaryPaddedReplaced = binaryPadded.replace(/0/g, ">").replace(/1/g, "<");
+
+	    // Add number of leave.
+	    result = binaryPaddedReplaced + _flowerNum;
+
+	    return result;
+	}
+
+
+	WishflowerServiceMock.prototype.wishflowerGetAll = function (_callback)
+	{
+		console.log("mock wishflowerGetAll");
+
+		var res = "";
 		res = JSON.stringify(this.m_wishes);
-		console.log(res);
 		_callback(res);
 	}
 
 	WishflowerServiceMock.prototype.wishflowerGetById = function (_id, _callback)
 	{
+		console.log("mock wishflowerGetById");
+
 		var res = "";
 
 		for (var i = 0; i < this.m_wishes.length; i++)
@@ -76,6 +103,7 @@ function WishflowerServiceMock()
 
 	WishflowerServiceMock.prototype.wishflowerGetByKeyPath = function(_keyPath, _callback)
 	{
+		console.log("mock wishflowerGetByKeyPath");	
 	    var res = "";
 
 	    for (var i = 0; i < this.m_wishes.length; i++)
@@ -91,6 +119,7 @@ function WishflowerServiceMock()
 
 	WishflowerServiceMock.prototype.wishflowerGetByWish = function(_wish, _callback)
 	{
+		console.log("mock wishflowerGetByWish");	
 	    var res = "";
 
 	    for (var i = 0; i < this.m_wishes.length; i++)
@@ -106,6 +135,7 @@ function WishflowerServiceMock()
 
 	WishflowerServiceMock.prototype.wishflowerAddWish = function (_wish, _callback)
 	{
+		console.log("mock wishflowerAddWish");	
 	    var res = "";
 
 	    // Find an empty wishflower to hold our incomming wish.
@@ -124,6 +154,7 @@ function WishflowerServiceMock()
 
 	WishflowerServiceMock.prototype.wishflowerAddById = function (_id, _wish, _callback)
 	{
+		console.log("mock wishflowerAddById");	
 		var res = "";
 
 		for (var i = 0; i < this.m_wishes.length; i++)
@@ -140,6 +171,7 @@ function WishflowerServiceMock()
 
 	WishflowerServiceMock.prototype.wishflowerAddByKeyPath = function (_keyPath, _wish, _callback)
 	{
+		console.log("mock wishflowerAddByKeyPath");	
 	    var res = "";
 
 	    for (var i = 0; i < this.m_wishes.length; i++)
@@ -151,24 +183,27 @@ function WishflowerServiceMock()
 	        }
 	    }
 
+		console.log("find:" + _keyPath  +", wish:" + _wish);
+
 	    _callback(res);
 	}
 
 	WishflowerServiceMock.prototype.wishflowerClearTree = function (_callback)
 	{
-	    var res = "";
-
+		console.log("mock wishflowerClearTree");	
 	    for (var i = 0; i < this.m_wishes.length; i++)
 	    {
 		    this.m_wishes[i].wish = "";
 	    }
 
-	    _callback(res);
+	    this.initOnce(null);
+	    
+	    _callback("");
 	}
 
 	WishflowerServiceMock.prototype.dump = function ()
 	{
-		console.log(this.m_servicesCount);
+		console.log(this.m_wishes);
 	}
 }
 

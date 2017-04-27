@@ -1,13 +1,19 @@
 
 module.exports = function(app)
 {
-	var wishFlowerService = null;
+	var objWishFlowerService = null;
+	var reqWishFlowerService = null;
 	if (__mockDB === true)
-		wishFlowerService = require(__basePath + "/controllers/services/wishflower.ServiceMock.js");
+	{
+		reqWishFlowerService = require(__basePath + "/controllers/services/wishflower.ServiceMock.js");
+		objWishFlowerService = new reqWishFlowerService();
+		objWishFlowerService.init(null);
+	}
 	else
-		wishFlowerService = require(__basePath + "/controllers/services/wishflower.Service.js");
-
-	var objWishFlowerService = new wishFlowerService();
+	{
+		reqWishFlowerService = require(__basePath + "/controllers/services/wishflower.Service.js");
+		objWishFlowerService = new reqWishFlowerService();
+	}
 
 	app.get ('/services/wishflowerGetAll', function (req, res) 
 		{

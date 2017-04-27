@@ -4,59 +4,78 @@ function db_wish()
 {
 	db_wish.prototype.initOnce = function(_dbclient)
 	{		
-		//console.log("initOnce");
+		console.log("mongo initOnce");
 	 	var collection = _dbclient.collection(db_wish.COLLECTION_NAME);
 		collection.drop();
 
-		var res = "";
-		res += '[';
-		res += '{"keyPath" : ">>>1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : ">>>2", "wish" : "WishTest" }';
-		res += ',';
-		res += '{"keyPath" : ">><1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : ">><2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "><>1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "><>2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "><<1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "><<2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<>>1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<>>2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<><1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<><2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<<>1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<<>2", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<<<1", "wish" : "" }';
-		res += ',';
-		res += '{"keyPath" : "<<<2", "wish" : "" }';
-		res += ']';
+		var res = this.automaticWishEntryGenerator(
+			global.__configDefinitions.get_C_TREE_LEVELS(), 
+			global.__configDefinitions.get_C_TREE_FLOWERS());
 
 		// Clear wish field.
 		var docs = JSON.parse(res);
 		for (var i = 0; i < docs.length; i++)
 		{
+			if (i === 1)
+				docs[i].wish = 'WishTest';
+
 			collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
 		}
-
-		//console.log("test update");
-		//this.wishflowerAddByKeyPath(">>>2", "updated", null);
 	}
+
+	db_wish.prototype.automaticWishEntryGenerator = function (_levels, _flowersQty)
+	{
+		var res = "";
+		
+		res += '[';
+
+		// Generate in between data.
+		var levels = _levels;
+		var flowersQty = _flowersQty;
+		var totalIterations = Math.pow(2, levels); 
+
+		for (var i = 0; i < totalIterations; i++)
+		{
+			for (var li = 1; li <= flowersQty; li++)
+			{
+				keyPath = this.getHashKey(_levels, i, li);
+		
+				res += '{ "_id" : "000", "keyPath" : "' + keyPath + '", "wish" : "" }';
+				
+				// Avoid add last ",".
+				if (li !== flowersQty || i !== totalIterations - 1)
+					res += ',';
+			}
+		}
+
+		res += ']';
+
+		return res;
+	}
+
+	db_wish.prototype.getHashKey = function (_levels, _finalPos, _flowerNum)
+	{
+	    var result = "";
+
+	    var binary = _finalPos.toString(2);
+
+	    // Pad with 0.
+	    var binaryPadded = binary + "";
+	    while (binaryPadded.length < _levels) binaryPadded = "0" + binaryPadded;
+
+	    // Replace 0 by > and 1 by <
+	    var binaryPaddedReplaced = binaryPadded.replace(/0/g, ">").replace(/1/g, "<");
+
+	    // Add number of leave.
+	    result = binaryPaddedReplaced + _flowerNum;
+
+	    return result;
+	}
+
 
 	db_wish.prototype.wishflowerGetAll = function(_callback)
 	{
-		//console.log("mongo wishflowerGetAll");
+		console.log("mongo wishflowerGetAll");
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
 
@@ -94,24 +113,20 @@ function db_wish()
     {
 		console.log("mongo wishflowerGetByKeyPath");
         // Pending implmentation.
-
     }
 
     db_wish.prototype.wishflowerGetByWish = function(_wish, _callback)
     {
 		console.log("mongo wishflowerGetByWish");
-
         // Pending implmentation.
     }
 
     db_wish.prototype.wishflowerAddWish = function(_wish, _callback)
     {
-    	var _self = this;
 		console.log("mongo wishflowerAddWish");
 
+    	var _self = this;
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
-
-       	//_self.wishflowerAddByKeyPath(">>>1", _wish, null);
 
 		collection
 		.find()
@@ -126,9 +141,11 @@ function db_wish()
 			    {
 			        if (docs[i].wish === '')
 			        {
-				       	_self.wishflowerAddByKeyPath(docs[i].keyPath, _wish + "doc", null);
 			            docs[i].wish = _wish;
 			            res = '[' + JSON.stringify(docs[i]) + ']';
+
+			            // Update database with new wish. 
+				       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
 			            break;
 			        }
 			    }
@@ -141,7 +158,6 @@ function db_wish()
 	db_wish.prototype.wishflowerAddById = function(_id, _wish, _callback) 
 	{
 		console.log("mongo wishflowerAddById");
-
 	}
 
     db_wish.prototype.wishflowerAddByKeyPath = function(_keyPath, _wish, _callback)
@@ -149,7 +165,6 @@ function db_wish()
 		console.log("mongo wishflowerAddByKeyPath");
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
-
 		var result = null; 
 
 		result = collection.update
@@ -160,8 +175,8 @@ function db_wish()
 		      wish: _wish
 		   }
 		)
-		console.log("find:" + _keyPath  +", wish:" + _wish);
-		console.log(result);
+
+		console.log("find:" + _keyPath  +", wish:" + _wish + ", result:" + result);
     }
 
     db_wish.prototype.wishflowerClearTree = function(_callback)
@@ -174,6 +189,10 @@ function db_wish()
 
 		_callback("");
     }
+
+    db_wish.prototype.dump = function()
+    {
+   }
 }
 
 module.exports = db_wish;
