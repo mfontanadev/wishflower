@@ -16,7 +16,7 @@ var global_bitmap_definition =
 Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.0';
 Globals.C_START_POSITION_PERCENT = 40;
 Globals.C_TREE_LEVELS = 4;
-Globals.C_TREE_FLOWERS = 2;
+Globals.C_TREE_FLOWERS = 3;
 function Globals() 
 { 
 	Globals.prototype.get_C_START_POSITION_PERCENT = function()

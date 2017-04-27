@@ -5,7 +5,7 @@ var url = require('url');
 
 // Global definitions
 global.__basePath = __dirname;
-global.__mockDB = false;
+global.__mockDB = true;
 global.__dbClient = null;
 
 var reqGlobals = require('./config/globalDefinitions.js'); 
