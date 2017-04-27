@@ -5,6 +5,8 @@ var viewMngr = null;
 // ******************************************************************
 window.onload = function()
 {
+	document.title = Globals.C_APPLICATION_TITLE_AND_VERSION;
+
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas', false);

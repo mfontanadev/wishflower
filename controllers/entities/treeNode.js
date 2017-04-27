@@ -264,16 +264,16 @@ function TreeNode()
 				branch = this.createBranchNode();
                 branch.m_hash = '<';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * 1);
-                branch.setHeightScalar(0.88);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+                branch.setHeightScalar(0.95);
+                branch.m_maxHeight = this.m_maxHeight * ((50 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
                 branch = this.createBranchNode();
                 branch.m_hash = '>';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * -1);
-                branch.setHeightScalar(0.88);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+                branch.setHeightScalar(0.95);
+                branch.m_maxHeight = this.m_maxHeight * ((50 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 			
@@ -387,7 +387,7 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
-        nodeItem.m_maxHeight = 140;
+        nodeItem.m_maxHeight = 130;
 		nodeItem.m_pertAngle = 10;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
@@ -404,7 +404,7 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_LEAVE;
         nodeItem.m_maxWidth = 3;
-        nodeItem.m_maxHeight = 40;
+        nodeItem.m_maxHeight = 35;
 		nodeItem.m_pertAngle = 20;
         nodeItem.m_fadingStatus = TreeNode.C_FADING_STOP;
 	

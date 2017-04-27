@@ -14,7 +14,9 @@ function WishflowerServiceMock()
 	{
 		console.log("mock initOnce");
 
-		var res = this.automaticWishEntryGenerator(global.__treeLeves, global.__treeFlowers);
+		var res = this.automaticWishEntryGenerator(
+			global.__configDefinitions.get_C_TREE_LEVELS(), 
+			global.__configDefinitions.get_C_TREE_FLOWERS());
 
 		// Clear wish field.
 		this.m_wishes = JSON.parse(res);

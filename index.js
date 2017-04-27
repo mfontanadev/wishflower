@@ -11,9 +11,6 @@ global.__dbClient = null;
 var reqGlobals = require('./config/globalDefinitions.js'); 
 global.__configDefinitions = new reqGlobals();
 
-//global.__treeLeves = 3;
-//global.__treeFlowers = 2;
-
 // Entry point.
 app.get("/", function (req, res) {
     res.sendFile(__dirname + '/views/' + 'wishflowerView.html');

@@ -1,15 +1,3 @@
-var C_APPLICATION_TITLE_AND_VERSION = 'Wishflower (v1.0.0) mdb';
-
-// Definition of states for the machine of finite states used in app main loop. 
-MainLoopState.C_APP_STATE_NOT_SET = 0;
-MainLoopState.C_APP_STATE_INTRO = 1;
-MainLoopState.C_APP_STATE_WAITING_USER_NAME = 2;
-MainLoopState.C_APP_STATE_LOOKING_WISHES = 3;
-MainLoopState.C_LOCAL_STORE_NAMESPACE = "wishflower";
-function MainLoopState() 
-{ 
-}
-
 // All sounds used by de app. SoundManager will preload all of them.
 var global_sound_definition = [
     {src:"wings.mp3", id:0}
@@ -25,6 +13,7 @@ var global_bitmap_definition =
     'ladybug.png'
 ];
 
+Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.0';
 Globals.C_START_POSITION_PERCENT = 40;
 Globals.C_TREE_LEVELS = 4;
 Globals.C_TREE_FLOWERS = 2;
@@ -44,11 +33,15 @@ function Globals()
 	{
 		return Globals.C_TREE_FLOWERS;
 	}
+
+	Globals.prototype.get_C_APPLICATION_TITLE_AND_VERSION = function()
+	{
+		return Globals.C_APPLICATION_TITLE_AND_VERSION;
+	}
 }
 
 if (typeof module !== 'undefined' && module !== null)
 {
-	module.exports = MainLoopState;
 	module.exports = Globals;
 }
 
