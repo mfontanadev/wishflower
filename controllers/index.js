@@ -28,8 +28,8 @@ module.exports = function(app)
     app.get ('/controllers/activities/wishflowerIntroActivity.js',
         function (req, res) {res.sendFile(__dirname + '/activities/wishflowerIntroActivity.js');});
 
-	app.get ('/controllers/activities/WishflowerInputControlsActivity.js', 
-		function (req, res) {res.sendFile(__dirname + '/activities/WishflowerInputControlsActivity.js');});
+	app.get ('/controllers/activities/wishflowerInputControlsActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerInputControlsActivity.js');});
 
     // MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
