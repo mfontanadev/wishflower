@@ -108,48 +108,26 @@ function Garden()
         }
         else
         {
-            if (_wishMessage === "cleartree")
-            {
-                callWebService
-                (
-                    'POST',
-                    'services/wishflowerClearTree', 
-                    function(_errorCode)
+            callWebService
+            (
+                'POST',
+                'services/wishflowerAddWish?wish=' + _wishMessage, 
+                function(_errorCode)
+                {
+                    msglog("CallWebService error:" + _errorCode);
+                },
+                function(_data)
+                {
+                    if (_data === "")
                     {
-                        msglog("CallWebService error:" + _errorCode);
-                    },
-                    function(_data)
-                    {
-                        if (_data === "")
-                        {
-                            console.log("Wishtree is clear.");
-                        }
+                        console.log("Wish not added, tree is full.");
                     }
-                );  
-            }
-            else
-            {
-                callWebService
-                (
-                    'POST',
-                    'services/wishflowerAddWish?wish=' + _wishMessage, 
-                    function(_errorCode)
+                    else
                     {
-                        msglog("CallWebService error:" + _errorCode);
-                    },
-                    function(_data)
-                    {
-                        if (_data === "")
-                        {
-                            console.log("Wish not added, tree is full.");
-                        }
-                        else
-                        {
-                            console.log("Wish added.");
-                        }
+                        console.log("Wish added.");
                     }
-                );  
-            }
+                }
+            );  
         }
     };
 

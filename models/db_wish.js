@@ -125,34 +125,43 @@ function db_wish()
     {
 		console.log("mongo wishflowerAddWish");
 
+		var res = "";		
     	var _self = this;
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
 
-		collection
-		.find()
-		.toArray
-		(
-			function(err, docs) 
-			{
-			    var res = "";
+		if (_wish === "cleartree")
+		{
+			console.log("before clear");
+			this.wishflowerClearTree(_callback);
+		}
+		else
+		{
+			console.log("adding wish");
 
-			    // Find an empty wishflower to hold our incomming wish.
-			    for (var i = 0; i < docs.length; i++)
-			    {
-			        if (docs[i].wish === '')
-			        {
-			            docs[i].wish = _wish;
-			            res = '[' + JSON.stringify(docs[i]) + ']';
+			collection
+			.find()
+			.toArray
+			(
+				function(err, docs) 
+				{
+				    // Find an empty wishflower to hold our incomming wish.
+				    for (var i = 0; i < docs.length; i++)
+				    {
+				        if (docs[i].wish === '')
+				        {
+				            docs[i].wish = _wish;
+				            res = '[' + JSON.stringify(docs[i]) + ']';
 
-			            // Update database with new wish. 
-				       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
-			            break;
-			        }
-			    }
+				            // Update database with new wish. 
+					       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
+				            break;
+				        }
+				    }
 
-			    _callback(res);
-			}
-		);
+				    _callback(res);
+				}
+			);
+		}
     }
 
 	db_wish.prototype.wishflowerAddById = function(_id, _wish, _callback) 
@@ -192,7 +201,8 @@ function db_wish()
 
     db_wish.prototype.dump = function()
     {
-   }
+		console.log("mongo dump");
+    }
 }
 
 module.exports = db_wish;

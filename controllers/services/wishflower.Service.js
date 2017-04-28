@@ -1,9 +1,7 @@
-//var req_db_wish_schema = null;
 var req_db_wish = null;
 
 if (typeof require != 'undefined')
 {
-//	req_db_wish_schema = require(__basePath + "/models/db_wish_schema.js");
 	req_db_wish = require(__basePath + "/models/db_wish.js");
 }
 
