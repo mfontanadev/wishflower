@@ -77,7 +77,10 @@ var global_bitmap_definition =
 
     'glif-flower_1.png',
     'glif-flower_2.png',
-    'glif-flower_3.png'
+    'glif-flower_3.png',
+    'glif-flower_4.png',
+    'glif-flower_5.png',
+    'glif-flower_6.png'    
 ];
 
 function Globals() 
