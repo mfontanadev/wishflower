@@ -3,19 +3,24 @@ TreeNode.C_NODE_TYPE_ROOT = "root";
 TreeNode.C_NODE_TYPE_BRANCH = "branch";
 TreeNode.C_NODE_TYPE_LEAVE = "leave";
 
+//TreeNode.C_GROWING_SPEED = 1;
+//***TODO: sl terminar los test dejar solamente la línea de arriba.
+TreeNode.C_GROWING_SPEED = 10;
+
 TreeNode.C_FADING_STOP = 0;
 TreeNode.C_FADING_IN = 1;
 TreeNode.C_FADING_OUT = 2;
 TreeNode.C_FADING_MAX_VALUE = 0.3;
 
-TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 7;
-TreeNode.C_GENERATION_LEAVE_QTTY = 5;
+TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = Globals.C_TREE_LEVELS + 2;
+TreeNode.C_GENERATION_LEAVE_QTTY = Globals.C_TREE_FLOWERS;
 TreeNode.DEBUG = false;
 
 TreeNode.composedLeaveImg = null;
 TreeNode.rootImg = null;
 TreeNode.branchImg = null;
 TreeNode.leaveImg = null;
+TreeNode.leaveClosedImg = null;
 TreeNode.resource = null;
 
 TreeNode.m_wishes = null;
@@ -23,21 +28,13 @@ TreeNode.m_wishes = null;
 TreeNode.C_TREE_STATUS_NOT_SET = 0;
 TreeNode.C_TREE_STATUS_WAITING_DATA = 1;
 TreeNode.C_TREE_STATUS_RENDERING = 2;
-//TreeNode.C_TREE_NEW_WISH_ANIMATION = 3;
-TreeNode.m_treeSta1tus = TreeNode.C_TREE_STATUS_NOT_SET;
 
 TreeNode.m_treeCursorHash = '';
 TreeNode.m_treeCursor = null;
+TreeNode.m_treeGrowedBranchs = 0;
+TreeNode.m_treeGrowedLeaves = 0;
 
-// Resultados del benchmark (generation = 13; leaves = 6, totBranch = 4096, totLeaves = 24576):
-// Funcion ImplemtLogic = tarda 12 milis en su pico de creación, luego en recorrer tarda 2 milis.
-// Funcion Render (con circulos) = tarda 400 milis con todas las hojas.
-//                               = tarda 330 milis solo hojas.
-//                               = tarda 30 milis solo ramas.
-//                               = tarda 30 milis dibujar 3072 hijas.
-// Funcion Render (con img) = tarda 130 milis solo hojas.
-
-// Funcion Recalular siempre activa hace que ImplemtLogic = tarda 25 milis ( para 1024 y 6144 hojas)
+TreeNode.m_totalLeaves = 0;
 
 function TreeNode() 
 {
@@ -55,7 +52,7 @@ function TreeNode()
     this.m_angle = 0;
     this.m_angleAcum = 0;
 
-	this.m_arrGenerationPositions = new Array();
+	this.m_arrGenerationPositions = [];
 	this.m_generatorIndex = 0;
 
     this.m_hash = '';
@@ -68,11 +65,7 @@ function TreeNode()
     this.m_maxHeight = 0;
 
 	this.m_pertAngle = 0;
-    this.m_branchDir = -1;
 
-    this.m_composedLeaveImg = null;
-
-    this.m_scalarImageWidth = 0;
     this.m_scalarImageHeight = 0;
 
     this.m_fadingStatus = TreeNode.C_FADING_STOP;
@@ -84,9 +77,9 @@ function TreeNode()
         this.m_viewParent = _viewParent;
         this.m_nodeType = TreeNode.C_NODE_TYPE_MAIN;
         this.m_parent = null;
-
-        this.setX(this.m_viewParent.m_canvasEx.m_canvasWidth / 2);
-        this.setY(this.m_viewParent.m_canvasEx.m_canvasHeight - 70);
+    
+        this.setX(this.m_viewParent.m_canvasEx.m_canvas.width / 2);
+        this.setY(this.m_viewParent.m_canvasEx.m_canvas.height);
 
         this.initLeaveImage();
         this.loadImages();
@@ -99,22 +92,23 @@ function TreeNode()
         var branch = this.createBranchNode();
         // link the main branch a little bit lower from top, 
         // this simulates the tree is inserted in the root. 
-        branch.setHeightScalar(0.3);     
+        branch.setHeightScalar(0.1);     
         branch.m_hash = 'T';
         root.addChild(branch);
 
-        this.dump();
-        this.info();
         this.recalculateTargetPointAndChilds();
         //_context.globalCompositeOperation = "lighter";
 
         TreeNode.m_treeCursor = branch;
         TreeNode.m_treeCursorHash = branch.getHash();
+
+        this.dump();
+        this.info();
     };
 
     TreeNode.prototype.initLeaveImage = function () 
     {
-        var size = 32
+        var size = 32;
 
         TreeNode.composedLeaveImg = document.createElement("canvas");
         TreeNode.composedLeaveImg.width = TreeNode.composedLeaveImg.height = size << 1;
@@ -132,9 +126,10 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root3.png');
+        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root.png');
         TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
+        TreeNode.leaveClosedImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave_closed.png');
     };
 
     TreeNode.prototype.handleInputs = function () 
@@ -161,8 +156,21 @@ function TreeNode()
         {
             if (this.canABranchGrowup() === true)
             {
-                this.m_height = this.m_height + 1; 
-                
+                this.m_height = this.m_height + TreeNode.C_GROWING_SPEED; 
+         
+                var width = this.m_viewParent.m_canvasEx.m_canvas.width;
+                if (this.m_x1 < width * 0.2 || this.m_x1 > width * 0.8)
+                {
+                    if (this.m_angle < 0)
+                    {
+                        this.setAngle(this.m_angle-=2);
+                    }   
+                    else
+                    {
+                        this.setAngle(this.m_angle+=2);
+                    } 
+                }
+
                 this.validateAndAddANewChild();
 
                 if (this.canABranchExpand() === true)
@@ -171,6 +179,14 @@ function TreeNode()
                 }
 
                 this.recalculateTargetPointAndChilds();
+
+                // Optimization to know if the tree is still growing (only branches)
+                // Each time a branch reaches its max height add one to the global variable m_treeGrowedBranchs.
+                // Then we can checkj this number against calculated branches in the tree.                
+                if (this.isBranchStillGrowing() === false)
+                {
+                    TreeNode.m_treeGrowedBranchs = TreeNode.m_treeGrowedBranchs + 1;
+                }
             }
 
             // Wind
@@ -184,23 +200,30 @@ function TreeNode()
         {
             if (this.canALeaveGrowup() === true)
             {
-                this.m_height = this.m_height + 1; 
-
+                this.m_height = this.m_height + TreeNode.C_GROWING_SPEED; 
+    
                 this.recalculateTargetPointAndChilds();
             }
             else
             {
                 this.implementWishflowerFade();
             }
+
+            // Optimization to know if the tree is still growing (only leaves)
+            // Each time a leave reaches its max height add one to the global variable m_treeGrowedLeaves.
+            // Then we can checkj this number against calculated branches in the tree.                
+            if (this.isLeaveStillGrowing() === false)
+            {
+                TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
+            }
         }
     };
 
     TreeNode.prototype.implementWishflowerFade = function ()
     {
-        
         if (this.m_fadingStatus === TreeNode.C_FADING_IN)
         {
-            this.m_fadingCounter++;
+            this.m_fadingCounter += TreeNode.C_GROWING_SPEED;
             if (this.m_fadingCounter >= 100)
             {
                 this.m_fadingCounter = 100;
@@ -212,7 +235,7 @@ function TreeNode()
 
         if (this.m_fadingStatus === TreeNode.C_FADING_OUT)
         {
-            this.m_fadingCounter--;
+            this.m_fadingCounter -= TreeNode.C_GROWING_SPEED;
             if (this.m_fadingCounter <= 0)
             {
                 this.m_fadingCounter = 0;
@@ -221,66 +244,49 @@ function TreeNode()
 
             this.m_fadingScalar = this.calculateFadingScalar();
         }
-    }
+    };
 
     TreeNode.prototype.calculateFadingScalar = function ()
     {
         return ((1 - TreeNode.C_FADING_MAX_VALUE) * (this.m_fadingCounter / 100)) + TreeNode.C_FADING_MAX_VALUE;  
-    }
+    };
 
     TreeNode.prototype.validateAndAddANewChild = function ()
     {
+        var bAddBranch = false;
+
         if (this.m_level + 1 <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION)
         {
-            var bAddBranch = false;
-            
             bAddBranch = this.areWeReachedCurrentGenerationPosition();
 
             if (bAddBranch === true) 
             {
+                var pert = 10 * (this.m_level - 1); 
                 var branch = null;
-				
                 
 				branch = this.createBranchNode();
-                branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * 1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(30)) / 100);
-				branch.m_maxWidth = this.m_maxWidth - 2;
-                this.addChild(branch);
-
-                branch = this.createBranchNode();
-                branch.setAngle((40 + chRandomWithNeg(branch.m_pertAngle)) * -1);
-                branch.setHeightScalar(0.95);
+                branch.m_hash = '<';
+                branch.setAngle((30 + chRandomWithNeg(pert)) * 1);
+                branch.setHeightScalar(0.88);
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
-                this.addChild(branch);
-                
-                /*
-                branch = this.createBranchNode();
-                branch.m_hash = '<';
-                branch.setAngle(50 * 1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.8;
-                branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
                 branch = this.createBranchNode();
                 branch.m_hash = '>';
-                branch.setAngle(50 * -1);
-                branch.setHeightScalar(0.95);
-                branch.m_maxHeight = this.m_maxHeight * 0.8;
-                branch.m_maxWidth = this.m_maxWidth - 2;
+                branch.setAngle((30 + chRandomWithNeg(pert)) * -1);
+                branch.setHeightScalar(0.88);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
-                */            
-				
-				branch.m_pertAngle = branch.m_pertAngle * 0.5;
+			
+				branch.m_pertAngle = branch.m_pertAngle * 2;
 				this.incrementGenerationPosition();
 
             }
         }
         else if (this.m_level === TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION)
         {
-            var bAddBranch = false;
             bAddBranch = this.areWeReachedCurrentGenerationPosition();
 
             if (bAddBranch === true) 
@@ -290,35 +296,25 @@ function TreeNode()
                 var noiseangle = 0;
             	for (var i = 0; i < TreeNode.C_GENERATION_LEAVE_QTTY; i++) 
             	{
-	                /*var leave = this.createLeaveNode();
-                    noiseangle = chRandom(10);
-                    leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
-	                leave.setAngle( leaveAngle + noiseangle);
-	                leave.setHeightScalar(1);
-	                this.addChild(leave);*/
-                    
                     var leave = this.createLeaveNode();
                     leave.m_hash = i + 1;
 
                     noiseangle = chRandom(10);
                     leaveAngle = ((angleArc / 2) * -1) + ((angleArc / (TreeNode.C_GENERATION_LEAVE_QTTY - 1) ) * i);
-                    leave.m_fadingStatus = TreeNode.C_FADING_IN;
                     leave.setAngle( leaveAngle + noiseangle);
                     leave.setHeightScalar(1);
                     this.addChild(leave);
-            	};
-
+                }
                 this.incrementGenerationPosition();
             }
         }
-    }
-
+    };
 
     TreeNode.prototype.canABranchGrowup = function ()
     {
         return (this.m_height < this.m_maxHeight && 
                 this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
-    }
+    };
 
     TreeNode.prototype.areWeReachedCurrentGenerationPosition = function (_percentPosition)
     {
@@ -330,17 +326,17 @@ function TreeNode()
     	}
 
         return false; 
-    }
+    };
 
     TreeNode.prototype.getGrowingRatio = function ()
     {
     	return (this.m_height / this.m_maxHeight);
-    }
+    };
 
     TreeNode.prototype.getCurrentGenerationPosition = function ()
     {
    		return this.m_arrGenerationPositions[this.m_generatorIndex];
-    }
+    };
     
     TreeNode.prototype.incrementGenerationPosition = function ()
     {
@@ -348,20 +344,30 @@ function TreeNode()
     	{
     		this.m_generatorIndex++;
     	}
-    }
+    };
 
 
     TreeNode.prototype.canALeaveGrowup = function ()
     {
         return (this.m_height < this.m_maxHeight && 
                 this.m_level === TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION + 1);
-    }
+    };
 
     TreeNode.prototype.canABranchExpand = function ()
     {
         return (this.m_width < this.m_maxWidth && 
                 this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
-    }
+    };
+
+    TreeNode.prototype.isBranchStillGrowing = function ()
+    {
+        return (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH && this.m_height > 0 && this.m_height < this.m_maxHeight);
+    };
+
+    TreeNode.prototype.isLeaveStillGrowing = function ()
+    {
+        return (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE && this.m_height > 0 && this.m_height < this.m_maxHeight);
+    };
 
     TreeNode.prototype.createRootNode = function ()
     {
@@ -369,8 +375,8 @@ function TreeNode()
 
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_ROOT;
-        nodeItem.m_width = 70;
-        nodeItem.m_height = 20;
+        nodeItem.m_width = 308 / 2;
+        nodeItem.m_height = 71 / 2;
         nodeItem.m_maxWidth = nodeItem.m_width;
         nodeItem.m_maxHeight = nodeItem.m_height;
 
@@ -384,8 +390,8 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
-        nodeItem.m_maxHeight = 80;
-		nodeItem.m_pertAngle = 20;
+        nodeItem.m_maxHeight = 140;
+		nodeItem.m_pertAngle = 10;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
 		nodeItem.m_arrGenerationPositions.push(0.4);
@@ -401,9 +407,12 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_LEAVE;
         nodeItem.m_maxWidth = 3;
-        nodeItem.m_maxHeight = 20;
+        nodeItem.m_maxHeight = 40;
 		nodeItem.m_pertAngle = 20;
-		
+        nodeItem.m_fadingStatus = TreeNode.C_FADING_STOP;
+	
+        TreeNode.m_totalLeaves = TreeNode.m_totalLeaves + 1;
+
         return nodeItem;
     };
 
@@ -427,7 +436,7 @@ function TreeNode()
         nodeItem.m_fadingCounter = 0;
         nodeItem.m_fadingScalar = TreeNode.C_FADING_MAX_VALUE;
         return nodeItem;
-    }
+    };
 
     TreeNode.prototype.render = function () 
     {
@@ -482,9 +491,11 @@ function TreeNode()
                         this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
 		
         if (this.m_wish !== '')
+        {
             renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
                                 this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x2, this.m_y2, 4, 'green');
+                                this.m_x2, this.m_y2, 20 * this.m_fadingScalar, 'green');
+        }
     };
 
     TreeNode.prototype.renderRootImage = function () 
@@ -515,10 +526,21 @@ function TreeNode()
         if (this.isNodeVisibleByCursor() === false)
             imgAlpha = 0.2;
 
-        drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
-                                            this.m_viewParent.m_canvasEx.m_context, 
-                                            TreeNode.leaveImg, 
-                                            this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        if (this.m_wish !== '')
+        {
+            drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                                this.m_viewParent.m_canvasEx.m_context, 
+                                                TreeNode.leaveImg, 
+                                                this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        }
+        else
+        {
+            drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
+                                                this.m_viewParent.m_canvasEx.m_context, 
+                                                TreeNode.leaveClosedImg, 
+                                                this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
+        }
+
         //drawImageRotationTransparentScaled(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
     };
 
@@ -647,7 +669,6 @@ function TreeNode()
         this.m_x2 = this.m_x1 + this.calculateTargetX(1);
         this.m_y2 = this.m_y1 - this.calculateTargetY(1);
 
-        //this.m_scalarImageWidth = this.calculateScalarImageWidth(this.m_width);
         this.m_scalarImageHeight = this.calculateScalarImageHeight();
 
         for (var i = 0; i < this.m_nodes.length; i++) {
@@ -655,15 +676,7 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.calculateScalarImageWidth = function (_w) 
-    {
-        var ro = this.m_height * _heightScalar;
-        var angle = 90 + this.getFinalAngle();
-
-        return cosOf(ro, angle);
-    };
-
-    TreeNode.prototype.calculateScalarImageHeight = function () 
+    TreeNode.prototype.calculateScalarImageHeight = function ()
     {
         var result = 0;
 
@@ -723,7 +736,6 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        //console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", x=" + this.m_x1 + ", y=" + this.m_y1 + ", a=" + this.m_angle + ", acc=" + this.m_angleAcum + ", scalar=" + this.m_linkPosition + ", width=" + this.m_maxHeight + ", " + this.getHash() + ",wish=" + this.m_wish);
         console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
     };
 
@@ -744,13 +756,25 @@ function TreeNode()
 
     TreeNode.prototype.info = function () 
     {
-        var retTotalFinalBranchs = Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 2);
-        var retTotalLeaves = retTotalFinalBranchs * TreeNode.C_GENERATION_LEAVE_QTTY;
+        var retTotalBranches = this.totalBranches();
+        var retTotalLastLevelBranches = this.totalFinalBranches();
+        var retTotalLeaves = retTotalLastLevelBranches * TreeNode.C_GENERATION_LEAVE_QTTY;
 
-        console.log("Total final branchs: " + retTotalFinalBranchs);
+        console.log("Total branches: " + retTotalBranches);
+        console.log("Total last level branches: " + retTotalLastLevelBranches);
         console.log("Total leaves: " + retTotalLeaves);
 
-        return ({totalBranchs: retTotalFinalBranchs, totalLeaves: retTotalLeaves});
+        return ({totalBranches: retTotalBranches, otalBranchs: retTotalLastLevelBranches, totalLeaves: retTotalLeaves});
+    };
+
+    TreeNode.prototype.totalFinalBranches = function () 
+    {
+        return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 2);
+    };
+
+    TreeNode.prototype.totalBranches = function () 
+    {
+        return Math.pow(2, TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION - 1) - 1;
     };
 
     TreeNode.prototype.findNodeByKeyPath = function (_keyPath) 
@@ -782,7 +806,7 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.updateWishes = function (_wishesArray) 
+    TreeNode.prototype.updateWishes = function (_wishesArray, _callback) 
     {
         TreeNode.m_wishes = _wishesArray;
 
@@ -792,20 +816,24 @@ function TreeNode()
             function(_item)
             {
                 var previosWish = _item.m_wish; 
-                _item.m_wish = '';
-
+                
                 for (var i = 0; i < TreeNode.m_wishes.length; i++) 
                 {
                     if (_item.getHash() === TreeNode.m_wishes[i].keyPath)
                     {
                         _item.m_wish = TreeNode.m_wishes[i].wish;
-                        break;
+                       break;
                     }
                 }
 
                 if (previosWish === '' && _item.m_wish !== '')
                 {
                     _item.m_fadingStatus = TreeNode.C_FADING_IN;
+
+                    if (typeof _callback !== 'undefined' && _callback !== null)
+                    {
+                        _callback(_item);
+                    }
                 }
 
                 if (previosWish !== '' && _item.m_wish === '')
@@ -814,6 +842,11 @@ function TreeNode()
                 }
             }
         );
+    };
+
+    TreeNode.prototype.getWishes = function () 
+    {
+        return TreeNode.m_wishes;
     };
 
     TreeNode.prototype.getCursorHashFormatted = function () 
@@ -900,8 +933,7 @@ function TreeNode()
     	}
     	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
     	{
-			var tmpNodeToGo = null;
-			var tmpHashToGo = TreeNode.m_treeCursor.m_parent.getHash();
+			var tmpNodeToGo = TreeNode.m_treeCursor.m_parent.getHash();
 
 			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) - 1); 
 			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
@@ -941,7 +973,31 @@ function TreeNode()
         }
     };
 
+    TreeNode.prototype.areTreeBranchesStillGrowing = function () 
+    {
+        return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
+    };
+
+    TreeNode.prototype.areTreeLeavesStillGrowing = function ()
+    {
+        return TreeNode.m_treeGrowedLeaves !== this.m_totalLeaves;
+    };
+
+    TreeNode.prototype.areCreatedAllLeaves = function () 
+    {
+        return TreeNode.m_totalLeaves === (this.totalFinalBranches() * TreeNode.C_GENERATION_LEAVE_QTTY);
+    };
+
+    TreeNode.prototype.getFirstBranch = function () 
+    {
+        var result = null;
+        if (this.m_nodes !== null && 
+            this.m_nodes[0] !== null &&
+            this.m_nodes[0].m_nodes[0] !== null)
+        {
+            result = this.m_nodes[0].m_nodes[0]; 
+        }
+
+        return result;
+    };
 }
-
-
-

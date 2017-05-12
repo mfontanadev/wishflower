@@ -1,7 +1,7 @@
-## This is an Orchesta simulator, it was created to learn about node-js, socket-io and heroku.
-Explanation in few words, the app let you join to a virtual orchesta, you phone or your pc will plays the instrument sounds.
+## This a POC app to show how to integrate MongoDB to Node JS
+Explanation in few words, the app let you send requests (wishes) and see them in a wish tree.
 
-Enjoy at: https://orchesta.herokuapp.com/
+Enjoy at: https://wishflower.herokuapp.com/
 
 ## Documentation
 

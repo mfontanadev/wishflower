@@ -4,16 +4,276 @@
 		"selected_items":
 		[
 			[
+				"m_key",
+				"m_keyPathFromAddedWish"
+			],
+			[
+				"start",
+				"starUpdateProcess"
+			],
+			[
+				"stop",
+				"stopUpdateProcess"
+			],
+			[
+				"m_",
+				"m_cx"
+			],
+			[
+				"set",
+				"setIconTouched"
+			],
+			[
+				"rende",
+				"renderText"
+			],
+			[
+				"C_ANIMATION_",
+				"C_ANIMATION_FIND"
+			],
+			[
+				"m_s",
+				"m_showMainHelp"
+			],
+			[
+				"C_a",
+				"C_ANIMATION_MAIN_HELP"
+			],
+			[
+				"C_STATE_HELP_",
+				"C_STATE_HELP_WRITE"
+			],
+			[
+				"lbl",
+				"m_lblWish"
+			],
+			[
+				"m_wis",
+				"m_wishes"
+			],
+			[
+				"totalL",
+				"totalLeaves"
+			],
+			[
+				"m_treeGr",
+				"m_treeGrowedLeaves"
+			],
+			[
+				"layer",
+				"layerHeight"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"m_po",
+				"m_poligonPath"
+			],
+			[
+				"Po",
+				"PoligonSegment"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"m",
+				"m_segments"
+			],
+			[
+				"m_ma",
+				"m_maxHeight"
+			],
+			[
+				"m_fa",
+				"m_fadingStatus"
+			],
+			[
+				"C_LADYBUG_POLIGONPATH_STATE_",
+				"C_LADYBUG_POLIGONPATH_STATE_NOT_SET"
+			],
+			[
+				"isPoligonPathOfType",
+				"isPoligonPathOfTypeFlying"
+			],
+			[
+				"is",
+				"isPoligonPathOfTypeFlying"
+			],
+			[
+				"get",
+				"getXYByPercent"
+			],
+			[
+				"move",
+				"moveUp"
+			],
+			[
+				"isPo",
+				"isPoligonPathRunning"
+			],
+			[
+				"C_LADYBUG_POLIGONPATH_",
+				"C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS"
+			],
+			[
+				"ca",
+				"canvasName"
+			],
+			[
+				"ima",
+				"imageId"
+			],
+			[
+				"mod",
+				"moduleRatio"
+			],
+			[
+				"has",
+				"hasExtraParams"
+			],
+			[
+				"m_poli",
+				"m_poligonPathScale"
+			],
+			[
+				"m_sca",
+				"m_scale2"
+			],
+			[
+				"C_la",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
+			],
+			[
+				"m_pa",
+				"m_viewParent"
+			],
+			[
+				"C_LADYBUG_AUTOWALKING_",
+				"C_LADYBUG_AUTOWALKING_STATE_NOT_SET"
+			],
+			[
+				"seg",
+				"segmentModule"
+			],
+			[
+				"m_a",
+				"m_autoWalkingState"
+			],
+			[
+				"po",
+				"m_poligonPath"
+			],
+			[
+				"isIn",
+				"isInsideCurrentSegment"
+			],
+			[
+				"va",
+				"validateWalkMovement"
+			],
+			[
+				"C_au",
+				"C_LADYBUG_AUTOWALKING_STATE_WALKING"
+			],
+			[
+				"C",
+				"C_POLIGONPATH_DIRECTION_NORMAL"
+			],
+			[
+				"m_au",
+				"m_autoWalkingState"
+			],
+			[
+				"_y",
+				"_y2"
+			],
+			[
+				"_x",
+				"_x2"
+			],
+			[
+				"_",
+				"_y1"
+			],
+			[
+				"START",
+				"startAnimation"
+			],
+			[
+				"C_ANIM_",
+				"C_ANIM_OPENING"
+			],
+			[
+				"C_ani",
+				"C_ANIM_STAND"
+			],
+			[
+				"C_",
+				"C_ANIM_MOVING"
+			],
+			[
+				"m_cu",
+				"m_currentAnimationId"
+			],
+			[
+				"m_ladybug_",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_is",
+				"m_is_standing"
+			],
+			[
+				"m_fr",
+				"m_currentFrame"
+			],
+			[
+				"prom",
+				"promCounter"
+			],
+			[
+				"m_la",
+				"m_ladybug_normal_img"
+			],
+			[
+				"m_ro",
+				"m_rotationDirection"
+			],
+			[
+				"Bit",
+				"BitmapManagerItem"
+			],
+			[
+				"m_walkR",
+				"m_walkRight_img"
+			],
+			[
+				"m_wa",
+				"m_walking_frame_counter"
+			],
+			[
+				"m_le",
+				"m_walkLeft_img"
+			],
+			[
+				"wa",
+				"m_walking_frame"
+			],
+			[
+				"m_el",
+				"m_elytra_right_img"
+			],
+			[
 				"yel",
 				"yellowLayer"
 			],
 			[
 				"m_re",
 				"m_resourceManager"
-			],
-			[
-				"m_",
-				"m_canvasEx"
 			],
 			[
 				"Soun",
@@ -24,10 +284,6 @@
 				"loadingTimeout"
 			],
 			[
-				"set",
-				"setFilenamesArray"
-			],
-			[
 				"m_ke",
 				"m_keyPath"
 			]
@@ -36,65 +292,91 @@
 	"buffers":
 	[
 		{
-			"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+			"file": "controllers/entities/inputControl.js",
 			"settings":
 			{
-				"buffer_size": 89333,
-				"line_ending": "Windows"
+				"buffer_size": 20104,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+			"file": "controllers/entities/treeNode.js",
 			"settings":
 			{
-				"buffer_size": 6189,
-				"line_ending": "Windows"
+				"buffer_size": 32831,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
+			"file": "lib/chel-dist/js/keyboardManager.js",
 			"settings":
 			{
-				"buffer_size": 86092,
-				"line_ending": "Windows"
+				"buffer_size": 4627,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "What I do for a living: I am a Senior Technical Leader in Software development with more than 15 years of experience, programming   Mobile and Web applications from C to Javascript, Team leadership, Scrum and always obsessed with the good practices.\n\nWhat I am. Curious naturalist pasionate by maths (I do digital art), coding (I do videogames), optimization (I am a full time system analist), natural engineering (I do computer simulations), music (I play piano) and all kind of things for the sake of humanity.\n\nStop reading and go to mfontanadevhome.appspot.com to see it in motion.\n\nStill here? Ok, two things that I really care.\n\nFirst, nature designs: I began programming in my childhood when my father bougth me a Commodore 64 and non stop. No matter what languaje I use, programs must be functional, elengant and efficent just like designs of nature. \nThat's my principal motivation to be constantly learning, training and sharing the good coding practices.\nInspired on Kent Beck books.\n\nSecond, to be more than a good technician: \nThe days of the lone programming were in the past we must work with other people so, it is important pay attention on being positive to find solutions, generous to share knoledgement, integral to be trustworthy among others.\nInspired on Walter Rissi ppt.    \n\nOLD\nAnalista-programador y líder de desarrollo, con más de siete años de experiencia en c++, c# y soluciones móviles.\n\nIntereses personales:\nGame designer de juegos lúdicos (c++, java, Android)\nDesarrollo de aplicaciones para generación arte digital.\n\n******************************************************************\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Technical Leader in mobile and environment setup\nUbicación: Roosevelt 1655\nDesde 6/2015 hasta 10/2015 \n\nCustomer: Toyota\nProject: PGR system  \n\nCustomer: Toyota \nProject: PGR system\nToyota Motor is a Japanese automotive manufacturer, as part of this process pallets with car pieces must be used once and againg. Toyota uses a mobile application to keep track of the pallets. This way Toyota is eco friendly\n\nI worked in the manteinance of the mobile application. I performed the setup of environments form develop to production using Jenkins and WebSphere.\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: .NET and SQL developer\nUbicación: Roosevelt 1655\nDesde 5/2015 hasta 7/2015 \n\nCustomer: MetLife\nProject: Proyecto GICCP \n\nKimberly Clark is a company that sells cleaning supplies among other things\n\nI worked in the mobile development and design of the main module called Asynch Queue Manager that allows work in offline mode and synchronized. \n\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Technical Leader in PhoneGap and Azure\nUbicación: Roosevelt 1655\nDesde 11/2014 hasta 3/2015 \n\nCustomer: Kimberly Clark\nProject: Proyecto KCP \n\nKimberly Clark is a company that sells cleaning supplies among other things\n\nI worked in the mobile development and design of the main module called Asynch Queue Manager that allows work in offline mode and synchronized. \n\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Technical Leader in PhoneGap and Azure\nUbicación: Roosevelt 1655\nDesde 11/2014 hasta 3/2015 \n\nCustomer: Enersa\nProject: Enersa mobile \n\nEnersa has a cross-platform solution that allows customers to find all the information from your electricity supply.\n\nI lead the mobile team and performed the configuration and documumentation for Azure platform.\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Mobile developer in Android, iOS, BlackBerry\nUbicación: Roosevelt 1655\nDesde 5/2012 hasta 9/2012 \n\nDescripcion:\nCustomer: El Cronista Comercial \nProject: Apertura – Information Technology \n\nThe Cronista Comercial uses a mobile application to make available reading their magazines in digital format.\n\nI was responsible for developing an application for Android and iOS that allows users read a magazine in digital format.\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Mobile developer in Android, iOS, BlackBerry\nUbicación: Roosevelt 1655\nDesde 9/2012 hasta 12/2012 \n\nCustomer: ISBAN (Santander Río)\nProject: Mobile Banking Empresas \n\nSantander Rio has an exclusive mobile application for his corporate customers. The application allows customers perform tax payment, make transfers, transaction authorization, among others.\n\nI was responsible for the development of a core layer multiplatform that emulates WORA.\n\n--------------------\n\nDesarrollador mobile Android, Black Berry, iOS\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Desarrollador mobile Android, Black Berry, iOS\nUbicación: Roosevelt 1655\nDesde 5/2012 hasta 9/2012 \n\nDescripcion:\nCustomer: ISBAN (Santander Río)\nProject: Mobile Banking Empresas \n\nSantander Rio cuenta con una aplicación mobile que ofrece a sus  ofrece a sus clientes corporativos para la autorización de transacciones (pago de impuestos, pago de sueldos, pago a proveedores, transferencias, etc.).\nMe desempeñe en el desarrollo del desarrollo del core multiplataforma para la aplicación Intranet Móvil\n\n--------------------\n\nPagina Web: \nNombre de la Empresa: Baufest\nTitulo: Mobile developer in Android, iOS, BlackBerry\nUbicación: Roosevelt 1655\nDesde 1/2012 hasta 5/2012 \n\nDescripcion:\nCustomer: Sancor Seguros \nProject: Cotizador Automotor \n\nSancor Seguros is a car ensurance company that uses a mobile application to perform quotation.\nI was responsible for developing an application for Android, iOS and BlackBerry to perform salesforce activities.\n\n\nThe Cronista Comercial uses a mobile application to make available reading their magazines in digital format.\n\nI was responsible for developing an application for Android and iOS that allows users read a magazine in digital format.\n\n--------------------\nPagina Web: 2Detalle de la Experiencia Adquirida.html\n\nNombre de la Empresa: Baufest\nTitulo: Android, iOS developer and analyst\nUbicación: Roosevelt 1655\nDesde 5/2012 hasta 8/2012 \n\nDescripcion:\nCustomer: El Cronista Comercial\nProject: Apertura and Information Technology \n\nThe Cronista Comercial uses a mobile application to make available reading their magazines in digital format.\n\nI was responsible for developing an application for Android and iOS that allows users read a magazine in digital format.\n\n--------------------\nPagina Web: 2Detalle de la Experiencia Adquirida.html\n\nNombre de la Empresa: Baufest\nTitulo: Android, iOS developer and analyst\nUbicación: \nDesde 1/2002 hasta 1/2004 \n\nDescripcion:\nCustomer: El Cronista Comercial\nProject: Apertura and Information Technology \n\nThe Cronista Comercial uses a mobile application to make available reading their magazines in digital format.\n\nI was responsible for developing an application for Android and iOS that allows users read a magazine in digital format.\n\n******************************************************************\nNombre de la Empresa: Azartron\nTitulo: Android, iOS developer and analyst\nUbicación: Roosevelt 1655\nDesde 5/2012 hasta 8/2012 \n\nDescripcion:\nCustomer: El Cronista Comercial\nProject: Apertura and Information Technology \n\nThe Cronista Comercial uses a mobile application to make available reading their magazines in digital format.\n\nI was responsible for developing an application for Android and iOS that allows users read a magazine in digital format.\n\n \n************************\nINtereses\n2015	Videojuegos, proyecto personal Tanks.\n2014	Adquirir experiencia en GitHub, Heroku y Html5 multiplataforma\n2013	Concursar en JS1K\n2012	Aprender HTML5 en forma autodidacta, juego “Politic Fight” en HTML5.\n2011	Desarrollo de juegos en Android en forma autodidacta.\n2011	Algoritmos de reconocimiento óptico para instalaciones digitales.\n2010	Desarrollo de L-Garden (proyecto artístico basado en alg. genéticos)\n2009  	Participación concurso videojuegos ADVA.\n2000 	Libro-Ensayo sobre como programar un videojuego de tipo laberinto.\n1996  	Dominio de lenguajes: ASM, COBOL, CLIPPER, PASCAL, VB, C++  \n\n************************\nVoluntariado\n2013\nEditar labor de voluntariadoHumanitarian aid for flooded La Plata.\nEditar organización de voluntariadoFundación Si\nEditarenero de 2013Ayuda humanitaria y en desastres naturales\nEditar descripción de voluntariadoMore details at http://www.fundacionsi.org.ar/\n\n1999\nEditar labor de voluntariadoPresident of the student center.\nEditar organización de voluntariadoMusic Conservatory Alberto Williams\nEditarenero de 1999Educación\nEditar descripción de voluntariadoMy colleagues and I helped with the publicity of conservatory's activities.\nMore details at http://cwilliams.bue.infd.edu.ar/sitio/index.cgi\n\n1998\nEditar labor de voluntariadoSoftware development.\nEditar organización de voluntariadoVIII Congreso Prociencia\nEditarseptiembre de 1998Ciencia y tecnología\nEditar descripción de voluntariadoI was part of the team for analysis and development of registration system.\nMore details at http://www.prociencia.com.ar/\n\n1997\nEditar labor de voluntariadoSoftware development.\nEditar organización de voluntariadoVII Congreso Prociencia\nEditarseptiembre de 1997Ciencia y tecnología\nEditar descripción de voluntariadoI was part of the team for analysis and development of registration system.\nMore details at http://www.prociencia.com.ar/\n\n************************\nCertificacionesAñadirArrastra para reorganizar las secciones del perfil\n\nHaz clic para editar el nombre de la certificaciónAdvanced Development Windows Store Apps with HTML5\nHaz clic para editar el nombre de la entidad que otorgó la certificación más el número de licenciaMicrosoft Virtual Academy\nHaz clic para editar las fechas de la certificaciónComienza en febrero de 2014\n\nHaz clic para editar el nombre de la certificaciónDevelopment of 2D games for Windows 8.1 with Unity\nHaz clic para editar el nombre de la entidad que otorgó la certificación más el número de licenciaMicrosoft Virtual Academy\nHaz clic para editar las fechas de la certificaciónComienza en enero de 2014\n\nHaz clic para editar el nombre de la certificaciónDiplomado Windows Phone 7\nHaz clic para editar el nombre de la entidad que otorgó la certificación más el número de licenciaMicrosoft Virtual Academy\nHaz clic para editar las fechas de la certificaciónComienza en mayo de 2012\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNombre de la Empresa: Q4Tech\n	Titulo: Senior C++ developer, Android, Black Berry\n	Ubicación: Tucumán 713 Piso 2 - CABA\n	Desde 10/2011 hasta 12/2011 \n\n	Descripcion:\n	Customer: Danone | Project: \"Themis - Danone\"\n\n	Danone uses a mobile application to perform the delivery logistic of his products.\n	I worked as C++ developer to migrate part of the code to Android and Black Berry.\n\n\nNombre de la Empresa: Q4Tech\n	Titulo: Senior C++ developer, Compact Framework\n	Ubicación: Tucumán 713 Piso 2 - CABA\n	Desde 1/2006 hasta 10/2011 \n\n	Descripcion:\n	Customer: Danone | Project: \"Themis Net – Danone\"\n\n	Danone uses a mobile application that lets you manage tasks involved in distribution operations and taking orders to customers.\n\n	I worked in the migration process from language Embedded C ++ 3.0 for Windows Mobile 5.0 to .NET Compact Framework for Windows Mobile 6.0.\n\n\nNombre de la Empresa: Q4Tech\n	Titulo: Programmer analyst C++ embedded 3.0\n	Ubicación: Tucumán 713 Piso 2 - CABA\n	Desde 1/2004 hasta 1/2006 \n\n	Descripcion:\n	Customer: Elea and Roemmers laboratories | Project: \"APM\"\n\n	Elea and Roemmers laboratories use a mobile application to register APM's activities.\n\n	I worked in the migration process from language Embedded C ++ 3.0 for Windows Mobile 5.0 to .NET Compact Framework for Windows Mobile 6.0.\n\n\n\nAPM – Laboratorios Elea y Roemmers\nRol Principal: Analista programador C++ embedded 3.0\n\nLos laboratorios utilizan la aplicación mobile para registrar las actividades que realiza un APM (Agente de Propaganda Médica) . \nMe desempeñe en el proceso de construcción y mantenimiento evolutivo de la aplicación para ambos laboratorios.\n\n\n",
-			"file": "/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
-			"file_size": 12374,
-			"file_write_time": 131145804972782443,
+			"file": "controllers/activities/wishflowerPlayActivity.js",
 			"settings":
 			{
-				"buffer_size": 11975,
-				"line_ending": "Windows"
+				"buffer_size": 1395,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
+			"file": "controllers/flows/playFlow.js",
 			"settings":
 			{
-				"buffer_size": 4858,
-				"line_ending": "Windows"
+				"buffer_size": 2708,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
+			"file": "controllers/entities/ladybug.js",
 			"settings":
 			{
-				"buffer_size": 4859,
-				"line_ending": "Windows"
+				"buffer_size": 39896,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "What I do for a living: I am a Senior Technical Leader in Software development with more than 15 years of experience, programming   Mobile and Web applications from C to Javascript, Team leadership, Scrum and always obsessed with the good practices.\n\nWhat I am. Naturalista curioso apasionado por matematicas (I do digital art), coding (I do videogames), optimizacion (I am a full time system analist), ingenierìa natural (I do computer simulations), music (I play piano) and all kind of things for the sake of humanity.\n\nStop reading and go to mfontanadevhome.appspot.com to see it in motion.\n\nStill here? Ok, two things that I really care.\n\nFirst, nature designs: I began programming in my childhood when my father bougth me a Commodore 64 and non stop. No matter what languaje I use, programs must be functional, elengant and efficent just like designs of nature. \nThat's my principal motivation to be constantly learning, training and sharing the good coding practices.\nInspired on Kent Beck books.\n\nSecond, to be more than a good technician: \nThe days of the lone programming were in the past we must work with other people so, it is important pay attention on being positive to find solutions, generous to share knoledgement, integral to be trustworthy among others.\nInspired on Walter Rissi ppt.    \n",
-			"file": "/C/Users/R440/Google Drive/Resources/cv linkedin red.txt",
-			"file_size": 1323,
-			"file_write_time": 131145801442760538,
+			"file": "controllers/entities/garden.js",
 			"settings":
 			{
-				"buffer_size": 1307,
-				"line_ending": "Windows"
+				"buffer_size": 6878,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 138 files for \"m_btnBack\"\n\nD:\\Mios\\Programas\\wishflower\\controllers\\activities\\wishflowerHelpActivity.js:\n   11  \tthis.m_flow = null;\n   12  \n   13: \tthis.m_btnBack = null;\n   14  };\n   15  \n   ..\n   35      var tmpCanvas = this.m_viewParent.m_canvasEx;\n   36  \n   37:     this.m_btnBack = new CanvasControl();\n   38:     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, \"<\");\n   39:     this.m_btnBack._fontSize = 12;\n   40:     this.m_btnBack._onClick = this.btnBack_controller;\n   41: \tthis.m_btnBack.setVisible(false);\n   42: \tthis.m_btnBack.setEnabled(false);    \n   43  };\n   44  \n   45  WishflowerHelpActivity.prototype.onEnterActivity = function ()\n   46  {\n   47: \tthis.m_btnBack.setVisible(true);\n   48: \tthis.m_btnBack.setEnabled(true);\n   49  \n   50  \tthis.m_flow.setAnimationsWithCurrentLadyBugOffset();\n   ..\n   88  WishflowerHelpActivity.prototype.renderControls = function ()\n   89  {\n   90: \tthis.m_btnBack.render();\n   91  };\n   92  \n   ..\n   99  WishflowerHelpActivity.prototype.onLeaveActivity = function ()\n  100  {\n  101: \tthis.m_btnBack.setVisible(false);\n  102: \tthis.m_btnBack.setEnabled(false);\n  103  };\n  104  \n\nD:\\Mios\\Programas\\wishflower\\controllers\\activities\\wishflowerIntroActivity.js:\n   10  \tthis.m_flow = null;\n   11  \n   12: \tthis.m_btnBack = null;\n   13  }\n   14  \n   ..\n   33      var tmpCanvas = this.m_viewParent.m_canvasEx;\n   34  \n   35:     this.m_btnBack = new CanvasControl();\n   36:     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, \"<\");\n   37:     this.m_btnBack._fontSize = 12;\n   38:     this.m_btnBack._onClick = this.btnBack_controller;\n   39: \tthis.m_btnBack.setVisible(false);\n   40: \tthis.m_btnBack.setEnabled(false);\n   41  };\n   42  \n   ..\n   46  WishflowerIntroActivity.prototype.onEnterActivity = function ()\n   47  {\n   48:   \tthis.m_btnBack.setVisible(true);\n   49:   \tthis.m_btnBack.setEnabled(true);\n   50  };\n   51  \n   ..\n   82  WishflowerIntroActivity.prototype.renderControls = function ()\n   83  {\n   84: \tthis.m_btnBack.render();\n   85  };\n   86  \n   ..\n   92  WishflowerIntroActivity.prototype.onLeaveActivity = function ()\n   93  {\n   94:   \tthis.m_btnBack.setVisible(false);\n   95:   \tthis.m_btnBack.setEnabled(false);\n   96  };\n   97  \n\nD:\\Mios\\Programas\\wishflower\\controllers\\activities\\wishflowerPlayActivity.js:\n   10  \tthis.m_flow = null;\n   11  \n   12: \tthis.m_btnBack = null;\n   13  };\n   14  \n   ..\n   32      var tmpCanvas = this.m_viewParent.m_canvasEx;\n   33  \n   34:     this.m_btnBack = new CanvasControl();\n   35:     this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, \"<\");\n   36:     this.m_btnBack._fontSize = 12;\n   37:     this.m_btnBack._onClick = this.btnBack_controller;\n   38:   \tthis.m_btnBack.setVisible(false);\n   39:   \tthis.m_btnBack.setEnabled(false);\n   40  };\n   41  \n   42  WishflowerPlayActivity.prototype.onEnterActivity = function ()\n   43  {\n   44:   \tthis.m_btnBack.setVisible(true);\n   45:   \tthis.m_btnBack.setEnabled(true);\n   46  \n   47  \tthis.m_flow.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);\n   ..\n   67  WishflowerPlayActivity.prototype.renderControls = function ()\n   68  {\n   69: \tthis.m_btnBack.render();\n   70  };\n   71  \n   ..\n   77  WishflowerPlayActivity.prototype.onLeaveActivity = function ()\n   78  {\n   79:   \tthis.m_btnBack.setVisible(false);\n   80:   \tthis.m_btnBack.setEnabled(false);\n   81  };\n   82  \n\n36 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 3436,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "controllers/activities/wishflowerHelpActivity.js",
+			"settings":
+			{
+				"buffer_size": 2135,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "controllers/activities/wishflowerIntroActivity.js",
+			"settings":
+			{
+				"buffer_size": 2017,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -105,18 +387,31 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 0.0,
-		"last_filter": "",
+		"height": 104.0,
+		"last_filter": "Package Control: install",
 		"selected_items":
 		[
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			]
 		],
-		"width": 0.0
+		"width": 416.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 153.0,
 		"history":
 		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
 	"distraction_free":
@@ -130,66 +425,151 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/HTML5/wishflower",
-		"/D/Work/HTML5/wishflower/config",
-		"/D/Work/HTML5/wishflower/controllers",
-		"/D/Work/HTML5/wishflower/controllers/activities",
-		"/D/Work/HTML5/wishflower/lib",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js",
-		"/D/Work/HTML5/wishflower/views"
+		"/D/Mios/Programas/wishflower",
+		"/D/Mios/Programas/wishflower/config",
+		"/D/Mios/Programas/wishflower/controllers",
+		"/D/Mios/Programas/wishflower/controllers/activities",
+		"/D/Mios/Programas/wishflower/controllers/entities",
+		"/D/Mios/Programas/wishflower/controllers/flows",
+		"/D/Mios/Programas/wishflower/controllers/services",
+		"/D/Mios/Programas/wishflower/lib",
+		"/D/Mios/Programas/wishflower/lib/chel-dist",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js",
+		"/D/Mios/Programas/wishflower/public",
+		"/D/Mios/Programas/wishflower/public/assets",
+		"/D/Mios/Programas/wishflower/public/assets/img",
+		"/D/Mios/Programas/wishflower/public/assets/snd"
 	],
 	"file_history":
 	[
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background.html",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background/background.html",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/index.js",
-		"/D/Work/HTML5/wishflower/controllers/wishflowerController.js",
-		"/D/Work/HTML5/wishflower_comp/last/controllers/activities/wishflowerPlayActivity.js",
-		"/D/Work/HTML5/wishflower_comp/last/controllers/wishflowerController.js",
-		"/D/Today/wishflower/background.html",
-		"/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
-		"/C/Users/R440/BitDownloads/Completed/Fullmetal Alchemist Brotherhood/IMPORTANTE.txt",
-		"/C/Users/R440/Google Drive/Resources/Nuevo documento de texto.txt",
-		"/D/Work/HTML5/wishflower/candidate/background.html",
-		"/D/Work/HTML5/wishflower/index.js",
-		"/D/Today/wishflower/wishflower/controllers/wishflowerController.js",
-		"/D/Work/HTML5/wishflower/candidate/index.js",
-		"/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/Nuevo documento de texto.txt",
-		"/D/Work/HTML5/background.html",
-		"/C/Tools/PhotoShop C1 Portable/Photoshop/Presets/Textures/Mountains 1.psd",
-		"/D/Work/HTML5/Orchesta/_oldVersions/orchesta 2/data/game_data.js",
-		"/D/Work/HTML5/Treninto/trunk/classes/viewPlay.js",
-		"/D/Work/HTML5/Treninto/trunk/classes/maze.js",
-		"/D/Work/HTML5/Treninto/trunk/classes/viewIntro.js",
-		"/D/Restauracion/Instrucciones.txt",
-		"/D/Work/HTML5/Treninto/trunk/treninto.html",
-		"/D/Docs/Registros ONline.txt",
-		"/H/Mios/Programas/New Text Document.txt",
-		"/D/Docs/Personal/key.txt",
-		"/D/Bitdown/Tools/Nuevo documento de texto.txt",
-		"/D/Bitdown/Tools/ultimo listado NB.txt",
-		"/F/Nueva/IMGP1192.JPG",
-		"/F/Nueva/IMGP1130.JPG",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/canvasControl.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/soundManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/resourceManager.js",
-		"/D/Work/HTML5/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
-		"/D/Work/HTML5/wishflower/config/globalDefinitions.js",
-		"/D/Work/HTML5/wishflower/views/index.js",
-		"/D/Work/HTML5/Orchesta/orchesta/config/globalDefinitions.js",
-		"/D/Work/HTML5/Orchesta/orchesta/lib/chel-1.0.1-dist/js/soundManager.js",
-		"/D/Work/HTML5/wishflower/package.json",
+		"/D/Mios/Programas/wishflower/controllers/entities/messageControl.js",
+		"/D/Mios/Programas/wishflower/config/globalDefinitions.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/garden.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/ladybug.js",
+		"/D/Mios/Programas/wishflower/controllers/wishflowerContext.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/treeNode.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/playFlow.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/helpFlow.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/introFlow.js",
+		"/D/Mios/Programas/wishflower/controllers/wishflowerController.js",
+		"/D/Mios/Programas/wishflower/models/db_wish.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/poligonPath.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/inputControl.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/keyPathControl.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerInputControlsActivity.js",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js/canvasControl.js",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/D/Mios/Programas/wishflower/index.js",
+		"/D/Mios/Programas/wishflower/controllers/services/wishflower.ServiceMock.js",
+		"/D/Mios/Programas/wishflower/controllers/services/wishflower.Service.js",
+		"/D/Mios/Programas/wishflower/views/index.js",
+		"/D/Mios/Programas/wishflower/controllers/entities/keypathControl.js",
+		"/D/Mios/Programas/wishflower/controllers/index.js",
+		"/D/Mios/Programas/wishflower/views/wishflowerView.html",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerIntroActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerLadybugFlyingPathActivity.js",
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/D/Mios/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/canvasControl.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html",
+		"/C/workspace/Bunge/Wokspaces/cfs-simulators/Isla de Carga de Líquidos/RyDSimulator-PruebaIntegral-PLC-v3.js",
+		"/C/workspace/Bunge/Wokspaces/cfs-simulators/Isla de Carga de Líquidos/IslaDeCargaSimulator - RyD - Test Automatizado - v3.js",
+		"/C/workspace/Bunge/Wokspaces/cfs-simulators/Isla de Carga de Líquidos/IslaDeCargaSimulator.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/errorPageView.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/garden.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_wish.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/db_wish_schema.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Service.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.ServiceMock.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Route.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower-master/controllers/entities/db_wish.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/mongoose/node_modules/hooks-fixed/README.md",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/README.md",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/serverOrchesta.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/protocolMessages.js",
+		"/C/Users/mfontana/Mios/Proyectos/Bunge/ISSUES/ISSUE-Phone4g/emulador/Campana/Demo.log",
+		"/C/Users/mfontana/Mios/Proyectos/Bunge/ISSUES/ISSUE-Phone4g/emulador/Campana/index.html",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/_old index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Service.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Route.js",
+		"/C/workspace/Bunge/Wokspaces/CFS/cfs-simulators/Isla de Carga de Liquidos/RyDSimulator-PruebaIntegral-PLC-v3.js",
+		"/C/workspace/Bunge/Wokspaces/CFS/cfs-simulators/Isla de Carga de Liquidos/IslaDeCargaSimulator - RyD - Test Automatizado - v3.js",
+		"/C/workspace/Bunge/Wokspaces/CFS/cfs-simulators/Isla de Carga de Liquidos/Humedimetro - v1.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower-master/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerImageFilterTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/bitmapFilter.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/guy_bad_j.anim.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/guy.sprites.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/politicfight/politicfight.appspot.com_files/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugWalkingPathActivity.js",
+		"/C/Users/mfontana/Mios/Today/python-docs-samples/appengine/flexible/multiple_services/static-service/app.yaml",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/background.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugFlyingPathActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower_old/wishflower/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerLadybugTestActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/backgroung.js",
+		"/C/Users/mfontana/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.IE5/8Z23BGSQ/Hipotecario[1].apk",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
+		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/Default (Windows).sublime-keymap",
+		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/db.json",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/History.md",
+		"/C/Users/mfontana/Downloads/criminal case against-you  I78 ITQ-KL4.rar",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js",
+		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/hero.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/enemy.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/soundManager.js",
+		"/C/Users/mfontana/Desktop/animation.txt",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/potion.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/consts.js",
 		"/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
-		"/C/Users/R440/Downloads/Nueva carpeta/Credits.txt",
-		"/C/Users/R440/AppData/Local/Temp/Rar$DI01.746/researching.txt",
-		"/D/Work/HTML5/wishflower/app-bf.sublime-project",
-		"/D/Work/HTML5/wishflower/controllers/entities/treeNode.js",
-		"/D/Work/HTML5/wishflower/orchesta-nb.sublime-project",
-		"/D/Work/HTML5/wishflower/wishflower-nb.sublime-workspace",
-		"/C/Users/Carla/MauWork/orchesta/controllers/errorPageController.js"
+		"/D/Bitdown/Tools/Nuevo documento de texto.txt"
 	],
 	"find":
 	{
@@ -197,9 +577,11 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"D:\\Mios\\Programas\\wishflower",
+			"C:\\Users\\mfontana\\Mios\\Personal\\Programas\\wishflower"
 		]
 	},
 	"find_state":
@@ -207,25 +589,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"cnv",
-			"ios",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"setResizeMethodToMaxZoom",
-			"visible",
-			"lblInfo",
-			"getIdByName",
-			"_soundName",
-			"_resourceName",
-			"m_managerAvailable",
-			"m_soundAvailable",
-			"setTimeout",
+			"m_ladybug",
+			"createBranchNode",
+			"setIconTouched",
+			"m_icon",
+			"m_iconConfirmation",
+			"m_icon",
+			"m_iconConfirmation",
+			"updateIconPositionAtEndOfSegment",
+			"m_btnBack",
+			"ctree_leave_closed.png",
+			"log.png",
+			"ladybug_normal",
+			"ctree_root",
+			"ctree_root.png",
+			"ctree_root",
+			"glif-sub",
+			"glif-down-arrow",
+			"glif-left-arrow",
+			"initWithViewAndTree",
 			"console",
-			"m_totalSounds",
-			"msg",
-			"undef",
-			"hash",
-			"getHash"
+			"m_totalLeaves",
+			"m_treeGrowedLeaves",
+			"C_TREE_FLOWERS",
+			"C_GENERATION_LEAVE_QTTY",
+			"--",
+			"---",
+			"m_totalLeaves",
+			"initWithViewAndTreeAndBackground",
+			"m_currentTree",
+			"m_idProcessUpdate",
+			"setTimeout",
+			"stopUpdateProcess",
+			"starUpdateProcess",
+			"stopUpdatingProcessAfterUpdateWishes",
+			"m_stopUpdatingProcessAfterUpdateWishes",
+			"stopUpdateProcess",
+			"m_stopUpdatingProcessAfterUpdateWishes",
+			"stopUpdatingProcessAfterUpdateWishes",
+			"m_stopUpdatingProcessAfterUpdateWishes",
+			"addWish",
+			"setRetur",
+			"return",
+			"setre",
+			"setreturnpre",
+			"m_totalLeaves",
+			"areCreatedAllLeaves",
+			"wish added",
+			"updateWishes",
+			"m_incommingLadybugs",
+			"onUpdatedNode",
+			"updateWishes",
+			"m_animeteNewIncommingWishes",
+			"C_UPDATE_FRECUENCY",
+			"areCreatedAllLeaves",
+			"m_animeteNewIncommingWishes",
+			"m_onConfirmationCallback",
+			"registerOnConfirm",
+			"registerWriteInputControlOnClick",
+			"C_STATE_ACTION_FADEOUT_TO_HIDE",
+			"showConfirmButtonControl",
+			"updateIconPositionAtEndOfSegment",
+			"calculateEndPointSegment",
+			"updateIconPositionAtEndOfSegment",
+			"m_cx",
+			"m_inputControlWrite",
+			"updatePosition",
+			"state_APPSTATE_INITIALIZING",
+			"moveLogic",
+			"m_cx",
+			"enable",
+			"enabled",
+			"onConfirmWriteClick",
+			"_enabled",
+			"_hasFocus",
+			"_hiddenInput",
+			"showConfirmButtonControl",
+			"m_messageControl",
+			"setLadyBugTouched",
+			"moveLogic",
+			"render",
+			"moveLogic",
+			"poligonPathLogic",
+			"m_keyboard",
+			"clic",
+			"Click",
+			"onIconControlWriteClick",
+			"registerOnClick",
+			"starUpdateProcess",
+			"startUpdate",
+			"route",
+			"showConfirmButtonForKeyPathControl",
+			"onKeyPathControlEditionChanged",
+			"_parentLadybug",
+			"getParent",
+			"_onkeyup",
+			"_onkeyUpParent",
+			"m_onEditionChanged",
+			"_onkeyUpParent",
+			"onKeyPathControlEditionChanged",
+			"registerOnKeyUpListener",
+			"alpha",
+			"m_keyPathControl",
+			"PoligonPath",
+			"InputControl",
+			"onKeyPathControlKeyUp",
+			"onMessageControlKeyUp",
+			"m_actionALpha",
+			"m_direction",
+			"m_ladybugTouched",
+			"m_confirmationIconTouched",
+			"m_iconPosition",
+			"m_iconSegment",
+			"m_iconSegmentCounter",
+			"m_iconSegment",
+			"m_onConfirmationParent",
+			"m_onConfirmationCallback",
+			"m_showConfirmButton",
+			"m_interpolatedSegmentPosition",
+			"m_iconScale",
+			"m_iconSegment",
+			"m_icon",
+			"m_iconConfirmation",
+			"m_iconOK",
+			"console",
+			"m_onIconClicParent",
+			"onIconControlFindClick",
+			"m_iconClicCallback",
+			"m_onIconClic"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -233,6 +724,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -243,145 +735,118 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/Bitdown/Tools/Nuevo documento de texto.txt",
+					"file": "controllers/entities/inputControl.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89333,
+						"buffer_size": 20104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								695,
-								695
+								16725,
+								16725
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6613.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/R440/BitDownloads/Completed/AN/VISTOS.txt",
+					"file": "controllers/entities/treeNode.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6189,
+						"buffer_size": 32831,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6189,
-								6189
+								12350,
+								12366
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 2780.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/D/Bitdown/Tools/ultimo listado NB.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 86092,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1180,
-								1180
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 5045.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/C/Users/R440/Google Drive/Resources/cv linkedin.txt",
+					"buffer": 2,
+					"file": "lib/chel-dist/js/keyboardManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11975,
+						"buffer_size": 4627,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								513
+								601,
+								601
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1589.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/background_log/background.html",
+					"buffer": 3,
+					"file": "controllers/activities/wishflowerPlayActivity.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4858,
+						"buffer_size": 1395,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								603,
-								603
+								1054,
+								1054
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -391,41 +856,42 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/C/Users/R440/Google Drive/InProgress/Wishflower-candidate/ladybug/background.html",
+					"buffer": 4,
+					"file": "controllers/flows/playFlow.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4859,
+						"buffer_size": 2708,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								599,
-								599
+								2381,
+								2381
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 882.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/C/Users/R440/Google Drive/Resources/cv linkedin red.txt",
+					"buffer": 5,
+					"file": "controllers/entities/ladybug.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1307,
+						"buffer_size": 39896,
 						"regions":
 						{
 						},
@@ -438,14 +904,287 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1050.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "controllers/entities/garden.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6878,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								799,
+								799
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1946.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3436,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										165,
+										174
+									],
+									[
+										288,
+										297
+									],
+									[
+										337,
+										346
+									],
+									[
+										420,
+										429
+									],
+									[
+										462,
+										471
+									],
+									[
+										521,
+										530
+									],
+									[
+										563,
+										572
+									],
+									[
+										706,
+										715
+									],
+									[
+										747,
+										756
+									],
+									[
+										941,
+										950
+									],
+									[
+										1077,
+										1086
+									],
+									[
+										1119,
+										1128
+									],
+									[
+										1296,
+										1305
+									],
+									[
+										1418,
+										1427
+									],
+									[
+										1467,
+										1476
+									],
+									[
+										1550,
+										1559
+									],
+									[
+										1592,
+										1601
+									],
+									[
+										1651,
+										1660
+									],
+									[
+										1693,
+										1702
+									],
+									[
+										1841,
+										1850
+									],
+									[
+										1884,
+										1893
+									],
+									[
+										2028,
+										2037
+									],
+									[
+										2167,
+										2176
+									],
+									[
+										2211,
+										2220
+									],
+									[
+										2387,
+										2396
+									],
+									[
+										2510,
+										2519
+									],
+									[
+										2559,
+										2568
+									],
+									[
+										2642,
+										2651
+									],
+									[
+										2684,
+										2693
+									],
+									[
+										2745,
+										2754
+									],
+									[
+										2789,
+										2798
+									],
+									[
+										2930,
+										2939
+									],
+									[
+										2973,
+										2982
+									],
+									[
+										3180,
+										3189
+									],
+									[
+										3318,
+										3327
+									],
+									[
+										3362,
+										3371
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "controllers/activities/wishflowerHelpActivity.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2132,
+								2132
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 750.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "controllers/activities/wishflowerIntroActivity.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2017,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2013,
+								2013
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 714.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -453,11 +1192,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 21.0
+		"height": 22.0
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -482,6 +1221,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 216.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -490,7 +1233,7 @@
 	"project": "app-nb.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -523,14 +1266,24 @@
 	"selected_group": 0,
 	"settings":
 	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		]
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 245.0,
+	"side_bar_width": 293.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
+		"max_columns": 1
 	}
 }
