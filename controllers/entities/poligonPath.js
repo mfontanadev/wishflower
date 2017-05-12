@@ -433,6 +433,18 @@ function PoligonSegment()
         this.m_poligonDirection.m_rc.m_y2 = this.m_y2 + _halfSide;
     }
     
+    PoligonSegment.prototype.setAt = function (_x, _y)
+    {
+        var dx = this.m_x1 - _x;
+        var dy = this.m_y1 - _y;
+        
+        this.m_x1 = _x;
+        this.m_y1 = _y;
+
+        this.m_x2 = this.m_x2 - dx;
+        this.m_y2 = this.m_y2 - dy;
+    };
+
     PoligonSegment.prototype.fLog = function () 
     { 
         var logText = "PoligonSegment: " +

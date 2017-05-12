@@ -59,6 +59,11 @@ function MessageControl()
         this.m_textControl.render();
     };
 
+    MessageControl.prototype.setFocus = function ()
+    {
+        this.m_textControl.setFocus(true);
+    };
+
     MessageControl.prototype.setX = function (_x)
     {
         this.m_textControl.setX(_x);

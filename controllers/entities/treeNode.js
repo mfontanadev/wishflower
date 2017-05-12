@@ -8,8 +8,8 @@ TreeNode.C_FADING_IN = 1;
 TreeNode.C_FADING_OUT = 2;
 TreeNode.C_FADING_MAX_VALUE = 0.3;
 
-TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = 4;
-TreeNode.C_GENERATION_LEAVE_QTTY = 2;
+TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION = Globals.C_TREE_LEVELS + 2;
+TreeNode.C_GENERATION_LEAVE_QTTY = Globals.C_TREE_FLOWERS;
 TreeNode.DEBUG = false;
 
 TreeNode.composedLeaveImg = null;
@@ -92,13 +92,14 @@ function TreeNode()
         branch.m_hash = 'T';
         root.addChild(branch);
 
-        this.dump();
-        this.info();
         this.recalculateTargetPointAndChilds();
         //_context.globalCompositeOperation = "lighter";
 
         TreeNode.m_treeCursor = branch;
         TreeNode.m_treeCursorHash = branch.getHash();
+
+        this.dump();
+        this.info();
     };
 
     TreeNode.prototype.initLeaveImage = function () 
@@ -121,7 +122,7 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root4.png');
+        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root.png');
         TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
         TreeNode.leaveClosedImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave_closed.png');
@@ -981,7 +982,7 @@ function TreeNode()
 
     TreeNode.prototype.areCreatedAllLeaves = function () 
     {
-        return TreeNode.m_totalLeaves === this.totalFinalBranches() * TreeNode.C_GENERATION_LEAVE_QTTY;
+        return TreeNode.m_totalLeaves === (this.totalFinalBranches() * TreeNode.C_GENERATION_LEAVE_QTTY);
     };
 
     TreeNode.prototype.getFirstBranch = function () 

@@ -1,3 +1,5 @@
+Ladybug.self = null;
+
 Ladybug.C_LADYBUG_TYPE_NOT_SET = 0;
 Ladybug.C_LADYBUG_TYPE_WISHMASTER = 1;
 Ladybug.C_LADYBUG_TYPE_ABOUT = 2;
@@ -74,7 +76,9 @@ function Ladybug()
         down: false,
         left: false,
         right: false,
-        button1: false
+        button1: false,
+        return: false,
+        clickOnLadybug: false
     }
 
     this.m_walkingZoneRectangle = new ChRect();
@@ -87,7 +91,11 @@ function Ladybug()
     this.m_visible = true;
 
     this.m_action = Ladybug.C_LADYBUG_ACTION_NORMAL;
-    this.m_scalePerturbationOnLadybugTouched = 1;
+    this.m_scalePerturbationOnLadybugTouched = 1;   // make ladybug a little smaller when user touches it.
+
+    this.m_inputControlWrite = new InputControl();
+    this.m_inputControlFind = new InputControl();
+    this.m_inputControlsEnabled = false;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -100,6 +108,12 @@ function Ladybug()
         this.setAnimations();
 
         this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
+
+        this.m_inputControlWrite.initWithTypeLadybug(_viewParent, InputControl.C_TYPE_WRITER, this);
+        this.m_inputControlFind.initWithTypeLadybug(_viewParent, InputControl.C_TYPE_FINDER, this);
+        
+        this.m_inputControlWrite.registerOnClick(this, this.onIconControlWriteClick);
+        this.m_inputControlFind.registerOnClick(this, this.onIconControlFindClick);        
     };
 
     // ****************************************
@@ -255,23 +269,27 @@ function Ladybug()
         this.m_keyboard.down = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_DOWN);
         this.m_keyboard.right = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT);
         this.m_keyboard.left = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT);
+        this.m_keyboard.return = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN);
+        if (this.m_keyboard.return === true)
+        {
+            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);  
+        }
+
         if (this.m_keyboard.right === true && this.m_keyboard.left === true)
         {
             this.m_keyboard.right = false;
             this.m_keyboard.left = false;      
         }
-
         this.m_keyboard.button1 = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT);
 
         this.m_scalePerturbationOnLadybugTouched = 1;
         var mouse = this.m_viewParent.getMouseManagerInstance();
-        if (mouse.m_mouseClick === true)
+        var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.collisionRectangle()); 
+        if (isMouseOnLadyBug === true && mouse.m_mouseClick === true)
         {
-            if (collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.collisionRectangle()) === true)
-            {
-                this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
-            }
+            this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
         }
+        this.m_keyboard.clickOnLadybug = mouse.triggerClic(isMouseOnLadyBug);
     };
 
     Ladybug.prototype.implementGameLogic = function () 
@@ -335,6 +353,9 @@ function Ladybug()
             {
                 this.m_poligonPath.render();    
             }
+
+            this.m_inputControlWrite.render();
+            this.m_inputControlFind.render();
         }
     };
 
@@ -343,6 +364,24 @@ function Ladybug()
     // ****************************************
     Ladybug.prototype.moveLogic = function ()
     {   
+        if (this.m_inputControlsEnabled === true)
+        {
+            /*if (this.m_keyboard.return === true)
+            {
+                this.m_inputControlWrite.setReturnPressed();
+                this.m_inputControlFind.setReturnPressed();
+            }*/
+
+            if (this.m_keyboard.clickOnLadybug === true)
+            {
+                this.m_inputControlWrite.setLadyBugTouched();
+                this.m_inputControlFind.setLadyBugTouched();
+            }
+
+            this.m_inputControlWrite.implementGameLogic();
+            this.m_inputControlFind.implementGameLogic();
+        }
+
         if (this.isInWalkingZone() === false)
         {
             this.m_keyboard.button1 = true;
@@ -399,6 +438,13 @@ function Ladybug()
         if (this.m_cy > this.m_viewParent.m_canvasEx.m_canvas.height)
             this.m_cy = this.m_viewParent.m_canvasEx.m_canvas.height;
 
+        this.updateDependecyControlsPosition();
+    }
+
+    Ladybug.prototype.updateDependecyControlsPosition = function ()
+    {   
+        this.m_inputControlWrite.setAt(this.m_cx, this.m_cy);
+        this.m_inputControlFind.setAt(this.m_cx, this.m_cy);
     }
 
     Ladybug.prototype.moveLogicStand = function ()
@@ -1105,7 +1151,42 @@ function Ladybug()
     {
         // 0.682 (percent of ladybug in the entire image) = 176 (ladybug in the center) / 379 (total width)
         return this.collisionRectangle().height() * 0.682;
-    }   
+    }  
+
+    Ladybug.prototype.onIconControlWriteClick = function (_parent, _sender)
+    {
+        _parent.m_inputControlFind.foreignIconClicked();
+    };
+
+    Ladybug.prototype.onIconControlFindClick = function (_parent, _sender)
+    {
+        _parent.m_inputControlWrite.foreignIconClicked();
+    };
+
+    Ladybug.prototype.registerWriteInputControlOnClick = function (_parent, _callBack)
+    {
+        this.m_inputControlWrite.registerOnConfirm(_parent, _callBack);
+    };
+
+    Ladybug.prototype.registerFindInputControlOnClick = function (_parent, _callBack)
+    {
+        this.m_inputControlFind.registerOnConfirm(_parent, _callBack);
+    };
+
+    Ladybug.prototype.notifyInputControlWriteConfirmation = function ()
+    {
+        this.m_inputControlFind.foreignConfirmClicked();
+    };
+
+    Ladybug.prototype.notifyInputControlFindConfirmation = function ()
+    {
+        this.m_inputControlWrite.foreignConfirmClicked();
+    };
+ 
+    Ladybug.prototype.setInputControlsEnabled = function (_value)
+    {
+         this.m_inputControlsEnabled = _value;
+    };
 };
 
 

@@ -5,6 +5,8 @@ var viewMngr = null;
 // ******************************************************************
 window.onload = function()
 {
+	document.title = Globals.C_APPLICATION_TITLE_AND_VERSION;
+
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas', false);
@@ -53,6 +55,6 @@ function appInitContext()
  	viewMngr.initializeActivities();
 
  	// Start animation loop.
-	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_LADYBUG_INPUT_CONTROLS);
+	viewMngr.navigateTo(WishflowerContext.C_ACTIVITY_INTRO);
 	viewMngr.animationCycle();	
 }

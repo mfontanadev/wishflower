@@ -4,8 +4,8 @@ InputControl.C_TYPE_NOT_SET = 0;
 InputControl.C_TYPE_WRITER = 1;
 InputControl.C_TYPE_FINDER = 2;
 
-InputControl.C_BUTTON_EXPANDED_DISTANCE = 120;      // Pixels.
-InputControl.C_BUTTON_COLLAPSED_DISTANCE = 50;      // Pixels.
+InputControl.C_BUTTON_EXPANDED_DISTANCE = 90;      // Pixels.
+InputControl.C_BUTTON_COLLAPSED_DISTANCE = 30;      // Pixels.
 
 InputControl.C_STATE_NOT_SET = -1;
 InputControl.C_STATE_HIDE = 0;
@@ -97,11 +97,10 @@ function InputControl()
             this.m_keyPathControl.setX(this.m_cx);
             this.m_keyPathControl.setY(this.m_cy);
             this.m_keyPathControl.registerOnEditionChangedListener(this, this.onKeyPathControlEditionChanged);
-
         }
 
         this.m_icon = new CanvasControl();
-        this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 50, 50, "");
+        this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 40, 40, "");
         this.m_icon.setImage(imageIcon);
         this.m_icon.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_icon.registerOnClick(this, this.buttonClic_controller);
@@ -109,7 +108,7 @@ function InputControl()
         this.m_icon._enabled = false;
 
         this.m_iconConfirmation = new CanvasControl();
-        this.m_iconConfirmation.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 50, 50, "");
+        this.m_iconConfirmation.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 40, 40, "");
         this.m_iconConfirmation.setImage('icon_done.png');
         this.m_iconConfirmation.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_iconConfirmation.registerOnClick(this, this.buttonOKClic_controller);
@@ -130,29 +129,6 @@ function InputControl()
     // ****************************************
     InputControl.prototype.handleInputs = function () 
     {
-        /*
-        var mouse = this.m_viewParent.getMouseManagerInstance();
-        var isMouseOnAction = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_segment.getEndPointCollitionRectangle()); 
-        if (mouse.m_clicDown === true && isMouseOnAction == true)
-        {
-
-        }*/
-        /*
-        if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_CHAR_W) === true &&
-            this.m_type === InputControl.C_TYPE_WRITER)
-        {
-            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_CHAR_W);
-            //this.foreignIconClicked(null, null);
-            this.showConfirmButton();
-        }        
-
-        if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_CHAR_S) === true &&
-            this.m_type === InputControl.C_TYPE_FINDER)
-        {
-            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_CHAR_S);
-            //this.foreignIconClicked(null, null);
-            this.hideConfirmButton();
-        } */       
     };
 
     InputControl.prototype.implementGameLogic = function () 
@@ -241,7 +217,10 @@ function InputControl()
                 this.initActionAlpha(100);
 
                 if (this.m_type === InputControl.C_TYPE_WRITER)
+                {
+                    this.m_messageControl.setFocus();
                     this.showConfirmButtonControl(this.m_messageControl);
+                }
                 
                 if (this.m_type === InputControl.C_TYPE_FINDER)
                     this.showConfirmButtonControl(this.m_keyPathControl);
@@ -370,19 +349,25 @@ function InputControl()
         this.m_icon.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
         this.m_icon.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
 
-        this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
-        this.m_iconConfirmation.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
+        //this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
+        //this.m_iconConfirmation.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
 
         if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
         {
             this.m_messageControl.setX(this.m_endSegmentPosition.x - this.m_messageControl.getWidth() / 2);
-            this.m_messageControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_segmentDirection));
+            this.m_messageControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.4 * this.m_segmentDirection));
+
+            this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
+            this.m_iconConfirmation.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 2.5 * this.m_segmentDirection));
         }
 
         if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
         {
             this.m_keyPathControl.setX(this.m_endSegmentPosition.x - this.m_keyPathControl.getWidth() / 2);
-            this.m_keyPathControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_segmentDirection));
+            this.m_keyPathControl.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * this.m_segmentDirection));
+
+            this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
+            this.m_iconConfirmation.setY(this.m_endSegmentPosition.y + (this.m_icon.getHeight() * 1.5 * this.m_segmentDirection));
         }
     };
 
@@ -542,7 +527,7 @@ function InputControl()
 
     InputControl.prototype.updateConfirmButton = function ()
     {
-        this.m_icon._visible = !this.m_showConfirmButton;
+        //this.m_icon._visible = !this.m_showConfirmButton;
         this.m_icon._enabled = !this.m_showConfirmButton;
 
         this.m_iconConfirmation._visible = this.m_showConfirmButton;
@@ -615,7 +600,16 @@ function InputControl()
         }
 
         return result;
-    }    
+    }
+
+    InputControl.prototype.setAt = function(_x, _y)
+    {
+        this.m_cx = _x;
+        this.m_cy = _y;
+
+        this.m_segment.setAt(_x, _y);
+        this.updateIconPositionAtEndOfSegment();
+    };
 }
 
 

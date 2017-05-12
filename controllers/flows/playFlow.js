@@ -22,35 +22,36 @@ function PlayFlow()
         
         this.m_tree = _viewParent.getDataContext().m_tree;
         this.m_ladybug = _viewParent.getDataContext().m_ladybug;
+        this.m_ladybug.registerWriteInputControlOnClick(this, this.onConfirmWriteClick);
+        this.m_ladybug.registerFindInputControlOnClick(this, this.onConfirmFinderClick);
+
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
     };
 
+
+    PlayFlow.prototype.handleInputs = function ()
+    {
+        if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
+        {
+            this.m_ladybug.handleInputs();
+        }
+    };
+
     PlayFlow.prototype.implementGameLogic = function () 
     {
-        // Check if clic event was raised.
-        var clicOnLadybug = false;
-        var mouse = this.m_viewParent.getMouseManagerInstance();
-        var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_ladybug.collisionRectangle()); 
-
-        if (mouse.triggerClic(isMouseOnLadyBug) === true)
-        {
-            clicOnLadybug = true;
-        }
-
         if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING)
         {
-            this.m_garden.starUpdateProcess();
+            this.state_APPSTATE_INITIALIZING();
             this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING); 
         }
  
         if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
         {
-
+            this.m_ladybug.implementGameLogic();
         }
 
         this.m_tree.implementGameLogic();
-        this.m_ladybug.implementGameLogic();
         this.m_garden.implementGameLogic();
     };
 
@@ -64,12 +65,31 @@ function PlayFlow()
 
     PlayFlow.prototype.state_APPSTATE_INITIALIZING = function () 
     {
+        this.m_ladybug.setInputControlsEnabled(true);
+        this.m_garden.starUpdateProcess();
     };
 
     PlayFlow.prototype.setState = function (_state) 
     {
         this.m_state = _state;
     };
+
+    PlayFlow.prototype.onConfirmWriteClick = function (_parent, _sender)
+    {
+        _parent.m_ladybug.notifyInputControlWriteConfirmation();
+        console.log("WRITER confirm");
+        console.log(_sender.getText());
+
+        var wish = _sender.getText();
+        _parent.m_garden.addWish(wish);
+    };
+
+    PlayFlow.prototype.onConfirmFinderClick = function (_parent, _sender)
+    {
+        _parent.m_ladybug.notifyInputControlFindConfirmation();
+        console.log("FINDER confirm");
+        console.log(_sender.getText());
+    };    
 };
 
 

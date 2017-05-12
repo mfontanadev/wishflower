@@ -9,8 +9,6 @@ function WishflowerHelpActivity(_id, _viewParent)
 	this.m_viewParent = _viewParent; 
 
 	this.m_flow = null;
-
-	this.m_btnBack = null;
 };
 
 
@@ -33,20 +31,10 @@ WishflowerHelpActivity.prototype.initialize = function ()
 WishflowerHelpActivity.prototype.createControls = function ()
 {
     var tmpCanvas = this.m_viewParent.m_canvasEx;
-
-    this.m_btnBack = new CanvasControl();
-    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
-    this.m_btnBack._fontSize = 12;
-    this.m_btnBack._onClick = this.btnBack_controller;
-	this.m_btnBack.setVisible(false);
-	this.m_btnBack.setEnabled(false);    
 };
 
 WishflowerHelpActivity.prototype.onEnterActivity = function ()
 {
-	this.m_btnBack.setVisible(true);
-	this.m_btnBack.setEnabled(true);
-
 	this.m_flow.setAnimationsWithCurrentLadyBugOffset();
 };
 
@@ -87,7 +75,6 @@ WishflowerHelpActivity.prototype.render = function ()
 
 WishflowerHelpActivity.prototype.renderControls = function ()
 {
-	this.m_btnBack.render();
 };
 
 WishflowerHelpActivity.prototype.btnBack_controller = function (_e, _sender)
@@ -98,6 +85,4 @@ WishflowerHelpActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerHelpActivity.prototype.onLeaveActivity = function ()
 {
-	this.m_btnBack.setVisible(false);
-	this.m_btnBack.setEnabled(false);
 };

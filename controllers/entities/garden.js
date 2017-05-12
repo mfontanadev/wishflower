@@ -7,19 +7,22 @@ function Garden()
     Garden.self = this;
 
     this.m_viewParent = null;
-    this.m_idProcessUpdate = null;
     this.m_currentTree = null;
     this.m_bakground = null;
+    this.m_ladybug = null;
+
+    this.m_idProcessUpdate = null;
     this.m_incommingLadybugs = [];
     this.m_animeteNewIncommingWishes = false;
     // Used in IntroView screen to stop updating while help is running.
-    this.m_stopUpdatingProcessAfterUpdateWishes = false;
+    this.m_stopGetAllWishesWhileHelpIsRunning = false;
 
-    Garden.prototype.initWithViewAndTreeAndBackground = function (_viewParent, _tree, _background) 
+    Garden.prototype.initWithViewAndTreeAndBackground = function (_viewParent) 
     {
         this.m_viewParent = _viewParent;
-        this.m_currentTree = _tree;
-        this.m_background = _background;
+        this.m_currentTree = _viewParent.getDataContext().m_tree;
+        this.m_background = _viewParent.getDataContext().m_background;
+        this.m_ladybug = _viewParent.getDataContext().m_ladybug;
     };
 
     Garden.prototype.handleInputs = function () 
@@ -49,25 +52,25 @@ function Garden()
         }
     };
 
-    Garden.prototype.stopUpdatingProcessAfterUpdateWishes = function () 
+    Garden.prototype.stopGetAllWishesWhileHelpIsRunning = function () 
     {
-        this.m_stopUpdatingProcessAfterUpdateWishes = true;
+        this.m_stopGetAllWishesWhileHelpIsRunning = true;
     };
 
     Garden.prototype.starUpdateProcess = function () 
     {
-        if (this.m_idProcessUpdate === null)
+        if (Garden.self.m_idProcessUpdate === null)
         {
-            this.m_idProcessUpdate = setTimeout(this.updateProcess, Garden.C_UPDATE_FRECUENCY);  
+            Garden.self.m_idProcessUpdate = setTimeout(this.updateProcess, Garden.C_UPDATE_FRECUENCY);  
         }
     };
 
     Garden.prototype.stopUpdateProcess = function () 
     {
-        if (this.m_idProcessUpdate !== null)
+        if (Garden.self.m_idProcessUpdate !== null)
         {
-            window.clearInterval(this.m_idProcessUpdate);
-            this.m_idProcessUpdate = null;   
+            window.clearInterval(Garden.self.m_idProcessUpdate);
+            Garden.self.m_idProcessUpdate = null;   
         }   
     };
 
@@ -90,11 +93,16 @@ function Garden()
                     Garden.self.m_currentTree.updateWishes(arrWishes, Garden.self.onUpdatedNode);
                     Garden.self.m_animeteNewIncommingWishes = true;
                 
-                    if (Garden.self.m_stopUpdatingProcessAfterUpdateWishes === true)
+                    if (Garden.self.m_stopGetAllWishesWhileHelpIsRunning === true)
                     {
                         console.log("STOP PROCESS");
                         Garden.self.stopUpdateProcess();
-                        Garden.self.m_stopUpdatingProcessAfterUpdateWishes = false;
+                        Garden.self.m_stopGetAllWishesWhileHelpIsRunning = false;
+                    }
+                    else
+                    {
+                        console.log("NEW UPDATE PROCESS");
+                        Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);
                     }
                 }
                 else
@@ -126,14 +134,17 @@ function Garden()
         }
         else
         {
+            // Avoid new wish be shown after insertion and let ladybug perform travel to flower.
+            this.stopUpdateProcess();
+
             callWebService
             (
                 'POST',
-                //'services/wishflowerAddById?id=>>1&wish=' + _wishMessage, 
                 'services/wishflowerAddWish?wish=' + _wishMessage, 
                 function(_errorCode)
                 {
                     msglog("CallWebService error:" + _errorCode);
+                    Garden.starUpdateProcess();
                 },
                 function(_data)
                 {
@@ -141,7 +152,10 @@ function Garden()
                     {
                         console.log("Wish not added, tree is full.");
                     }
-
+                    else
+                    {
+                        console.log("Wish added.");
+                    }
                 }
             );  
         }
