@@ -122,7 +122,7 @@ function TreeNode()
 
     TreeNode.prototype.loadImages = function () 
     {
-        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root.png');
+        TreeNode.rootImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_root4.png');
         TreeNode.branchImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_branch.png');
         TreeNode.leaveImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave.png');
         TreeNode.leaveClosedImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ctree_leave_closed.png');

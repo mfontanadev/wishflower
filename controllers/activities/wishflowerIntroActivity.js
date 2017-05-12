@@ -8,6 +8,8 @@ function WishflowerIntroActivity(_id, _viewParent)
 	this.m_viewParent = _viewParent; 
 
 	this.m_flow = null;
+
+	this.m_btnBack = null;
 }
 
 WishflowerIntroActivity.prototype.getActivityName = function ()
@@ -29,6 +31,13 @@ WishflowerIntroActivity.prototype.initialize = function ()
 WishflowerIntroActivity.prototype.createControls = function ()
 {
     var tmpCanvas = this.m_viewParent.m_canvasEx;
+
+    this.m_btnBack = new CanvasControl();
+    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
+    this.m_btnBack._fontSize = 12;
+    this.m_btnBack._onClick = this.btnBack_controller;
+	this.m_btnBack.setVisible(false);
+	this.m_btnBack.setEnabled(false);
 };
 
 // ****************************************
@@ -36,6 +45,8 @@ WishflowerIntroActivity.prototype.createControls = function ()
 // ****************************************
 WishflowerIntroActivity.prototype.onEnterActivity = function ()
 {
+  	this.m_btnBack.setVisible(true);
+  	this.m_btnBack.setEnabled(true);
 };
 
 WishflowerIntroActivity.prototype.handleInputs = function ()
@@ -70,6 +81,7 @@ WishflowerIntroActivity.prototype.render = function ()
 
 WishflowerIntroActivity.prototype.renderControls = function ()
 {
+	this.m_btnBack.render();
 };
 
 WishflowerIntroActivity.prototype.btnBack_controller = function (_e, _sender)
@@ -79,5 +91,7 @@ WishflowerIntroActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerIntroActivity.prototype.onLeaveActivity = function ()
 {
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
 

@@ -8,11 +8,22 @@ var global_sound_definition = [
 // All bitmaps used by de app. ResourceManager will preload all of them.
 var global_bitmap_definition = 
 [
+    'glif-left-arrow.png',
+    'glif-right-arrow.png',
+    'glif-down-arrow.png',
+    'glif-sub.png',
+    'glif-add.png',
+
+    'icon_find.png',
+    'icon_write.png',
+    'icon_done.png',
+
     'ctree_root.png',
+    'ctree_root2.png',
+    'ctree_root3.png',
+    'ctree_root4.png',
     'ctree_branch.png',
     'ctree_leave.png',
-    'ctree_leave_closed.png',
-
     'ladybug_normal.png',
     'ladybug_walk_left.png',
     'ladybug_walk_right.png',
@@ -21,9 +32,13 @@ var global_bitmap_definition =
     'ladybug_open_3.png',
     'ladybug_flying_1.png',
     'ladybug_flying_2.png',
-
+    'log.png',
+    'polygonpath_test_grass.png',
     'callouts\\callout_main_1.png',
     'callouts\\callout_main_2.png',
+    'treereference.png',
+    'ctree_leave_closed.png',
+
     'callouts\\callout_write_1.png',
     'callouts\\callout_write_11.png',
     'callouts\\callout_write_2.png',
@@ -34,6 +49,7 @@ var global_bitmap_definition =
     'callouts\\callout_write_6.png',
     'callouts\\callout_write_7.png',
     'callouts\\callout_write_71.png',
+
     'callouts\\callout_find_1.png',
     'callouts\\callout_find_11.png',
     'callouts\\callout_find_2.png',
@@ -47,11 +63,6 @@ var global_bitmap_definition =
     'callouts\\callout_find_6.png',
     'callouts\\callout_find_61.png',
 
-    'icon_find.png',
-    'icon_write.png',
-    'icon_done.png',
-    'glif-left-arrow.png',
-    'glif-right-arrow.png',
     'glif-flower_1.png',
     'glif-flower_2.png',
     'glif-flower_3.png',

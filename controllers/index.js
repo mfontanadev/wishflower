@@ -4,21 +4,32 @@ module.exports = function(app)
 	app.get ('/controllers/activities/wishflowerPlayActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerPlayActivity.js');});
 
+	app.get ('/controllers/activities/wishflowerAboutActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerAboutActivity.js');});
+
+	app.get ('/controllers/activities/wishflowerLadybugTestActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugTestActivity.js');});
+
+	app.get ('/controllers/activities/wishflowerMenuActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerMenuActivity.js');});
+
 	app.get ('/controllers/activities/wishflowerHelpActivity.js', 
 		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerHelpActivity.js');});
+
+	app.get ('/controllers/activities/wishflowerLadybugWalkingPathActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugWalkingPathActivity.js');});
+
+	app.get ('/controllers/activities/wishflowerImageFilterTestActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerImageFilterTestActivity.js');});
+
+	app.get ('/controllers/activities/wishflowerLadybugFlyingPathActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerLadybugFlyingPathActivity.js');});
 
     app.get ('/controllers/activities/wishflowerIntroActivity.js',
         function (req, res) {res.sendFile(__dirname + '/activities/wishflowerIntroActivity.js');});
 
-	// FLOWS
-	app.get ('/controllers/flows/playFlow.js', 
-		function (req, res) {res.sendFile(__dirname + '/flows/playFlow.js');});
-
-	app.get ('/controllers/flows/helpFlow.js', 
-		function (req, res) {res.sendFile(__dirname + '/flows/helpFlow.js');});
-
-    app.get ('/controllers/flows/introFlow.js',
-        function (req, res) {res.sendFile(__dirname + '/flows/introFlow.js');});
+	app.get ('/controllers/activities/wishflowerInputControlsActivity.js', 
+		function (req, res) {res.sendFile(__dirname + '/activities/wishflowerInputControlsActivity.js');});
 
     // MAIN CONTROLLERS
 	app.get ('/controllers/errorPageController.js', 
@@ -55,11 +66,21 @@ module.exports = function(app)
 	app.get ('/controllers/entities/inputControl.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/inputControl.js');});
 
-    	app.get ('/controllers/entities/keyPathControl.js',
+    app.get ('/controllers/entities/keyPathControl.js',
         function (req, res) {res.sendFile(__dirname + '/entities/keyPathControl.js');});
 
-    	app.get ('/controllers/entities/messageControl.js',
+    app.get ('/controllers/entities/messageControl.js',
         function (req, res) {res.sendFile(__dirname + '/entities/messageControl.js');});
+
+    // FLOWS
+	app.get ('/controllers/entities/introFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/introFlow.js');});
+
+	app.get ('/controllers/entities/helpFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/helpFlow.js');});
+
+	app.get ('/controllers/entities/playFlow.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/playFlow.js');});
 
 	console.log("   controllers/index.js: OK");
 }

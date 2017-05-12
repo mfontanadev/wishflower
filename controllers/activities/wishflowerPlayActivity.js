@@ -8,6 +8,8 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_viewParent = _viewParent; 
 
 	this.m_flow = null;
+
+	this.m_btnBack = null;
 };
 
 WishflowerPlayActivity.prototype.getActivityName = function ()
@@ -28,10 +30,20 @@ WishflowerPlayActivity.prototype.initialize = function ()
 WishflowerPlayActivity.prototype.createControls = function ()
 {
     var tmpCanvas = this.m_viewParent.m_canvasEx;
+
+    this.m_btnBack = new CanvasControl();
+    this.m_btnBack.initButtonStyle(tmpCanvas, 20 + 5, 20 + 5, 15, 15, "<");
+    this.m_btnBack._fontSize = 12;
+    this.m_btnBack._onClick = this.btnBack_controller;
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
 
 WishflowerPlayActivity.prototype.onEnterActivity = function ()
 {
+  	this.m_btnBack.setVisible(true);
+  	this.m_btnBack.setEnabled(true);
+
 	this.m_flow.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
 };
 
@@ -54,6 +66,7 @@ WishflowerPlayActivity.prototype.render = function ()
 
 WishflowerPlayActivity.prototype.renderControls = function ()
 {
+	this.m_btnBack.render();
 };
 
 WishflowerPlayActivity.prototype.btnBack_controller = function (_e, _sender)
@@ -63,4 +76,6 @@ WishflowerPlayActivity.prototype.btnBack_controller = function (_e, _sender)
 
 WishflowerPlayActivity.prototype.onLeaveActivity = function ()
 {
+  	this.m_btnBack.setVisible(false);
+  	this.m_btnBack.setEnabled(false);
 };
