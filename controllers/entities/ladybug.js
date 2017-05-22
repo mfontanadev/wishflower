@@ -97,9 +97,6 @@ function Ladybug()
     this.m_inputControlFind = new InputControl();
     this.m_inputControlsEnabled = false;
 
-    this.m_keyPathFromAddedWish = "";
-    this.m_errorSendingWishErrorDesc = "";
-
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
         this.m_viewParent = _viewParent;
@@ -1166,12 +1163,12 @@ function Ladybug()
         _parent.m_inputControlWrite.foreignIconClicked();
     };
 
-    Ladybug.prototype.registerWriteInputControlOnClick = function (_parent, _callBack)
+    Ladybug.prototype.registerWriteInputControlOnConfirm = function (_parent, _callBack)
     {
         this.m_inputControlWrite.registerOnConfirm(_parent, _callBack);
     };
 
-    Ladybug.prototype.registerFindInputControlOnClick = function (_parent, _callBack)
+    Ladybug.prototype.registerFindInputControlOnConfirm = function (_parent, _callBack)
     {
         this.m_inputControlFind.registerOnConfirm(_parent, _callBack);
     };
@@ -1191,16 +1188,15 @@ function Ladybug()
          this.m_inputControlsEnabled = _value;
     };
 
-    Ladybug.prototype.setKeyPathOfAddWish = function (_keyPath)
+    Ladybug.prototype.getLadybugWish = function ()
     {
-         this.m_keyPathFromAddedWish = _keyPath;
+         return this.m_inputControlWrite.getText();
     };
 
-    Ladybug.prototype.setErrorSendingWish = function (_errorDesc)
+    Ladybug.prototype.getLadybugKeyPath = function ()
     {
-         this.m_errorSendingWishErrorDesc = _errorDesc;
+         return this.m_inputControlFind.getText();
     };
-
 };
 
 

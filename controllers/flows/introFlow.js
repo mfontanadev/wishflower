@@ -10,7 +10,7 @@ function IntroFlow()
     this.m_viewParent = null;
     this.m_activity = null;
 
-    this.m_poligonPath = null;
+    this.m_ladyBugPoligonPath = null;
     this.m_tree = null;
     this.m_ladybug = null;
     this.m_background = null;
@@ -23,6 +23,7 @@ function IntroFlow()
         this.m_viewParent = _viewParent;
         this.m_activity = _viewParent.getCurrentActivity();
         
+        this.m_ladyBugPoligonPath = _viewParent.getDataContext().m_ladyBugPoligonPath;
         this.m_tree = _viewParent.getDataContext().m_tree;
         this.m_ladybug = _viewParent.getDataContext().m_ladybug;
         this.m_background = _viewParent.getDataContext().m_background;
@@ -54,7 +55,7 @@ function IntroFlow()
         if (this.m_state !== IntroFlow.C_INTRO_FLOW_APPSTATE_INITIALIZING)
         {
             this.m_tree.implementGameLogic();
-            this.m_poligonPath.implementGameLogic();
+            this.m_ladyBugPoligonPath.implementGameLogic();
             this.m_ladybug.implementGameLogic();
             this.m_garden.implementGameLogic();
         }
@@ -67,13 +68,7 @@ function IntroFlow()
         this.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
         this.m_tree.reset(); 
 
-        this.m_poligonPath = new PoligonPath();
-        this.m_poligonPath.init(this.m_viewParent);
-        this.m_poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
-        this.m_poligonPath.setInfitineLoop(false);
-        this.m_poligonPath.setSegmentLinesVisibility(true);
-
-        this.m_ladybug.setPoligonPath(this.m_poligonPath);
+        this.m_ladybug.setPoligonPath(this.m_ladyBugPoligonPath);
         this.m_ladybug.setVisible(false);
 
         this.m_garden.stopGetAllWishesWhileHelpIsRunning();
@@ -86,7 +81,7 @@ function IntroFlow()
     {               
         if (this.m_tree.areTreeBranchesStillGrowing() === false)
         {
-            this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_poligonPath);
+            this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
             this.setState(IntroFlow.C_INTRO_FLOW_APPSTATE_USER_HELP);   
         }
     }
@@ -97,7 +92,7 @@ function IntroFlow()
         {
             this.m_background.render();
             this.m_tree.render();
-            this.m_poligonPath.render();
+            this.m_ladyBugPoligonPath.render();
             this.m_ladybug.render();
             this.m_garden.render();
         }

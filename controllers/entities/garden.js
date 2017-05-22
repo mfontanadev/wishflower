@@ -146,7 +146,7 @@ function Garden()
                     msglog("CallWebService error:" + _errorCode);
                     Garden.starUpdateProcess();
 
-                    if (_errorCallback !== null)
+                    if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
                         _errorCallback(_errorCode);
                 },
                 function(_data)
@@ -160,8 +160,8 @@ function Garden()
                         console.log("Wish added.");
                     }
                     
-                    if (_successCallback !== null)
-                        _successCallback(data);
+                    if (typeof _successCallback != 'undefined' && _successCallback !== null)
+                        _successCallback(_data);
                 }
             );  
         }
@@ -184,16 +184,18 @@ function Garden()
         var trunkSegment = new PoligonSegment();
         trunkSegment.init(trunkNode.m_x1, trunkNode.m_y1, trunkNode.m_x2, trunkNode.m_y2);
 
-        var ladyBugStartPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); 
+        var endPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); 
         var trunkWidth = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); 
 
-        _poligonPath.clearSegments();
-    
         var tmpSegment = new PoligonSegment();
-        tmpSegment.initWithExtraParams(trunkNode.m_x1, trunkNode.m_y1 + 20, 0.01, 0.5, ladyBugStartPosition.x, ladyBugStartPosition.y, trunkWidth, 1);
+        tmpSegment.initWithExtraParams(
+            trunkNode.m_x1, trunkNode.m_y1 + 20, 0.01, 0.5, 
+            endPosition.x, endPosition.y, trunkWidth, 1);
         //tmpSegment.setVelocityRatio(0.2);
         //***TODO: sl terminar los test dejar solamente la línea de arriba.
         tmpSegment.setVelocityRatio(5);
+
+        _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
 
         // Activate ladybug walking.
@@ -202,5 +204,32 @@ function Garden()
         _ladybug.setVisible(true);
     };
    
+    Garden.prototype.performLadybugFindTarget = function (_tree, _ladybug, _poligonPath)
+    {
+        // Make a path from root to the middle of tree's first branch.
+        var trunkNode = _tree.getFirstBranch();
+        var trunkWidth = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); 
 
+        var trunkSegment = new PoligonSegment();
+        trunkSegment.init(trunkNode.m_x1, trunkNode.m_y1, trunkNode.m_x2, trunkNode.m_y2);
+
+        var startPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); 
+        var endPosition = trunkSegment.getXYByPercent(100); 
+
+        var tmpSegment = new PoligonSegment();
+        tmpSegment.initWithExtraParams(
+            startPosition.x, startPosition.y, trunkWidth, 1, 
+            endPosition.x, endPosition.y, trunkWidth, 1);
+        tmpSegment.setVelocityRatio(0.2);
+        //***TODO: al terminar los test dejar solamente la línea de arriba.
+        //tmpSegment.setVelocityRatio(5);
+
+        _poligonPath.clearSegments();
+        _poligonPath.addSegmentObject(tmpSegment);
+
+        // Activate ladybug walking.
+        _ladybug.setAtCurrentSegmentStartPosition();   
+        _ladybug.startPoligonWalking();
+        _ladybug.setVisible(true);
+    };
 }
