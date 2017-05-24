@@ -137,16 +137,7 @@ function InputControl()
         {
             if (this.m_parentLadybugTouched === true)
             {
-                this.m_icon._visible = false;
-                this.m_icon._enabled = false;
-                
-                this.m_iconConfirmation._visible = false;
-                this.m_iconConfirmation._enabled = false;
-
-                this.m_segmentCounter = 0;
-
-                this.setInputControlEnabled(false);
-                this.setState(InputControl.C_STATE_FADE_IN_SEGMENT);
+                this.cleanState();
             }
         }
 
@@ -342,6 +333,20 @@ function InputControl()
         this.m_endSegmentPosition = this.m_segment.getXYByPercent(this.m_segmentCounter);
     };
 
+    InputControl.prototype.cleanState = function () 
+    {
+        this.m_icon._visible = false;
+        this.m_icon._enabled = false;
+        
+        this.m_iconConfirmation._visible = false;
+        this.m_iconConfirmation._enabled = false;
+
+        this.m_segmentCounter = 0;
+
+        this.setInputControlEnabled(false);
+        this.setState(InputControl.C_STATE_FADE_IN_SEGMENT);
+    }
+
     InputControl.prototype.updateIconPositionAtEndOfSegment = function () 
     {
         this.calculateEndPointSegment();
@@ -510,6 +515,17 @@ function InputControl()
             this.m_state === InputControl.C_STATE_SELECTABLE)
         {
             this.m_parentLadybugTouched = true;
+            console.log("touched forced");
+        }
+    };    
+
+    InputControl.prototype.showKeyPathFinding = function ()
+    {
+        if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
+        {
+            //this.setLadyBugTouched();
+            this.cleanState();
+            //this.setState(InputControl.C_STATE_FADE_IN_SEGMENT);
         }
     };    
 

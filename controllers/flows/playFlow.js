@@ -16,6 +16,9 @@ function PlayFlow()
     this.m_garden = null;
 
     this.m_state = PlayFlow.C_PLAY_FLOW_NOT_SET;
+    this.m_wishResponseOk = false;
+    this.m_wishResponseError = false;
+    this.m_wishResponse = "";
 
     PlayFlow.prototype.init = function (_viewParent) 
     {
@@ -52,17 +55,46 @@ function PlayFlow()
         {
             if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
             {
-                console.log("wish requested");
-                //this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                //this.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH); 
+                console.log("PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING");
+                this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+                this.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH); 
             }
 
             if (this.m_state === PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH)
             {
+                console.log("PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH");
                 if (this.m_ladybug.isPoligonPathFinished() === true)
                 {
+                    this.m_ladybug.endUsingPoligonPath();
                     this.sendWishRequestedByUser();
-                    console.log("finding target position reached.")
+                }
+            }
+
+            if (this.m_state === PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE)
+            {
+                console.log("PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE");
+
+                if (this.m_ladybug.isSideToSideFinished() === true)
+                {
+                    if (this.m_wishResponseOk === true)
+                    {
+                        // Stop side to side
+                        this.m_ladybug.stopSideToSideAnimation();
+
+                        // 
+                        this.m_garden.startUpdateProcess();
+                    
+                        console.log("RESPONSE OK: " + this.m_wishResponseData);
+                    }
+
+                    if (this.m_wishResponseError === true)
+                    {
+                        console.log("RESPONSE ERROR: " + this.m_wishResponseData);
+                    }
+                
+                    this.m_wishResponseOk = false;
+                    this.m_wishResponseError = false;
+                    this.m_wishResponse = "";
                 }
             }
 
@@ -83,7 +115,7 @@ function PlayFlow()
     PlayFlow.prototype.state_APPSTATE_INITIALIZING = function () 
     {
         this.m_ladybug.setInputControlsEnabled(true);
-        this.m_garden.starUpdateProcess();
+        this.m_garden.startUpdateProcess();
     };
 
     PlayFlow.prototype.setState = function (_state) 
@@ -97,8 +129,8 @@ function PlayFlow()
         console.log("WRITER confirm");
         console.log(_parent.m_ladybug.getLadybugWish());
 
-        var wish = _parent.m_ladybug.getLadybugWish()
-        _parent.m_garden.addWish(wish);
+        //var wish = _parent.m_ladybug.getLadybugWish()
+        //_parent.m_garden.addWish(wish);
     };
 
     PlayFlow.prototype.onConfirmFinderClick = function (_parent, _sender)
@@ -107,17 +139,41 @@ function PlayFlow()
         console.log("FINDER confirm");
         console.log("Wish to be added:" + _parent.m_ladybug.getLadybugKeyPath());
 
-        var wish = _parent.m_ladybug.getLadybugKeyPath()
-        _parent.m_garden.addWish(wish);
+        //var wish = _parent.m_ladybug.getLadybugKeyPath()
+        //_parent.m_garden.addWish(wish);
     };    
 
     //DOING
     PlayFlow.prototype.sendWishRequestedByUser = function ()
     {
-        // Perform ladybug animation and wait server response.
         // Stop update process.
-        // When finished make ANIMATION_WALKING_TO_FLOWER.
+        this.m_garden.stopUpdateProcess();
+
+        // Perform ladybug animation and wait server response. Move ladybug head side to side.
+        this.m_ladybug.startSideToSideAnimation(6);
+
+        // Send wish to garden and wait response.
+        this.m_wishResponseOk = false;
+        this.m_wishResponseError = false;
+        this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
+
+        this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE); 
     };     
+
+
+    PlayFlow.prototype.wishAdded = function (_parent, _data)
+    {
+        _parent.m_wishResponseData = _data;
+        _parent.m_wishResponseOk = true;
+        _parent.m_wishResponseError = false;
+    }
+
+    PlayFlow.prototype.wishError = function (_parent, _errorCode)
+    {
+        _parent.m_wishResponseData = _errorCode;
+        _parent.m_wishResponseOk = false;
+        _parent.m_wishResponseError = true;
+    }
 };
 
 

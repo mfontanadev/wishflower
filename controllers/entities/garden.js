@@ -57,7 +57,7 @@ function Garden()
         this.m_stopGetAllWishesWhileHelpIsRunning = true;
     };
 
-    Garden.prototype.starUpdateProcess = function () 
+    Garden.prototype.startUpdateProcess = function () 
     {
         if (Garden.self.m_idProcessUpdate === null)
         {
@@ -126,7 +126,7 @@ function Garden()
         }
     }
 
-    Garden.prototype.addWish = function (_wishMessage, _successCallback, _errorCallback) 
+    Garden.prototype.addWish = function (_wishMessage, _parent, _successCallback, _errorCallback) 
     {   
         if (_wishMessage === "")
         {
@@ -144,10 +144,10 @@ function Garden()
                 function(_errorCode)
                 {
                     msglog("CallWebService error:" + _errorCode);
-                    Garden.starUpdateProcess();
+                    Garden.startUpdateProcess();
 
                     if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
-                        _errorCallback(_errorCode);
+                        _errorCallback(_parent, _errorCode);
                 },
                 function(_data)
                 {
@@ -161,7 +161,7 @@ function Garden()
                     }
                     
                     if (typeof _successCallback != 'undefined' && _successCallback !== null)
-                        _successCallback(_data);
+                        _successCallback(_parent, _data);
                 }
             );  
         }
@@ -220,9 +220,9 @@ function Garden()
         tmpSegment.initWithExtraParams(
             startPosition.x, startPosition.y, trunkWidth, 1, 
             endPosition.x, endPosition.y, trunkWidth, 1);
-        tmpSegment.setVelocityRatio(0.2);
+        //tmpSegment.setVelocityRatio(0.2);
         //***TODO: al terminar los test dejar solamente la línea de arriba.
-        //tmpSegment.setVelocityRatio(5);
+        tmpSegment.setVelocityRatio(5);
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);

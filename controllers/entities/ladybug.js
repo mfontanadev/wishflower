@@ -21,6 +21,7 @@ Ladybug.C_ANIM_ROTATING_LEFT = 3;
 Ladybug.C_ANIM_OPENING = 4;
 Ladybug.C_ANIM_CLOSING = 5;
 Ladybug.C_ANIM_FLYING = 6;
+Ladybug.C_ANIM_SIDE_TO_SIDE = 7;
 
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET = -1;
 
@@ -43,6 +44,7 @@ Ladybug.C_LADYBUG_ACTION_GOING_TO_NEW_WISH = 1;
 Ladybug.C_LADYBUG_ACTION_FADING_OUT = 2;
 Ladybug.C_LADYBUG_ACTION_FADING_OUT_FINISHED = 3;
 
+Ladybug.C_LADYBUG_DEFAULT_ANGLE = 90;
 
 function Ladybug() 
 {
@@ -53,7 +55,7 @@ function Ladybug()
     this.m_cy = 0;
     this.m_rc = new ChRect();
 
-    this.m_angle = 90;
+    this.m_angle = Ladybug.C_LADYBUG_DEFAULT_ANGLE;
     this.m_alpha = 1;
     this.m_scale = Ladybug.C_LADYBUG_SCALE;
     this.m_rotationDirection = 1;
@@ -96,6 +98,9 @@ function Ladybug()
     this.m_inputControlWrite = new InputControl();
     this.m_inputControlFind = new InputControl();
     this.m_inputControlsEnabled = false;
+
+    this.m_sideToSideState = true;
+    this.m_sideToSideMovementsCount = 0;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -175,6 +180,17 @@ function Ladybug()
         this.addAnimationFrame(animation, 'ladybug_flying_1.png', 1);
         this.addAnimationFrame(animation, 'ladybug_flying_2.png', 1);
         this.m_arrAnimations.push(animation);
+
+        animation = new Animation();
+        animation.initWith(this, Ladybug.C_ANIM_SIDE_TO_SIDE, 0, 0);
+        animation.setOnChangeFrameListener(this.changeFrameSideToSide, null);
+        animation.setInfiniteLoop(true);
+        this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
+        this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
+        this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
+        this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
+        this.m_arrAnimations.push(animation);
+
     };
 
     Ladybug.prototype.startFrameWalkEvent = function (_parent) 
@@ -260,6 +276,27 @@ function Ladybug()
         _animation.createFrame(tmpResource, 0, 0, tmpResource.width, tmpResource.height, 0, 0, 0, 0, _duration);
     }    
 
+    Ladybug.prototype.changeFrameSideToSide = function (_parent) 
+    {
+        var frameIndex = this.getCurrentFrameIndex();
+
+        if (frameIndex === 0)
+        {
+            _parent.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE + 30); 
+        }
+        else if (frameIndex === 1 || frameIndex === 3)
+        {
+            _parent.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE); 
+        }        
+        else if (frameIndex === 2)
+        {
+            _parent.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE - 30); 
+        }        
+
+        if (_parent.m_sideToSideMovementsCount > 0)
+            _parent.m_sideToSideMovementsCount--;
+    }   
+
     // ****************************************
     // Main cicle: handleInputs, implementGameLogic, render
     // ****************************************
@@ -338,7 +375,7 @@ function Ladybug()
             this.m_arrAnimations[this.m_currentAnimationId].render(
                 this.m_viewParent.m_canvasEx.m_canvas, 
                 this.m_viewParent.m_canvasEx.m_context,
-                this.m_angle - 90, this.m_alpha, this.m_scale * this.m_scalePerturbationOnLadybugTouched);
+                this.m_angle - Ladybug.C_LADYBUG_DEFAULT_ANGLE, this.m_alpha, this.m_scale * this.m_scalePerturbationOnLadybugTouched);
                                                                                                      
             if (C_LOG === true)
             {
@@ -398,6 +435,10 @@ function Ladybug()
         else if (this.isAnimation_OPENING() === true)
         {
             this.moveLogicOpening();
+        }
+        else if (this.isAnimation_SIDE_TO_SIDE() === true)
+        {
+            this.moveSideToSide();
         }
 
         this.updatePosition();
@@ -536,6 +577,13 @@ function Ladybug()
         }
     }
 
+    Ladybug.prototype.moveSideToSide = function ()
+    {   
+        if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+        {
+        }
+    }
+
     Ladybug.prototype.flyLeft = function () 
     {
         this.m_velocity.x = this.m_velocity.x - Ladybug.C_LADYBUG_SETTING_H_THRUST;           
@@ -561,13 +609,13 @@ function Ladybug()
 
     Ladybug.prototype.angleCompensation = function () 
     {
-        if (Math.abs(this.m_velocity.a - 90) <= 10)
+        if (Math.abs(this.m_velocity.a - Ladybug.C_LADYBUG_DEFAULT_ANGLE) <= 10)
         {
-            this.m_velocity.a = 90;
+            this.m_velocity.a = Ladybug.C_LADYBUG_DEFAULT_ANGLE;
         }
         else
         {
-            this.m_velocity.a = this.m_velocity.a - ((this.m_velocity.a - 90) / 2);    
+            this.m_velocity.a = this.m_velocity.a - ((this.m_velocity.a - Ladybug.C_LADYBUG_DEFAULT_ANGLE) / 2);    
         }
     }
 
@@ -647,7 +695,7 @@ function Ladybug()
 
     Ladybug.prototype.startFlyingCheckSum = function () 
     {
-        return (Math.abs(this.m_angle - 90) < Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE); 
+        return (Math.abs(this.m_angle - Ladybug.C_LADYBUG_DEFAULT_ANGLE) < Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE); 
     }
 
     Ladybug.prototype.forceAnimation_STAND = function () 
@@ -655,6 +703,30 @@ function Ladybug()
         this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
         this.m_arrAnimations[this.m_currentAnimationId].reset();  
     };
+
+    // ****************************************
+    // PoligonPath logic 
+    // ****************************************
+    Ladybug.prototype.startSideToSideAnimation = function (_sideToSideMovementsCount)
+    {
+        this.m_sideToSideMovementsCount = _sideToSideMovementsCount;
+
+        //this.m_inputControlFind.showKeyPathFinding();
+
+        this.startAnimation(Ladybug.C_ANIM_SIDE_TO_SIDE);       
+    }
+
+    Ladybug.prototype.stopSideToSideAnimation = function ()
+    {
+        this.m_sideToSideMovementsCount = 0;
+        this.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE); 
+        this.startAnimation(Ladybug.C_ANIM_STAND);       
+    }
+
+    Ladybug.prototype.isSideToSideFinished = function ()
+    {
+        return this.m_sideToSideMovementsCount === 0; 
+    }
 
     // ****************************************
     // PoligonPath logic 
@@ -785,7 +857,7 @@ function Ladybug()
         if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE)
         {
             this.setAtCurrentSegmentStartPosition();
-            this.setAngle(90);
+            this.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE);
             this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS;
         }
         else if (this.m_poligonPathState === Ladybug.C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS)
@@ -862,6 +934,11 @@ function Ladybug()
     Ladybug.prototype.isAnimation_FLYING = function ()
     {
         return (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING);
+    };
+
+    Ladybug.prototype.isAnimation_SIDE_TO_SIDE = function () 
+    {
+        return (this.m_currentAnimationId === Ladybug.C_ANIM_SIDE_TO_SIDE);
     };
 
     Ladybug.prototype.setAngle = function (_angle) 

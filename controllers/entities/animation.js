@@ -33,6 +33,7 @@ function Animation ()
 	
 	Animation.prototype.implementGameLogic = function () 
 	{
+		var fireStartFrameEvent = false;
 		var fireEndFrameEvent = false;
 		var fireEndAnimationEvent = false;
 
@@ -46,7 +47,7 @@ function Animation ()
 					this.start();
 				}
 			}
-	
+
 			if (this.m_frameCounter >= this.m_arrFrames[this.m_currentFrame].m_duration )
 			{
 				this.m_frameCounter = 0;
@@ -64,27 +65,20 @@ function Animation ()
 			}
 
 			if (this.m_frameCounter === 0 && this.m_frameInc === 1)
-			{
-				if (this.m_onStartFrameEvent !== null)
-					this.m_onStartFrameEvent(this.m_parent);
-			}
-
-			if (fireEndFrameEvent === true)
-			{
-				if (this.m_onEndFrameEvent !== null)
-					this.m_onEndFrameEvent(this.m_parent);
-			}
-
-			if (fireEndAnimationEvent === true)
-			{
-				if (this.m_onEndAnimationEvent !== null)
-					this.m_onEndAnimationEvent(this.m_parent);
-			}
+				fireStartFrameEvent = true;
 
 			this.m_frameCounter = this.m_frameCounter + this.m_frameInc;
 		}
-		//this.move(m_canvas, m_context);
-		//this.dissolve(C_Animation_NATURAL_DISSOLVE);
+
+		// Trigger events after all logic was done.
+		if (fireStartFrameEvent === true && this.m_onStartFrameEvent !== null)
+			this.m_onStartFrameEvent(this.m_parent);
+
+		if (fireEndFrameEvent === true && this.m_onEndFrameEvent !== null)
+			this.m_onEndFrameEvent(this.m_parent);
+
+		if (fireEndAnimationEvent === true && this.m_onEndAnimationEvent !== null)
+			this.m_onEndAnimationEvent(this.m_parent);
 	}
 	
 	Animation.prototype.render = function (_canvas, _context)
@@ -273,6 +267,11 @@ function Animation ()
 		{
 			this.m_flip = 1;
 		}
+	}
+
+	Animation.prototype.getCurrentFrameIndex = function()
+	{
+		return this.m_currentFrame;
 	}
 }
 	

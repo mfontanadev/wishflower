@@ -72,7 +72,7 @@ function IntroFlow()
         this.m_ladybug.setVisible(false);
 
         this.m_garden.stopGetAllWishesWhileHelpIsRunning();
-        this.m_garden.starUpdateProcess();
+        this.m_garden.startUpdateProcess();
 
         this.setState(IntroFlow.C_INTRO_FLOW_APPSTATE_TREE_GROWING);            
     };
