@@ -4,7 +4,7 @@ TreeNode.C_NODE_TYPE_BRANCH = "branch";
 TreeNode.C_NODE_TYPE_LEAVE = "leave";
 
 //TreeNode.C_GROWING_SPEED = 1;
-//***TODO: sl terminar los test dejar solamente la línea de arriba.
+//***TODO: al terminar los test dejar solamente la línea de arriba.
 TreeNode.C_GROWING_SPEED = 10;
 
 TreeNode.C_FADING_STOP = 0;
@@ -873,6 +873,11 @@ function TreeNode()
     };
 
 
+    TreeNode.prototype.cursorReset = function () 
+    {
+        this.m_treeCursor  = this.getFirstBranch();
+    }
+
     TreeNode.prototype.cursorLeft = function () 
     {
         if (TreeNode.m_treeCursor.m_nodes !== null && 
@@ -1000,4 +1005,51 @@ function TreeNode()
 
         return result;
     };
+
+    TreeNode.prototype.getNodesForKeyPath = function (_keyPath) 
+    {
+        var result = new Array();
+        var keyPathChar = "";
+
+        this.cursorReset();
+
+        for (var i = 0; i < _keyPath.length; i++) 
+        {
+            keyPathChar = _keyPath.substring(i,i + 1);
+            //console.log("index:" + i + "key: " + keyPathChar);
+
+            if (keyPathChar === "<")
+            {
+                this.cursorLeft();
+                msglog("BRANCH:" + TreeNode.m_treeCursor.getHash());
+            }
+            else if (keyPathChar === ">")
+            {
+                this.cursorRight();
+                msglog("BRANCH:" + TreeNode.m_treeCursor.getHash());
+            }
+            else
+            {
+                var flowerNumber = parseInt(keyPathChar);
+
+                for (var number = 0; number < flowerNumber; number++) 
+                {
+                    this.cursorNextLeave();   
+                    msglog("FLOWER:" + this.m_treeCursor.getHash());
+                }
+            }
+
+            var keyPath = TreeNode.m_treeCursor.getHash();
+            var currentNode = this.findNodeByKeyPath(keyPath);
+            msglog("addind keypath: " + keyPath); 
+            msglog(currentNode);
+            result.push(currentNode);
+        }
+
+
+
+        return result;
+    };
+
+
 }

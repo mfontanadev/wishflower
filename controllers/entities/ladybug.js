@@ -709,7 +709,7 @@ function Ladybug()
     // ****************************************
     Ladybug.prototype.startSideToSideAnimation = function (_sideToSideMovementsCount)
     {
-        this.m_sideToSideMovementsCount = _sideToSideMovementsCount;
+        this.m_sideToSideMovementsCount = _sideToSideMovementsCount * 3;
 
         //this.m_inputControlFind.showKeyPathFinding();
 
@@ -720,12 +720,16 @@ function Ladybug()
     {
         this.m_sideToSideMovementsCount = 0;
         this.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE); 
-        this.startAnimation(Ladybug.C_ANIM_STAND);       
+
+        // Change animation with no end animation check.
+        this.m_currentAnimationId = Ladybug.C_ANIM_STAND;
+        this.m_arrAnimations[this.m_currentAnimationId].reset();
+        this.m_arrAnimations[this.m_currentAnimationId].start();    
     }
 
     Ladybug.prototype.isSideToSideFinished = function ()
     {
-        return this.m_sideToSideMovementsCount === 0; 
+        return (this.m_sideToSideMovementsCount === 0); 
     }
 
     // ****************************************
@@ -1070,7 +1074,6 @@ function Ladybug()
         poligonPath.init(this.m_viewParent);
         poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
         poligonPath.setInfitineLoop(false);
-        poligonPath.setSegmentLinesVisibility(false);
 
         for (var i = 0; i < paramLayersQuantity; i++) 
         {

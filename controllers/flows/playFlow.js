@@ -3,6 +3,7 @@ PlayFlow.C_PLAY_FLOW_APPSTATE_NOT_SET = -1;
 PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING = 0;
 PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING = 1;
 PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH = 2;
+PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 3;
 
 function PlayFlow() 
 {
@@ -80,21 +81,28 @@ function PlayFlow()
                     {
                         // Stop side to side
                         this.m_ladybug.stopSideToSideAnimation();
-
-                        // 
-                        this.m_garden.startUpdateProcess();
-                    
                         console.log("RESPONSE OK: " + this.m_wishResponseData);
+
+                        var newWishKeyPath = JSON.parse(this.m_wishResponseData)[0].keyPath;
+                        this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+                        this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
                     }
 
                     if (this.m_wishResponseError === true)
                     {
                         console.log("RESPONSE ERROR: " + this.m_wishResponseData);
                     }
-                
-                    this.m_wishResponseOk = false;
-                    this.m_wishResponseError = false;
-                    this.m_wishResponse = "";
+                }
+            }
+
+            if (this.m_state === PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET)
+            {
+                console.log("PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET");
+                if (this.m_ladybug.isPoligonPathFinished() === true)
+                {
+                    this.m_ladybug.endUsingPoligonPath();
+                    console.log("Fin");
+                    this.m_garden.startUpdateProcess();
                 }
             }
 
@@ -110,6 +118,7 @@ function PlayFlow()
         this.m_tree.render();
         this.m_ladybug.render();
         this.m_garden.render();
+        this.m_ladyBugPoligonPath.render();
     };
 
     PlayFlow.prototype.state_APPSTATE_INITIALIZING = function () 
@@ -150,12 +159,16 @@ function PlayFlow()
         this.m_garden.stopUpdateProcess();
 
         // Perform ladybug animation and wait server response. Move ladybug head side to side.
-        this.m_ladybug.startSideToSideAnimation(6);
+        this.m_ladybug.startSideToSideAnimation(2);
 
         // Send wish to garden and wait response.
         this.m_wishResponseOk = false;
         this.m_wishResponseError = false;
+        this.m_wishResponse = "";
+        
         this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
+        //MOCK
+        //this.wishAdded(this, '[{"_id":"000","keyPath":"<<>2","wish":"Test wish"}]');
 
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE); 
     };     

@@ -95,7 +95,7 @@ function Garden()
                 
                     if (Garden.self.m_stopGetAllWishesWhileHelpIsRunning === true)
                     {
-                        console.log("STOP PROCESS");
+                        console.log("STOP PROCESS WHILE HELP IS RUNNING");
                         Garden.self.stopUpdateProcess();
                         Garden.self.m_stopGetAllWishesWhileHelpIsRunning = false;
                     }
@@ -193,7 +193,7 @@ function Garden()
             endPosition.x, endPosition.y, trunkWidth, 1);
         //tmpSegment.setVelocityRatio(0.2);
         //***TODO: sl terminar los test dejar solamente la línea de arriba.
-        tmpSegment.setVelocityRatio(5);
+        tmpSegment.setVelocityRatio(2);
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
@@ -207,11 +207,12 @@ function Garden()
     Garden.prototype.performLadybugFindTarget = function (_tree, _ladybug, _poligonPath)
     {
         // Make a path from root to the middle of tree's first branch.
-        var trunkNode = _tree.getFirstBranch();
-        var trunkWidth = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); 
+        var nodeFrom = _tree.getFirstBranch();
+        var nodeTo = nodeFrom.m_nodes[0];
+        var trunkWidth = _ladybug.getScaleToSpecificWidth(nodeFrom.m_width * 2); 
 
         var trunkSegment = new PoligonSegment();
-        trunkSegment.init(trunkNode.m_x1, trunkNode.m_y1, trunkNode.m_x2, trunkNode.m_y2);
+        trunkSegment.init(nodeFrom.m_x1, nodeFrom.m_y1, nodeTo.m_x1, nodeTo.m_y1);
 
         var startPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); 
         var endPosition = trunkSegment.getXYByPercent(100); 
@@ -222,7 +223,7 @@ function Garden()
             endPosition.x, endPosition.y, trunkWidth, 1);
         //tmpSegment.setVelocityRatio(0.2);
         //***TODO: al terminar los test dejar solamente la línea de arriba.
-        tmpSegment.setVelocityRatio(5);
+        tmpSegment.setVelocityRatio(2);
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
@@ -231,5 +232,43 @@ function Garden()
         _ladybug.setAtCurrentSegmentStartPosition();   
         _ladybug.startPoligonWalking();
         _ladybug.setVisible(true);
+    };
+
+    Garden.prototype.performLadybugWalkKeyPath = function (_newWishKeyPath, _tree, _ladybug, _poligonPath)
+    {
+        var keyPathNodes = _tree.getNodesForKeyPath(_newWishKeyPath);
+
+        // Make a path from root to the middle of tree's first branch.
+
+        _poligonPath.clearSegments();
+
+        var tmpSegment = null;
+        var trunkNode = _tree.getFirstBranch();
+        var widthFrom = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); 
+        var alpha = 1;
+
+        for (var i = 0; i < keyPathNodes.length - 1; i++) 
+        {
+            widthTo = _ladybug.getScaleToSpecificWidth(keyPathNodes[i].m_width * 2); 
+
+            // Make invisible the end of last segment.
+            if (i === keyPathNodes.length - 2)
+                alpha = 0;
+
+            tmpSegment = new PoligonSegment();
+            tmpSegment.initWithExtraParams(
+                keyPathNodes[i].m_x1, keyPathNodes[i].m_y1, widthFrom , 1, 
+                keyPathNodes[i + 1].m_x1, keyPathNodes[i + 1].m_y1, widthTo, alpha);
+            tmpSegment.setVelocityRatio(1);
+            _poligonPath.addSegmentObject(tmpSegment);
+
+            widthFrom = _ladybug.getScaleToSpecificWidth(keyPathNodes[i].m_width * 2); 
+        }
+
+        // Activate ladybug walking.
+        _ladybug.setAtCurrentSegmentStartPosition();   
+        _ladybug.startPoligonWalking();
+        _ladybug.setVisible(true);
+
     };
 }
