@@ -267,7 +267,7 @@ function TreeNode()
 				branch = this.createBranchNode();
                 branch.m_hash = '<';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * 1);
-                branch.setHeightScalar(0.88);
+                branch.setHeightScalar(0.90);
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
@@ -275,7 +275,7 @@ function TreeNode()
                 branch = this.createBranchNode();
                 branch.m_hash = '>';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * -1);
-                branch.setHeightScalar(0.88);
+                branch.setHeightScalar(0.90);
                 branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
@@ -447,54 +447,17 @@ function TreeNode()
             this.m_nodes[i].render();
         }
 
-        if (TreeNode.DEBUG === true)
+        if (this.m_nodeType === TreeNode.C_NODE_TYPE_ROOT) 
         {
-            this.renderIndicators();
-        }                                        
-        else
+			this.renderRootImage();
+        }
+        else if (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH) 
         {
-            if (this.m_nodeType === TreeNode.C_NODE_TYPE_ROOT) 
-            {
-    			this.renderRootImage();
-            }
-            else if (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH) 
-            {
-                this.renderBranchImage();                    
-            }
-            else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE) 
-            {
-    			this.renderLeaveImage();
-            }
-        }        
-    };
-
-	TreeNode.prototype.renderRoot = function () 
-    {
-        renderRectangleFilled(  this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x1 - (this.m_width / 2), this.m_y1 - this.m_height, 
-                                this.m_width, this.m_height, 'orange');
-	};
-	   
-    TreeNode.prototype.renderBranch = function () 
-    {
-        var branchColor = rgbaToColor(137, 64, 25, 0.8);
-		renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
-                        this.m_viewParent.m_canvasEx.m_context, 
-                        this.m_x1, this.m_y1, this.m_x2, this.m_y2, branchColor, 1, this.m_width);
-    };
-    
-    TreeNode.prototype.renderLeave = function () 
-    {
-        renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
-                        this.m_viewParent.m_canvasEx.m_context, 
-                        this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1, 1);
-		
-        if (this.m_wish !== '')
+            this.renderBranchImage();                    
+        }
+        else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE) 
         {
-            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x2, this.m_y2, 20 * this.m_fadingScalar, 'green');
+			this.renderLeaveImage();
         }
     };
 
@@ -540,63 +503,6 @@ function TreeNode()
                                                 TreeNode.leaveClosedImg, 
                                                 this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * this.m_fadingScalar);
         }
-
-        //drawImageRotationTransparentScaled(this.m_viewParent.m_canvasEx.m_canvas, this.m_viewParent.m_canvasEx.m_context, TreeNode.leaveImg, this.m_x1, this.m_y1, this.getFinalAngle(), 0.8 * imgAlpha, this.m_scalarImageHeight * 1);
-    };
-
-    TreeNode.prototype.renderIndicators = function () 
-    {
-        if (this.m_nodeType === TreeNode.C_NODE_TYPE_ROOT) 
-        {
-            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x1, this.m_y1, 3, 'blue');
-            
-            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
-            
-            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x2, this.m_y2, 1, 'red');
-        }
-        else if (this.m_nodeType === TreeNode.C_NODE_TYPE_BRANCH) 
-        {
-            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x1, this.m_y1, 3, 'blue');
-            
-            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'gray', 1,  1);
-            
-            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x2, this.m_y2, 1, 'red');
-        }
-        else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE) 
-        {
-            renderCircleNotFill(this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x1, this.m_y1, 3, 'blue');
-            
-            renderLineWidth(this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x1, this.m_y1, this.m_x2, this.m_y2, 'green', 1,  1);
-        
-            if (this.m_wish !== '')
-            {
-                renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
-                                this.m_viewParent.m_canvasEx.m_context, 
-                                this.m_x2, this.m_y2, 1, 'red');
-            }
-        }
-        else if (this.m_nodeType === TreeNode.C_NODE_TYPE_MAIN) 
-        {
-            renderCircle(   this.m_viewParent.m_canvasEx.m_canvas, 
-                            this.m_viewParent.m_canvasEx.m_context, 
-                            this.m_x2, this.m_y2, 1, 'brown');
-        }
     };
 
     TreeNode.prototype.setTreeStatus = function (_treeStatus) 
@@ -613,9 +519,6 @@ function TreeNode()
     TreeNode.prototype.setParent = function (_parentNode) 
     {
         this.m_parent = _parentNode;
-        //this.m_viewParent.m_canvasEx.m_canvas = _parentNode.m_viewParent.m_canvasEx.m_canvas;
-        //this.m_viewParent.m_canvasEx.m_context = _parentNode.m_context;
-
         this.recalculateTargetPointAndChilds();
     };
 
@@ -724,9 +627,6 @@ function TreeNode()
     TreeNode.prototype.getFinalAngle = function () 
     {
         return this.m_angleAcum + this.m_angle;
-    };
-
-    TreeNode.prototype.reset = function () {
     };
 
     TreeNode.prototype.dump = function () 
@@ -849,15 +749,6 @@ function TreeNode()
         return TreeNode.m_wishes;
     };
 
-    TreeNode.prototype.getCursorHashFormatted = function () 
-    {
-        var res = TreeNode.m_treeCursorHash;
-        res = res.replace(/>/g, '> ');
-        res = res.replace(/</g, '< ');
-
-        return res;
-    };
-
     TreeNode.prototype.isNodeVisibleByCursor = function () 
     {
         var result = true;
@@ -870,112 +761,6 @@ function TreeNode()
             }        
         }
         return result;
-    };
-
-
-    TreeNode.prototype.cursorReset = function () 
-    {
-        this.m_treeCursor  = this.getFirstBranch();
-    }
-
-    TreeNode.prototype.cursorLeft = function () 
-    {
-        if (TreeNode.m_treeCursor.m_nodes !== null && 
-            TreeNode.m_treeCursor.m_nodes.length > 0)
-        {
-            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[0];            
-            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-        }
-    };
-
-    TreeNode.prototype.cursorRight = function () 
-    {
-        if (TreeNode.m_treeCursor.m_nodes !== null && 
-            TreeNode.m_treeCursor.m_nodes.length > 1)
-        {
-            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[1];            
-            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-        }
-    };
-
-    TreeNode.prototype.cursorNextLeave = function () 
-    {
-    	if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_BRANCH)
-    	{
-	        if (TreeNode.m_treeCursor.m_nodes !== null && 
-	            TreeNode.m_treeCursor.m_nodes.length > 0)
-	        {
-	            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[0];            
-	            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-	        }
-    	}
-    	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
-    	{
-			var tmpNodeToGo = null;
-			var tmpHashToGo = TreeNode.m_treeCursor.m_parent.getHash();
-
-			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) + 1); 
-			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
-
-			if (tmpNodeToGo !== null)
-			{
-				TreeNode.m_treeCursor = tmpNodeToGo;
-    	        TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-			}
-    	}
-    };
-
-    TreeNode.prototype.cursorPreviousLeave = function () 
-    {
-    	if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_BRANCH)
-    	{
-	        if (TreeNode.m_treeCursor.m_nodes !== null && 
-	            TreeNode.m_treeCursor.m_nodes.length > 0)
-	        {
-	            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_nodes[TreeNode.m_treeCursor.m_nodes.length - 1];            
-	            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-	        }
-    	}
-    	else if (TreeNode.m_treeCursor.m_nodeType == TreeNode.C_NODE_TYPE_LEAVE)
-    	{
-			var tmpNodeToGo = TreeNode.m_treeCursor.m_parent.getHash();
-
-			tmpHashToGo = tmpHashToGo + (parseInt(TreeNode.m_treeCursor.m_hash) - 1); 
-			tmpNodeToGo = this.findNodeByKeyPath(tmpHashToGo);
-
-			if (tmpNodeToGo !== null)
-			{
-				TreeNode.m_treeCursor = tmpNodeToGo;
-    	        TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-			}
-    	}
-    };
-
-    TreeNode.prototype.cursorDown = function () 
-    {
-        if (TreeNode.m_treeCursor.m_parent !== null)
-        {
-            TreeNode.m_treeCursor = TreeNode.m_treeCursor.m_parent;            
-            TreeNode.m_treeCursorHash = TreeNode.m_treeCursor.getHash(); 
-        }
-    };
-
-
-    TreeNode.prototype.isNextLevelALeaveType = function () 
-    {
-    	//if (TreeNode.m_treeCursor != null)
-		//	TreeNode.m_treeCursor.dump();    	
-        
-        if (TreeNode.m_treeCursor.m_nodes !== null && 
-            TreeNode.m_treeCursor.m_nodes.length > 1 &&
-            TreeNode.m_treeCursor.m_nodes[0].m_nodeType === TreeNode.C_NODE_TYPE_LEAVE )
-        {
-        	return true;
-        }
-        else
-        {
-        	return false;
-        }
     };
 
     TreeNode.prototype.areTreeBranchesStillGrowing = function () 
@@ -1011,45 +796,39 @@ function TreeNode()
         var result = new Array();
         var keyPathChar = "";
 
-        this.cursorReset();
+        var node = this.getFirstBranch();
 
         for (var i = 0; i < _keyPath.length; i++) 
         {
             keyPathChar = _keyPath.substring(i,i + 1);
-            //console.log("index:" + i + "key: " + keyPathChar);
+            msglog("index:" + i + "key: " + keyPathChar);
 
             if (keyPathChar === "<")
             {
-                this.cursorLeft();
-                msglog("BRANCH:" + TreeNode.m_treeCursor.getHash());
+                node = node.m_nodes[0];
+                msglog("BRANCH:" + node.getHash());
             }
             else if (keyPathChar === ">")
             {
-                this.cursorRight();
-                msglog("BRANCH:" + TreeNode.m_treeCursor.getHash());
+                node = node.m_nodes[1];
+                msglog("BRANCH:" + node.getHash());
             }
             else
             {
                 var flowerNumber = parseInt(keyPathChar);
-
-                for (var number = 0; number < flowerNumber; number++) 
-                {
-                    this.cursorNextLeave();   
-                    msglog("FLOWER:" + this.m_treeCursor.getHash());
-                }
+                node = node.m_nodes[flowerNumber - 1];
+                msglog("FLOWER:" + node.getHash());
             }
 
-            var keyPath = TreeNode.m_treeCursor.getHash();
+            // Find node and add to node's collection.
+            var keyPath = node.getHash();
             var currentNode = this.findNodeByKeyPath(keyPath);
             msglog("addind keypath: " + keyPath); 
             msglog(currentNode);
             result.push(currentNode);
         }
 
-
-
         return result;
     };
-
 
 }

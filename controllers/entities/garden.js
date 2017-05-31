@@ -16,6 +16,7 @@ function Garden()
     this.m_animeteNewIncommingWishes = false;
     // Used in IntroView screen to stop updating while help is running.
     this.m_stopGetAllWishesWhileHelpIsRunning = false;
+    this.m_skeepThisKeyPath = "";
 
     Garden.prototype.initWithViewAndTreeAndBackground = function (_viewParent) 
     {
@@ -118,11 +119,14 @@ function Garden()
     {  
         if (Garden.self.m_animeteNewIncommingWishes === true)
         {
-            // Create a new flying ladybug.
-            var incommingLadybug = new Ladybug();
-            incommingLadybug.initWithType(Garden.self.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
-            incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());
-            Garden.self.m_incommingLadybugs.push(incommingLadybug);
+            if (Garden.self.m_skeepThisKeyPath !== _node.getHash())
+            {
+                // Create a new flying ladybug.
+                var incommingLadybug = new Ladybug();
+                incommingLadybug.initWithType(Garden.self.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
+                incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());
+                Garden.self.m_incommingLadybugs.push(incommingLadybug);
+            }
         }
     }
 
@@ -238,8 +242,6 @@ function Garden()
     {
         var keyPathNodes = _tree.getNodesForKeyPath(_newWishKeyPath);
 
-        // Make a path from root to the middle of tree's first branch.
-
         _poligonPath.clearSegments();
 
         var tmpSegment = null;
@@ -271,4 +273,9 @@ function Garden()
         _ladybug.setVisible(true);
 
     };
+
+    Garden.prototype.avoidUpdateThisKeyPath = function(_keyPath)
+    {
+        this.m_skeepThisKeyPath = _keyPath;
+    }
 }

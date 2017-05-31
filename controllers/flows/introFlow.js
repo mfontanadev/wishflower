@@ -66,7 +66,6 @@ function IntroFlow()
     {
         this.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height * (8.5/10));
         this.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
-        this.m_tree.reset(); 
 
         this.m_ladybug.setPoligonPath(this.m_ladyBugPoligonPath);
         this.m_ladybug.setVisible(false);

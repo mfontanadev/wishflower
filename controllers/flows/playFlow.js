@@ -4,6 +4,8 @@ PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING = 0;
 PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING = 1;
 PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH = 2;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 3;
+PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS = 4;
+PlayFlow.C_PLAY_FLOW_IDLE = 5;
 
 function PlayFlow() 
 {
@@ -79,16 +81,24 @@ function PlayFlow()
                 {
                     if (this.m_wishResponseOk === true)
                     {
-                        // Stop side to side
-                        this.m_ladybug.stopSideToSideAnimation();
-                        console.log("RESPONSE OK: " + this.m_wishResponseData);
+                        if (this.m_wishResponseData === "")
+                        {
+                            console.log("RESPONSE TREEFULL: " + this.m_wishResponseData);
+                            this.setState(PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS);
+                        }
+                        else
+                        {
+                            // Stop side to side.
+                            this.m_ladybug.stopSideToSideAnimation();
+                            console.log("RESPONSE OK: " + this.m_wishResponseData);
 
-                        var newWishKeyPath = JSON.parse(this.m_wishResponseData)[0].keyPath;
-                        this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                        this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
+                            var newWishKeyPath = JSON.parse(this.m_wishResponseData)[0].keyPath;
+                            this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
+                            this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+                            this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
+                        }
                     }
-
-                    if (this.m_wishResponseError === true)
+                    else if (this.m_wishResponseError === true)
                     {
                         console.log("RESPONSE ERROR: " + this.m_wishResponseData);
                     }
@@ -101,9 +111,20 @@ function PlayFlow()
                 if (this.m_ladybug.isPoligonPathFinished() === true)
                 {
                     this.m_ladybug.endUsingPoligonPath();
-                    console.log("Fin");
-                    this.m_garden.startUpdateProcess();
+                    this.setState(PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS);
                 }
+            }
+
+
+            if (this.m_state === PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS)
+            {
+                console.log("PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS");
+                this.m_garden.startUpdateProcess();
+                this.setState(PlayFlow.C_PLAY_FLOW_IDLE);
+            }
+
+            if (this.m_state === PlayFlow.C_PLAY_FLOW_IDLE)
+            {
             }
 
             this.m_ladybug.implementGameLogic();
@@ -152,14 +173,13 @@ function PlayFlow()
         //_parent.m_garden.addWish(wish);
     };    
 
-    //DOING
     PlayFlow.prototype.sendWishRequestedByUser = function ()
     {
         // Stop update process.
         this.m_garden.stopUpdateProcess();
 
         // Perform ladybug animation and wait server response. Move ladybug head side to side.
-        this.m_ladybug.startSideToSideAnimation(2);
+        this.m_ladybug.startSideToSideAnimation(Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS);
 
         // Send wish to garden and wait response.
         this.m_wishResponseOk = false;
@@ -167,9 +187,6 @@ function PlayFlow()
         this.m_wishResponse = "";
         
         this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
-        //MOCK
-        //this.wishAdded(this, '[{"_id":"000","keyPath":"<<>2","wish":"Test wish"}]');
-
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE); 
     };     
 

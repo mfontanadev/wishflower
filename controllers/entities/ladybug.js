@@ -12,6 +12,7 @@ Ladybug.C_LADYBUG_SETTING_TORQUE = 6;
 Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE = 181;
 Ladybug.C_LADYBUG_MAX_SLIDE = 4;
 Ladybug.C_LADYBUG_SCALE = WishflowerContext.C_LADYBUG_SCALE;
+Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS = 2;
 
 Ladybug.C_ANIM_NOT_SET = -1;
 Ladybug.C_ANIM_STAND = 0;
@@ -20,8 +21,7 @@ Ladybug.C_ANIM_ROTATING_RIGHT = 2;
 Ladybug.C_ANIM_ROTATING_LEFT = 3;
 Ladybug.C_ANIM_OPENING = 4;
 Ladybug.C_ANIM_CLOSING = 5;
-Ladybug.C_ANIM_FLYING = 6;
-Ladybug.C_ANIM_SIDE_TO_SIDE = 7;
+Ladybug.C_ANIM_SIDE_TO_SIDE = 6;
 
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET = -1;
 
@@ -172,13 +172,6 @@ function Ladybug()
         this.addAnimationFrame(animation, 'ladybug_open_3.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_2.png', 1);
         this.addAnimationFrame(animation, 'ladybug_open_1.png', 1);
-        this.m_arrAnimations.push(animation);
-
-        animation = new Animation();
-        animation.initWith(this, Ladybug.C_ANIM_FLYING, 0, 0);
-        animation.setInfiniteLoop(true);
-        this.addAnimationFrame(animation, 'ladybug_flying_1.png', 1);
-        this.addAnimationFrame(animation, 'ladybug_flying_2.png', 1);
         this.m_arrAnimations.push(animation);
 
         animation = new Animation();
@@ -403,12 +396,6 @@ function Ladybug()
     {   
         if (this.m_inputControlsEnabled === true)
         {
-            /*if (this.m_keyboard.return === true)
-            {
-                this.m_inputControlWrite.setReturnPressed();
-                this.m_inputControlFind.setReturnPressed();
-            }*/
-
             if (this.m_keyboard.clickOnLadybug === true)
             {
                 this.m_inputControlWrite.setLadyBugTouched();
@@ -419,18 +406,9 @@ function Ladybug()
             this.m_inputControlFind.implementGameLogic();
         }
 
-        if (this.isInWalkingZone() === false)
-        {
-            this.m_keyboard.button1 = true;
-        }
-
         if (this.isAnimation_STAND() === true)
         {
             this.moveLogicStand();
-        }
-        else if (this.isAnimation_FLYING() === true)
-        {
-            this.moveLogicFlying();
         }
         else if (this.isAnimation_OPENING() === true)
         {
@@ -448,24 +426,6 @@ function Ladybug()
     {   
         this.m_cx = this.m_cx + this.m_velocity.x;
         this.m_cy = this.m_cy + this.m_velocity.y;
-
-        if (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING)
-        {
-            var slideEffect = 0;
-            var slideVelocity = this.m_velocity.x;
-
-            if (slideVelocity > Ladybug.C_LADYBUG_MAX_SLIDE)
-            {
-                slideVelocity = Ladybug.C_LADYBUG_MAX_SLIDE;
-            }
-            else if (slideVelocity < -1 * Ladybug.C_LADYBUG_MAX_SLIDE)
-            {
-                slideVelocity = -1 * Ladybug.C_LADYBUG_MAX_SLIDE;
-            }
-
-            slideEffect = (slideVelocity * Ladybug.C_LADYBUG_SETTING_TORQUE);
-            this.m_angle = this.m_velocity.a - slideEffect;
-        }
 
         if (this.m_cx < 0)
             this.m_cx = 0;
@@ -509,72 +469,9 @@ function Ladybug()
         }
     }
 
-    Ladybug.prototype.isInWalkingZone = function ()
-    {
-        if (this.m_autoflight === false)
-        {
-            return true;
-        }
-        else 
-        {
-            return collisionPointScaledRect(this.m_cx, this.m_cy, 1, 1, this.m_walkingZoneRectangle);
-        }
-    }
-
-    Ladybug.prototype.moveLogicFlying = function ()
-    {   
-        if (this.m_keyboard.left === true)
-        {
-            this.flyLeft();
-        }
-        else if (this.m_keyboard.right === true)
-        {
-            this.flyRight();
-        }
-        else
-        {
-            this.horizontalCompensation();
-        }
-
-        if (this.m_keyboard.up === true)
-        {
-            this.flyUp();
-        }
-        else if (this.m_keyboard.down === true)
-        {
-            this.flyDown();
-        }
-        else
-        {
-            this.verticalCompensation();
-        }
-
-        if (this.m_keyboard.button1 === false)
-        {
-            this.closeElytras();
-
-            this.m_velocity.x = 0;
-            this.m_velocity.y = 0;
-            this.m_angle = this.m_velocity.a;   
-            this.m_velocity.inverse_x = false;
-            this.m_velocity.inverse_y = false;
-        }
-        else
-        {
-            this.angleCompensation();
-        }
-    }
-
     Ladybug.prototype.moveLogicOpening = function ()
     {   
-        if (this.m_keyboard.button1 === true)
-        {
-            this.flyingAnimation();
-        }
-        else
-        {
-            this.closeElytras();
-        }
+        this.closeElytras();
     }
 
     Ladybug.prototype.moveSideToSide = function ()
@@ -582,64 +479,6 @@ function Ladybug()
         if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
         {
         }
-    }
-
-    Ladybug.prototype.flyLeft = function () 
-    {
-        this.m_velocity.x = this.m_velocity.x - Ladybug.C_LADYBUG_SETTING_H_THRUST;           
-    };
-
-    Ladybug.prototype.flyRight = function () 
-    {
-        this.m_velocity.x = this.m_velocity.x + Ladybug.C_LADYBUG_SETTING_H_THRUST;           
-    };
-
-    Ladybug.prototype.horizontalCompensation = function () 
-    {
-        this.m_velocity.x = this.m_velocity.x * 0.95;
-        if (Math.abs(this.m_velocity.x) < 0.25)
-            this.m_velocity.x = 0;
-
-        if (this.m_velocity.x < -Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
-            this.m_velocity.x = -Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
-        
-        if (this.m_velocity.x > Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
-            this.m_velocity.x = Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
-    }
-
-    Ladybug.prototype.angleCompensation = function () 
-    {
-        if (Math.abs(this.m_velocity.a - Ladybug.C_LADYBUG_DEFAULT_ANGLE) <= 10)
-        {
-            this.m_velocity.a = Ladybug.C_LADYBUG_DEFAULT_ANGLE;
-        }
-        else
-        {
-            this.m_velocity.a = this.m_velocity.a - ((this.m_velocity.a - Ladybug.C_LADYBUG_DEFAULT_ANGLE) / 2);    
-        }
-    }
-
-    Ladybug.prototype.flyUp = function () 
-    {
-        this.m_velocity.y = this.m_velocity.y - Ladybug.C_LADYBUG_SETTING_H_THRUST;           
-    };
-
-    Ladybug.prototype.flyDown = function () 
-    {
-        this.m_velocity.y = this.m_velocity.y + Ladybug.C_LADYBUG_SETTING_H_THRUST;           
-    };
-
-    Ladybug.prototype.verticalCompensation = function () 
-    {
-        this.m_velocity.y = this.m_velocity.y * 0.95;
-        if (Math.abs(this.m_velocity.y) < 0.25)
-            this.m_velocity.y = 0;
-
-        if (this.m_velocity.y < -Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
-            this.m_velocity.y = -Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
-        
-        if (this.m_velocity.y > Ladybug.C_LADYBUG_SETTING_MAX_THRUST)
-            this.m_velocity.y = Ladybug.C_LADYBUG_SETTING_MAX_THRUST;
     }
 
     Ladybug.prototype.rotateLeft = function () 
@@ -674,28 +513,9 @@ function Ladybug()
         }
     };
 
-    Ladybug.prototype.flyingAnimation = function () 
-    {
-        if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true &&
-            this.startFlyingCheckSum() === true)
-        {
-            var sndId = this.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
-            this.m_viewParent.getSoundManagerInstance().play(sndId, true);
-
-            this.m_velocity.a = this.m_angle;   
-
-            this.startAnimation(Ladybug.C_ANIM_FLYING);       
-        }
-    }
-
     Ladybug.prototype.closeElytras = function () 
     {
         this.startAnimation(Ladybug.C_ANIM_CLOSING);       
-    }
-
-    Ladybug.prototype.startFlyingCheckSum = function () 
-    {
-        return (Math.abs(this.m_angle - Ladybug.C_LADYBUG_DEFAULT_ANGLE) < Ladybug.C_LADYBUG_VERTICAL_TOLERANCE_ANGLE); 
     }
 
     Ladybug.prototype.forceAnimation_STAND = function () 
@@ -935,11 +755,6 @@ function Ladybug()
         return (this.m_currentAnimationId === Ladybug.C_ANIM_OPENING);
     };
 
-    Ladybug.prototype.isAnimation_FLYING = function ()
-    {
-        return (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING);
-    };
-
     Ladybug.prototype.isAnimation_SIDE_TO_SIDE = function () 
     {
         return (this.m_currentAnimationId === Ladybug.C_ANIM_SIDE_TO_SIDE);
@@ -948,11 +763,6 @@ function Ladybug()
     Ladybug.prototype.setAngle = function (_angle) 
     {
         this.m_angle = _angle % 360;
-    };
-
-    Ladybug.prototype.setAutoflight = function (_value) 
-    {
-        this.m_autoflight = _value;
     };
 
     Ladybug.prototype.setPoligonPath = function (_poligonPath) 
@@ -972,20 +782,6 @@ function Ladybug()
             this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE;
             this.m_poligonPath.reset();
         }
-    };
-
-    Ladybug.prototype.startPoligonFlying = function () 
-    {
-        if (this.m_poligonPath !== null)
-        {
-            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE;
-            this.m_poligonPath.reset();
-        }
-    };
-
-    Ladybug.prototype.getPoligonPath = function () 
-    {
-        return this.m_poligonPath;
     };
 
     Ladybug.prototype.endUsingPoligonPath = function () 
@@ -1127,6 +923,7 @@ function Ladybug()
         this.setVisible(true);
     };
 
+    // ****************************************
     // Default animated object helpers
     // ****************************************
     Ladybug.prototype.startAnimation = function (_animationId) 
@@ -1138,24 +935,6 @@ function Ladybug()
             this.m_arrAnimations[this.m_currentAnimationId].start();
         }
     };
-
-    Ladybug.prototype.reset = function () 
-    {
-    };
-
-    Ladybug.prototype.dump = function () 
-    {
-    };
-
-    Ladybug.prototype.setWalkingRectangle = function (_notFlyingRectangle) 
-    {
-        this.m_walkingZoneRectangle.m_x1 = _notFlyingRectangle.m_x1;
-        this.m_walkingZoneRectangle.m_y1 = _notFlyingRectangle.m_y1;
-        this.m_walkingZoneRectangle.m_x2 = _notFlyingRectangle.m_x2;
-        this.m_walkingZoneRectangle.m_y2 = _notFlyingRectangle.m_y2;
-
-        return this.m_walkingZoneRectangle; 
-    }
 
     Ladybug.prototype.collisionRectangle = function () 
     {
@@ -1172,43 +951,13 @@ function Ladybug()
         this.m_visible = _value;
     }
 
-    Ladybug.prototype.getVisible = function () 
-    {
-        return this.m_visible;
-    }
-
     Ladybug.prototype.getScaleToSpecificWidth = function (_width) 
     {
+        // Lady bug dimensions widthout transparency.
         var realWidth = 213;
         var realHeight = 191;
 
         return _width / realWidth; 
-    }
-
-    Ladybug.prototype.fadeOutScaleAndAlpha = function (_steps) 
-    {
-        this.m_action = Ladybug.C_LADYBUG_ACTION_FADING_OUT;
-        this.m_fadeStep = _steps;
-        this.m_fadeAplhaInc = this.m_alpha / _steps;
-        this.m_fadeScaleInc = this.m_scale / _steps;
-    }
-
-    Ladybug.prototype.stopFadeOut = function () 
-    {
-        this.m_action = Ladybug.C_LADYBUG_ACTION_NORMAL;
-    }
-
-    Ladybug.prototype.isFadeOutFinished = function () 
-    {
-        if (this.m_action === Ladybug.C_LADYBUG_ACTION_FADING_OUT_FINISHED &&
-            this.m_scale === 0 && this.m_alpha === 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     Ladybug.prototype.getWidth = function () 
@@ -1233,6 +982,9 @@ function Ladybug()
         return this.collisionRectangle().height() * 0.682;
     }  
 
+    // ****************************************
+    // Input control logic
+    // ****************************************
     Ladybug.prototype.onIconControlWriteClick = function (_parent, _sender)
     {
         _parent.m_inputControlFind.foreignIconClicked();

@@ -5,7 +5,11 @@
 		[
 			[
 				"m_",
-				"m_ladybug"
+				"m_garden"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
 			],
 			[
 				"C_ANIM_",
@@ -78,10 +82,6 @@
 			[
 				"layer",
 				"layerHeight"
-			],
-			[
-				"for",
-				"for\tfor (…) {…}"
 			],
 			[
 				"m_po",
@@ -300,40 +300,11 @@
 	"buffers":
 	[
 		{
-			"file": "controllers/flows/playFlow.js",
-			"settings":
-			{
-				"buffer_size": 5956,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "controllers/entities/ladybug.js",
 			"settings":
 			{
-				"buffer_size": 42533,
+				"buffer_size": 35520,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Garden.self = null;\n\nGarden.C_UPDATE_FRECUENCY = 2000;\n\nfunction Garden() \n{\n    Garden.self = this;\n\n    this.m_viewParent = null;\n    this.m_currentTree = null;\n    this.m_bakground = null;\n    this.m_ladybug = null;\n\n    this.m_idProcessUpdate = null;\n    this.m_incommingLadybugs = [];\n    this.m_animeteNewIncommingWishes = false;\n    // Used in IntroView screen to stop updating while help is running.\n    this.m_stopGetAllWishesWhileHelpIsRunning = false;\n\n    Garden.prototype.initWithViewAndTreeAndBackground = function (_viewParent) \n    {\n        this.m_viewParent = _viewParent;\n        this.m_currentTree = _viewParent.getDataContext().m_tree;\n        this.m_background = _viewParent.getDataContext().m_background;\n        this.m_ladybug = _viewParent.getDataContext().m_ladybug;\n    };\n\n    Garden.prototype.handleInputs = function () \n    {\n    };\n\n    Garden.prototype.implementGameLogic = function () \n    {\n        for (var i = this.m_incommingLadybugs.length - 1; i >= 0; i--) \n        {\n            this.m_incommingLadybugs[i].implementGameLogic();\n\n            // Remove item if it reaches travel's end.\n            if (this.m_incommingLadybugs[i].isPoligonPathFinished() === true)\n            {\n                this.m_incommingLadybugs[i].endUsingPoligonPath();  \n                this.m_incommingLadybugs.splice(i,1);                \n            }\n        }\n    };\n\n    Garden.prototype.render = function () \n    {\n        for (var i = this.m_incommingLadybugs.length - 1; i >= 0; i--) \n        {\n            this.m_incommingLadybugs[i].render();\n        }\n    };\n\n    Garden.prototype.stopGetAllWishesWhileHelpIsRunning = function () \n    {\n        this.m_stopGetAllWishesWhileHelpIsRunning = true;\n    };\n\n    Garden.prototype.startUpdateProcess = function () \n    {\n        if (Garden.self.m_idProcessUpdate === null)\n        {\n            Garden.self.m_idProcessUpdate = setTimeout(this.updateProcess, Garden.C_UPDATE_FRECUENCY);  \n        }\n    };\n\n    Garden.prototype.stopUpdateProcess = function () \n    {\n        if (Garden.self.m_idProcessUpdate !== null)\n        {\n            window.clearInterval(Garden.self.m_idProcessUpdate);\n            Garden.self.m_idProcessUpdate = null;   \n        }   \n    };\n\n    Garden.prototype.updateProcess = function () \n    {\n        callWebService\n        (\n            'GET',\n            'services/wishflowerGetAll', \n            function(_errorCode)\n            {\n                msglog(\"CallWebService error:\" + _errorCode);\n            },\n            function(_data)\n            {\n                var arrWishes = JSON.parse(_data);\n\n                if (Garden.self.m_currentTree.areCreatedAllLeaves() === true)\n                {\n                    Garden.self.m_currentTree.updateWishes(arrWishes, Garden.self.onUpdatedNode);\n                    Garden.self.m_animeteNewIncommingWishes = true;\n                \n                    if (Garden.self.m_stopGetAllWishesWhileHelpIsRunning === true)\n                    {\n                        console.log(\"STOP PROCESS WHILE HELP IS RUNNING\");\n                        Garden.self.stopUpdateProcess();\n                        Garden.self.m_stopGetAllWishesWhileHelpIsRunning = false;\n                    }\n                    else\n                    {\n                        console.log(\"NEW UPDATE PROCESS\");\n                        Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);\n                    }\n                }\n                else\n                {           \n                    console.log(\"NEW UPDATE PROCESS\");\n                    Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);\n                } \n             }\n        );\n    };\n\n    Garden.prototype.onUpdatedNode = function (_node) \n    {  \n        if (Garden.self.m_animeteNewIncommingWishes === true)\n        {\n            // Create a new flying ladybug.\n            var incommingLadybug = new Ladybug();\n            incommingLadybug.initWithType(Garden.self.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);\n            incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());\n            Garden.self.m_incommingLadybugs.push(incommingLadybug);\n        }\n    }\n\n    Garden.prototype.addWish = function (_wishMessage, _parent, _successCallback, _errorCallback) \n    {   \n        if (_wishMessage === \"\")\n        {\n            console.log(\"Wish not added, empty wish.\");\n        }\n        else\n        {\n            // Avoid new wish be shown after insertion and let ladybug perform travel to flower.\n            this.stopUpdateProcess();\n\n            callWebService\n            (\n                'POST',\n                'services/wishflowerAddWish?wish=' + _wishMessage, \n                function(_errorCode)\n                {\n                    msglog(\"CallWebService error:\" + _errorCode);\n                    Garden.startUpdateProcess();\n\n                    if (typeof _errorCallback != 'undefined' && _errorCallback !== null)\n                        _errorCallback(_parent, _errorCode);\n                },\n                function(_data)\n                {\n                    if (_data === \"\")\n                    {\n                        console.log(\"Wish not added, tree is full.\");\n                    }\n                    else\n                    {\n                        console.log(\"Wish added.\");\n                    }\n                    \n                    if (typeof _successCallback != 'undefined' && _successCallback !== null)\n                        _successCallback(_parent, _data);\n                }\n            );  \n        }\n    };\n\n    Garden.prototype.logWishes = function () \n    {   \n        console.log(Garden.self.m_currentTree.getWishes());\n    };\n\n    Garden.prototype.logCurrentTree = function () \n    {   \n        console.log(Garden.self.m_currentTree.dump());\n    };\n    \n    Garden.prototype.performALadybugApparition = function (_tree, _ladybug, _poligonPath)\n    {\n        // Make a path from root to the middle of tree's first branch.\n        var trunkNode = _tree.getFirstBranch();\n        var trunkSegment = new PoligonSegment();\n        trunkSegment.init(trunkNode.m_x1, trunkNode.m_y1, trunkNode.m_x2, trunkNode.m_y2);\n\n        var endPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); \n        var trunkWidth = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); \n\n        var tmpSegment = new PoligonSegment();\n        tmpSegment.initWithExtraParams(\n            trunkNode.m_x1, trunkNode.m_y1 + 20, 0.01, 0.5, \n            endPosition.x, endPosition.y, trunkWidth, 1);\n        //tmpSegment.setVelocityRatio(0.2);\n        //***TODO: sl terminar los test dejar solamente la línea de arriba.\n        tmpSegment.setVelocityRatio(5);\n\n        _poligonPath.clearSegments();\n        _poligonPath.addSegmentObject(tmpSegment);\n\n        // Activate ladybug walking.\n        _ladybug.setAtCurrentSegmentStartPosition();   \n        _ladybug.startPoligonWalking();\n        _ladybug.setVisible(true);\n    };\n   \n    Garden.prototype.performLadybugFindTarget = function (_tree, _ladybug, _poligonPath)\n    {\n        // Make a path from root to the middle of tree's first branch.\n        var trunkNode = _tree.getFirstBranch();\n        var trunkWidth = _ladybug.getScaleToSpecificWidth(trunkNode.m_width * 2); \n\n        var trunkSegment = new PoligonSegment();\n        trunkSegment.init(trunkNode.m_x1, trunkNode.m_y1, trunkNode.m_x2, trunkNode.m_y2);\n\n        var startPosition = trunkSegment.getXYByPercent(Globals.C_START_POSITION_PERCENT); \n        var endPosition = trunkSegment.getXYByPercent(100); \n\n        var tmpSegment = new PoligonSegment();\n        tmpSegment.initWithExtraParams(\n            startPosition.x, startPosition.y, trunkWidth, 1, \n            endPosition.x, endPosition.y, trunkWidth, 1);\n        //tmpSegment.setVelocityRatio(0.2);\n        //***TODO: al terminar los test dejar solamente la línea de arriba.\n        tmpSegment.setVelocityRatio(5);\n\n        _poligonPath.clearSegments();\n        _poligonPath.addSegmentObject(tmpSegment);\n\n        // Activate ladybug walking.\n        _ladybug.setAtCurrentSegmentStartPosition();   \n        _ladybug.startPoligonWalking();\n        _ladybug.setVisible(true);\n    };\n}\n",
-			"file": "controllers/entities/garden.js",
-			"file_size": 8565,
-			"file_write_time": 131401245637526156,
-			"settings":
-			{
-				"buffer_size": 8350,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/wishflowerController.js",
-			"settings":
-			{
-				"buffer_size": 2224,
 				"line_ending": "Windows"
 			}
 		}
@@ -384,26 +355,35 @@
 	"expanded_folders":
 	[
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js"
 	],
 	"file_history":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/introFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/animation.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/introFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/keyPathControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerIntroActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerHelpActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/keyboardManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
 		"/D/Mios/Programas/wishflower/controllers/entities/messageControl.js",
 		"/D/Mios/Programas/wishflower/config/globalDefinitions.js",
 		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
@@ -513,12 +493,7 @@
 		"/C/Users/mfontana/Downloads/criminal case against-you  I78 ITQ-KL4.rar",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js",
-		"/C/workspace/banco-hipotecario/bancamovil-workspace/bancamovil-mobile-eclipse/FE_App_Android_3.4.0-SNAPSHOT/res/raw/gtm_tbj5bl",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/requestMessages.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/OrchestaHeroku/orchesta/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/animated.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js"
 	],
 	"find":
 	{
@@ -539,6 +514,88 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"startFrameWalkEvent",
+			"isInWalkingZone",
+			"openElytras",
+			"isInWalkingZone",
+			"moveLogicOpening",
+			"flyRight",
+			"horizontalCompensation",
+			"angleCompensation",
+			"flyDown",
+			"verticalCompensation",
+			"rotateRight",
+			"openElytras",
+			"forceAnimation_STAND",
+			"setHeightScalar",
+			"scalar",
+			"branch",
+			"scalar",
+			"flying",
+			"startFlyingCheckSum",
+			"flying",
+			"flyin",
+			"reset(",
+			"reset",
+			"C_ANIM_FLYING",
+			"isAnimation_FLYING",
+			"setAutoflight",
+			"isPoligonPathFinished",
+			"startPoligonWalking",
+			"startPoligonFlying",
+			"getPoligonPath",
+			"endUsingPoligonPath",
+			"startNewWishAnimation",
+			"startAnimation",
+			"setWalkingRectangle",
+			"setVisible",
+			"getVisible",
+			"getScaleToSpecificWidth",
+			"fadeOutScaleAndAlpha",
+			"stopFadeOut",
+			"isFadeOutFinished",
+			"getHeight",
+			"getWidthWithoutTransparencySpace",
+			"setInputControlsEnabled",
+			"getLadybugKeyPath",
+			"C_PLAY_FLOW_APPSTATE_NOT_SET",
+			"skeep",
+			"SKEEP",
+			"CONSOLE",
+			"msglog",
+			"3",
+			"areTreeBranchesStillGrowing",
+			"isNextLevelALeaveType",
+			"sNodeVisibleByCursor",
+			"getCursorHashFormatted",
+			"preOrder",
+			"reset",
+			"setX",
+			"}",
+			"setTreeStatus",
+			"renderIndicators",
+			"renderBranch",
+			"implementGameLogic",
+			"initLeaveImage",
+			"cursorReset",
+			"m_skeepThisKeyPath",
+			"m_skeepThisKeepPath",
+			"setSegmentLinesVisibility",
+			"m_segmentLinesVisibility",
+			"C_DEBUG_SHOW_LINES",
+			"m_segmentLinesVisibility",
+			"m_newWishPoligonPath",
+			"m_keyPathNodes",
+			"width",
+			"getFirstBranch",
+			"msgLog",
+			">>2",
+			"line",
+			"drawlin",
+			"startAnimation",
+			"force",
+			"startAnimation",
+			"performALadybugApparition",
 			"stopGetAllWishesWhileHelpIsRunning",
 			"m_stopGetAllWishesWhileHelpIsRunning",
 			"STOP PROCESS",
@@ -584,89 +641,7 @@
 			"startSideToSideAnimation",
 			"forceAnimation_STAND",
 			"FindIn",
-			"finding target",
-			"90",
-			"m_currentFrame",
-			"m_arrAnimations",
-			"startFrameSidetoSide",
-			"sidetoside",
-			"isSideToSideAnimation",
-			"flyingAnimation",
-			"moveLogicOpening",
-			"moveLogic",
-			"startFrameRotatingLeftEvent",
-			"startFrameSidetoSide",
-			"isAnimation_SIDE_TO_SIDE",
-			"startFrameRotatingLeftEvent",
-			"isPoligonPathStarted",
-			"C_LADYBUG_POLIGONPATH_STATE_OPEN_ELYTRAS",
-			"C_LADYBUG_POLIGONPATH_STATE_WALKING",
-			"rotateLeft",
-			"C_ANIM_ROTATING_LEFT",
-			"rotateLeft",
-			"C_ANIM_ROTATING_LEFT",
-			"rotateLeft",
-			"moveLogicOpening",
-			"isAnimation_STAND",
-			"C_LADYBUG_POLIGONPATH_STATE_SETTING_ANGLE",
-			"sendWishRequestedByUser",
-			"m_ladybug",
-			"createBranchNode",
-			"setIconTouched",
-			"m_icon",
-			"m_iconConfirmation",
-			"m_icon",
-			"m_iconConfirmation",
-			"updateIconPositionAtEndOfSegment",
-			"m_btnBack",
-			"ctree_leave_closed.png",
-			"log.png",
-			"ladybug_normal",
-			"ctree_root",
-			"ctree_root.png",
-			"ctree_root",
-			"glif-sub",
-			"glif-down-arrow",
-			"glif-left-arrow",
-			"initWithViewAndTree",
-			"console",
-			"m_totalLeaves",
-			"m_treeGrowedLeaves",
-			"C_TREE_FLOWERS",
-			"C_GENERATION_LEAVE_QTTY",
-			"--",
-			"---",
-			"m_totalLeaves",
-			"initWithViewAndTreeAndBackground",
-			"m_currentTree",
-			"m_idProcessUpdate",
-			"setTimeout",
-			"stopUpdateProcess",
-			"starUpdateProcess",
-			"stopUpdatingProcessAfterUpdateWishes",
-			"m_stopUpdatingProcessAfterUpdateWishes",
-			"stopUpdateProcess",
-			"m_stopUpdatingProcessAfterUpdateWishes",
-			"stopUpdatingProcessAfterUpdateWishes",
-			"m_stopUpdatingProcessAfterUpdateWishes",
-			"addWish",
-			"setRetur",
-			"return",
-			"setre",
-			"setreturnpre",
-			"m_totalLeaves",
-			"areCreatedAllLeaves",
-			"wish added",
-			"updateWishes",
-			"m_incommingLadybugs",
-			"onUpdatedNode",
-			"updateWishes",
-			"m_animeteNewIncommingWishes",
-			"C_UPDATE_FRECUENCY",
-			"areCreatedAllLeaves",
-			"m_animeteNewIncommingWishes",
-			"m_onConfirmationCallback",
-			"registerOnConfirm"
+			"finding target"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -690,49 +665,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/flows/playFlow.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5956,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3345,
-								3345
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1055.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "controllers/entities/ladybug.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 42533,
+						"buffer_size": 35520,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10240,
-								10240
+								7873,
+								7889
 							]
 						],
 						"settings":
@@ -742,69 +687,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4393.0,
+						"translation.y": 2539.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controllers/entities/garden.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8350,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1608,
-								1642
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 483.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "controllers/wishflowerController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2224,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1089,
-								1089
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 495.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
