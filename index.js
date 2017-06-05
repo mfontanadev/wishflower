@@ -16,8 +16,6 @@ global.__services = null;
 var reqGlobals = require('./config/globalDefinitions.js'); 
 global.__configDefinitions = new reqGlobals();
 
-console.log(global.__configDefinitions);
-
 // Entry point.
 app.get("/", function (req, res) {
     res.sendFile(__dirname + '/views/' + 'wishflowerView.html');

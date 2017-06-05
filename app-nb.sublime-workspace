@@ -307,6 +307,14 @@
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+			"settings":
+			{
+				"buffer_size": 685,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -366,6 +374,8 @@
 	],
 	"file_history":
 	[
+		"/C/Program Files/Sublime Text 3/Packages/Default.sublime-package",
+		"/C/Program Files/Sublime Text 3/Packages/Color Scheme - Default.sublime-package",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/animation.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
@@ -491,9 +501,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/History.md",
 		"/C/Users/mfontana/Downloads/criminal case against-you  I78 ITQ-KL4.rar",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/politicfight/politicfight.appspot.com_files/joystickMngr.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js"
 	],
 	"find":
 	{
@@ -514,6 +522,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"addAnimationFrame",
+			"isAValidMovement",
+			"console",
+			"function",
 			"startFrameWalkEvent",
 			"isInWalkingZone",
 			"openElytras",
@@ -637,11 +649,7 @@
 			"setOnEndAnimationEvent",
 			"startAnimation",
 			"forceAnimation_STAND",
-			"startAnimation",
-			"startSideToSideAnimation",
-			"forceAnimation_STAND",
-			"FindIn",
-			"finding target"
+			"startAnimation"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -676,21 +684,62 @@
 						"selection":
 						[
 							[
-								7873,
-								7889
+								7035,
+								7035
 							]
 						],
 						"settings":
 						{
+							"rulers":
+							[
+								80
+							],
+							"spell_check": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2539.0,
+						"translation.y": 2151.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 685,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								463
+							],
+							[
+								595,
+								602
+							],
+							[
+								620,
+								627
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

@@ -47,6 +47,9 @@ var global_bitmap_definition =
     'callouts\\callout_find_6.png',
     'callouts\\callout_find_61.png',
 
+    'callouts\\callout_conn_error1.png',
+    'callouts\\callout_conn_error2.png',
+
     'icon_find.png',
     'icon_write.png',
     'icon_done.png',

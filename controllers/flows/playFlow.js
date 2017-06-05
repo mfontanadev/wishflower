@@ -6,6 +6,12 @@ PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH = 2;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 3;
 PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS = 4;
 PlayFlow.C_PLAY_FLOW_IDLE = 5;
+PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE = 6;
+PlayFlow.C_PLAY_ERROR_DESCRIPTION = 7;
+
+PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
+PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
+PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR = 1;
 
 function PlayFlow() 
 {
@@ -23,6 +29,9 @@ function PlayFlow()
     this.m_wishResponseError = false;
     this.m_wishResponse = "";
 
+    this.m_arrAnimations = new Array();
+    this.m_currentAnimationId = PlayFlow.C_ANIMATION_ID_NOT_SET;
+
     PlayFlow.prototype.init = function (_viewParent) 
     {
         this.m_viewParent = _viewParent;
@@ -36,8 +45,49 @@ function PlayFlow()
 
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
+
+        this.setAnimationsWithCurrentLadyBugOffset();
+   };
+
+    PlayFlow.prototype.setAnimationsWithCurrentLadyBugOffset = function () 
+    {
+        var animation = null;
+
+        animation = new Animation();
+        animation.initWith(this, HelpFlow.C_ANIMATION_ID_MAIN_HELP, 0, 0);
+        this.addAnimationFrame(animation, 'callout_main_1.png',  12);
+        this.addAnimationFrame(animation, 'callout_main_2.png',  12);
+        animation.setInfiniteLoop(true);
+        animation.flipHorizontal(true);
+        this.m_arrAnimations.push(animation);
+
+        animation = new Animation();
+        animation.initWith(this, HelpFlow.C_ANIMATION_ID_CONNECTION_ERROR, 0, 0);
+        this.addAnimationFrame(animation, 'callout_conn_error1.png',  12);
+        this.addAnimationFrame(animation, 'callout_conn_error2.png',  12);
+        animation.setInfiniteLoop(true);
+        this.m_arrAnimations.push(animation);
     };
 
+    PlayFlow.prototype.updateAnimationPositions = function () 
+    {
+        var pivot = getOffsetsGivenAPivot(314, 235, 34, 167, 0.5);
+
+        calloutXPos = this.m_ladybug.m_cx;
+        calloutYPos = this.m_ladybug.m_cy;
+        marginX = this.m_ladybug.getWidthWithoutTransparencySpace() / 1.5;
+        marginY = this.m_ladybug.getHeightWithoutTransparencySpace() / 1.5;
+
+        this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].setPosition(calloutXPos + (pivot.x * -1) - marginX, calloutYPos + pivot.y);
+        this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].setPosition(calloutXPos + pivot.x + marginX, calloutYPos + pivot.y);
+    }
+
+    PlayFlow.prototype.addAnimationFrame = function (_animation, _imageName, _duration) 
+    {
+        var tmpResource = this.m_viewParent.getBitmapManagerInstance().getImageByName(_imageName);
+
+        _animation.createFrame(tmpResource, 0, 0, tmpResource.width, tmpResource.height, 0, 0, 0, 0, _duration);
+    }   
 
     PlayFlow.prototype.handleInputs = function ()
     {
@@ -101,6 +151,14 @@ function PlayFlow()
                     else if (this.m_wishResponseError === true)
                     {
                         console.log("RESPONSE ERROR: " + this.m_wishResponseData);
+
+                        // Stop side to side.
+                        this.m_ladybug.stopSideToSideAnimation();
+
+                        this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
+                        this.m_ladybug.startPoligonWalking();
+
+                        this.setState(PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE);
                     }
                 }
             }
@@ -115,13 +173,41 @@ function PlayFlow()
                 }
             }
 
-
             if (this.m_state === PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS)
             {
                 console.log("PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS");
                 this.m_garden.startUpdateProcess();
                 this.setState(PlayFlow.C_PLAY_FLOW_IDLE);
             }
+
+            if (this.m_state === PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE)
+            {
+                console.log("PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE");
+
+                if (this.m_ladybug.isPoligonPathFinished() === true)
+                {
+                    this.m_ladybug.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE);
+
+                    this.updateAnimationPositions();
+
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].reset();
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].start();            
+
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].reset();
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].start();            
+
+                    this.setState(PlayFlow.C_PLAY_ERROR_DESCRIPTION);
+                }
+            }
+
+            if (this.m_state === PlayFlow.C_PLAY_ERROR_DESCRIPTION)
+            {
+                console.log("PlayFlow.C_PLAY_ERROR_DESCRIPTION");
+    
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].implementGameLogic();
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].implementGameLogic();
+            }
+
 
             if (this.m_state === PlayFlow.C_PLAY_FLOW_IDLE)
             {
@@ -140,6 +226,19 @@ function PlayFlow()
         this.m_ladybug.render();
         this.m_garden.render();
         this.m_ladyBugPoligonPath.render();
+        
+        if (this.m_state === PlayFlow.C_PLAY_ERROR_DESCRIPTION)
+        {
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].render(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            0, 1, 0.5);
+
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].render(
+            this.m_viewParent.m_canvasEx.m_canvas, 
+            this.m_viewParent.m_canvasEx.m_context,
+            0, 1, 0.5);
+        }
     };
 
     PlayFlow.prototype.state_APPSTATE_INITIALIZING = function () 
@@ -186,7 +285,8 @@ function PlayFlow()
         this.m_wishResponseError = false;
         this.m_wishResponse = "";
         
-        this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
+        //this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
+        this.m_garden.addWish("Test wish", this, this.wishError, this.wishError);
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE); 
     };     
 
