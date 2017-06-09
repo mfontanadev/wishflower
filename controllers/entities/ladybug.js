@@ -1029,6 +1029,11 @@ function Ladybug()
     {
          return this.m_inputControlFind.getText();
     };
+
+    Ladybug.prototype.isInputControlAnimationFinished = function ()
+    {
+         return this.m_inputControlWrite.isHidden() && this.m_inputControlFind.isHidden(); 
+    };
 };
 
 

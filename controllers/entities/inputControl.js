@@ -626,6 +626,13 @@ function InputControl()
         this.m_segment.setAt(_x, _y);
         this.updateIconPositionAtEndOfSegment();
     };
+
+
+    InputControl.prototype.isHidden = function()
+    {
+        return (this.m_state === InputControl.C_STATE_HIDE);
+    };
+
 }
 
 

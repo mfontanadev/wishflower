@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"C_ANIMATION_ID_",
+				"C_ANIMATION_ID_CONNECTION_ERROR"
+			],
+			[
+				"close",
+				"closeSocketCOMMAND"
+			],
+			[
+				"idPro",
+				"idProcessEchoCOMMAND"
+			],
+			[
+				"comm",
+				"COMMAND_PORT"
+			],
+			[
+				"SOC",
+				"socketCOMMAND"
+			],
+			[
+				"is",
+				"isReader"
+			],
+			[
+				"txt",
+				"txtEchoCommandResponse"
+			],
+			[
 				"m_",
 				"m_garden"
 			],
@@ -113,10 +141,6 @@
 			],
 			[
 				"isPoligonPathOfType",
-				"isPoligonPathOfTypeFlying"
-			],
-			[
-				"is",
 				"isPoligonPathOfTypeFlying"
 			],
 			[
@@ -300,19 +324,27 @@
 	"buffers":
 	[
 		{
-			"file": "controllers/entities/ladybug.js",
+			"file": "controllers/flows/playFlow.js",
 			"settings":
 			{
-				"buffer_size": 35520,
+				"buffer_size": 11916,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+			"file": "controllers/entities/animation.js",
 			"settings":
 			{
-				"buffer_size": 685,
+				"buffer_size": 7982,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/flows/helpFlow.js",
+			"settings":
+			{
+				"buffer_size": 12462,
 				"line_ending": "Windows"
 			}
 		}
@@ -368,32 +400,38 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/services",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js"
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerHelpActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerIntroActivity.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/Demo.log",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
+		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/index-g4.html",
+		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/run-g4.bat",
+		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/run-g3.bat",
 		"/C/Program Files/Sublime Text 3/Packages/Default.sublime-package",
 		"/C/Program Files/Sublime Text 3/Packages/Color Scheme - Default.sublime-package",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/animation.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/introFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/chlib.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/keyboardManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/keyPathControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerPlayActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerIntroActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerHelpActivity.js",
 		"/D/Mios/Programas/wishflower/controllers/entities/messageControl.js",
 		"/D/Mios/Programas/wishflower/config/globalDefinitions.js",
 		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerPlayActivity.js",
@@ -496,12 +534,7 @@
 		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
 		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/Default (Windows).sublime-keymap",
 		"/C/Users/mfontana/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/db.json",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/keyboardManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/History.md",
-		"/C/Users/mfontana/Downloads/criminal case against-you  I78 ITQ-KL4.rar",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/storageManager.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-1.0.1-dist/js/viewManager.js"
 	],
 	"find":
 	{
@@ -522,6 +555,41 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setAnimationsWithCurrentLadyBugOffset",
+			"start",
+			"setAnimationsWithCurrentLadyBugOffset",
+			"RESET",
+			"m_poligonDirection",
+			"C_POLIGONPATH_DIRECTION_INVERSE",
+			"C_POLIGONPATH_DIRECTION_NORMAL",
+			"clearFields",
+			"borrar",
+			"'Echo'",
+			"socketCOMMAND",
+			"idProcessEchoCOMMAND",
+			"idProcessEchoCommand",
+			"idProcessEchoCOMMAND",
+			"cronEchoCommand",
+			"idProcessEchoCOMMAND",
+			"\n\t",
+			"peurto",
+			"idProcessEchoCOMMAND",
+			"socketSERIE",
+			"cronEchoCommand",
+			"command",
+			"sendToDisplay",
+			"sendCommand",
+			"socketSERIE",
+			"socket",
+			"getOutputStream",
+			"echo_co",
+			"tablero",
+			"sendToDisplay",
+			"send",
+			"cronReadFromUSB",
+			"execute",
+			"cronKeepAlive",
+			"ver",
 			"addAnimationFrame",
 			"isAValidMovement",
 			"console",
@@ -614,42 +682,7 @@
 			"starUpdateProcess",
 			"m_sideToSideMovementsCount",
 			"stringify",
-			"is side to",
-			"isSideToSideFinished",
-			"startSideToSideAnimation",
-			"moveSideToSide",
-			"moveLogic",
-			"visible",
-			"m_parentLadybugTouched",
-			"setLadyBugTouched",
-			"sidetoside",
-			"startSideToSideAnimation",
-			"end\"",
-			" end\"",
-			"changeFrameSideToSide",
-			"setInfiniteLoop",
-			"infinite",
-			"changeFrameSidetoSide",
-			"m_frameCounter",
-			"}",
-			"m_frameCounter",
-			"new",
-			"new\"",
-			"new",
-			"infinite",
-			"m_frameCounter",
-			"m_onStartFrameEvent",
-			"forceAnimation_STAND",
-			"reset",
-			"startAnimation",
-			"startSideToSideAnimation",
-			"+",
-			"startSideToSideAnimation",
-			"m_onEndAnimationEvent",
-			"setOnEndAnimationEvent",
-			"startAnimation",
-			"forceAnimation_STAND",
-			"startAnimation"
+			"is side to"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -673,34 +706,29 @@
 			[
 				{
 					"buffer": 0,
-					"file": "controllers/entities/ladybug.js",
+					"file": "controllers/flows/playFlow.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 35520,
+						"buffer_size": 11916,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7035,
-								7035
+								2568,
+								2568
 							]
 						],
 						"settings":
 						{
-							"rulers":
-							[
-								80
-							],
-							"spell_check": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2151.0,
+						"translation.y": 672.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -708,38 +736,61 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+					"file": "controllers/entities/animation.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 685,
+						"buffer_size": 7982,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								456,
-								463
-							],
-							[
-								595,
-								602
-							],
-							[
-								620,
-								627
+								6652,
+								6663
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3215.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "controllers/flows/helpFlow.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11651,
+								11651
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 3029.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -835,7 +886,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 293.0,
+	"side_bar_width": 334.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

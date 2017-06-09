@@ -155,6 +155,7 @@ function Garden()
                 },
                 function(_data)
                 {
+                    _data = "";
                     if (_data === "")
                     {
                         console.log("Wish not added, tree is full.");

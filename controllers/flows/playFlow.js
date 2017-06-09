@@ -2,12 +2,13 @@ PlayFlow.C_PLAY_FLOW_APPSTATE_NOT_SET = -1;
 
 PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING = 0;
 PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING = 1;
-PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH = 2;
-PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 3;
-PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS = 4;
-PlayFlow.C_PLAY_FLOW_IDLE = 5;
-PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE = 6;
-PlayFlow.C_PLAY_ERROR_DESCRIPTION = 7;
+PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH = 2;
+PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH = 3;
+PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 4;
+PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS = 5;
+PlayFlow.C_PLAY_FLOW_IDLE = 6;
+PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE = 7;
+PlayFlow.C_PLAY_ERROR_DESCRIPTION = 8;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -91,7 +92,8 @@ function PlayFlow()
 
     PlayFlow.prototype.handleInputs = function ()
     {
-        if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
+        if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING ||
+            this.m_state === PlayFlow.C_PLAY_ERROR_DESCRIPTION)
         {
             this.m_ladybug.handleInputs();
         }
@@ -109,17 +111,28 @@ function PlayFlow()
             if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
             {
                 console.log("PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING");
-                this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                this.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH); 
+                //this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+                ///this.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH); 
             }
 
             if (this.m_state === PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH)
             {
                 console.log("PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH");
-                if (this.m_ladybug.isPoligonPathFinished() === true)
+                if (this.m_ladybug.isInputControlAnimationFinished() === true)
+                {
+                    this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+                    this.setState(PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH);
+                }
+            }
+
+            if (this.m_state === PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH)
+            {
+                console.log("PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH");
+                if (this.m_ladybug.isPoligonPathFinished() === true)                  
                 {
                     this.m_ladybug.endUsingPoligonPath();
                     this.sendWishRequestedByUser();
+                    this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE);
                 }
             }
 
@@ -206,6 +219,13 @@ function PlayFlow()
     
                 this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].implementGameLogic();
                 this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].implementGameLogic();
+
+                if (this.m_ladybug.m_keyboard.clickOnLadybug == true)
+                {
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].stop();
+                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].stop();
+                    this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
+                }
             }
 
 
@@ -260,6 +280,8 @@ function PlayFlow()
 
         //var wish = _parent.m_ladybug.getLadybugWish()
         //_parent.m_garden.addWish(wish);
+
+        _parent.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH);
     };
 
     PlayFlow.prototype.onConfirmFinderClick = function (_parent, _sender)
@@ -286,7 +308,7 @@ function PlayFlow()
         this.m_wishResponse = "";
         
         //this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
-        this.m_garden.addWish("Test wish", this, this.wishError, this.wishError);
+        this.m_garden.addWish("Test wish", this, this.wishAdded, this.wishError);
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE); 
     };     
 
