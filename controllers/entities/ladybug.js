@@ -97,10 +97,14 @@ function Ladybug()
 
     this.m_inputControlWrite = new InputControl();
     this.m_inputControlFind = new InputControl();
+    
+    // When it is true user can not use movements controls on ladybug.
     this.m_inputControlsEnabled = false;
 
     this.m_sideToSideState = true;
     this.m_sideToSideMovementsCount = 0;
+
+    this.m_captureHandleInputs = true;
 
     Ladybug.prototype.initWithType = function (_viewParent, _ladyBugType) 
     {
@@ -295,31 +299,34 @@ function Ladybug()
     // ****************************************
     Ladybug.prototype.handleInputs = function () 
     {
-        this.m_keyboard.up = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_UP);
-        this.m_keyboard.down = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_DOWN);
-        this.m_keyboard.right = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT);
-        this.m_keyboard.left = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT);
-        this.m_keyboard.return = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN);
-        if (this.m_keyboard.return === true)
+        if (this.m_captureHandleInputs === true)
         {
-            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);  
-        }
+            this.m_keyboard.up = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_UP);
+            this.m_keyboard.down = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_DOWN);
+            this.m_keyboard.right = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RIGHT);
+            this.m_keyboard.left = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_LEFT);
+            this.m_keyboard.return = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_RETURN);
+            if (this.m_keyboard.return === true)
+            {
+                this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_RETURN);  
+            }
 
-        if (this.m_keyboard.right === true && this.m_keyboard.left === true)
-        {
-            this.m_keyboard.right = false;
-            this.m_keyboard.left = false;      
-        }
-        this.m_keyboard.button1 = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT);
+            if (this.m_keyboard.right === true && this.m_keyboard.left === true)
+            {
+                this.m_keyboard.right = false;
+                this.m_keyboard.left = false;      
+            }
+            this.m_keyboard.button1 = this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_SHIFT);
 
-        this.m_scalePerturbationOnLadybugTouched = 1;
-        var mouse = this.m_viewParent.getMouseManagerInstance();
-        var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.collisionRectangle()); 
-        if (isMouseOnLadyBug === true && mouse.m_mouseClick === true)
-        {
-            this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
+            this.m_scalePerturbationOnLadybugTouched = 1;
+            var mouse = this.m_viewParent.getMouseManagerInstance();
+            var isMouseOnLadyBug = collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.collisionRectangle()); 
+            if (isMouseOnLadyBug === true && mouse.m_mouseClick === true)
+            {
+                this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
+            }
+            this.m_keyboard.clickOnLadybug = mouse.triggerClic(isMouseOnLadyBug);
         }
-        this.m_keyboard.clickOnLadybug = mouse.triggerClic(isMouseOnLadyBug);
     };
 
     Ladybug.prototype.implementGameLogic = function () 
@@ -405,18 +412,20 @@ function Ladybug()
             this.m_inputControlWrite.implementGameLogic();
             this.m_inputControlFind.implementGameLogic();
         }
-
-        if (this.isAnimation_STAND() === true)
+        else
         {
-            this.moveLogicStand();
-        }
-        else if (this.isAnimation_OPENING() === true)
-        {
-            this.moveLogicOpening();
-        }
-        else if (this.isAnimation_SIDE_TO_SIDE() === true)
-        {
-            this.moveSideToSide();
+            if (this.isAnimation_STAND() === true)
+            {
+                this.moveLogicStand();
+            }
+            else if (this.isAnimation_OPENING() === true)
+            {
+                this.moveLogicOpening();
+            }
+            else if (this.isAnimation_SIDE_TO_SIDE() === true)
+            {
+                this.moveSideToSide();
+            }
         }
 
         this.updatePosition();
@@ -1034,6 +1043,17 @@ function Ladybug()
     {
          return this.m_inputControlWrite.isHidden() && this.m_inputControlFind.isHidden(); 
     };
+
+    Ladybug.prototype.disable = function ()
+    {
+         this.m_captureHandleInputs = false; 
+    };
+
+    Ladybug.prototype.enable = function ()
+    {
+         this.m_captureHandleInputs = true; 
+    };
+
 };
 
 

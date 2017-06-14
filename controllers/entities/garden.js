@@ -140,7 +140,7 @@ function Garden()
         {
             // Avoid new wish be shown after insertion and let ladybug perform travel to flower.
             this.stopUpdateProcess();
-
+console.log("new wish:" + _wishMessage);
             callWebService
             (
                 'POST',
@@ -155,7 +155,7 @@ function Garden()
                 },
                 function(_data)
                 {
-                    _data = "";
+                    _data = "ERROR";
                     if (_data === "")
                     {
                         console.log("Wish not added, tree is full.");
@@ -164,9 +164,18 @@ function Garden()
                     {
                         console.log("Wish added.");
                     }
-                    
-                    if (typeof _successCallback != 'undefined' && _successCallback !== null)
-                        _successCallback(_parent, _data);
+
+                    if (_data === "ERROR")
+                    {
+                        _errorCode = "force error";
+                        if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
+                            _errorCallback(_parent, _errorCode);
+                    }
+                    else
+                    {
+                        if (typeof _successCallback != 'undefined' && _successCallback !== null)
+                            _successCallback(_parent, _data);
+                    }
                 }
             );  
         }

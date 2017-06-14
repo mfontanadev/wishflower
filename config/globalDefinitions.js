@@ -50,6 +50,9 @@ var global_bitmap_definition =
     'callouts\\callout_conn_error1.png',
     'callouts\\callout_conn_error2.png',
 
+    'callouts\\callout_error_full-tree1.png',
+    'callouts\\callout_error_full-tree2.png',
+
     'icon_find.png',
     'icon_write.png',
     'icon_done.png',
