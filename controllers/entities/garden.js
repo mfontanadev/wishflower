@@ -140,7 +140,7 @@ function Garden()
         {
             // Avoid new wish be shown after insertion and let ladybug perform travel to flower.
             this.stopUpdateProcess();
-console.log("new wish:" + _wishMessage);
+            console.log("new wish:" + _wishMessage);
             callWebService
             (
                 'POST',

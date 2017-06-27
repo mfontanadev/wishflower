@@ -9,7 +9,7 @@ PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR = 31;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 4;
 PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS = 5;
 PlayFlow.C_PLAY_FLOW_IDLE = 6;
-PlayFlow.C_PLAY_ERROR_DESCRIPTION = 8;
+PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE = 8;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -49,6 +49,11 @@ function WishResponse()
     WishResponse.prototype.isResponseRecievedFromServer = function () 
     {
         return (this.m_recieved === true);
+    }
+
+    WishResponse.prototype.responseData = function () 
+    {
+        return this.m_data;
     }
 }
 
@@ -157,6 +162,11 @@ function PlayFlow()
         {
             this.processState_BACKING_BASE_AFTER_ERROR();
         }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
+        {
+            this.processState_ANIMATING_ERROR_RESPONSE();
+        }
+
 
 
 
@@ -294,7 +304,6 @@ function PlayFlow()
             this.m_garden.implementGameLogic();
         }*/
 
-
         this.m_ladybug.implementGameLogic();
         this.m_tree.implementGameLogic();
         this.m_garden.implementGameLogic();        
@@ -308,7 +317,7 @@ function PlayFlow()
         this.m_garden.render();
         this.m_ladyBugPoligonPath.render();
         
-        if (this.m_state === PlayFlow.C_PLAY_ERROR_DESCRIPTION)
+        if (this.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
         {
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].render(
             this.m_viewParent.m_canvasEx.m_canvas, 
@@ -416,7 +425,7 @@ function PlayFlow()
 
             if (this.m_wishResponse.hasError() === true)
             {
-                console.log("RESPONSE ERROR: " + this.m_wishResponseData);
+                console.log("RESPONSE ERROR: " + this.m_wishResponse.responseData());
 
                 this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
                 this.m_ladybug.startPoligonWalking();
@@ -448,8 +457,37 @@ function PlayFlow()
 
     PlayFlow.prototype.processState_BACKING_BASE_AFTER_ERROR = function () 
     {
+        if (this.m_ladybug.isPoligonPathFinished() === true)                  
+        {
+            this.m_ladybug.endUsingPoligonPath();
+            this.updateAnimationPositions();
+
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].reset();
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].start();   
+            if (this.m_wishResponse.isTreeFull() === true)
+            {
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_TREE_FULL].reset();
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_TREE_FULL].start();  
+            }
+            else
+            {
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].reset();
+                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].start();  
+            }
+
+            this.setState(PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE);
+        }
     }
 
+    PlayFlow.prototype.processState_ANIMATING_ERROR_RESPONSE = function () 
+    {
+        this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].implementGameLogic();
+        this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].implementGameLogic();
+    }
+
+    // ****************************************
+    // Auxiliares
+    // ****************************************
     PlayFlow.prototype.onConfirmFinderClick = function (_parent, _sender)
     {
         _parent.m_ladybug.notifyInputControlFindConfirmation();

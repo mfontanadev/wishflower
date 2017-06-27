@@ -1,5 +1,3 @@
-var C_APPLICATION_TITLE_AND_VERSION = 'Wishflower (v1.0.0) mdb';
-
 // All sounds used by de app. SoundManager will preload all of them.
 var global_sound_definition = [
     {src:"wings.mp3", id:0}
