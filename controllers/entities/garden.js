@@ -155,7 +155,7 @@ function Garden()
                 },
                 function(_data)
                 {
-                    _data = "ERROR";
+                    _data = "";
                     if (_data === "")
                     {
                         console.log("Wish not added, tree is full.");
@@ -211,6 +211,7 @@ function Garden()
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
+        _poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
 
         // Activate ladybug walking.
         _ladybug.setAtCurrentSegmentStartPosition();   
@@ -241,6 +242,7 @@ function Garden()
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
+        _poligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
 
         // Activate ladybug walking.
         _ladybug.setAtCurrentSegmentStartPosition();   

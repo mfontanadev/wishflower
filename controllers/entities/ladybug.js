@@ -22,6 +22,7 @@ Ladybug.C_ANIM_ROTATING_LEFT = 3;
 Ladybug.C_ANIM_OPENING = 4;
 Ladybug.C_ANIM_CLOSING = 5;
 Ladybug.C_ANIM_SIDE_TO_SIDE = 6;
+Ladybug.C_ANIM_FLYING = 7;
 
 Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET = -1;
 
@@ -189,7 +190,13 @@ function Ladybug()
         this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
         this.addAnimationFrame(animation, 'ladybug_normal.png',  5);
         this.m_arrAnimations.push(animation);
-
+	
+        animation = new Animation();
+        animation.initWith(this, Ladybug.C_ANIM_FLYING, 0, 0);
+        animation.setInfiniteLoop(true);
+        this.addAnimationFrame(animation, 'ladybug_flying_1.png', 1);
+        this.addAnimationFrame(animation, 'ladybug_flying_2.png', 1);
+        this.m_arrAnimations.push(animation);
     };
 
     Ladybug.prototype.startFrameWalkEvent = function (_parent) 
@@ -429,6 +436,10 @@ function Ladybug()
             {
                 this.moveLogicOpening();
             }
+ 	    else if (this.isAnimation_FLYING() === true)
+	    {
+	    	this.moveLogicFlying();
+	    }
             else if (this.isAnimation_SIDE_TO_SIDE() === true)
             {
                 this.moveSideToSide();
@@ -442,6 +453,25 @@ function Ladybug()
     {   
         this.m_cx = this.m_cx + this.m_velocity.x;
         this.m_cy = this.m_cy + this.m_velocity.y;
+
+	/*
+        if (this.m_currentAnimationId === Ladybug.C_ANIM_FLYING)
+        {
+            var slideEffect = 0;
+            var slideVelocity = this.m_velocity.x;
+
+            if (slideVelocity > Ladybug.C_LADYBUG_MAX_SLIDE)
+            {
+                slideVelocity = Ladybug.C_LADYBUG_MAX_SLIDE;
+            }
+            else if (slideVelocity < -1 * Ladybug.C_LADYBUG_MAX_SLIDE)
+            {
+                slideVelocity = -1 * Ladybug.C_LADYBUG_MAX_SLIDE;
+            }
+
+            slideEffect = (slideVelocity * Ladybug.C_LADYBUG_SETTING_TORQUE);
+            this.m_angle = this.m_velocity.a - slideEffect;
+        }*/
 
         if (this.m_cx < 0)
             this.m_cx = 0;
@@ -529,6 +559,16 @@ function Ladybug()
         }
     };
 
+    Ladybug.prototype.flyingAnimation = function () 
+    {
+        if (this.m_arrAnimations[this.m_currentAnimationId].hasEnded() === true)
+        {
+            var sndId = this.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+            this.m_viewParent.getSoundManagerInstance().play(sndId, true);
+
+            this.startAnimation(Ladybug.C_ANIM_FLYING);       
+        }
+    }
     Ladybug.prototype.closeElytras = function () 
     {
         this.startAnimation(Ladybug.C_ANIM_CLOSING);       
