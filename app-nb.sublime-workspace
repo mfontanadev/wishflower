@@ -392,10 +392,19 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/soundManager.js",
+			"file": "controllers/flows/playFlow.js",
 			"settings":
 			{
-				"buffer_size": 6712,
+				"buffer_size": 19901,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/garden.js",
+			"settings":
+			{
+				"buffer_size": 10419,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -446,13 +455,10 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities",
@@ -462,6 +468,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/soundManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config/globalDefinitions.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/chlib.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/trunk/scale_property.xml",
@@ -502,7 +510,6 @@
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Punto de control/trunk/run-g3.bat",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerHelpActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/Demo.log",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/index-g4.html",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/run-g4.bat",
@@ -588,8 +595,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/_old index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Service.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Route.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js"
 	],
 	"find":
 	{
@@ -611,6 +617,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"m_wishResponseData",
+			"responseRecievedFromServer",
+			"updateAnimationPositions",
+			"processState_ANIMATING_ERROR_RESPONSE",
+			"C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE",
+			"C_PLAY_ERROR_DESCRIPTION",
+			"C_ANIMATION_ID_CONNECTION_ERROR",
+			"start",
+			"poligon",
+			"C_ANIMATION_ID_CONNECTION_ERROR",
+			"isTreeFull",
 			"modu",
 			"distance",
 			"m_thumbails",
@@ -727,18 +744,7 @@
 			"setAnimationsWithCurrentLadyBugOffset",
 			"RESET",
 			"m_poligonDirection",
-			"C_POLIGONPATH_DIRECTION_INVERSE",
-			"C_POLIGONPATH_DIRECTION_NORMAL",
-			"clearFields",
-			"borrar",
-			"'Echo'",
-			"socketCOMMAND",
-			"idProcessEchoCOMMAND",
-			"idProcessEchoCommand",
-			"idProcessEchoCOMMAND",
-			"cronEchoCommand",
-			"idProcessEchoCOMMAND",
-			"\n\t"
+			"C_POLIGONPATH_DIRECTION_INVERSE"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -762,31 +768,62 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/soundManager.js",
+					"file": "controllers/flows/playFlow.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6712,
+						"buffer_size": 19901,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5892,
-								5892
+								18576,
+								18576
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 3402.0,
+						"translation.x": 0.0,
+						"translation.y": 6384.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "controllers/entities/garden.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10419,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5410,
+								5447
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1932.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -882,7 +919,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 231.0,
+	"side_bar_width": 276.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

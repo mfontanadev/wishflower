@@ -515,7 +515,6 @@ function InputControl()
             this.m_state === InputControl.C_STATE_SELECTABLE)
         {
             this.m_parentLadybugTouched = true;
-            console.log("touched forced");
         }
     };    
 

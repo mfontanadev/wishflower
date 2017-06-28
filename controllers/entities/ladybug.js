@@ -82,6 +82,8 @@ function Ladybug()
         return: false,
         clickOnLadybug: false
     }
+    this.m_onClickCallback = null;
+    this.m_onClickParent = null;
 
     this.m_walkingZoneRectangle = new ChRect();
     this.m_autoflight = false;
@@ -326,6 +328,11 @@ function Ladybug()
                 this.m_scalePerturbationOnLadybugTouched = 1 - 0.1;
             }
             this.m_keyboard.clickOnLadybug = mouse.triggerClic(isMouseOnLadyBug);
+
+            if (this.m_keyboard.clickOnLadybug == true)
+            {
+                this.m_onClickCallback(this.m_onClickParent, this);
+            }
         }
     };
 
@@ -793,6 +800,15 @@ function Ladybug()
         }
     };
 
+    Ladybug.prototype.startPoligonFlying = function () 
+    {
+        if (this.m_poligonPath !== null)
+        {
+            this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_SETTING_FLYING_ANGLE;
+            this.m_poligonPath.reset();
+        }
+    };
+
     Ladybug.prototype.endUsingPoligonPath = function () 
     {
         this.m_poligonPathState = Ladybug.C_LADYBUG_POLIGONPATH_STATE_NOT_SET;
@@ -994,6 +1010,12 @@ function Ladybug()
     // ****************************************
     // Input control logic
     // ****************************************
+    Ladybug.prototype.registerOnClick = function (_parent, _callBack)
+    {
+        this.m_onClickCallback = _callBack;
+        this.m_onClickParent = _parent;
+    };
+
     Ladybug.prototype.onIconControlWriteClick = function (_parent, _sender)
     {
         _parent.m_inputControlFind.foreignIconClicked();
@@ -1053,7 +1075,6 @@ function Ladybug()
     {
          this.m_captureHandleInputs = true; 
     };
-
 };
 
 

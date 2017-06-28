@@ -76,6 +76,8 @@ function PlayFlow()
     this.m_arrAnimations = new Array();
     this.m_currentAnimationId = PlayFlow.C_ANIMATION_ID_NOT_SET;
 
+    this.m_clickOnLadybug = false;
+
     PlayFlow.prototype.init = function (_viewParent) 
     {
         this.m_viewParent = _viewParent;
@@ -86,6 +88,7 @@ function PlayFlow()
         this.m_ladybug = _viewParent.getDataContext().m_ladybug;
         this.m_ladybug.registerWriteInputControlOnConfirm(this, this.onConfirmWriteClick);
         this.m_ladybug.registerFindInputControlOnConfirm(this, this.onConfirmFinderClick);
+        this.m_ladybug.registerOnClick(this, this.onClick);
 
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
@@ -337,13 +340,17 @@ function PlayFlow()
     // ****************************************
     PlayFlow.prototype.processState_APPSTATE_INITIALIZING = function () 
     {
+        this.m_clickOnLadybug = false;
+        this.m_writeWishConfirmed = false;
+        this.m_wishResponse.reset();
+
         this.m_ladybug.enable();
         this.m_ladybug.setInputControlsEnabled(true);
         this.m_garden.startUpdateProcess();
         
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_USER_ACTIONS); 
     };
-
+    
     PlayFlow.prototype.processState_WAITING_USER_ACTIONS = function () 
     {
         // Rule one
@@ -352,7 +359,8 @@ function PlayFlow()
         {
             this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
             this.m_garden.stopUpdateProcess();
-
+            this.m_ladybug.disable();
+            
             this.setState(PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH); 
         }
 
@@ -461,6 +469,7 @@ function PlayFlow()
         {
             this.m_ladybug.endUsingPoligonPath();
             this.updateAnimationPositions();
+            this.m_ladybug.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE);
 
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].reset();
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].start();   
@@ -474,6 +483,7 @@ function PlayFlow()
                 this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].reset();
                 this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].start();  
             }
+            this.m_ladybug.enable();
 
             this.setState(PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE);
         }
@@ -483,7 +493,24 @@ function PlayFlow()
     {
         this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].implementGameLogic();
         this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].implementGameLogic();
+
+        if (this.m_clickOnLadybug === true)
+        {
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].stop();
+            this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].stop();
+
+            this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
+        }
     }
+
+    PlayFlow.prototype.onClick = function (_parent, _sender)
+    {
+        if (_parent.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
+        {
+            _parent.m_clickOnLadybug = true;
+            console.log(_parent);
+        }
+    };    
 
     // ****************************************
     // Auxiliares
