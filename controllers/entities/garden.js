@@ -155,7 +155,8 @@ function Garden()
                 },
                 function(_data)
                 {
-                    _data = "";
+                    //For debug
+                    //_data = "";
                     if (_data === "")
                     {
                         console.log("Wish not added, tree is full.");
@@ -165,17 +166,18 @@ function Garden()
                         console.log("Wish added.");
                     }
 
-                    if (_data === "ERROR")
-                    {
-                        _errorCode = "force error";
-                        if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
-                            _errorCallback(_parent, _errorCode);
-                    }
-                    else
-                    {
-                        if (typeof _successCallback != 'undefined' && _successCallback !== null)
-                            _successCallback(_parent, _data);
-                    }
+                    //For debug
+                    //if (_data === "ERROR")
+                    //{
+                    //    _errorCode = "force error";
+                    //    if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
+                    //        _errorCallback(_parent, _errorCode);
+                    //}
+                    //else
+                    //{
+                    if (typeof _successCallback != 'undefined' && _successCallback !== null)
+                        _successCallback(_parent, _data);
+                    //}
                 }
             );  
         }

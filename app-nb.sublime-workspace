@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"C_PLAY_FLOw_C",
+				"C_PLAY_FLOW_CLIMBING_TO_FIND_WISH"
+			],
+			[
+				"m_fi",
+				"m_findWishConfirmed"
+			],
+			[
+				"m_ani",
+				"m_errorAnimationID"
+			],
+			[
+				"C_ANIMATION_ID_",
+				"C_ANIMATION_ID_TREE_FULL"
+			],
+			[
+				"all",
+				"allPiecesAllocated"
+			],
+			[
+				"m_con",
+				"m_confirmationMode"
+			],
+			[
+				"C_STATE_",
+				"C_STATE_PLAYING"
+			],
+			[
+				"level",
+				"levelSelectorBack"
+			],
+			[
+				"C_s",
+				"C_STATE_SELECTIONG_LEVEL"
+			],
+			[
+				"get",
+				"getLevelsCount"
+			],
+			[
+				"m_cu",
+				"m_currentLevelIndex"
+			],
+			[
 				"m_on",
 				"m_onClickParent"
 			],
@@ -72,10 +116,6 @@
 				"m_wishResponseData"
 			],
 			[
-				"get",
-				"getLadybugWish"
-			],
-			[
 				"la",
 				"ladybug"
 			],
@@ -84,16 +124,8 @@
 				"m_inputControlWrite"
 			],
 			[
-				"C_s",
-				"C_STATE_HIDE"
-			],
-			[
 				"m_s",
 				"m_state"
-			],
-			[
-				"C_ANIMATION_ID_",
-				"C_ANIMATION_ID_CONNECTION_ERROR"
 			],
 			[
 				"close",
@@ -320,10 +352,6 @@
 				"C_ANIM_MOVING"
 			],
 			[
-				"m_cu",
-				"m_currentAnimationId"
-			],
-			[
 				"m_ladybug_",
 				"m_ladybug_normal_img"
 			],
@@ -399,7 +427,16 @@
 			"file": "controllers/flows/playFlow.js",
 			"settings":
 			{
-				"buffer_size": 20831,
+				"buffer_size": 21655,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/entities/keyPathControl.js",
+			"settings":
+			{
+				"buffer_size": 14375,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -408,24 +445,7 @@
 			"file": "controllers/entities/garden.js",
 			"settings":
 			{
-				"buffer_size": 10572,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/poligonPath.js",
-			"settings":
-			{
-				"buffer_size": 12697,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/entities/ladybug.js",
-			"settings":
-			{
-				"buffer_size": 38393,
+				"buffer_size": 10648,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -478,37 +498,60 @@
 	[
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/flows",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/public"
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/chlib.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/piece.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/levelSelector.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/desktop.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/mouseManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/History.md",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/canvasControl.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/node_modules/socket.io/node_modules/socket.io-parser/binary.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/keyboardManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/viewManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/flows/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/puzzleController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/puzzleContext.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/playPanel.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/bitmapManager.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/orchesta_prj/orchesta-master/controllers/interpeterController.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/orchesta_prj/orchesta-master/views/errorPageView.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/index.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/helpFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/soundManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config/globalDefinitions.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/chlib.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/trunk/scale_property.xml",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/desktop.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/piecesPanel.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/piece.js",
 		"/C/Users/mfontana/Downloads/ScaleEmulator/com/bunge/captureFromScales/scaleEmulator/PosOperationInvocation.class",
 		"/C/Users/mfontana/Downloads/ScaleEmulator/com/bunge/captureFromScales/scaleEmulator/EmulatorServer.class",
 		"/C/Users/mfontana/Downloads/ScaleEmulator/META-INF/MANIFEST.MF",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/keyboardManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/views/wishflowerView.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/chlib.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/consts.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/playPanel.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/trunk/index.html",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/backgroundPanel.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerPlayActivity.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/introFlow.js",
@@ -523,7 +566,6 @@
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/index.html",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Punto de control/trunk/run-g3.bat",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities/wishflowerHelpActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/poligonPath.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/Demo.log",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/index-g4.html",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/branches/feature-autogestion/run-g4.bat",
@@ -596,20 +638,7 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.ServiceMock.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/wishflower.Route.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/_back/wishflower-master/controllers/entities/db_wish.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/node_modules/mongoose/node_modules/hooks-fixed/README.md",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/chatInterpeter.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/README.md",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/serverOrchesta.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/server/protocolMessages.js",
-		"/C/Users/mfontana/Mios/Proyectos/Bunge/ISSUES/ISSUE-Phone4g/emulador/Campana/Demo.log",
-		"/C/Users/mfontana/Mios/Proyectos/Bunge/ISSUES/ISSUE-Phone4g/emulador/Campana/index.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/models/_old index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/services/errorPage.Service.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/playFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/flower.js"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerContext.js"
 	],
 	"find":
 	{
@@ -632,6 +661,60 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"isInputControlAnimationFinished",
+			"processState_WAITING_USER_ACTIONS",
+			"C_PLAY_FLOW_WAITING_USER_ACTIONS",
+			"C_PLAY_FLOW_CLIMBING_TO_SEND_WISH",
+			"C_PLAY_FLOW_CLIMBING_TO_FIND_WISH",
+			"C_PLAY_FLOW_WALKING_TO_TARGET",
+			"C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE",
+			"C_PLAY_FLOW_IDLE",
+			"C_PLAY_FLOW_RESTART_UPDATING_PROCESS",
+			"m_writeWishConfirmed",
+			"userWantToFindAWish",
+			"onConfirmFinderClick",
+			"C_PLAY_FLOW_APPSTATE_INITIALIZING",
+			"m_writeWishConfirmed",
+			"hasUserWrittenAWish",
+			"m_errorAnimationID",
+			"C_ANIMATION_ID_TREE_FULL",
+			"C_ANIMATION_ID_CONNECTION_ERROR",
+			"processState_ANIMATING_ERROR_RESPONSE",
+			"C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR",
+			"C_ANIMATION_ID_CONNECTION_ERROR",
+			"console",
+			"m_touchStopMouse",
+			"m_clicDown",
+			"triggerClic",
+			"m_touchStopMouse",
+			"mouseXY",
+			"m_touchStopMouse",
+			"console.log",
+			"hide",
+			"isPieceAllocated",
+			"canvaex",
+			"C_STATE_SELECTING_LEVEL",
+			"CHLIB_C_STROKE_WIDTH_RECTANGLE",
+			"renderrectangle",
+			"_parentDesktop",
+			"C_STATE_SELECTIONG_LEVEL",
+			"m_type",
+			"control",
+			"_imageDownLoaded",
+			"render",
+			"self",
+			"drawImageResized",
+			"_imageLoaded",
+			"_ctx",
+			"fff",
+			"_ctx",
+			"render",
+			"CanvasControl",
+			"visible",
+			"disable",
+			"render",
+			"button",
+			"get_MoinLoopState",
 			"directio",
 			"m_writeWishConfirmed",
 			"hasUserWrittenAWish",
@@ -705,61 +788,7 @@
 			"m_rect",
 			"scaled",
 			"rect",
-			"thumbailItem",
-			"Thumbail",
-			"m_thumbails",
-			"Thumbail",
-			"m_background",
-			"BackgroundPanel",
-			"BoardPanel",
-			"BackgroundPanel",
-			"C_ANIMATION_ID_CONNECTION_ERROR",
-			"C_PLAY_FLOW_ERROR_ADDING_WALK_TO_BASE",
-			"C_PLAY_ERROR_ADDING_WALK_TO_BASE",
-			"WishResponse",
-			"m_wishResponseRecieved",
-			"m_inputControlsEnabled",
-			"m_wishResponse",
-			"m_writeWishConfirmed",
-			"m_wishResponseOk",
-			"sendWishRequestedByUser",
-			"disable",
-			"C_PLAY_FLOW_APPSTATE_PLAYING",
-			"moveLogic",
-			"processState_WAITING_USER_ACTIONS",
-			"C_PLAY_FLOW_WAITING_USER_ACTIONS",
-			"updateAnimationPositions",
-			"setEnableIn",
-			"m_inputControlsEnabled",
-			"setInputControlsEnabled",
-			"inputcon",
-			"m_keyboard.button1",
-			"m_keyboard.return",
-			"m_keyboard.up",
-			"poligonPathWalkingLogic",
-			"poligonPathLogic",
-			"isPoligonPathStarted",
-			"*****************",
-			"state_APPSTATE_INITIALIZING",
-			"stopGetAllWishesWhileHelpIsRunning",
-			"m_stopGetAllWishesWhileHelpIsRunning",
-			"state_APPSTATE_INITIALIZING",
-			"c_key",
-			"vk_re",
-			"return",
-			"startNewWishAnimation",
-			"sendWishRequestedByUser",
-			"__services",
-			"sendWishRequestedByUser",
-			"C_PLAY_FLOW_USER_REQUEST_A_WISH",
-			"add",
-			"sendWishRequestedByUser",
-			"performLadybugFindTarget",
-			"startNewWishAnimation",
-			"state_APPSTATE_INITIALIZING",
-			"m_inputControlsEnabled",
-			"setInputControlsEnabled",
-			"m_inputControlsEnabled"
+			"thumbailItem"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -787,75 +816,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20831,
+						"buffer_size": 21655,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13681,
-								13705
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5933.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "controllers/entities/garden.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10572,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5439,
-								5439
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1960.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controllers/entities/poligonPath.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12697,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								441,
-								483
+								230,
+								230
 							]
 						],
 						"settings":
@@ -868,24 +837,54 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "controllers/entities/ladybug.js",
+					"buffer": 1,
+					"file": "controllers/entities/keyPathControl.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 38393,
+						"buffer_size": 14375,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7631,
-								7631
+								5021,
+								5021
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 1218.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "controllers/entities/garden.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5674,
+								5674
 							]
 						],
 						"settings":
@@ -895,10 +894,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2372.0,
+						"translation.y": 1619.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

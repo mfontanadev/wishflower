@@ -112,12 +112,12 @@ function KeyPathControl()
         this.m_numberButtons.push(button);
 
         // Set states
-        this.setButtonState(0, KeyPathControl.C_KEY_INDICATOR_LEFT);
-        this.setButtonState(1, KeyPathControl.C_KEY_INDICATOR_LEFT);
-        this.setButtonState(2, KeyPathControl.C_KEY_INDICATOR_LEFT);
-        this.setButtonState(3, KeyPathControl.C_KEY_INDICATOR_LEFT);
-        this.setButtonState(4, KeyPathControl.C_KEY_INDICATOR_LEFT);
-        this.setButtonState(5, KeyPathControl.C_KEY_INDICATOR_LEFT);
+        this.setButtonState(0, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        this.setButtonState(1, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        this.setButtonState(2, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        this.setButtonState(3, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        this.setButtonState(4, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        this.setButtonState(5, KeyPathControl.C_KEY_INDICATOR_RIGHT);
         this.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
 
         this.setEnabled(false);
