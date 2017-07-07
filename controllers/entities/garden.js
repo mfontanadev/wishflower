@@ -140,14 +140,14 @@ function Garden()
         {
             // Avoid new wish be shown after insertion and let ladybug perform travel to flower.
             this.stopUpdateProcess();
-            console.log("new wish:" + _wishMessage);
+            msglog("REQUEST new wish:" + _wishMessage);
             callWebService
             (
                 'POST',
                 'services/wishflowerAddWish?wish=' + _wishMessage, 
                 function(_errorCode)
                 {
-                    msglog("CallWebService error:" + _errorCode);
+                    msglog("RESPONSE (addWish) error:" + _errorCode);
                     Garden.startUpdateProcess();
 
                     if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
@@ -159,11 +159,11 @@ function Garden()
                     //_data = "";
                     if (_data === "")
                     {
-                        console.log("Wish not added, tree is full.");
+                        msglog("RESPONSE (addWish): tree full");
                     }
                     else
                     {
-                        console.log("Wish added.");
+                        msglog("RESPONSE (addWish) ok: " + _data);
                     }
 
                     //For debug

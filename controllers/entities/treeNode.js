@@ -636,7 +636,7 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (hash=" + this.m_hash + ")"); 
+        console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (wish=" + this.m_wish+ ")"); 
     };
 
     TreeNode.prototype.getHash = function () 

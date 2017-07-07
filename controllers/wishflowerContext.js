@@ -69,6 +69,11 @@ function WishflowerContext()
 		return result;
 	};
 
+	WishflowerContext.prototype.configDefinitions = function ()
+	{
+		return __configDefinitions;
+	}
+
 	this.initDefault();
 };
 

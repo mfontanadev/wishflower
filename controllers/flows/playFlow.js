@@ -6,6 +6,8 @@ PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH = 2;
 PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH = 3;
 PlayFlow.C_PLAY_FLOW_WAITING_NEW_WISH_SERVER_RESPONSE = 4;
 PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR = 41;
+PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 5;
+PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 6;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -51,6 +53,12 @@ function WishResponse()
     {
         return this.m_data;
     }
+
+    WishResponse.prototype.getWishKeyPath = function () 
+    {
+        return JSON.parse(this.m_data)[0].keyPath;
+    }
+
 }
 
 function PlayFlow() 
@@ -169,6 +177,14 @@ function PlayFlow()
         {
             this.processState_ANIMATING_ERROR_RESPONSE();
         }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH)
+        {
+            this.processState_C_PLAY_FLOW_CLIMBING_TO_FIND_WISH();
+        }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER)
+        {
+            this.processState_C_PLAY_FLOW_WALKING_TO_FLOWER();
+        }
 
         this.m_ladybug.implementGameLogic();
         this.m_tree.implementGameLogic();
@@ -246,7 +262,6 @@ function PlayFlow()
     {
         _parent.m_ladybug.notifyInputControlWriteConfirmation();
         _parent.userWroteAWish();
-        console.log("    onConfirmWriteClick, wish=" + _parent.m_ladybug.getLadybugWish());
     };
 
     PlayFlow.prototype.userWroteAWish = function ()
@@ -294,14 +309,13 @@ function PlayFlow()
 
     PlayFlow.prototype.wishAdded = function (_parent, _data)
     {
-        console.log("wish added:" + _data);
-
+        console.log("CALLBACK (addWish): ok");
         _parent.m_wishResponse.responseRecievedFromServer(_data, false);
     }
 
     PlayFlow.prototype.wishError = function (_parent, _errorCode)
     {
-        console.log("wish error:" + _errorCode);        
+        console.log("CALLBACK (addWish): error");
         _parent.m_wishResponse.responseRecievedFromServer(_errorCode, true);
     }
 
@@ -317,33 +331,17 @@ function PlayFlow()
             if (this.m_wishResponse.hasError() === true ||
                 this.m_wishResponse.isTreeFull() === true)
             {
-                console.log("RESPONSE ERROR: " + this.m_wishResponse.responseData());
+                mslog("RESPONSE ERROR: " + this.m_wishResponse.responseData());
 
                 this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
                 this.m_ladybug.startPoligonWalking();
 
                 this.setState(PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR);
             }
-            /*
-            else if (this.m_wishResponse.isTreeFull() === true)
+            else 
             {
-            }*/
-                /*
-                console.log("RESPONSE TREEFULL: " + this.m_wishResponseData);
-                //this.setState(PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS);
-                }
-                else
-                {
-                    // Stop side to side.
-                    this.m_ladybug.stopSideToSideAnimation();
-                    console.log("RESPONSE OK: " + this.m_wishResponseData);
-
-                    var newWishKeyPath = JSON.parse(this.m_wishResponseData)[0].keyPath;
-                    this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
-                    this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                    this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
-                }
-            }*/
+                this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER);
+            }
         }
     };
 
@@ -397,9 +395,60 @@ function PlayFlow()
         if (_parent.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
         {
             _parent.m_clickOnLadybug = true;
-            console.log(_parent);
         }
     };    
+
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_CLIMBING_TO_FIND_WISH = function () 
+    {
+        if (this.m_ladybug.isPoligonPathFinished() === true)                  
+        {
+            this.m_ladybug.endUsingPoligonPath();
+    
+            // Perform ladybug animation and wait server response. Move ladybug head side to side.
+            this.m_ladybug.startSideToSideAnimation(Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS);
+
+            this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER); 
+        }
+    }
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_WALKING_TO_FLOWER = function () 
+    {
+        if (this.m_ladybug.isSideToSideFinished() === true) 
+        {
+            // Stop side to side.
+            this.m_ladybug.stopSideToSideAnimation();
+
+            var newWishKeyPath = "";
+            if (this.hasUserWrittenAWish() === true)
+            {
+                newWishKeyPath = this.m_wishResponse.getWishKeyPath();
+                this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
+            }
+            else if (this.hasUserWantedToFindAWish() === true)
+            {
+                newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
+            }
+
+            // Create a poligonpath from trunk top to flower.
+            this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+
+            this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
+        }
+    }
+
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_WALKING_TO_TARGET = function () 
+    {
+        if (this.m_ladybug.isPoligonPathFinished() === true)                  
+        {
+            this.m_ladybug.endUsingPoligonPath();
+
+            console.log("Implement DROP_PETAL")
+
+            //this.setState(PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE);
+        }
+    }
 
     // ****************************************
     // Auxiliares
@@ -426,153 +475,3 @@ function PlayFlow()
     };
 
 };
-
-
-
-
-
-
-
-/*
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_APPSTATE_PLAYING");
-                //this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                ///this.setState(PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH); 
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_USER_REQUEST_A_WISH");
-                if (this.m_ladybug.isInputControlAnimationFinished() === true)
-                {
-                    this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                    this.setState(PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH);
-                }
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH");
-                if (this.m_ladybug.isPoligonPathFinished() === true)                  
-                {
-                    console.log("antes end using:" + this.m_ladybug.isPoligonPathFinished())
-                    this.m_ladybug.endUsingPoligonPath();
-                    console.log("end end using:" + this.m_ladybug.isPoligonPathFinished())
-                    this.sendWishRequestedByUser();
-                    this.setState(PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE);
-                }
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_WAITING_REQUEST_A_WISH_RESPONSE");
-
-                if (this.m_ladybug.isSideToSideFinished() === true)
-                {
-                    if (this.m_wishResponseOk === true)
-                    {
-                        if (this.m_wishResponseData === "")
-                        {
-                            console.log("RESPONSE TREEFULL: " + this.m_wishResponseData);
-                            this.setState(PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS);
-                        }
-                        else
-                        {
-                            // Stop side to side.
-                            this.m_ladybug.stopSideToSideAnimation();
-                            console.log("RESPONSE OK: " + this.m_wishResponseData);
-
-                            var newWishKeyPath = JSON.parse(this.m_wishResponseData)[0].keyPath;
-                            this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
-                            this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-                            this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
-                        }
-                    }
-                    else if (this.m_wishResponseError === true)
-                    {
-                        console.log("RESPONSE ERROR: " + this.m_wishResponseData);
-
-                        // Stop side to side.
-                        this.m_ladybug.stopSideToSideAnimation();
-
-                        this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
-                        this.m_ladybug.startPoligonWalking();
-
-                        this.setState(PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE);
-                    }
-                }
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET");
-                if (this.m_ladybug.isPoligonPathFinished() === true)
-                {
-                    this.m_ladybug.endUsingPoligonPath();
-                    this.setState(PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS);
-                }
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS)
-            {
-                console.log("PlayFlow.C_PLAY_FLOW_RESTART_UPDATING_PROCESS");
-                this.m_garden.startUpdateProcess();
-                this.setState(PlayFlow.C_PLAY_FLOW_IDLE);
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE)
-            {
-                console.log("PlayFlow.C_PLAY_ERROR_ADDING_WALK_TO_BASE");
-
-                if (this.m_ladybug.isPoligonPathFinished() === true)
-                {
-                    this.m_ladybug.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE);
-
-                    this.updateAnimationPositions();
-
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].reset();
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].start();            
-
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].reset();
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].start();            
-
-                    this.setState(PlayFlow.C_PLAY_ERROR_DESCRIPTION);
-                }
-            }
-
-            if (this.m_state === PlayFlow.C_PLAY_ERROR_DESCRIPTION)
-            {
-                console.log("PlayFlow.C_PLAY_ERROR_DESCRIPTION");
-    
-                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].implementGameLogic();
-                this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].implementGameLogic();
-
-                if (this.m_ladybug.m_keyboard.clickOnLadybug == true)
-                {
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_CONNECTION_ERROR].stop();
-                    this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].stop();
-                    this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
-                }
-            }
-
-
-            if (this.m_state === PlayFlow.C_PLAY_FLOW_IDLE)
-            {
-            }
-
-            this.m_ladybug.implementGameLogic();
-            this.m_tree.implementGameLogic();
-            this.m_garden.implementGameLogic();
-        }*/
-
-
-
-        /*
-        if (?this.userWantToFindaWish() === true &&
-            this.m_ladybug.isInputControlAnimationFinished() === true)
-        {
-            this.m_garden.performLadybugFindTarget(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-
-            //this.setState(PlayFlow.?); 
-        }*/

@@ -108,6 +108,7 @@ function Globals()
 		return Globals.C_APPLICATION_TITLE_AND_VERSION;
 	}
 }
+var __configDefinitions = new Globals();
 
 if (typeof module !== 'undefined' && module !== null)
 {

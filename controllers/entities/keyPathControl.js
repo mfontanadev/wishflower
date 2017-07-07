@@ -30,7 +30,7 @@ function KeyPathControl()
     this.m_rc = new ChRect();
     this.m_alpha = 0;
 
-    this.m_keyPathState = ["", "", "", "", "", "", 0];
+    this.m_keyPathState = ["", "", "", "", "", "", ""];
     this.m_leftButtons = [];        // buttons "<"
     this.m_rightButtons = [];       // buttons ">"
     this.m_numberButtons = [];      // button "1", "2", "3", "4", "5", "6" 
@@ -40,6 +40,9 @@ function KeyPathControl()
     this.m_editionChanged = false;
 
     this.m_stopEventPropagation = false;
+
+    this.m_levels = 0;
+    this.m_flowers = 0;
 
     KeyPathControl.prototype.init = function (_viewParent, _parentLadybug)
     {
@@ -51,6 +54,9 @@ function KeyPathControl()
         this.m_cx = this.m_parentLadybug.m_cx;
         this.m_cy = this.m_parentLadybug.m_cy;
 
+        this.m_levels = this.m_viewParent.getGlobalConfig().get_C_TREE_LEVELS();
+        this.m_flowers = this.m_viewParent.getGlobalConfig().get_C_TREE_FLOWERS();
+
         var button = null;
         for (var i = 0; i < 6; i++)
         {
@@ -59,6 +65,8 @@ function KeyPathControl()
             button.setTag(i);
             button.setImage('glif-left-arrow.png');
             button.registerOnClick(this, this.onLeftButtonClick);
+            button.setVisible(false);
+            button.setEnabled(false);
             this.m_leftButtons.push(button);
 
             button = new CanvasControl();
@@ -66,7 +74,12 @@ function KeyPathControl()
             button.setTag(i);
             button.setImage('glif-right-arrow.png');
             button.registerOnClick(this, this.onRightButtonClick);
+            button.setVisible(false);
+            button.setEnabled(false);
             this.m_rightButtons.push(button);
+
+            if (i < this.m_levels)
+                this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_RIGHT);
         }
 
         button = new CanvasControl();
@@ -111,14 +124,7 @@ function KeyPathControl()
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
-        // Set states
-        this.setButtonState(0, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(1, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(2, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(3, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(4, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(5, KeyPathControl.C_KEY_INDICATOR_RIGHT);
-        this.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+        this.setButtonState(this.m_levels, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
 
         this.setEnabled(false);
         this.m_stopEventPropagation = false;
@@ -130,20 +136,20 @@ function KeyPathControl()
         if (_state === KeyPathControl.C_KEY_INDICATOR_LEFT)
         {
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_LEFT;
-            this.m_leftButtons[_index]._visible = true;
-            this.m_leftButtons[_index]._enable = true;
-            this.m_rightButtons[_index]._visible = false;
-            this.m_rightButtons[_index]._enable = false;
+            this.m_leftButtons[_index].setVisible(true);
+            this.m_leftButtons[_index].setEnabled(true);
+            this.m_rightButtons[_index].setVisible(false);
+            this.m_rightButtons[_index].setEnabled(false);
 
             this.triggerOnEditionChangedEvent();
         }
         else if (_state === KeyPathControl.C_KEY_INDICATOR_RIGHT)
         {
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_RIGHT;
-            this.m_rightButtons[_index]._visible = true;
-            this.m_rightButtons[_index]._enable = true;
-            this.m_leftButtons[_index]._visible = false;
-            this.m_leftButtons[_index]._enable = false;
+            this.m_rightButtons[_index].setVisible(true);
+            this.m_rightButtons[_index].setEnabled(true);
+            this.m_leftButtons[_index].setVisible(false);
+            this.m_leftButtons[_index].setEnabled(false);
 
             this.triggerOnEditionChangedEvent();
         }
@@ -151,8 +157,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_1;
-            this.m_numberButtons[0]._visible = true;
-            this.m_numberButtons[0]._enable = true;
+            this.m_numberButtons[0].setVisible(true);
+            this.m_numberButtons[0].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }
@@ -160,8 +166,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_2;
-            this.m_numberButtons[1]._visible = true;
-            this.m_numberButtons[1]._enable = true;
+            this.m_numberButtons[1].setVisible(true);
+            this.m_numberButtons[1].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }
@@ -169,8 +175,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_3;
-            this.m_numberButtons[2]._visible = true;
-            this.m_numberButtons[2]._enable = true;
+            this.m_numberButtons[2].setVisible(true);
+            this.m_numberButtons[2].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }
@@ -178,8 +184,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_4;
-            this.m_numberButtons[3]._visible = true;
-            this.m_numberButtons[3]._enable = true;
+            this.m_numberButtons[3].setVisible(true);
+            this.m_numberButtons[3].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }
@@ -187,8 +193,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_5;
-            this.m_numberButtons[4]._visible = true;
-            this.m_numberButtons[4]._enable = true;
+            this.m_numberButtons[4].setVisible(true);
+            this.m_numberButtons[4].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }
@@ -196,8 +202,8 @@ function KeyPathControl()
         {
             this.resetNumberButtonsState();
             this.m_keyPathState[_index] = KeyPathControl.C_KEY_INDICATOR_FLOWER_6;
-            this.m_numberButtons[5]._visible = true;
-            this.m_numberButtons[5]._enable = true;
+            this.m_numberButtons[5].setVisible(true);
+            this.m_numberButtons[5].setEnabled(true);
 
             this.triggerOnEditionChangedEvent();            
         }        
@@ -207,8 +213,8 @@ function KeyPathControl()
     {
         for (var i = 0; i < 6; i++)
         {
-            this.m_numberButtons[i]._visible = false;
-            this.m_numberButtons[i]._enable = false;
+            this.m_numberButtons[i].setVisible(false);
+            this.m_numberButtons[i].setEnabled(false);
         }
     };
 
@@ -238,18 +244,16 @@ function KeyPathControl()
 
     KeyPathControl.prototype.render = function () 
     {
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].render();
             this.m_rightButtons[i].render();
         }
 
-        this.m_numberButtons[0].render();
-        this.m_numberButtons[1].render();
-        this.m_numberButtons[2].render();
-        this.m_numberButtons[3].render();
-        this.m_numberButtons[4].render();
-        this.m_numberButtons[5].render();        
+        for (var i2 = 0; i2 < this.m_flowers; i2++)
+        {
+            this.m_numberButtons[i2].render();
+        }
     };
 
     KeyPathControl.prototype.onLeftButtonClick = function(_e, _sender)
@@ -270,30 +274,14 @@ function KeyPathControl()
     {
         var tmpParent = _sender.getOnClickParent();
 
-        if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_1)
+        if (tmpParent.m_keyPathState[tmpParent.m_levels] === tmpParent.m_flowers)
         {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_2);
+            tmpParent.setButtonState(tmpParent.m_levels, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);    
         }
-        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_2)
+        else
         {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_3);
+            tmpParent.setButtonState(tmpParent.m_levels, tmpParent.m_keyPathState[tmpParent.m_levels] + 1);
         }
-        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_3)
-        {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_4);
-        }
-        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_4)
-        {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_5);
-        }
-        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_5)
-        {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_6);
-        }
-        else if (tmpParent.m_keyPathState[6] === KeyPathControl.C_KEY_INDICATOR_FLOWER_6)
-        {
-            tmpParent.setButtonState(6, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
-        }        
     };
 
     KeyPathControl.prototype.setFocus = function ()
@@ -305,16 +293,16 @@ function KeyPathControl()
         this.m_cx = _x;
 
         var padding = 5;
-        var dx = ((7 * KeyPathControl.C_CONTROL_SIZE) + (padding * 6)) / 2;
-        for (var i = 0; i < 6; i++)
+        var dx = (((this.m_levels + 1) * KeyPathControl.C_CONTROL_SIZE) + (padding * this.m_levels)) / 2;
+        for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
             this.m_rightButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
         }
 
-        for (var i2 = 0; i2 < 6; i2++)
+        for (var i2 = 0; i2 < this.m_levels; i2++)
         {
-            this.m_numberButtons[i2].setX(this.m_cx - dx + (6 * (KeyPathControl.C_CONTROL_SIZE + padding)));
+            this.m_numberButtons[i2].setX(this.m_cx - dx + (this.m_levels * (KeyPathControl.C_CONTROL_SIZE + padding)));
         }
     };
 
@@ -323,13 +311,13 @@ function KeyPathControl()
         this.m_cy = _y;
 
         var dy = (KeyPathControl.C_CONTROL_SIZE) / 2;
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].setY(this.m_cy - dy);
             this.m_rightButtons[i].setY(this.m_cy - dy);
         }
 
-        for (var i2 = 0; i2 < 6; i2++)
+        for (var i2 = 0; i2 < this.m_levels; i2++)
         {
             this.m_numberButtons[i2].setY(this.m_cy - dy);
         }
@@ -339,13 +327,13 @@ function KeyPathControl()
     {
         this.m_alpha = _alpha;
 
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].setAlpha(_alpha);
             this.m_rightButtons[i].setAlpha(_alpha);
         }
 
-        for (var i2 = 0; i2 < 6; i2++)
+        for (var i2 = 0; i2 < this.m_flowers; i2++)
         {
             this.m_numberButtons[i2].setAlpha(_alpha);
         }
@@ -355,7 +343,7 @@ function KeyPathControl()
     {
         var result = "";
 
-        for (var i = 0; i < 7; i++)
+        for (var i = 0; i < this.m_levels + 1; i++)
         {
             result = result + this.m_keyPathState[i].toString();
         }
@@ -365,13 +353,13 @@ function KeyPathControl()
 
     KeyPathControl.prototype.setEnabled = function (_value)
     {
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].setEnabled(_value);
             this.m_rightButtons[i].setEnabled(_value);
         }
 
-        for (var i2 = 0; i2 < 6; i2++)
+        for (var i2 = 0; i2 < this.m_flowers; i2++)
         {
             this.m_numberButtons[i2].setEnabled(_value);
         }
