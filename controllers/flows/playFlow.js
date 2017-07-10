@@ -6,8 +6,8 @@ PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH = 2;
 PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH = 3;
 PlayFlow.C_PLAY_FLOW_WAITING_NEW_WISH_SERVER_RESPONSE = 4;
 PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR = 41;
-PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 5;
-PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET = 6;
+PlayFlow.C_PLAY_FLOW_THINKING = 5;
+PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 6;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -181,6 +181,10 @@ function PlayFlow()
         {
             this.processState_C_PLAY_FLOW_CLIMBING_TO_FIND_WISH();
         }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_THINKING)
+        {
+            this.processState_C_PLAY_FLOW_THINKING();
+        }
         else if (this.m_state === PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER)
         {
             this.processState_C_PLAY_FLOW_WALKING_TO_FLOWER();
@@ -340,6 +344,11 @@ function PlayFlow()
             }
             else 
             {
+                // Create a poligonpath from trunk top to flower.
+                var newWishKeyPath = this.m_wishResponse.getWishKeyPath();
+                this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
+                this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+
                 this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER);
             }
         }
@@ -404,9 +413,22 @@ function PlayFlow()
         if (this.m_ladybug.isPoligonPathFinished() === true)                  
         {
             this.m_ladybug.endUsingPoligonPath();
-    
-            // Perform ladybug animation and wait server response. Move ladybug head side to side.
+
+            // Perform ladybug animation looking at user keypath wanted.
             this.m_ladybug.startSideToSideAnimation(Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS);
+
+            this.setState(PlayFlow.C_PLAY_FLOW_THINKING); 
+        }
+    }
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_THINKING = function () 
+    {
+        if (this.m_ladybug.isSideToSideFinished() === true)                  
+        {
+            this.m_ladybug.stopSideToSideAnimation();
+
+            var newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
+            this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
 
             this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER); 
         }
@@ -414,41 +436,13 @@ function PlayFlow()
 
     PlayFlow.prototype.processState_C_PLAY_FLOW_WALKING_TO_FLOWER = function () 
     {
-        if (this.m_ladybug.isSideToSideFinished() === true) 
-        {
-            // Stop side to side.
-            this.m_ladybug.stopSideToSideAnimation();
-
-            var newWishKeyPath = "";
-            if (this.hasUserWrittenAWish() === true)
-            {
-                newWishKeyPath = this.m_wishResponse.getWishKeyPath();
-                this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
-            }
-            else if (this.hasUserWantedToFindAWish() === true)
-            {
-                newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
-            }
-
-            // Create a poligonpath from trunk top to flower.
-            this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-
-            this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_TARGET);
-        }
-    }
-
-
-    PlayFlow.prototype.processState_C_PLAY_FLOW_WALKING_TO_TARGET = function () 
-    {
         if (this.m_ladybug.isPoligonPathFinished() === true)                  
         {
             this.m_ladybug.endUsingPoligonPath();
-
-            console.log("Implement DROP_PETAL")
-
-            //this.setState(PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE);
+            console.log("end walking to flower");
         }
     }
+
 
     // ****************************************
     // Auxiliares
