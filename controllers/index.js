@@ -55,11 +55,14 @@ module.exports = function(app)
 	app.get ('/controllers/entities/inputControl.js', 
 		function (req, res) {res.sendFile(__dirname + '/entities/inputControl.js');});
 
-    	app.get ('/controllers/entities/keyPathControl.js',
+   	app.get ('/controllers/entities/keyPathControl.js',
         function (req, res) {res.sendFile(__dirname + '/entities/keyPathControl.js');});
 
-    	app.get ('/controllers/entities/messageControl.js',
+   	app.get ('/controllers/entities/messageControl.js',
         function (req, res) {res.sendFile(__dirname + '/entities/messageControl.js');});
+
+	app.get ('/controllers/entities/petal.js', 
+		function (req, res) {res.sendFile(__dirname + '/entities/petal.js');});
 
 	console.log("   controllers/index.js: OK");
 }

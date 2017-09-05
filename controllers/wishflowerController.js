@@ -19,7 +19,7 @@ window.onload = function()
 	bitmapManager.setFilenamesArray(global_bitmap_definition);
 
 	var bitmapFilter = new BitmapFilter();
-	bitmapManager.setBitmapFilter(document, bitmapFilter.noiseAndTransparentFilter);
+	bitmapManager.setBitmapFilter(document, bitmapFilter.registerUtagawaFilter);
 
 	// Enable using sounds
 	var soundManager = viewMngr.getSoundManagerInstance();

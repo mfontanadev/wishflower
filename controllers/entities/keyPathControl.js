@@ -19,7 +19,6 @@ function KeyPathControl()
     KeyPathControl.self = this;
 
     this.m_viewParent = null;
-    this.m_parentLadybug = null;
     this.m_state = KeyPathControl.C_STATE_NOT_SET;
 
     this.m_cx = 0;
@@ -44,18 +43,17 @@ function KeyPathControl()
     this.m_levels = 0;
     this.m_flowers = 0;
 
-    KeyPathControl.prototype.init = function (_viewParent, _parentLadybug)
+    KeyPathControl.prototype.init = function (_viewParent, _cx, _cy)
     {
         this.m_stopEventPropagation = true;
 
         this.m_viewParent = _viewParent;
-        this.m_parentLadybug = _parentLadybug;
 
-        this.m_cx = this.m_parentLadybug.m_cx;
-        this.m_cy = this.m_parentLadybug.m_cy;
+        this.m_cx = _cx;
+        this.m_cy = _cy;
 
-        this.m_levels = this.m_viewParent.getGlobalConfig().get_C_TREE_LEVELS();
-        this.m_flowers = this.m_viewParent.getGlobalConfig().get_C_TREE_FLOWERS();
+        this.m_levels = this.m_viewParent.getGlobalConfigInstance().get_C_TREE_LEVELS();
+        this.m_flowers = this.m_viewParent.getGlobalConfigInstance().get_C_TREE_FLOWERS();
 
         var button = null;
         for (var i = 0; i < 6; i++)
@@ -126,9 +124,19 @@ function KeyPathControl()
 
         this.setButtonState(this.m_levels, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
 
+        this.setX(this.m_cx);
+        this.setY(this.m_cy);
+
         this.setEnabled(false);
+
         this.m_stopEventPropagation = false;
     };
+
+    KeyPathControl.prototype.initWithLadybugPosition = function (_viewParent, _parentLadybug)
+    {
+        this.init(_viewParent,  _parentLadybug.m_cx,  _parentLadybug.m_cy);
+
+    }
 
     KeyPathControl.prototype.setButtonState = function(_index, _state)
     {
@@ -348,6 +356,46 @@ function KeyPathControl()
             result = result + this.m_keyPathState[i].toString();
         }
 
+        return result;
+    };
+
+    // Convert "<<1" to the internal representation.
+    KeyPathControl.prototype.setText = function (_keyPath)
+    {
+        var result = "";
+        var char = "";
+
+        for (var i = 0; i < _keyPath.length; i++)
+        {
+            char = _keyPath.substring(i, i + 1);
+
+            switch(char)
+            {
+                case KeyPathControl.C_KEY_INDICATOR_LEFT: 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_LEFT); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_RIGHT: 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_RIGHT); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_1.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_1); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_2.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_2); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_3.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_3); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_4.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_4); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_5.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_5); break;
+
+                case KeyPathControl.C_KEY_INDICATOR_FLOWER_6.toString(): 
+                    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_FLOWER_6); break;
+            }
+        }
         return result;
     };
 

@@ -8,6 +8,8 @@ PlayFlow.C_PLAY_FLOW_WAITING_NEW_WISH_SERVER_RESPONSE = 4;
 PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR = 41;
 PlayFlow.C_PLAY_FLOW_THINKING = 5;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 6;
+PlayFlow.C_PLAY_FLOW_FLOWER_FALLING = 7;
+PlayFlow.C_PLAY_FLOW_USER_READING_WISH = 8;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -71,6 +73,7 @@ function PlayFlow()
     this.m_ladybug = null;
     this.m_background = null;
     this.m_garden = null;
+    this.m_petal = null;
 
     this.m_state = PlayFlow.C_PLAY_FLOW_NOT_SET;
     
@@ -86,6 +89,8 @@ function PlayFlow()
 
     this.m_findWishConfirmed = false;
 
+    this.m_clickOnPetal = false;
+
     PlayFlow.prototype.init = function (_viewParent) 
     {
         this.m_viewParent = _viewParent;
@@ -100,6 +105,18 @@ function PlayFlow()
 
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
+        this.m_petal = _viewParent.getDataContext().m_petal;
+        this.m_petal.registerOnClick(this, this.onClickPetal);
+        this.m_petal.setVisible(false);
+        this.m_petal.disable();
+        
+        this.m_btnExitReading = new CanvasControl();
+        this.m_btnExitReading.initButtonStyle(this.m_viewParent.m_canvasEx, 0, 0, 30, 30, "");
+        this.m_btnExitReading.setImage('icon_done.png');
+        this.m_btnExitReading.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
+        this.m_btnExitReading.registerOnClick(this, this.btnExitReading_click);
+        this.m_btnExitReading._visible = false;
+        this.m_btnExitReading._enabled = false;
 
         this.setAnimationsWithCurrentLadyBugOffset();
    };
@@ -143,6 +160,7 @@ function PlayFlow()
     PlayFlow.prototype.handleInputs = function ()
     {
         this.m_ladybug.handleInputs();
+        this.m_petal.handleInputs();
 
         if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
         {
@@ -189,10 +207,19 @@ function PlayFlow()
         {
             this.processState_C_PLAY_FLOW_WALKING_TO_FLOWER();
         }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_FLOWER_FALLING)
+        {
+            this.processState_C_PLAY_FLOW_FLOWER_FALLING();
+        }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_USER_READING_WISH)
+        {
+            this.processState_C_PLAY_FLOW_USER_READING_WISH();
+        }
 
         this.m_ladybug.implementGameLogic();
         this.m_tree.implementGameLogic();
-        this.m_garden.implementGameLogic();        
+        this.m_garden.implementGameLogic();
+        this.m_petal.implementGameLogic();        
     };
 
     PlayFlow.prototype.render = function () 
@@ -202,7 +229,9 @@ function PlayFlow()
         this.m_ladybug.render();
         this.m_garden.render();
         this.m_ladyBugPoligonPath.render();
-        
+        this.m_petal.render();
+        this.m_btnExitReading.render();
+
         if (this.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
         {
             this.m_arrAnimations[this.m_errorAnimationID].render(
@@ -217,12 +246,12 @@ function PlayFlow()
         }
     };
 
-
     // ****************************************
     // FSM (logica para cada estado de la maquina de estados finitos)
     // ****************************************
     PlayFlow.prototype.processState_APPSTATE_INITIALIZING = function () 
     {
+        this.m_clickOnPetal = false;
         this.m_clickOnLadybug = false;
         this.m_writeWishConfirmed = false;
         this.m_findWishConfirmed = false;
@@ -230,8 +259,16 @@ function PlayFlow()
 
         this.m_ladybug.enable();
         this.m_ladybug.setInputControlsEnabled(true);
+
         this.m_garden.startUpdateProcess();
-        
+
+        this.m_btnExitReading._visible = false;
+        this.m_btnExitReading._enabled = false;
+
+        this.m_petal.setVisible(false);
+        this.m_petal.disable();
+        this.m_petal.resetState();
+
         this.setState(PlayFlow.C_PLAY_FLOW_WAITING_USER_ACTIONS); 
     };
     
@@ -241,6 +278,14 @@ function PlayFlow()
         if (this.m_ladybug.isInputControlAnimationFinished() === true)
         {
             var jumpToNextState = false;
+
+            //START - FORCE PROCRESS FLOW FOR TESTING PORPOURSES
+            if (this.m_tree.someFlowerGrowed() === true)
+            {
+                this.setState(PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH); 
+                this.userWantToFindAWish();
+            }
+            //END   - FORCE PROCRESS FLOW FOR TESTING PORPOURSES
 
             if (this.hasUserWrittenAWish() === true)
             {
@@ -345,6 +390,7 @@ function PlayFlow()
             else 
             {
                 // Create a poligonpath from trunk top to flower.
+                console.log("RECIBIDO WISH");
                 var newWishKeyPath = this.m_wishResponse.getWishKeyPath();
                 this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
                 this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
@@ -429,6 +475,7 @@ function PlayFlow()
 
             var newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
             this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+            console.log(newWishKeyPath);
 
             this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER); 
         }
@@ -439,9 +486,53 @@ function PlayFlow()
         if (this.m_ladybug.isPoligonPathFinished() === true)                  
         {
             this.m_ladybug.endUsingPoligonPath();
+
+            this.m_petal.performFalling(this.m_tree, this.m_ladybug);
+
             console.log("end walking to flower");
+            this.setState(PlayFlow.C_PLAY_FLOW_FLOWER_FALLING); 
         }
     }
+    
+    PlayFlow.prototype.processState_C_PLAY_FLOW_FLOWER_FALLING = function () 
+    {
+        if (this.m_petal.isWaitingClose() === true)
+        {
+            var trunkMiddlePosition =this.m_tree.getPositionOfBranch(
+                this.m_tree.getFirstBranch(), 
+                Globals.C_START_POSITION_PERCENT);
+
+            this.m_btnExitReading.setX(trunkMiddlePosition.x - 15);
+            this.m_btnExitReading.setY(trunkMiddlePosition.y - 15);
+            this.m_btnExitReading._visible = true;
+            this.m_btnExitReading._enabled = true;
+                       
+            this.setState(PlayFlow.C_PLAY_FLOW_USER_READING_WISH);
+        }
+    }
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_USER_READING_WISH = function () 
+    {
+        if (this.m_clickOnPetal === true)
+        {
+            this.m_petal.disable();
+
+            this.m_btnExitReading._visible = false;
+            this.m_btnExitReading._enabled = false;
+
+            this.m_petal.setVisible(false);
+            this.m_petal.disable();
+            this.m_petal.resetState();
+
+            this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+            this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
+        }
+    }
+
+    PlayFlow.prototype.btnExitReading_click = function (_e, _sender)
+    {
+        _sender.getOnClickParent().m_clickOnPetal = true;
+    };    
 
 
     // ****************************************

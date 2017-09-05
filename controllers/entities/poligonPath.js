@@ -387,8 +387,19 @@ function PoligonSegment()
 
     PoligonSegment.prototype.getXYByPercent = function (_percent)
     {
-        var resultX = (this.getDeltaX() * _percent / 100) + this.m_x1;
-        var resultY = (this.getDeltaY() * _percent / 100) + this.m_y1;
+        var resultX = this.m_x1;
+        var resultY = this.m_y1;
+
+        if (_percent >= 100)
+        {
+            resultX = this.m_x2;
+            resultY = this.m_y2;
+        }
+        if (_percent > 0 && _percent < 100)
+        {
+            resultX = resultX + (this.getDeltaX() * _percent / 100);
+            resultY = resultY + (this.getDeltaY() * _percent / 100);
+        }
 
         return ({x: resultX, y: resultY});
     };

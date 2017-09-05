@@ -25,6 +25,7 @@ function WishflowerContext()
 		this.m_background = null;
 		this.m_garden = null;
 		this.m_ladyBugPoligonPath = null;
+		this.m_petal = null;
 	};
 		
 	WishflowerContext.prototype.initialize = function (_parentView)
@@ -55,6 +56,9 @@ function WishflowerContext()
         this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_NORMAL);
         this.m_ladyBugPoligonPath.setInfitineLoop(false);
         this.m_ladyBugPoligonPath.setSegmentLinesVisibility(true);
+
+		this.m_petal = new Petal();
+		this.m_petal.init(this.m_viewParent);
 	};
 
 	WishflowerContext.prototype.createActivities = function ()
@@ -68,11 +72,6 @@ function WishflowerContext()
         
 		return result;
 	};
-
-	WishflowerContext.prototype.configDefinitions = function ()
-	{
-		return __configDefinitions;
-	}
 
 	this.initDefault();
 };

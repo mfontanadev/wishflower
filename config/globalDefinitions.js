@@ -10,6 +10,7 @@ var global_bitmap_definition =
     'ctree_branch.png',
     'ctree_leave.png',
     'ctree_leave_closed.png',
+    'ctree_petal.png',
 
     'ladybug_normal.png',
     'ladybug_walk_left.png',
@@ -51,6 +52,8 @@ var global_bitmap_definition =
     'callouts\\callout_error_full-tree1.png',
     'callouts\\callout_error_full-tree2.png',
 
+    'callouts\\callout_wishinfo.png',
+    
     'icon_find.png',
     'icon_write.png',
     'icon_done.png',
@@ -108,7 +111,6 @@ function Globals()
 		return Globals.C_APPLICATION_TITLE_AND_VERSION;
 	}
 }
-var __configDefinitions = new Globals();
 
 if (typeof module !== 'undefined' && module !== null)
 {

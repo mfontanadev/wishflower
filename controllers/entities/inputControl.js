@@ -93,9 +93,10 @@ function InputControl()
             imageIcon = 'icon_find.png';
 
             this.m_keyPathControl = new KeyPathControl();
-            this.m_keyPathControl.init(this.m_viewParent, this.m_parentLadybug);
-            this.m_keyPathControl.setX(this.m_cx);
-            this.m_keyPathControl.setY(this.m_cy);
+            this.m_keyPathControl.initWithLadybugPosition(this.m_viewParent, this.m_parentLadybug);
+            //TODO: al usar initWithLadybugPosition no sería necesario hacerlo asi
+            //this.m_keyPathControl.setX(this.m_cx);
+            //this.m_keyPathControl.setY(this.m_cy);
             this.m_keyPathControl.registerOnEditionChangedListener(this, this.onKeyPathControlEditionChanged);
         }
 

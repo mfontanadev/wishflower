@@ -28,7 +28,7 @@ function Background()
 
         this.createCanvasForBackground();
         this.compositeAllLayers(this.m_bitmapManagerItem.m_originalBitmap.getContext('2d'));
-        this.applyFilter(this.m_bitmapFilter.noiseAndTransparentFilter);
+        this.applyFilter(this.m_bitmapFilter.registerUtagawaFilter);
     };
 
     // ****************************************

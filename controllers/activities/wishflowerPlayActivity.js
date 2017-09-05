@@ -48,7 +48,7 @@ WishflowerPlayActivity.prototype.implementGameLogic = function ()
 WishflowerPlayActivity.prototype.render = function ()
 {
 	this.m_flow.render();
-
+		
 	this.renderControls();
 };
 

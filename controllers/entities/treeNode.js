@@ -187,6 +187,7 @@ function TreeNode()
                 {
                     TreeNode.m_treeGrowedBranchs = TreeNode.m_treeGrowedBranchs + 1;
                 }
+                //console.log(TreeNode.m_treeGrowedBranchs);
             }
 
             // Wind
@@ -207,14 +208,6 @@ function TreeNode()
             else
             {
                 this.implementWishflowerFade();
-            }
-
-            // Optimization to know if the tree is still growing (only leaves)
-            // Each time a leave reaches its max height add one to the global variable m_treeGrowedLeaves.
-            // Then we can checkj this number against calculated branches in the tree.                
-            if (this.isLeaveStillGrowing() === false)
-            {
-                TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
             }
         }
     };
@@ -310,12 +303,6 @@ function TreeNode()
         }
     };
 
-    TreeNode.prototype.canABranchGrowup = function ()
-    {
-        return (this.m_height < this.m_maxHeight && 
-                this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
-    };
-
     TreeNode.prototype.areWeReachedCurrentGenerationPosition = function (_percentPosition)
     {
     	var tmpCurrentGenerationPosition = this.getCurrentGenerationPosition();
@@ -346,17 +333,17 @@ function TreeNode()
     	}
     };
 
-
+    TreeNode.prototype.canABranchGrowup = function ()
+    {
+        return (this.m_height < this.m_maxHeight && 
+                this.m_level >= 2 && 
+                this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
+    };
+    
     TreeNode.prototype.canALeaveGrowup = function ()
     {
         return (this.m_height < this.m_maxHeight && 
                 this.m_level === TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION + 1);
-    };
-
-    TreeNode.prototype.canABranchExpand = function ()
-    {
-        return (this.m_width < this.m_maxWidth && 
-                this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
     };
 
     TreeNode.prototype.isBranchStillGrowing = function ()
@@ -367,6 +354,12 @@ function TreeNode()
     TreeNode.prototype.isLeaveStillGrowing = function ()
     {
         return (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE && this.m_height > 0 && this.m_height < this.m_maxHeight);
+    };
+
+    TreeNode.prototype.canABranchExpand = function ()
+    {
+        return (this.m_width < this.m_maxWidth && 
+                this.m_level >= 2 && this.m_level <= TreeNode.C_LEVEL_LIMIT_TO_BRANCH_GENERATION);
     };
 
     TreeNode.prototype.createRootNode = function ()
@@ -729,6 +722,7 @@ function TreeNode()
                 if (previosWish === '' && _item.m_wish !== '')
                 {
                     _item.m_fadingStatus = TreeNode.C_FADING_IN;
+                    TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
 
                     if (typeof _callback !== 'undefined' && _callback !== null)
                     {
@@ -739,6 +733,7 @@ function TreeNode()
                 if (previosWish !== '' && _item.m_wish === '')
                 {
                     _item.m_fadingStatus = TreeNode.C_FADING_OUT;
+                    TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves - 1;
                 }
             }
         );
@@ -768,14 +763,14 @@ function TreeNode()
         return TreeNode.m_treeGrowedBranchs !== this.totalBranches();
     };
 
-    TreeNode.prototype.areTreeLeavesStillGrowing = function ()
-    {
-        return TreeNode.m_treeGrowedLeaves !== this.m_totalLeaves;
-    };
-
     TreeNode.prototype.areCreatedAllLeaves = function () 
     {
         return TreeNode.m_totalLeaves === (this.totalFinalBranches() * TreeNode.C_GENERATION_LEAVE_QTTY);
+    };
+
+    TreeNode.prototype.someFlowerGrowed = function () 
+    {
+        return TreeNode.m_treeGrowedLeaves > 0;
     };
 
     TreeNode.prototype.getFirstBranch = function () 
@@ -831,4 +826,13 @@ function TreeNode()
         return result;
     };
 
+    TreeNode.prototype.getPositionOfBranch = function (_node, _percent) 
+    {
+        var nodeTo = _node.m_nodes[0];
+        var trunkSegment = new PoligonSegment();
+        trunkSegment.init(_node.m_x1, _node.m_y1, nodeTo.m_x1, nodeTo.m_y1);
+        var position = trunkSegment.getXYByPercent(_percent); 
+
+        return position;
+    }
 }

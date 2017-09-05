@@ -128,3 +128,6 @@ if (typeof io === 'undefined')
 	);
 }
 
+// TODO:
+// Verificar que mientras se hace el recorrido de busqueda de deseo, los demás sigan llegando.
+// Set maxlenght to wish text.

@@ -125,7 +125,9 @@ function Ladybug()
         this.m_inputControlFind.initWithTypeLadybug(_viewParent, InputControl.C_TYPE_FINDER, this);
         
         this.m_inputControlWrite.registerOnClick(this, this.onIconControlWriteClick);
-        this.m_inputControlFind.registerOnClick(this, this.onIconControlFindClick);        
+        this.m_inputControlFind.registerOnClick(this, this.onIconControlFindClick);    
+        
+        this.m_inputControlFind.setInputControlEnabled(false);
     };
 
     // ****************************************
@@ -1093,12 +1095,16 @@ function Ladybug()
 
     Ladybug.prototype.getLadybugWish = function ()
     {
-         return this.m_inputControlWrite.getText();
+        /// TODO: remove after testing
+        return "This is a long texto to see if wraping funciont is working!! 4lines is the max to enter text and can not be five lines."
+         //return this.m_inputControlWrite.getText();
     };
 
     Ladybug.prototype.getLadybugKeyPath = function ()
     {
-         return this.m_inputControlFind.getText();
+        /// TODO: remove after testing
+        return ">>>1";
+        //return this.m_inputControlFind.getText();
     };
 
     Ladybug.prototype.isInputControlAnimationFinished = function ()
