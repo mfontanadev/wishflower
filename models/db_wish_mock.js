@@ -143,15 +143,23 @@ function db_wish_mock()
 		{
 			console.log("adding wish");
 
+			var emptyWishesIndexes = new Array();
 		    // Find an empty wishflower to hold our incomming wish.
 		    for (var i = 0; i < this.m_wishes.length; i++)
 		    {
 		        if (this.m_wishes[i].wish === '')
 		        {
-		            this.m_wishes[i].wish = _wish;
-		            res = '[' + JSON.stringify(this.m_wishes[i]) + ']';
-		            break;
+		        	emptyWishesIndexes.push(i);
 		        }
+		    }
+
+		    if (emptyWishesIndexes.length > 0)
+		    {
+		    	var selectedIndex = Math.round( (Math.random() * (emptyWishesIndexes.length - 1)), 1);
+
+	   		    this.m_wishes[selectedIndex].wish = _wish;
+	            res = '[' + JSON.stringify(this.m_wishes[selectedIndex]) + ']';
+	            console.log(this.m_wishes[i]);
 		    }
 
 		    _callback(res);

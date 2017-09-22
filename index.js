@@ -128,10 +128,3 @@ if (typeof io === 'undefined')
 	);
 }
 
-// TODO:
-// Verificar que mientras se hace el recorrido de busqueda de deseo, los demás sigan llegando.
-// Set maxlenght to wish text.
-
-// HECHO Limpiar texto de inputControl al inicializar
-// Posicionar en el mismo lugar a ladybug cuando termina la animacion de climb luego de leer un deseo.
-// HECHO No funciona la animacion de nuevo deseo agregado.

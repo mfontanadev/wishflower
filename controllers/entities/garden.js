@@ -148,7 +148,7 @@ function Garden()
                 function(_errorCode)
                 {
                     msglog("RESPONSE (addWish) error:" + _errorCode);
-                    Garden.startUpdateProcess();
+                    Garden.self.startUpdateProcess();
 
                     if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
                         _errorCallback(_parent, _errorCode);

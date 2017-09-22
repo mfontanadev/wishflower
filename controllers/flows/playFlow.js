@@ -6,6 +6,7 @@ PlayFlow.C_PLAY_FLOW_CLIMBING_TO_SEND_WISH = 2;
 PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH = 3;
 PlayFlow.C_PLAY_FLOW_WAITING_NEW_WISH_SERVER_RESPONSE = 4;
 PlayFlow.C_PLAY_FLOW_BACKING_BASE_AFTER_ERROR = 41;
+PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE = 42;
 PlayFlow.C_PLAY_FLOW_THINKING = 5;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 6;
 PlayFlow.C_PLAY_FLOW_FLOWER_FALLING = 7;
@@ -104,6 +105,7 @@ function PlayFlow()
         this.m_ladybug.registerFindInputControlOnConfirm(this, this.onConfirmFinderClick);
         this.m_ladybug.registerOnClick(this, this.onClick);
         this.m_ladybug.endUsingPoligonPath();
+        this.m_ladybug.cleanInputControl();
 
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
@@ -265,7 +267,6 @@ function PlayFlow()
 
         this.m_ladybug.enable();
         this.m_ladybug.setInputControlsEnabled(true);
-        this.m_ladybug.cleanInputControl();
 
         this.m_garden.startUpdateProcess();
 
@@ -388,7 +389,7 @@ function PlayFlow()
             if (this.m_wishResponse.hasError() === true ||
                 this.m_wishResponse.isTreeFull() === true)
             {
-                mslog("RESPONSE ERROR: " + this.m_wishResponse.responseData());
+                msglog("RESPONSE ERROR: " + this.m_wishResponse.responseData());
 
                 this.m_ladyBugPoligonPath.setDirection(PoligonPath.C_POLIGONPATH_DIRECTION_INVERSE);
                 this.m_ladybug.startPoligonWalking();
@@ -415,6 +416,7 @@ function PlayFlow()
             this.m_ladybug.endUsingPoligonPath();
             this.updateAnimationPositions();
             this.m_ladybug.setAngle(Ladybug.C_LADYBUG_DEFAULT_ANGLE);
+            this.m_clickOnLadybug = false;
 
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].reset();
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].start();   
@@ -470,6 +472,11 @@ function PlayFlow()
             this.m_ladybug.endUsingPoligonPath();
 
             // Perform ladybug animation looking at user keypath wanted.
+            
+            var wishNode = this.m_tree.findNodeByKeyPath(this.m_ladybug.getLadybugKeyPath());
+            if (wishNode !== null)
+                this.m_ladybug.setLadybugWish(wishNode.m_wish);
+
             this.m_ladybug.startSideToSideAnimation(Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS);
 
             this.setState(PlayFlow.C_PLAY_FLOW_THINKING); 
@@ -533,6 +540,7 @@ function PlayFlow()
             this.m_petal.disable();
             this.m_petal.resetState();
 
+            this.m_ladybug.cleanInputControl();
             this.m_ladybug.setInputControlsEnabled(false);
 
             this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);

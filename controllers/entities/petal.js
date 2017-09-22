@@ -219,11 +219,14 @@ function Petal()
     {
         var trunkNode = _tree.getFirstBranch();
         this.m_wishKeyPath = _ladybug.getLadybugKeyPath();
+        this.m_wishText = _ladybug.getLadybugWish();
 
+        /*
         var wishNode = _tree.findNodeByKeyPath(this.m_wishKeyPath);
         if (wishNode !== null)
             this.m_wishText = _tree.findNodeByKeyPath(this.m_wishKeyPath).m_wish;
-
+        */
+        
         msglog("***** keyPath, wish *****");
         msglog(this.m_wishKeyPath);
         msglog(this.m_wishText);

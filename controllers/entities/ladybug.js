@@ -1098,6 +1098,11 @@ function Ladybug()
         return this.m_inputControlWrite.getText();
     };
 
+    Ladybug.prototype.setLadybugWish = function (_wish)
+    {
+         this.m_inputControlWrite.setText(_wish);
+    };
+
     Ladybug.prototype.cleanInputControl = function ()
     {
         this.m_inputControlWrite.setText("");

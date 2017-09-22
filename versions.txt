@@ -1,0 +1,123 @@
+TO DO:
+-Hacer que canvasEx tenga funiones para calcular la mitad y el total de ancho y alto.
+-Usar context para almacenar el tree, ladybug y otras cosas compartidas entre activities.
+
+LECCIONES APRENDIDAS:
+-Es más rápido no usar getImageByName() para obtener los recursos, pasarlo a una variable previamente.
+ En 2000 iteraciones durante 50 veces el promedio con getImageByName() es 70
+ En 2000 iteraciones durante 50 veces el promedio con variable es 62
+
+// TODO:
+// Verificar que mientras se hace el recorrido de busqueda de deseo, los demás sigan llegando.
+// DONE: Set maxlenght to wish text. The input control lenght is the limit.
+
+// HECHO Limpiar texto de inputControl al inicializar
+// Posicionar en el mismo lugar a ladybug cuando termina la animacion de climb luego de leer un deseo.
+// HECHO No funciona la animacion de nuevo deseo agregado.
+
+HISTORY:
+T=
+		Version: 3.0
+		Entry: mfontana (17/10/2016)
+.0		Refactor para incluir escalado en CanvasControl y Mouse
+		REfactor para nueva estructura de proyectos. Usando Activities, etc.
+
+		Version: 2.1
+		Entry: mfontana (05/11/2015)
+24.0		Refactor para hacer que la estructura de carpetas quede en forma estandarizada como dice NodeJs
+		Se removieron todos los archivos innecesarios.
+		Se trabajó en una rama llamada protos y luego se impacto en la rama master.
+			
+		Entry: mfontana (01/12/2015)
+1.0		Acumulado de cambios para construir estas versiones.
+		Mobile Orchesta (Interpeter) v2.03: 
+			Funciones score.play / reset /stop removidas de charInterpreter y pasadas al controller
+		Mobile Orchesta (MultiEditor) v1.2: 
+			Funciones score.play / reset /stop removidas de charInterpreter y pasadas al controller
+
+		Entry: mfontana (30/12/2015)
+8.0		Acumulado de cambios y testeos finales.
+		Agregado de proyecto WebStorm como IDE de trabajo.
+
+		Entry: mfontana (12/11/2015)
+6.0		Acumulado de cambios para construir estas versiones.
+		Mobile Orchesta (Interpeter) v2.02:
+			Soporta botones para sound on y sound off.
+		Mobile Orchesta (Director) v2.02
+			Soporta botones para sound on y sound off.
+
+		Version: 2.1
+		Entry: mfontana (05/11/2015)
+6.0		Acumulado de cambios para construir la version 2.1,
+                nueva version de la gestion de sonidos, fucniones par buscar por nombre
+                del sonido y devolver el ID.
+			Score.js: nueva funcion logInstrumentsFileName para logear los nombre
+			de archivos de sonido correspondiente a todo un score.
+			
+		Version: 2.0
+		Entry: mfontana (30/10/2015)
+8.0		Acumulado de cambios para construir la version 2.0
+			Director: soporta alta y baja de instrumentos.
+		Version: 1.0.21
+		Entry: mfontana (23/10/2015)
+8.0		Acumulado de cambios para construir canvas control.
+			CanvasControl soporta botones con imágenes
+			Editor multiple usando canvas control terminado.
+			
+		Version: 1.0.20
+		Entry: mfontana (30/09/2015)
+8.0		Acumulado de cambios para construir canvas control.
+
+		Version: 1.0.19
+		Entry: mfontana (09/06/2015)
+2.0		Playable NoteDef functionality.
+		Key alteration description on score.
+
+		Version: 1.0.18
+		Entry: mfontana (01/05/2015)
+30.0		Acumulado de commit from 25/03/2015 a 09/05/2015
+
+                Ver: Instrument.prototype.playNote = function (nt, np)
+		Version: 1.0.18
+		Entry: mfontana (25/03/2015)
+1.0		INstrument.js: ahora es quien se encarga de tocar las notas.
+                Ver: Instrument.prototype.playNote = function (nt, np)
+
+		Version: 1.0.17
+		Entry: mfontana (24/03/2015)
+1.0		Score.js: S0_00 se parsea como silencion completo de compas.
+
+		Version: 1.0.16
+		Entry: mfontana (15/03/2015)
+1.0		Score.js: render pentagram with scroll
+
+		Version: 1.0.15
+		Entry: mfontana (14/03/2015)
+1.0		Score.js: render in minimal resolution see getMinimalResolution() function.
+
+		Version: 1.0.14
+		Entry: mfontana (13/03/2015)
+2.0		Score.js: render tick and use Note object to recicle it in render and play.
+
+		Version: 1.0.13
+		Entry: mfontana (01/03/2015)
+0.5		Enviar score por defecto si el instrumento seleccionado no es uno reconocido.
+
+		Version: 1.0.12
+		Entry: mfontana (25/10/2015)
+1.0		Haciendo que funcione para heroku.
+                Borrando jade, y comentarios no utilizados.
+                
+		Version: 1.0.11
+		Entry: mfontana (19/10/2015)
+2.0		Load score on demand from server. See processIncommingMessage_C_MESSAGE_GET_SCORE
+
+		Version: 1.0.10
+		Entry: mfontana (19/10/2015)
+2.0		Refactorizando apra incluir archivo de constatnes glc.js
+
+		Version: 1.0.9
+		Entry: mfontana (18/10/2015)
+1.0		Agregando Fagot, Clarinet y reestructurando plantina de ubicación.
+
+
