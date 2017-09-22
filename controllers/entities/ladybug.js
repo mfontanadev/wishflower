@@ -1108,9 +1108,19 @@ function Ladybug()
         this.m_inputControlWrite.setText("");
     };
 
+    Ladybug.prototype.cleanKeyPathControl = function ()
+    {
+        this.m_inputControlFind.reset();
+    };
+
     Ladybug.prototype.getLadybugKeyPath = function ()
     {
         return this.m_inputControlFind.getText();
+    };
+
+    Ladybug.prototype.setLadybugKeyPath = function (_keyPath)
+    {
+        return this.m_inputControlFind.setText(_keyPath);
     };
 
     Ladybug.prototype.isInputControlAnimationFinished = function ()

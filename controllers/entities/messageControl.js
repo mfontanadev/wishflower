@@ -142,6 +142,11 @@ function MessageControl()
 
         return result;
     }
+
+    MessageControl.prototype.reset = function()
+    {
+        this.setText("");
+    }
 }
 
 

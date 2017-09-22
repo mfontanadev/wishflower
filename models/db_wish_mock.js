@@ -159,7 +159,7 @@ function db_wish_mock()
 
 	   		    this.m_wishes[selectedIndex].wish = _wish;
 	            res = '[' + JSON.stringify(this.m_wishes[selectedIndex]) + ']';
-	            console.log(this.m_wishes[i]);
+	            console.log(res);
 		    }
 
 		    _callback(res);

@@ -618,6 +618,24 @@ function InputControl()
         {
             this.m_messageControl.setText(_value);
         }
+
+        if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
+        {
+            this.m_keyPathControl.setText(_value);
+        }
+    }
+
+    InputControl.prototype.reset = function ()
+    {
+        if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
+        {
+            this.m_messageControl.reset();
+        }
+
+        if (this.m_keyPathControl !== null && this.m_type === InputControl.C_TYPE_FINDER)
+        {
+            this.m_keyPathControl.reset();
+        }
     }
 
     InputControl.prototype.setAt = function(_x, _y)

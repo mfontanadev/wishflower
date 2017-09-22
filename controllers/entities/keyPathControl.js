@@ -81,8 +81,8 @@ function KeyPathControl()
             button.setEnabled(false);
             this.m_rightButtons.push(button);
 
-            if (i < this.m_levels)
-                this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+            //if (i < this.m_levels)
+            //    this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_RIGHT);
         }
 
         button = new CanvasControl();
@@ -127,7 +127,7 @@ function KeyPathControl()
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
-        this.setButtonState(this.m_levels, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+        this.reset();
 
         this.setX(this.m_cx);
         this.setY(this.m_cy);
@@ -466,6 +466,16 @@ function KeyPathControl()
     {
         return this.m_editionChanged;
     };  
+
+
+    KeyPathControl.prototype.reset = function()
+    {
+        for (var i = 0; i < this.m_levels; i++)
+        {
+            this.setButtonState(i, KeyPathControl.C_KEY_INDICATOR_RIGHT);
+        }
+        this.setButtonState(this.m_levels, KeyPathControl.C_KEY_INDICATOR_FLOWER_1);
+    }
 }
 
 

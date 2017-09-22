@@ -401,6 +401,7 @@ function PlayFlow()
                 // Create a poligonpath from trunk top to flower.
                 msglog("RECIBIDO WISH");
                 var newWishKeyPath = this.m_wishResponse.getWishKeyPath();
+                this.m_ladybug.setLadybugKeyPath(newWishKeyPath);
                 this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
                 this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
 
@@ -472,11 +473,6 @@ function PlayFlow()
             this.m_ladybug.endUsingPoligonPath();
 
             // Perform ladybug animation looking at user keypath wanted.
-            
-            var wishNode = this.m_tree.findNodeByKeyPath(this.m_ladybug.getLadybugKeyPath());
-            if (wishNode !== null)
-                this.m_ladybug.setLadybugWish(wishNode.m_wish);
-
             this.m_ladybug.startSideToSideAnimation(Ladybug.C_LADYBUG_SIDE_TO_SIDE_REPETITIONS);
 
             this.setState(PlayFlow.C_PLAY_FLOW_THINKING); 
@@ -488,6 +484,10 @@ function PlayFlow()
         if (this.m_ladybug.isSideToSideFinished() === true)                  
         {
             this.m_ladybug.stopSideToSideAnimation();
+            
+            var wishNode = this.m_tree.findNodeByKeyPath(this.m_ladybug.getLadybugKeyPath());
+            if (wishNode !== null)
+                this.m_ladybug.setLadybugWish(wishNode.m_wish);
 
             var newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
             this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
@@ -541,6 +541,7 @@ function PlayFlow()
             this.m_petal.resetState();
 
             this.m_ladybug.cleanInputControl();
+            this.m_ladybug.cleanKeyPathControl();
             this.m_ladybug.setInputControlsEnabled(false);
 
             this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
