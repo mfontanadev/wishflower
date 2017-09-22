@@ -4,8 +4,56 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"newDate"
+			],
+			[
+				"add",
+				"addDay"
+			],
+			[
+				"get",
+				"getLastDelta"
+			],
+			[
+				"stock",
+				"stockValues"
+			],
+			[
+				"_date",
+				"_dates"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"analysis",
+				"analysisStocks"
+			],
+			[
 				"m_",
-				"m_desktop"
+				"m_values"
+			],
+			[
+				"sto",
+				"stockItem"
+			],
+			[
+				"Sto",
+				"StockEntity"
+			],
+			[
+				"m_p",
+				"m_porcessed"
+			],
+			[
+				"en",
+				"endtIndexToken"
+			],
+			[
+				"str",
+				"startIndexToken"
 			],
 			[
 				"m_can",
@@ -62,10 +110,6 @@
 			[
 				"C_s",
 				"C_STATE_SELECTIONG_LEVEL"
-			],
-			[
-				"get",
-				"getLevelsCount"
 			],
 			[
 				"m_cu",
@@ -170,10 +214,6 @@
 			[
 				"txt",
 				"txtEchoCommandResponse"
-			],
-			[
-				"for",
-				"for\tfor (…) {…}"
 			],
 			[
 				"C_ANIM_",
@@ -444,38 +484,11 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/mfontana/Documents/start_mode.sh",
+			"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
 			"settings":
 			{
-				"buffer_size": 1234,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/mfontana/Documents/settings.sh",
-			"settings":
-			{
-				"buffer_size": 2434,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/mfontana/Documents/settings.json",
-			"settings":
-			{
-				"buffer_size": 762,
+				"buffer_size": 1651,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/mfontana/Documents/serial_port.sh",
-			"settings":
-			{
-				"buffer_size": 4724,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -535,11 +548,24 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/rava_v5.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/rava_v4.js",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/sdcardimg/raspbian-mount",
+		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/piece.js",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/sdcardimg/raspbian-shrink",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/sdcardimg/raspberry_baufest.img",
+		"/E/Mios/Programas/rava_v4.js",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/Vagrantfile",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/vagrant",
+		"/C/workspace/Bunge/Tools/autogestion_ubuntu14/sdcardimg/raspbian-shrink-mac.txt",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
+		"/C/Users/mfontana/Documents/serial_port.sh",
+		"/C/Users/mfontana/Documents/settings.json",
 		"/C/Users/mfontana/Documents/settings.sh",
+		"/C/Users/mfontana/Documents/start_mode.sh",
 		"/C/workspace/Bunge/Wokspaces/AutogestionBalanzas_JavaApp/trunk/src/main/bash/settings.sh",
 		"/C/workspace/Bunge/Wokspaces/AutogestionBalanzas_JavaApp/trunk/src/main/bash/settings/display.sh",
 		"/C/Users/mfontana/Documents/start.sh",
-		"/C/Users/mfontana/Documents/start_mode.sh",
 		"/C/Users/mfontana/Documents/rc.local",
 		"/C/workspace/Bunge/Wokspaces/AutogestionBalanzas_JavaApp/trunk/settings.json",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/config/globalDefinitions.js",
@@ -567,7 +593,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerController.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/controllers/entities/piece.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/mouseManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/History.md",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/canvasControl.js",
@@ -584,7 +609,6 @@
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/helpFlow.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/soundManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
 		"/C/workspace/Bunge/Wokspaces/herramientas-de-instrumentacion/SimuladorCFS-Autegestion/trunk/scale_property.xml",
 		"/C/Users/mfontana/Downloads/ScaleEmulator/com/bunge/captureFromScales/scaleEmulator/PosOperationInvocation.class",
 		"/C/Users/mfontana/Downloads/ScaleEmulator/com/bunge/captureFromScales/scaleEmulator/EmulatorServer.class",
@@ -651,22 +675,11 @@
 		"/D/Mios/Programas/wishflower/lib/chel-dist/js/chlib.js",
 		"/D/Mios/Programas/wishflower/lib/chel-dist/js/mouseManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/animation.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/consts.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/viewManager.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/chlib.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/entities/ladybug.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/lib/chel-dist/js/canvasControl.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/activities/wishflowerHelpTestActivity.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/errorPageController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/controllers/index.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/views/wishflowerView.html"
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower/config/globalDefinitions.js"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -687,6 +700,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sendAllRequestAndPopulateStockCollection",
+			"normalizeDates",
+			"step",
+			"cierre",
+			"start_string",
+			"3",
+			"= 3",
+			"getRow",
+			"-1",
+			"analysis",
+			"analys",
+			"options",
+			"call_Perfil_WS",
+			"makeResponse",
+			"call_Perfil_WS",
+			"callback_Perfil",
+			"makeResponse",
+			"callback_Perfil",
 			"setOperativeStartMode",
 			"setConfigStartMode",
 			"display_start_mode_menu",
@@ -796,25 +827,7 @@
 			"m_clicDown",
 			"triggerClic",
 			"m_touchStopMouse",
-			"mouseXY",
-			"m_touchStopMouse",
-			"console.log",
-			"hide",
-			"isPieceAllocated",
-			"canvaex",
-			"C_STATE_SELECTING_LEVEL",
-			"CHLIB_C_STROKE_WIDTH_RECTANGLE",
-			"renderrectangle",
-			"_parentDesktop",
-			"C_STATE_SELECTIONG_LEVEL",
-			"m_type",
-			"control",
-			"_imageDownLoaded",
-			"render",
-			"self",
-			"drawImageResized",
-			"_imageLoaded",
-			"_ctx"
+			"mouseXY"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -840,45 +853,16 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/mfontana/Documents/start_mode.sh",
+					"file": "/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/prueba concepto request.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1234,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1234,
-								1234
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 129.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/mfontana/Documents/settings.sh",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2434,
+						"buffer_size": 1651,
 						"regions":
 						{
 						},
@@ -891,72 +875,13 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/mfontana/Documents/settings.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 762,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								762,
-								762
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 4452.0,
-						"translation.y": 0.0,
+						"translation.y": 765.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/mfontana/Documents/serial_port.sh",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4724,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4695,
-								4709
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2100.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -964,7 +889,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1005,7 +930,7 @@
 	"project": "app-nb.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

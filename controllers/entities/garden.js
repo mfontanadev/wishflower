@@ -96,19 +96,19 @@ function Garden()
                 
                     if (Garden.self.m_stopGetAllWishesWhileHelpIsRunning === true)
                     {
-                        console.log("STOP PROCESS WHILE HELP IS RUNNING");
+                        msglog("STOP PROCESS WHILE HELP IS RUNNING");
                         Garden.self.stopUpdateProcess();
                         Garden.self.m_stopGetAllWishesWhileHelpIsRunning = false;
                     }
                     else
                     {
-                        console.log("NEW UPDATE PROCESS");
+                        msglog("NEW UPDATE PROCESS");
                         Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);
                     }
                 }
                 else
                 {           
-                    console.log("NEW UPDATE PROCESS");
+                    msglog("NEW UPDATE PROCESS");
                     Garden.self.m_idProcessUpdate = setTimeout(Garden.self.updateProcess, Garden.C_UPDATE_FRECUENCY);
                 } 
              }
@@ -134,7 +134,7 @@ function Garden()
     {   
         if (_wishMessage === "")
         {
-            console.log("Wish not added, empty wish.");
+            msglog.log("Wish not added, empty wish.");
         }
         else
         {
@@ -155,8 +155,6 @@ function Garden()
                 },
                 function(_data)
                 {
-                    //For debug
-                    //_data = "";
                     if (_data === "")
                     {
                         msglog("RESPONSE (addWish): tree full");
@@ -166,18 +164,8 @@ function Garden()
                         msglog("RESPONSE (addWish) ok: " + _data);
                     }
 
-                    //For debug
-                    //if (_data === "ERROR")
-                    //{
-                    //    _errorCode = "force error";
-                    //    if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
-                    //        _errorCallback(_parent, _errorCode);
-                    //}
-                    //else
-                    //{
                     if (typeof _successCallback != 'undefined' && _successCallback !== null)
                         _successCallback(_parent, _data);
-                    //}
                 }
             );  
         }
@@ -185,12 +173,12 @@ function Garden()
 
     Garden.prototype.logWishes = function () 
     {   
-        console.log(Garden.self.m_currentTree.getWishes());
+        msglog(Garden.self.m_currentTree.getWishes());
     };
 
     Garden.prototype.logCurrentTree = function () 
     {   
-        console.log(Garden.self.m_currentTree.dump());
+        msglog(Garden.self.m_currentTree.dump());
     };
     
     Garden.prototype.performALadybugApparition = function (_tree, _ladybug, _poligonPath)
@@ -207,9 +195,7 @@ function Garden()
         tmpSegment.initWithExtraParams(
             trunkNode.m_x1, trunkNode.m_y1 + 20, 0.01, 0.5, 
             endPosition.x, endPosition.y, trunkWidth, 1);
-        //tmpSegment.setVelocityRatio(0.2);
-        //***TODO: sl terminar los test dejar solamente la línea de arriba.
-        tmpSegment.setVelocityRatio(2);
+        tmpSegment.setVelocityRatio(1);
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);
@@ -238,9 +224,7 @@ function Garden()
         tmpSegment.initWithExtraParams(
             startPosition.x, startPosition.y, trunkWidth, 1, 
             endPosition.x, endPosition.y, trunkWidth, 1);
-        //tmpSegment.setVelocityRatio(0.2);
-        //***TODO: al terminar los test dejar solamente la línea de arriba.
-        tmpSegment.setVelocityRatio(2);
+        tmpSegment.setVelocityRatio(1);
 
         _poligonPath.clearSegments();
         _poligonPath.addSegmentObject(tmpSegment);

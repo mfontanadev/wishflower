@@ -14,6 +14,8 @@ KeyPathControl.C_KEY_INDICATOR_FLOWER_6 = 6;
 
 KeyPathControl.C_CONTROL_SIZE = 30;
 
+KeyPathControl.C_PADDING = 5;
+
 function KeyPathControl() 
 {
     KeyPathControl.self = this;
@@ -36,12 +38,15 @@ function KeyPathControl()
 
     this.m_onEditionChangedParent = null;
     this.m_onEditionChanged = null;
-    this.m_editionChanged = false;
+    this.m_editionChanged = true;
 
     this.m_stopEventPropagation = false;
 
     this.m_levels = 0;
     this.m_flowers = 0;
+
+    this.m_controlSize = KeyPathControl.C_CONTROL_SIZE;
+    this.m_padding = KeyPathControl.C_PADDING;
 
     KeyPathControl.prototype.init = function (_viewParent, _cx, _cy)
     {
@@ -59,7 +64,7 @@ function KeyPathControl()
         for (var i = 0; i < 6; i++)
         {
             button = new CanvasControl();
-            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
             button.setTag(i);
             button.setImage('glif-left-arrow.png');
             button.registerOnClick(this, this.onLeftButtonClick);
@@ -68,7 +73,7 @@ function KeyPathControl()
             this.m_leftButtons.push(button);
 
             button = new CanvasControl();
-            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+            button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
             button.setTag(i);
             button.setImage('glif-right-arrow.png');
             button.registerOnClick(this, this.onRightButtonClick);
@@ -81,42 +86,42 @@ function KeyPathControl()
         }
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(1);
         button.setImage('glif-flower_1.png');
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(2);
         button.setImage('glif-flower_2.png');
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(3);
         button.setImage('glif-flower_3.png');
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(4);
         button.setImage('glif-flower_4.png');
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(5);
         button.setImage('glif-flower_5.png');
         button.registerOnClick(this, this.onNumberButtonClick);
         this.m_numberButtons.push(button);
 
         button = new CanvasControl();
-        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, KeyPathControl.C_CONTROL_SIZE, KeyPathControl.C_CONTROL_SIZE, "");
+        button.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy, this.m_controlSize, this.m_controlSize, "");
         button.setTag(6);
         button.setImage('glif-flower_6.png');
         button.registerOnClick(this, this.onNumberButtonClick);
@@ -296,21 +301,44 @@ function KeyPathControl()
     {
     };
 
-    KeyPathControl.prototype.setX = function (_x)
+    KeyPathControl.prototype.resizeToCalloutHelp = function ()
     {
-        this.m_cx = _x;
+        this.m_controlSize = 16;
 
-        var padding = 5;
-        var dx = (((this.m_levels + 1) * KeyPathControl.C_CONTROL_SIZE) + (padding * this.m_levels)) / 2;
         for (var i = 0; i < this.m_levels; i++)
         {
-            this.m_leftButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
-            this.m_rightButtons[i].setX(this.m_cx - dx + (i * (KeyPathControl.C_CONTROL_SIZE + padding)));
+            this.m_leftButtons[i]._width = this.m_controlSize;
+            this.m_leftButtons[i]._height = this.m_controlSize;
+            this.m_rightButtons[i]._width = this.m_controlSize;
+            this.m_rightButtons[i]._height = this.m_controlSize;
         }
 
         for (var i2 = 0; i2 < this.m_levels; i2++)
         {
-            this.m_numberButtons[i2].setX(this.m_cx - dx + (this.m_levels * (KeyPathControl.C_CONTROL_SIZE + padding)));
+            this.m_numberButtons[i2]._width = this.m_controlSize;
+            this.m_numberButtons[i2]._height = this.m_controlSize;
+        }
+
+        this.m_padding = 2;
+
+        this.setX(this.m_cx);
+        this.setY(this.m_cy - 50);
+    }
+
+    KeyPathControl.prototype.setX = function (_x)
+    {
+        this.m_cx = _x;
+
+        var dx = (((this.m_levels + 1) * this.m_controlSize) + (this.m_padding * this.m_levels)) / 2;
+        for (var i = 0; i < this.m_levels; i++)
+        {
+            this.m_leftButtons[i].setX(this.m_cx - dx + (i * (this.m_controlSize + this.m_padding)));
+            this.m_rightButtons[i].setX(this.m_cx - dx + (i * (this.m_controlSize + this.m_padding)));
+        }
+
+        for (var i2 = 0; i2 < this.m_levels; i2++)
+        {
+            this.m_numberButtons[i2].setX(this.m_cx - dx + (this.m_levels * (this.m_controlSize + this.m_padding)));
         }
     };
 
@@ -318,7 +346,7 @@ function KeyPathControl()
     {
         this.m_cy = _y;
 
-        var dy = (KeyPathControl.C_CONTROL_SIZE) / 2;
+        var dy = (this.m_controlSize) / 2;
         for (var i = 0; i < this.m_levels; i++)
         {
             this.m_leftButtons[i].setY(this.m_cy - dy);

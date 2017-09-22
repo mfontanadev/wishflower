@@ -3,9 +3,7 @@ TreeNode.C_NODE_TYPE_ROOT = "root";
 TreeNode.C_NODE_TYPE_BRANCH = "branch";
 TreeNode.C_NODE_TYPE_LEAVE = "leave";
 
-//TreeNode.C_GROWING_SPEED = 1;
-//***TODO: al terminar los test dejar solamente la línea de arriba.
-TreeNode.C_GROWING_SPEED = 10;
+TreeNode.C_GROWING_SPEED = 2;
 
 TreeNode.C_FADING_STOP = 0;
 TreeNode.C_FADING_IN = 1;
@@ -90,6 +88,7 @@ function TreeNode()
         this.addChild(root);
 
         var branch = this.createBranchNode();
+
         // link the main branch a little bit lower from top, 
         // this simulates the tree is inserted in the root. 
         branch.setHeightScalar(0.1);     
@@ -97,7 +96,6 @@ function TreeNode()
         root.addChild(branch);
 
         this.recalculateTargetPointAndChilds();
-        //_context.globalCompositeOperation = "lighter";
 
         TreeNode.m_treeCursor = branch;
         TreeNode.m_treeCursorHash = branch.getHash();
@@ -161,14 +159,7 @@ function TreeNode()
                 var width = this.m_viewParent.m_canvasEx.m_canvas.width;
                 if (this.m_x1 < width * 0.2 || this.m_x1 > width * 0.8)
                 {
-                    if (this.m_angle < 0)
-                    {
-                        this.setAngle(this.m_angle-=2);
-                    }   
-                    else
-                    {
-                        this.setAngle(this.m_angle+=2);
-                    } 
+                    this.m_width = this.m_width * 0.7;
                 }
 
                 this.validateAndAddANewChild();
@@ -187,15 +178,7 @@ function TreeNode()
                 {
                     TreeNode.m_treeGrowedBranchs = TreeNode.m_treeGrowedBranchs + 1;
                 }
-                //console.log(TreeNode.m_treeGrowedBranchs);
             }
-
-            // Wind
-            /*
-            if (this.m_level >= 4 && this.m_level <= 5)
-            {
-                this.setAngle(this.m_angle + chRandomWithNeg(1));
-            }*/
         }
         else if (this.m_nodeType === TreeNode.C_NODE_TYPE_LEAVE)
         {
@@ -254,14 +237,14 @@ function TreeNode()
 
             if (bAddBranch === true) 
             {
-                var pert = 10 * (this.m_level - 1); 
+                var pert = 5 * (this.m_level - 1); 
                 var branch = null;
                 
 				branch = this.createBranchNode();
                 branch.m_hash = '<';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * 1);
                 branch.setHeightScalar(0.90);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 
@@ -269,7 +252,7 @@ function TreeNode()
                 branch.m_hash = '>';
                 branch.setAngle((30 + chRandomWithNeg(pert)) * -1);
                 branch.setHeightScalar(0.90);
-                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(20)) / 100);
+                branch.m_maxHeight = this.m_maxHeight * ((60 + chRandom(15)) / 100);
 				branch.m_maxWidth = this.m_maxWidth - 2;
                 this.addChild(branch);
 			
@@ -383,7 +366,7 @@ function TreeNode()
         nodeItem.m_viewParent = this.m_viewParent;
         nodeItem.m_nodeType = TreeNode.C_NODE_TYPE_BRANCH;
         nodeItem.m_maxWidth = 10;
-        nodeItem.m_maxHeight = 140;
+        nodeItem.m_maxHeight = 130;
 		nodeItem.m_pertAngle = 10;
 
 		chClearArray(nodeItem.m_arrGenerationPositions);
@@ -629,7 +612,7 @@ function TreeNode()
             this.m_nodes[i].dump();
         }
             
-        console.log("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (wish=" + this.m_wish+ ")"); 
+        msglog("        ".substring(0,this.m_level) +  "-" + this.m_nodeType + ": l=" + this.m_level + ", ISVIS=" + this.isNodeVisibleByCursor() + ",gethash=" + this.getHash()+ " (wish=" + this.m_wish+ ")"); 
     };
 
     TreeNode.prototype.getHash = function () 
@@ -653,9 +636,9 @@ function TreeNode()
         var retTotalLastLevelBranches = this.totalFinalBranches();
         var retTotalLeaves = retTotalLastLevelBranches * TreeNode.C_GENERATION_LEAVE_QTTY;
 
-        console.log("Total branches: " + retTotalBranches);
-        console.log("Total last level branches: " + retTotalLastLevelBranches);
-        console.log("Total leaves: " + retTotalLeaves);
+        msglog("Total branches: " + retTotalBranches);
+        msglog("Total last level branches: " + retTotalLastLevelBranches);
+        msglog("Total leaves: " + retTotalLeaves);
 
         return ({totalBranches: retTotalBranches, otalBranchs: retTotalLastLevelBranches, totalLeaves: retTotalLeaves});
     };

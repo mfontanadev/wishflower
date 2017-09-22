@@ -84,6 +84,11 @@ function MessageControl()
         return this.m_textControl.getText();
     };
 
+    MessageControl.prototype.setText = function (_text)
+    {
+        this.m_textControl.setText(_text);
+    };
+
     MessageControl.prototype.setEnabled = function (_value)
     {
         return this.m_textControl.setEnabled(_value);

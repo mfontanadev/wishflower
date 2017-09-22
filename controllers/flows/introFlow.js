@@ -47,8 +47,7 @@ function IntroFlow()
             {
                 this.m_ladybug.endUsingPoligonPath();   
                 this.setState(IntroFlow.C_INTRO_FLOW_NOT_SET); 
-                //this.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_HELP);
-                this.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_PLAY);
+                this.m_viewParent.navigateTo(WishflowerContext.C_ACTIVITY_HELP);
             }
         }
 
@@ -70,7 +69,7 @@ function IntroFlow()
         this.m_ladybug.setPoligonPath(this.m_ladyBugPoligonPath);
         this.m_ladybug.setVisible(false);
 
-//        this.m_garden.stopGetAllWishesWhileHelpIsRunning();
+        this.m_garden.stopGetAllWishesWhileHelpIsRunning();
         this.m_garden.startUpdateProcess();
 
         this.setState(IntroFlow.C_INTRO_FLOW_APPSTATE_TREE_GROWING);            

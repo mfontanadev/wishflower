@@ -8,7 +8,7 @@ Petal.C_PETAL_FALLING_FORCE = 3;
 Petal.C_PETAL_FALLING_WIND = 20;
 Petal.C_PETAL_ROTATION_FORCE = 10;
 
-Petal.C_PETAL_CALLOUTINFO_SCALE = 0.5;
+Petal.C_PETAL_CALLOUTINFO_SCALE = 0.6;
 Petal.C_PETAL_CALLOUTINFO_LINE_HEIGHT = 12;
 Petal.C_PETAL_CALLOUTINFO_FONT = "normal normal " + Petal.C_PETAL_CALLOUTINFO_LINE_HEIGHT + "px Arial";  
 
@@ -63,6 +63,8 @@ function Petal()
         this.m_imgWishFlowerInfoCallout = this.m_viewParent.getBitmapManagerInstance().getOriginalImageByName('callout_wishinfo.png');
     
         this.m_keyPathControl.init(_viewParent, this.m_cx, this.m_cy);
+        this.m_keyPathControl.resizeToCalloutHelp();
+
         this.m_keyPathControl.setEnabled(false);
     };
 
@@ -103,7 +105,7 @@ function Petal()
     {
         if (this.m_state === Petal.C_PETAL_STATE_FALLING)
         {
-            this.m_fallingStep = this.m_fallingStep + 5;
+            this.m_fallingStep = this.m_fallingStep + 1;
             this.updatePosition();
 
             if (this.m_fallingStep >= 100)
@@ -111,17 +113,16 @@ function Petal()
                 this.m_fallingStep = 100;
                 this.setState(Petal.C_PETAL_STATE_WAITING_CLOSE);   
                 
-                //TODO: remove.
-                console.log("petal:" + this.m_wishText);
-                console.log("petal:" + this.m_wishKeyPath);
+                msglog("petal:" + this.m_wishText);
+                msglog("petal:" + this.m_wishKeyPath);
 
                 var padding = 20;
                 var mw = ((this.m_imgWishFlowerInfoCallout.width * Petal.C_PETAL_CALLOUTINFO_SCALE) / 2) - padding;
                 var mh = ((this.m_imgWishFlowerInfoCallout.height * Petal.C_PETAL_CALLOUTINFO_SCALE) / 2) - (padding / 2);
 
                 this.m_calloutRect.initWith(
-                    this.m_cx - mw, this.m_cy - (this.m_imgWishFlowerInfoCallout.height / 3) - mh,
-                    this.m_cx + mw, this.m_cy - (this.m_imgWishFlowerInfoCallout.height / 3) + mh);
+                    this.m_cx - mw, this.m_cy - (this.m_imgWishFlowerInfoCallout.height / 3.4) - mh,
+                    this.m_cx + mw, this.m_cy - (this.m_imgWishFlowerInfoCallout.height / 3.4) + mh);
 
                 this.m_multilineText = splitTextIntoLinesWithMeasurement(
                     this.m_viewParent.m_canvasEx.m_canvas, 
@@ -136,7 +137,7 @@ function Petal()
 
                 // 
                 this.m_keyPathControl.setX(this.m_cx);
-                this.m_keyPathControl.setY(this.m_cy - 20);
+                this.m_keyPathControl.setY(this.m_cy - 35);
                 this.m_keyPathControl.setEnabled(false);
             }
         }
@@ -218,13 +219,14 @@ function Petal()
     {
         var trunkNode = _tree.getFirstBranch();
         this.m_wishKeyPath = _ladybug.getLadybugKeyPath();
-        this.m_wishText = _ladybug.getLadybugWish();
 
-        //this.m_wishText = "Esto es un texto de prueba para renderizar el mensaje."
-        //this.m_keyPathControl.set
-        console.log("***** keyPath, wish *****");
-        console.log(this.m_wishKeyPath);
-        console.log(this.m_wishText);
+        var wishNode = _tree.findNodeByKeyPath(this.m_wishKeyPath);
+        if (wishNode !== null)
+            this.m_wishText = _tree.findNodeByKeyPath(this.m_wishKeyPath).m_wish;
+
+        msglog("***** keyPath, wish *****");
+        msglog(this.m_wishKeyPath);
+        msglog(this.m_wishText);
 
         this.m_keyPathControl.setText(this.m_wishKeyPath);
 

@@ -80,8 +80,8 @@ function MainLoopState()
 
 Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.0';
 Globals.C_START_POSITION_PERCENT = 40;
-Globals.C_TREE_LEVELS = 3;
-Globals.C_TREE_FLOWERS = 2;
+Globals.C_TREE_LEVELS = 6;
+Globals.C_TREE_FLOWERS = 5;
 function Globals() 
 { 
     this.m_mainLoopState = new MainLoopState(); 

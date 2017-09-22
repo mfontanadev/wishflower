@@ -17,7 +17,7 @@ WishflowerIntroActivity.prototype.getActivityName = function ()
 
 WishflowerIntroActivity.prototype.initialize = function ()
 {   
-	console.log(this.getActivityName());
+	msglog(this.getActivityName());
 
 	this.m_flow = new IntroFlow();
 	this.m_flow.init(this.m_viewParent, this);

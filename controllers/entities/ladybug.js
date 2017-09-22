@@ -4,8 +4,8 @@ Ladybug.C_LADYBUG_TYPE_NOT_SET = 0;
 Ladybug.C_LADYBUG_TYPE_WISHMASTER = 1;
 Ladybug.C_LADYBUG_TYPE_ABOUT = 2;
 
-Ladybug.C_LADYBUG_ANGLE_INCREMENT = 10;
-Ladybug.C_LADYBUG_WALK_INCREMENT = 5;
+Ladybug.C_LADYBUG_ANGLE_INCREMENT = 3;
+Ladybug.C_LADYBUG_WALK_INCREMENT = 2;
 Ladybug.C_LADYBUG_SETTING_H_THRUST = 0.25;
 Ladybug.C_LADYBUG_SETTING_MAX_THRUST = 5;
 Ladybug.C_LADYBUG_SETTING_TORQUE = 6;
@@ -1095,16 +1095,17 @@ function Ladybug()
 
     Ladybug.prototype.getLadybugWish = function ()
     {
-        /// TODO: remove after testing
-        return "This is a long texto to see if wraping funciont is working!! 4lines is the max to enter text and can not be five lines."
-         //return this.m_inputControlWrite.getText();
+        return this.m_inputControlWrite.getText();
+    };
+
+    Ladybug.prototype.cleanInputControl = function ()
+    {
+        this.m_inputControlWrite.setText("");
     };
 
     Ladybug.prototype.getLadybugKeyPath = function ()
     {
-        /// TODO: remove after testing
-        return ">>>1";
-        //return this.m_inputControlFind.getText();
+        return this.m_inputControlFind.getText();
     };
 
     Ladybug.prototype.isInputControlAnimationFinished = function ()

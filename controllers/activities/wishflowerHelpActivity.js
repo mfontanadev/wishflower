@@ -19,7 +19,7 @@ WishflowerHelpActivity.prototype.getActivityName = function ()
 
 WishflowerHelpActivity.prototype.initialize = function ()
 {   
-	console.log(this.getActivityName());
+	msglog(this.getActivityName());
 	
 	this.m_flow = new HelpFlow();
 	this.m_flow.init(this.m_viewParent, this);
@@ -40,15 +40,6 @@ WishflowerHelpActivity.prototype.onEnterActivity = function ()
 
 WishflowerHelpActivity.prototype.handleInputs = function ()
 {
-	var mouse = this.m_viewParent.getMouseManagerInstance();
-	if (mouse.m_mouseClick === true && this.m_startWalking === false)
-	{
-		if (collisionPointRect(mouse.m_mousePosX, mouse.m_mousePosY, this.m_ladybug.collisionRectangle()) === true)
-		{
-			//this.m_startWalking = true;
-		}
-	}
-
 	if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
     {
         this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);

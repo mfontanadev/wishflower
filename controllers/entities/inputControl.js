@@ -94,9 +94,6 @@ function InputControl()
 
             this.m_keyPathControl = new KeyPathControl();
             this.m_keyPathControl.initWithLadybugPosition(this.m_viewParent, this.m_parentLadybug);
-            //TODO: al usar initWithLadybugPosition no sería necesario hacerlo asi
-            //this.m_keyPathControl.setX(this.m_cx);
-            //this.m_keyPathControl.setY(this.m_cy);
             this.m_keyPathControl.registerOnEditionChangedListener(this, this.onKeyPathControlEditionChanged);
         }
 
@@ -354,9 +351,6 @@ function InputControl()
 
         this.m_icon.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
         this.m_icon.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
-
-        //this.m_iconConfirmation.setX(this.m_endSegmentPosition.x - this.m_icon._width / 2);
-        //this.m_iconConfirmation.setY(this.m_endSegmentPosition.y - this.m_icon._height / 2);
 
         if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
         {
@@ -616,6 +610,14 @@ function InputControl()
         }
 
         return result;
+    }
+
+    InputControl.prototype.setText = function (_value)
+    {
+        if (this.m_messageControl !== null && this.m_type === InputControl.C_TYPE_WRITER)
+        {
+            this.m_messageControl.setText(_value);
+        }
     }
 
     InputControl.prototype.setAt = function(_x, _y)

@@ -10,6 +10,7 @@ PlayFlow.C_PLAY_FLOW_THINKING = 5;
 PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER = 6;
 PlayFlow.C_PLAY_FLOW_FLOWER_FALLING = 7;
 PlayFlow.C_PLAY_FLOW_USER_READING_WISH = 8;
+PlayFlow.C_PLAY_FLOW_CLIMB_TO_START_POSITION = 9;
 
 PlayFlow.C_ANIMATION_ID_NOT_SET = -1;
 PlayFlow.C_ANIMATION_ID_MAIN_HELP = 0;
@@ -102,6 +103,7 @@ function PlayFlow()
         this.m_ladybug.registerWriteInputControlOnConfirm(this, this.onConfirmWriteClick);
         this.m_ladybug.registerFindInputControlOnConfirm(this, this.onConfirmFinderClick);
         this.m_ladybug.registerOnClick(this, this.onClick);
+        this.m_ladybug.endUsingPoligonPath();
 
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
@@ -215,6 +217,10 @@ function PlayFlow()
         {
             this.processState_C_PLAY_FLOW_USER_READING_WISH();
         }
+        else if (this.m_state === PlayFlow.C_PLAY_FLOW_CLIMB_TO_START_POSITION)
+        {
+            this.processState_C_PLAY_FLOW_CLIMB_TO_START_POSITION();
+        }
 
         this.m_ladybug.implementGameLogic();
         this.m_tree.implementGameLogic();
@@ -259,6 +265,7 @@ function PlayFlow()
 
         this.m_ladybug.enable();
         this.m_ladybug.setInputControlsEnabled(true);
+        this.m_ladybug.cleanInputControl();
 
         this.m_garden.startUpdateProcess();
 
@@ -280,11 +287,12 @@ function PlayFlow()
             var jumpToNextState = false;
 
             //START - FORCE PROCRESS FLOW FOR TESTING PORPOURSES
+            /*
             if (this.m_tree.someFlowerGrowed() === true)
             {
                 this.setState(PlayFlow.C_PLAY_FLOW_CLIMBING_TO_FIND_WISH); 
                 this.userWantToFindAWish();
-            }
+            }*/
             //END   - FORCE PROCRESS FLOW FOR TESTING PORPOURSES
 
             if (this.hasUserWrittenAWish() === true)
@@ -358,13 +366,13 @@ function PlayFlow()
 
     PlayFlow.prototype.wishAdded = function (_parent, _data)
     {
-        console.log("CALLBACK (addWish): ok");
+        msglog("CALLBACK (addWish): ok");
         _parent.m_wishResponse.responseRecievedFromServer(_data, false);
     }
 
     PlayFlow.prototype.wishError = function (_parent, _errorCode)
     {
-        console.log("CALLBACK (addWish): error");
+        msglog("CALLBACK (addWish): error");
         _parent.m_wishResponse.responseRecievedFromServer(_errorCode, true);
     }
 
@@ -390,7 +398,7 @@ function PlayFlow()
             else 
             {
                 // Create a poligonpath from trunk top to flower.
-                console.log("RECIBIDO WISH");
+                msglog("RECIBIDO WISH");
                 var newWishKeyPath = this.m_wishResponse.getWishKeyPath();
                 this.m_garden.avoidUpdateThisKeyPath(newWishKeyPath);
                 this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
@@ -447,7 +455,8 @@ function PlayFlow()
 
     PlayFlow.prototype.onClick = function (_parent, _sender)
     {
-        if (_parent.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE)
+        if (_parent.m_state === PlayFlow.C_PLAY_FLOW_ANIMATING_ERROR_RESPONSE ||
+            _parent.m_state === PlayFlow.C_PLAY_FLOW_WAITING_USER_ACTIONS)
         {
             _parent.m_clickOnLadybug = true;
         }
@@ -475,7 +484,7 @@ function PlayFlow()
 
             var newWishKeyPath = this.m_ladybug.getLadybugKeyPath();
             this.m_garden.performLadybugWalkKeyPath(newWishKeyPath, this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
-            console.log(newWishKeyPath);
+            msglog(newWishKeyPath);
 
             this.setState(PlayFlow.C_PLAY_FLOW_WALKING_TO_FLOWER); 
         }
@@ -489,7 +498,7 @@ function PlayFlow()
 
             this.m_petal.performFalling(this.m_tree, this.m_ladybug);
 
-            console.log("end walking to flower");
+            msglog("end walking to flower");
             this.setState(PlayFlow.C_PLAY_FLOW_FLOWER_FALLING); 
         }
     }
@@ -524,7 +533,19 @@ function PlayFlow()
             this.m_petal.disable();
             this.m_petal.resetState();
 
+            this.m_ladybug.setInputControlsEnabled(false);
+
             this.m_garden.performALadybugApparition(this.m_tree, this.m_ladybug, this.m_ladyBugPoligonPath);
+            this.setState(PlayFlow.C_PLAY_FLOW_CLIMB_TO_START_POSITION);
+        }
+    }
+
+    PlayFlow.prototype.processState_C_PLAY_FLOW_CLIMB_TO_START_POSITION = function () 
+    {
+        if (this.m_ladybug.isPoligonPathFinished() === true)
+        {
+            this.m_ladybug.endUsingPoligonPath();  
+
             this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
         }
     }
@@ -533,7 +554,6 @@ function PlayFlow()
     {
         _sender.getOnClickParent().m_clickOnPetal = true;
     };    
-
 
     // ****************************************
     // Auxiliares
@@ -556,7 +576,7 @@ function PlayFlow()
     {
         this.m_state = _state;
 
-        console.log("   PLAYFLOW.state:" + this.m_state);
+        msglog("   PLAYFLOW.state:" + this.m_state);
     };
 
 };
