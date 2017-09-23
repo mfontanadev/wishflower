@@ -218,10 +218,13 @@ function PlayFlow()
             this.processState_C_PLAY_FLOW_CLIMB_TO_START_POSITION();
         }
 
-        this.m_ladybug.implementGameLogic();
-        this.m_tree.implementGameLogic();
-        this.m_garden.implementGameLogic();
-        this.m_petal.implementGameLogic();        
+        if (this.m_state !== PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING)
+        {
+            this.m_ladybug.implementGameLogic();
+            this.m_tree.implementGameLogic();
+            this.m_garden.implementGameLogic();
+            this.m_petal.implementGameLogic();        
+        }
     };
 
     PlayFlow.prototype.render = function () 
@@ -445,7 +448,6 @@ function PlayFlow()
             this.m_arrAnimations[PlayFlow.C_ANIMATION_ID_MAIN_HELP].stop();
 
             this.m_errorAnimationID = PlayFlow.C_ANIMATION_ID_NOT_SET; 
-
             this.setState(PlayFlow.C_PLAY_FLOW_APPSTATE_INITIALIZING);
         }
     }
