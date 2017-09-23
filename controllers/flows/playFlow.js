@@ -165,12 +165,6 @@ function PlayFlow()
     {
         this.m_ladybug.handleInputs();
         this.m_petal.handleInputs();
-
-        if (this.m_viewParent.getKeyboardManagerInstance().isKeyDown(C_KEY_BACKSPACE) === true)
-        {
-            this.m_viewParent.getKeyboardManagerInstance().disableUntilKeyUp(C_KEY_BACKSPACE);
-            this.m_garden.addWish("wish", this, null, null);
-        }        
     };
 
     PlayFlow.prototype.implementGameLogic = function () 
