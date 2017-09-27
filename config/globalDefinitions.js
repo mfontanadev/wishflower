@@ -57,6 +57,10 @@ var global_bitmap_definition =
     'icon_find.png',
     'icon_write.png',
     'icon_done.png',
+    'icon_find_down.png',
+    'icon_write_down.png',
+    'icon_done_down.png',
+
     'glif-left-arrow.png',
     'glif-right-arrow.png',
     'glif-flower_1.png',
@@ -78,7 +82,7 @@ function MainLoopState()
 { 
 }
 
-Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.0';
+Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v4.0.0';
 Globals.C_START_POSITION_PERCENT = 40;
 Globals.C_TREE_LEVELS = 6;
 Globals.C_TREE_FLOWERS = 5;

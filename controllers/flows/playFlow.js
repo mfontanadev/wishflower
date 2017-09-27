@@ -117,6 +117,7 @@ function PlayFlow()
         this.m_btnExitReading = new CanvasControl();
         this.m_btnExitReading.initButtonStyle(this.m_viewParent.m_canvasEx, 0, 0, 30, 30, "");
         this.m_btnExitReading.setImage('icon_done.png');
+        this.m_btnExitReading.setImageDown('icon_done_down.png');
         this.m_btnExitReading.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_btnExitReading.registerOnClick(this, this.btnExitReading_click);
         this.m_btnExitReading._visible = false;

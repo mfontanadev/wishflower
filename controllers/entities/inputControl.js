@@ -21,9 +21,13 @@ InputControl.C_STATE_EXPAND_ICON = 9;
 InputControl.C_STATE_ICON_FADE_OUT = 10;
 InputControl.C_STATE_ACTION_FADEOUT_TO_HIDE = 11;
 InputControl.C_STATE_HIDE_ICON_FROM_COLLAPSED = 12;
+InputControl.C_STATE_FADE_OUT_SEGMENT = 13;
 
+InputControl.C_ICON_FADEIN_SPEED = 5;
 InputControl.C_ICON_SCALE_RATIO = 10;
 InputControl.C_ACTION_ALPHA_RATIO = 10;
+InputControl.C_FADEIN_SPEED = 5;
+
 
 function InputControl() 
 {
@@ -75,10 +79,12 @@ function InputControl()
         this.m_cy = this.m_parentLadybug.m_cy;
          
         var imageIcon = "";
+        var imageIconDown = "";
         if (_inputControlType === InputControl.C_TYPE_WRITER)
         {
             this.m_segmentDirection = -1;
             imageIcon = 'icon_write.png';
+            imageIconDown = 'icon_write_down.png';
 
             this.m_messageControl = new MessageControl();
             this.m_messageControl.init(this.m_viewParent, this.m_parentLadybug);
@@ -91,6 +97,7 @@ function InputControl()
         {
             this.m_segmentDirection = 1;
             imageIcon = 'icon_find.png';
+            imageIconDown = 'icon_find_down.png';
 
             this.m_keyPathControl = new KeyPathControl();
             this.m_keyPathControl.initWithLadybugPosition(this.m_viewParent, this.m_parentLadybug);
@@ -100,6 +107,7 @@ function InputControl()
         this.m_icon = new CanvasControl();
         this.m_icon.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 40, 40, "");
         this.m_icon.setImage(imageIcon);
+        this.m_icon.setImageDown(imageIconDown);
         this.m_icon.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_icon.registerOnClick(this, this.buttonClic_controller);
         this.m_icon._visible = false;
@@ -108,6 +116,7 @@ function InputControl()
         this.m_iconConfirmation = new CanvasControl();
         this.m_iconConfirmation.initButtonStyle(this.m_viewParent.m_canvasEx, this.m_cx, this.m_cy + (InputControl.C_BUTTON_EXPANDED_DISTANCE * this.m_segmentDirection), 40, 40, "");
         this.m_iconConfirmation.setImage('icon_done.png');
+        this.m_iconConfirmation.setImageDown('icon_done_down.png');
         this.m_iconConfirmation.setTheme(CanvasControl.C_THEME_TYPE_BORDERLESS);
         this.m_iconConfirmation.registerOnClick(this, this.buttonOKClic_controller);
         this.m_iconConfirmation._visible = false;
@@ -141,7 +150,7 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_FADE_IN_SEGMENT)
         {
-            this.m_segmentCounter = this.m_segmentCounter + 5;
+            this.m_segmentCounter = this.m_segmentCounter + InputControl.C_FADEIN_SPEED;
             if (this.m_segmentCounter >= 100)
             {
                 this.m_segmentCounter = 100;
@@ -189,7 +198,7 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_COLLAPSE_ICON)
         {
-            this.m_segmentCounter = this.m_segmentCounter - 5;
+            this.m_segmentCounter = this.m_segmentCounter - InputControl.C_FADEIN_SPEED;
             if (this.m_segmentCounter <= 40)
             {
                 this.initActionAlpha(0);
@@ -252,7 +261,7 @@ function InputControl()
 
         if (this.m_state === InputControl.C_STATE_EXPAND_ICON)
         {
-            this.m_segmentCounter = this.m_segmentCounter + 5;
+            this.m_segmentCounter = this.m_segmentCounter + InputControl.C_ICON_FADEIN_SPEED;
             if (this.m_segmentCounter >= 100)
             {
                 this.m_segmentCounter = 100;
@@ -268,7 +277,6 @@ function InputControl()
             if (this.decrementActionAlpha() === false)
             {
                 this.initActionAlpha(0);
-
                 this.setState(InputControl.C_STATE_ICON_FADE_OUT);
             }
         }
@@ -279,9 +287,19 @@ function InputControl()
             {
                 this.initIconScale(0);
 
-                this.setState(InputControl.C_STATE_HIDE);
+                this.setState(InputControl.C_STATE_FADE_OUT_SEGMENT);
             }
             this.updateIconPositionAtEndOfSegment();
+        }
+
+        if (this.m_state === InputControl.C_STATE_FADE_OUT_SEGMENT)
+        {
+            this.m_segmentCounter = this.m_segmentCounter - InputControl.C_FADEIN_SPEED;
+            if (this.m_segmentCounter <= 0)
+            {
+                this.m_segmentCounter = 0;
+                this.setState(InputControl.C_STATE_HIDE);
+            }       
         }
 
         this.m_parentLadybugTouched = false;
