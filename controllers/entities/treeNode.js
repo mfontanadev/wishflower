@@ -704,8 +704,8 @@ function TreeNode()
 
                 if (previosWish === '' && _item.m_wish !== '')
                 {
-                    _item.m_fadingStatus = TreeNode.C_FADING_IN;
-                    TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
+                    //_item.m_fadingStatus = TreeNode.C_FADING_IN;
+                    //TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
 
                     if (typeof _callback !== 'undefined' && _callback !== null)
                     {
@@ -720,6 +720,12 @@ function TreeNode()
                 }
             }
         );
+    };
+
+    TreeNode.prototype.startFading = function () 
+    {
+        this.m_fadingStatus = TreeNode.C_FADING_IN;
+        TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
     };
 
     TreeNode.prototype.getWishes = function () 

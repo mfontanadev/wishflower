@@ -986,6 +986,7 @@ function Ladybug()
 
         this.setPoligonPath(poligonPath);
         this.startPoligonFlying();
+        this.setLadybugKeyPath(_keyPath);
 
         this.setVisible(true);
     };

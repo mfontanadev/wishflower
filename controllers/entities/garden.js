@@ -39,7 +39,12 @@ function Garden()
             // Remove item if it reaches travel's end.
             if (this.m_incommingLadybugs[i].isPoligonPathFinished() === true)
             {
-                this.m_incommingLadybugs[i].endUsingPoligonPath();  
+                this.m_incommingLadybugs[i].endUsingPoligonPath();
+
+                //Start flower fading after incomming ladybug reach his target.
+                var keyPath = this.m_incommingLadybugs[i].getLadybugKeyPath();
+                var node = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
+                node.startFading();
                 this.m_incommingLadybugs.splice(i,1);                
             }
         }
@@ -126,6 +131,11 @@ function Garden()
                 incommingLadybug.initWithType(Garden.self.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
                 incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());
                 Garden.self.m_incommingLadybugs.push(incommingLadybug);
+            }
+            else
+            {
+                // If it is not an incomming wish start inmediatly fading in animation. 
+                _node.startFading();
             }
         }
     }
