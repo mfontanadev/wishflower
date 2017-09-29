@@ -706,7 +706,6 @@ function TreeNode()
                 {
                     //_item.m_fadingStatus = TreeNode.C_FADING_IN;
                     //TreeNode.m_treeGrowedLeaves = TreeNode.m_treeGrowedLeaves + 1;
-
                     if (typeof _callback !== 'undefined' && _callback !== null)
                     {
                         _callback(_item);

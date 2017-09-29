@@ -126,6 +126,7 @@ function Garden()
         {
             if (Garden.self.m_skeepThisKeyPath !== _node.getHash())
             {
+                console.log("flying");
                 // Create a new flying ladybug.
                 var incommingLadybug = new Ladybug();
                 incommingLadybug.initWithType(Garden.self.m_viewParent, Ladybug.C_LADYBUG_TYPE_WISHMASTER);
@@ -137,6 +138,10 @@ function Garden()
                 // If it is not an incomming wish start inmediatly fading in animation. 
                 _node.startFading();
             }
+        }
+        else
+        {
+            _node.startFading();
         }
     }
 

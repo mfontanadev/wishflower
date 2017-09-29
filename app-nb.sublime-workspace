@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"ima",
+				"imageIconDown"
+			],
+			[
+				"setLadybug",
+				"setLadybugKeyPath"
+			],
+			[
 				"get",
 				"getLadybugKeyPath"
 			],
@@ -332,10 +340,6 @@
 				"canvasName"
 			],
 			[
-				"ima",
-				"imageId"
-			],
-			[
 				"mod",
 				"moduleRatio"
 			],
@@ -487,6 +491,40 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "controllers/entities/garden.js",
+			"settings":
+			{
+				"buffer_size": 10368,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/activities/wishflowerHelpActivity.js",
+			"settings":
+			{
+				"buffer_size": 1847,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v52.js",
+			"settings":
+			{
+				"buffer_size": 35394,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v51.js",
+			"settings":
+			{
+				"buffer_size": 31940,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -534,6 +572,7 @@
 	"expanded_folders":
 	[
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/activities",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities",
@@ -546,14 +585,18 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower - Copy/node_modules/eslint-scope/lib/variable.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/processing.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v51.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/inputControl.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
+		"/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v51.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/models/db_wish_mock.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/garden.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/flows/playFlow.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/ladybug.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/keyPathControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/petal.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/messageControl.js",
@@ -595,13 +638,10 @@
 		"/C/workspace/Bunge/Wokspaces/AutogestionBalanzas_JavaApp/trunk/package.sh",
 		"/C/workspace/Bunge/Wokspaces/AutogestionBalanzas_JavaApp/trunk/package.bat",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerContext.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/config/globalDefinitions.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/viewManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/views/errorPageView.html",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/lib/chel-dist/js/canvasControl.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/views/index.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/wishflowerController.js",
-		"/C/Users/mfontana/Mios/Personal/Programas/wishflower_prj/wishflower/controllers/entities/treeNode.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/mouseManager.js",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/History.md",
 		"/C/Users/mfontana/Mios/Personal/Programas/puzzle_prj/puzzle/lib/chel-dist/js/canvasControl.js",
@@ -672,8 +712,7 @@
 		"/D/Mios/Programas/wishflower/lib/chel-dist/js/viewManager.js",
 		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerMenuActivity.js",
 		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerHelpActivity.js",
-		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js",
-		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerIntroActivity.js"
+		"/D/Mios/Programas/wishflower/controllers/activities/wishflowerAboutActivity.js"
 	],
 	"find":
 	{
@@ -698,6 +737,39 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"C_MAX_BEST_STOCKS",
+			"getrow",
+			"S",
+			"printReport",
+			"PRINTRE",
+			"getHeader",
+			"console.log",
+			"icon_done.png",
+			"m_iconTouched",
+			"setIconTouched",
+			"buttonClic_controller",
+			"m_segmentCounter",
+			"C_STATE_ICON_FADE_OUT",
+			"C_STATE_FADE_OUT_SEGMENT",
+			"C_STATE_HIDE",
+			"C_STATE_ICON_FADE_OUT",
+			"C_STATE_ACTION_FADEOUT_TO_HIDE",
+			"C_STATE_ACTION_FADEOUT",
+			"decrementActionAlpha",
+			"C_STATE_ACTION_FADEOUT_TO_HIDE",
+			"m_parentLadybugTouched",
+			"click",
+			"C_STATE_COLLAPSE_ICON",
+			"click",
+			"m_icon",
+			"buttonClic_controller",
+			"buttonOKClic_controller",
+			"5",
+			"m_skeepThisKeyPath",
+			"updateWishes",
+			"m_incommingLadybugs",
+			"startNewWishAnimation",
+			"onUpdatedNode",
 			"getRow",
 			"getValues",
 			"header",
@@ -792,40 +864,7 @@
 			"C_PLAY_FLOW_CLIMBING_TO_FIND_WISH",
 			"m_wishResponseData",
 			"avoidUpdateThisKeyPath",
-			"avoidu",
-			"hasUserWantedToFindAWish",
-			"m_findWishConfirmed",
-			"isSideToSid",
-			"SIDETOSI",
-			"processState_CLIMBING_TO_SEND_WISH",
-			"C_PLAY_FLOW_CLIMBING_TO_SEND_WISH",
-			"processState_ANIMATING_ERROR_RESPONSE",
-			"C_PLAY_FLOW_CLIMBING_TO_FIND_WISH",
-			"setEnable(",
-			"_enabl",
-			"_visi",
-			"..setEnable(false);",
-			"..setEnable",
-			"_enable = false",
-			"._enable = true",
-			"._visible = false",
-			"._visible = true",
-			"_visible",
-			"C_KEY_INDICATOR_FLOWER_1",
-			"resetNumberButtonsState",
-			"m_leftButtons",
-			"m_keyPathState",
-			"resetNumberButtonsState",
-			"setEnabled",
-			"m_flowers",
-			"global",
-			"m_globalConfig",
-			"initializeDataContext",
-			"m_dataContext",
-			"global",
-			"reqGlobals",
-			"get_C_TREE_LEVELS",
-			"Globals"
+			"avoidu"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -852,8 +891,127 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "controllers/entities/garden.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7355,
+								7355
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2737.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "controllers/activities/wishflowerHelpActivity.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1847,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1317,
+								1317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v52.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 35394,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5918,
+								5918
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2175.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/mfontana/Mios/Personal/Programas/tools_prj/rava_v51.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 31940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13058,
+								13058
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7185.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -900,7 +1058,7 @@
 	"project": "app-nb.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -947,7 +1105,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 284.0,
+	"side_bar_width": 214.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

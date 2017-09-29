@@ -6,7 +6,7 @@ function db_wish()
 	{		
 		console.log("mongo initOnce");
 	 	var collection = _dbclient.collection(db_wish.COLLECTION_NAME);
-		collection.drop();
+		//collection.drop();
 
 		var res = this.automaticWishEntryGenerator(
 			global.__configDefinitions.get_C_TREE_LEVELS(), 
@@ -17,7 +17,7 @@ function db_wish()
 		for (var i = 0; i < docs.length; i++)
 		{
 			if (i === 1)
-				docs[i].wish = 'WishTest';
+				docs[i].wish = 'WishTestMongo';
 
 			collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
 		}
@@ -151,6 +151,7 @@ function db_wish()
 				        {
 				            docs[i].wish = _wish;
 				            res = '[' + JSON.stringify(docs[i]) + ']';
+				            console.log(res);
 
 				            // Update database with new wish. 
 					       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
@@ -185,7 +186,7 @@ function db_wish()
 		   }
 		)
 
-		console.log("find:" + _keyPath  +", wish:" + _wish + ", result:" + result);
+		console.log("find:" + _keyPath  +", wish:" + _wish);
     }
 
     db_wish.prototype.wishflowerClearTree = function(_callback)
@@ -194,6 +195,7 @@ function db_wish()
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
 
+		collection.drop();
 		this.initOnce(__dbClient);
 
 		_callback("");

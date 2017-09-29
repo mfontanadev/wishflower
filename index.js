@@ -5,11 +5,11 @@ var url = require('url');
 
 // config
 var C_USE_MONGODB_OLD_CONNECTION_TYPE = false;
-var C_USE_MLAB_DATABASE_HOST = false;
+var C_USE_MLAB_DATABASE_HOST = true;
 
 // Global definitions
 global.__basePath = __dirname;
-global.__mockDB = true;
+global.__mockDB = false;
 global.__dbClient = null;
 global.__services = null;
 
