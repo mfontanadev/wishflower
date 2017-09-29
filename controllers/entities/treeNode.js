@@ -465,7 +465,7 @@ function TreeNode()
         if (this.isNodeVisibleByCursor() === false)
             imgAlpha = 0.2;
 
-        if (this.m_wish !== '')
+        if (this.m_wish !== '' || this.m_fadingStatus === TreeNode.C_FADING_OUT)
         {
             drawImageRotationTransparentScaled( this.m_viewParent.m_canvasEx.m_canvas, 
                                                 this.m_viewParent.m_canvasEx.m_context, 
