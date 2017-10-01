@@ -144,20 +144,27 @@ function db_wish()
 			(
 				function(err, docs) 
 				{
-				    // Find an empty wishflower to hold our incomming wish.
+					var emptyWishesIndexes = new Array();
+					// Find an empty wishflower to hold our incomming wish.
 				    for (var i = 0; i < docs.length; i++)
-				    {
+					{
 				        if (docs[i].wish === '')
-				        {
-				            docs[i].wish = _wish;
-				            res = '[' + JSON.stringify(docs[i]) + ']';
-				            console.log(res);
+						{
+							emptyWishesIndexes.push(i);
+						}
+					}
 
-				            // Update database with new wish. 
-					       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
-				            break;
-				        }
-				    }
+				    if (emptyWishesIndexes.length > 0)
+					{
+						var selectedIndex = Math.round( (Math.random() * (emptyWishesIndexes.length - 1)), 1);
+
+						docs[selectedIndex].wish = _wish;
+						res = '[' + JSON.stringify(docs[selectedIndex]) + ']';
+						console.log(res);
+
+						// Update database with new wish. 
+						_self.wishflowerAddByKeyPath(docs[selectedIndex].keyPath, docs[selectedIndex].wish, null);
+					}
 
 				    _callback(res);
 				}

@@ -82,7 +82,7 @@ function MainLoopState()
 { 
 }
 
-Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v4.0.0';
+Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v4.0.1';
 Globals.C_START_POSITION_PERCENT = 40;
 Globals.C_TREE_LEVELS = 6; // 6
 Globals.C_TREE_FLOWERS = 3; // 5
