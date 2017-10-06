@@ -9,7 +9,7 @@ var C_USE_MLAB_DATABASE_HOST = true;
 
 // Global definitions
 global.__basePath = __dirname;
-global.__mockDB = false;
+global.__mockDB = true;
 global.__dbClient = null;
 global.__services = null;
 

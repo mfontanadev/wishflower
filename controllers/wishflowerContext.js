@@ -26,6 +26,8 @@ function WishflowerContext()
 		this.m_garden = null;
 		this.m_ladyBugPoligonPath = null;
 		this.m_petal = null;
+
+		this.m_webgl = null;
 	};
 		
 	WishflowerContext.prototype.initialize = function (_parentView)
@@ -59,6 +61,9 @@ function WishflowerContext()
 
 		this.m_petal = new Petal();
 		this.m_petal.init(this.m_viewParent);
+
+		this.m_webgl = new Webgl();
+		this.m_webgl.init(this.m_viewParent);
 	};
 
 	WishflowerContext.prototype.createActivities = function ()

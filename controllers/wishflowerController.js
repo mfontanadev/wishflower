@@ -10,6 +10,8 @@ window.onload = function()
 	// Create main view helper.
 	viewMngr = new ViewManager(document, window);
 	viewMngr.initCanvasById('idCanvas', false);
+	viewMngr.enableWebgl();
+
 	viewMngr.enableProgressBarWhenLoadingResources();
 
 	// Enable using bitmaps

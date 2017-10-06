@@ -9,7 +9,15 @@
 			<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
 			<style>
 				body { margin: 0; }
-				idCanvas { width: 100%; height: 100% }
+
+				  #idCanvas {
+				      background-color: transparent;  /* needed because webgl-tutoraisl.css sets canvas bg color to white */
+				      position: absolute;
+				      left: 0px;
+				      top: 0px;
+				      z-index: 10;
+				  }
+
 				image, canvas {
 				    user-select: none;
 				    -ms-user-select: none;
@@ -23,6 +31,14 @@
 			</style>
 						
 				
+
+
+		</head>
+
+		<body bgcolor="#FFFFFF">
+			<canvas id="idCanvas" width="480" height="640" style="solid #FF0000;"></canvas>
+		</body>
+
 			<!-- Custom Apis-->
 			<script src="../lib/chel-dist/js/consts.js"></script>
 			<script src="../config/globalDefinitions.js"></script>			
@@ -32,9 +48,11 @@
 			<script src="../lib/chel-dist/js/soundManager.js"></script>
 			<script src="../lib/chel-dist/js/mouseManager.js"></script>
 			<script src="../lib/chel-dist/js/keyboardManager.js"></script>
+			<script src="../lib/chel-dist/js/webglManager.js"></script>
 			<script src="../lib/chel-dist/js/viewManager.js"></script>
 
 			<!-- Vendor Apis -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js"></script>
     		<script src="../lib/jquery-1.11.2-min/js/jquery1.11.2jquery.min.js"></script>
 			<script src="/socket.io/socket.io.js"></script>
 			<script src="../lib/sound-0.6.1-dist/js/soundjs-0.6.1.min.js"></script>
@@ -53,6 +71,7 @@
 			<script src="../controllers/entities/keyPathControl.js"></script>
 			<script src="../controllers/entities/messageControl.js"></script>
 			<script src="../controllers/entities/petal.js"></script>
+			<script src="../controllers/entities/webgl.js"></script>
 
 			<script src="../controllers/flows/introFlow.js"></script>
 			<script src="../controllers/flows/helpFlow.js"></script>
@@ -62,11 +81,6 @@
 			<script src="../controllers/activities/wishflowerHelpActivity.js"></script>
             <script src="../controllers/activities/wishflowerIntroActivity.js"></script>
 			<script src="../controllers/wishflowerController.js"></script>
-		</head>
-
-		<body bgcolor="#FFFFFF">
-			<canvas id="idCanvas" width="480" height="640" style="solid #FF0000;"></canvas>
-		</body>
 	</html>
 </read>
 

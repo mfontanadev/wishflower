@@ -16,6 +16,8 @@ function IntroFlow()
     this.m_background = null;
     this.m_garden = null;
 
+    this.m_webgl = null;
+
     this.m_state = IntroFlow.C_INTRO_FLOW_STATE_NOT_SET;
 
     IntroFlow.prototype.init = function (_viewParent) 
@@ -28,6 +30,7 @@ function IntroFlow()
         this.m_ladybug = _viewParent.getDataContext().m_ladybug;
         this.m_background = _viewParent.getDataContext().m_background;
         this.m_garden = _viewParent.getDataContext().m_garden;
+        this.m_webgl = _viewParent.getDataContext().m_webgl;
     };
 
     IntroFlow.prototype.implementGameLogic = function () 
@@ -53,6 +56,7 @@ function IntroFlow()
 
         if (this.m_state !== IntroFlow.C_INTRO_FLOW_APPSTATE_INITIALIZING)
         {
+            this.m_webgl.implementGameLogic();
             this.m_tree.implementGameLogic();
             this.m_ladyBugPoligonPath.implementGameLogic();
             this.m_ladybug.implementGameLogic();
@@ -88,6 +92,7 @@ function IntroFlow()
     {
         if (this.m_state !== IntroFlow.C_INTRO_FLOW_APPSTATE_INITIALIZING)
         {
+            this.m_webgl.render();
             this.m_background.render();
             this.m_tree.render();
             this.m_ladyBugPoligonPath.render();
