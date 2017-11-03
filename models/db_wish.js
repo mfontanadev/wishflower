@@ -1,4 +1,4 @@
-db_wish.COLLECTION_NAME = "wish";
+db_wish.COLLECTION_NAME = "wishmongo";
 
 function db_wish()
 {
@@ -6,7 +6,7 @@ function db_wish()
 	{		
 		console.log("mongo initOnce");
 	 	var collection = _dbclient.collection(db_wish.COLLECTION_NAME);
-		collection.drop();
+		//collection.drop();
 
 		var res = this.automaticWishEntryGenerator(
 			global.__configDefinitions.get_C_TREE_LEVELS(), 
@@ -17,7 +17,7 @@ function db_wish()
 		for (var i = 0; i < docs.length; i++)
 		{
 			if (i === 1)
-				docs[i].wish = 'WishTest';
+				docs[i].wish = 'WishTestMongo demo';
 
 			collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
 		}
@@ -144,19 +144,27 @@ function db_wish()
 			(
 				function(err, docs) 
 				{
-				    // Find an empty wishflower to hold our incomming wish.
+					var emptyWishesIndexes = new Array();
+					// Find an empty wishflower to hold our incomming wish.
 				    for (var i = 0; i < docs.length; i++)
-				    {
+					{
 				        if (docs[i].wish === '')
-				        {
-				            docs[i].wish = _wish;
-				            res = '[' + JSON.stringify(docs[i]) + ']';
+						{
+							emptyWishesIndexes.push(i);
+						}
+					}
 
-				            // Update database with new wish. 
-					       	_self.wishflowerAddByKeyPath(docs[i].keyPath, docs[i].wish, null);
-				            break;
-				        }
-				    }
+				    if (emptyWishesIndexes.length > 0)
+					{
+						var selectedIndex = Math.round( (Math.random() * (emptyWishesIndexes.length - 1)), 1);
+
+						docs[selectedIndex].wish = _wish;
+						res = '[' + JSON.stringify(docs[selectedIndex]) + ']';
+						console.log(res);
+
+						// Update database with new wish. 
+						_self.wishflowerAddByKeyPath(docs[selectedIndex].keyPath, docs[selectedIndex].wish, null);
+					}
 
 				    _callback(res);
 				}
@@ -194,6 +202,7 @@ function db_wish()
 
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
 
+		collection.drop();
 		this.initOnce(__dbClient);
 
 		_callback("");

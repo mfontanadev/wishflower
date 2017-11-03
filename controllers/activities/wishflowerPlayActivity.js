@@ -14,6 +14,11 @@ function WishflowerPlayActivity(_id, _viewParent)
 	this.m_btnSendWish = null;
 }
 
+WishflowerPlayActivity.prototype.getActivityName = function ()
+{   
+	return "WishflowerPlayActivity";
+}
+
 // Call this method once, reinitialization of values must be 
 // performed using reset() function.
 WishflowerPlayActivity.prototype.initialize = function ()
@@ -24,7 +29,7 @@ WishflowerPlayActivity.prototype.initialize = function ()
     this.m_tree.initWithRootAndBranch(this.m_viewParent);
     this.m_tree.setY( this.m_viewParent.m_canvasEx.m_canvas.height * (8.5/10));
     this.m_tree.setTreeStatus(TreeNode.C_TREE_STATUS_RENDERING);
-    this.m_tree.reset(); 
+    //this.m_tree.reset(); 
 
     this.m_garden = new Garden();
     this.m_garden.initWithViewAndTree(this.m_viewParent, this.m_tree);
@@ -56,7 +61,7 @@ WishflowerPlayActivity.prototype.onEnterActivity = function ()
 	this.m_btnSendWish._visible = false;
 	this.m_btnSendWish._disable = false;
 
-	this.m_garden.starUpdateProcess();
+	this.m_garden.startUpdateProcess();
 };
 
 WishflowerPlayActivity.prototype.handleInputs = function ()

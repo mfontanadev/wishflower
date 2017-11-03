@@ -2,6 +2,15 @@ WORKING
 ===================
   * TODO: Add animation class to chLib js. 
 
+1.0.4 / 2017-03-01
+===================
+  * deps: mouseManager
+    - Fix: Safari and Chrome mobile emulation fires mouse touch and mouseDown, generating twice clic.
+           Add flag to prevent this happend.
+
+  * deps: canvasControl
+    - Fix: Same logic from mouseManager twice clic.
+
 1.0.3 / 2016-18-10
 ===================
   * deps: ControlCanvas@3.6

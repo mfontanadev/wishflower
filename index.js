@@ -5,11 +5,11 @@ var url = require('url');
 
 // config
 var C_USE_MONGODB_OLD_CONNECTION_TYPE = false;
-var C_USE_MLAB_DATABASE_HOST = false;
+var C_USE_MLAB_DATABASE_HOST = true;
 
 // Global definitions
 global.__basePath = __dirname;
-global.__mockDB = true;
+global.__mockDB = false;
 global.__dbClient = null;
 global.__services = null;
 
@@ -52,7 +52,7 @@ if (global.__mockDB === false)
 	if (C_USE_MONGODB_OLD_CONNECTION_TYPE === true)
 	{
 		var server = new mongodb.Server("127.0.0.1", 27017, {});
-		var dbBaseTest = new mongodb.Db('wishFlowerDB', server, {});
+		var dbBaseTest = new mongodb.Db('wishflowerdb', server, {});
 		dbBaseTest.open
 		(
 			function (error, client) 

@@ -11,6 +11,7 @@ function Garden()
     this.m_currentTree = null;
     this.m_incommingLadybugs = [];
     this.m_animeteNewIncommingWishes = false;
+    this.m_skeepThisKeyPath = "";
 
     Garden.prototype.initWithViewAndTree = function (_viewParent, _tree) 
     {
@@ -29,8 +30,14 @@ function Garden()
             this.m_incommingLadybugs[i].implementGameLogic();
 
             // Remove item if it reaches travel's end.
-            if (this.m_incommingLadybugs[i].isTravelFinished() === true)
+            if (this.m_incommingLadybugs[i].isPoligonPathFinished() === true)
             {
+                this.m_incommingLadybugs[i].endUsingPoligonPath();
+
+                //Start flower fading after incomming ladybug reach his target.
+                var keyPath = this.m_incommingLadybugs[i].getLadybugKeyPath();
+                var node = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
+                node.startFading();
                 this.m_incommingLadybugs.splice(i,1);                
             }
         }
@@ -45,20 +52,20 @@ function Garden()
     };
 
 
-    Garden.prototype.starUpdateProcess = function () 
+    Garden.prototype.startUpdateProcess = function () 
     {
-        if (this.m_idProcessUpdate === null)
+        if (Garden.self.m_idProcessUpdate === null)
         {
-            this.m_idProcessUpdate = setTimeout(this.updateProcess, Garden.C_UPDATE_FRECUENCY);  
+            Garden.self.m_idProcessUpdate = setTimeout(this.updateProcess, Garden.C_UPDATE_FRECUENCY);  
         }
     };
 
-    Garden.prototype.stopUpdateProcess = function (_wish) 
+    Garden.prototype.stopUpdateProcess = function () 
     {
-        if (this.m_idProcessUpdate !== null)
+        if (Garden.self.m_idProcessUpdate !== null)
         {
-            window.clearInterval(this.m_idProcessUpdate);
-            this.m_idProcessUpdate = null;   
+            window.clearInterval(Garden.self.m_idProcessUpdate);
+            Garden.self.m_idProcessUpdate = null;   
         }   
     };
 
@@ -93,10 +100,13 @@ function Garden()
         {
             // Create a new flying ladybug.
             var incommingLadybug = new Ladybug();
-            incommingLadybug.initWithView(Garden.self.m_viewParent);
-            incommingLadybug.travelToFlower(_node.m_x1, _node.m_y1);
-            incommingLadybug.startTravel();
+            incommingLadybug.initWithType(Garden.self.m_viewParent);
+            incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());
             Garden.self.m_incommingLadybugs.push(incommingLadybug);
+        }
+        else
+        {
+            _node.startFading();
         }
     }
 
@@ -108,23 +118,30 @@ function Garden()
         }
         else
         {
+            // Avoid new wish be shown after insertion and let ladybug perform travel to flower.
+            // this.stopUpdateProcess();
+            msglog("REQUEST new wish:" + _wishMessage);
             callWebService
             (
                 'POST',
                 'services/wishflowerAddWish?wish=' + _wishMessage, 
                 function(_errorCode)
                 {
-                    msglog("CallWebService error:" + _errorCode);
+                    msglog("RESPONSE (addWish) error:" + _errorCode);
+                    Garden.self.startUpdateProcess();
+
+                    if (typeof _errorCallback != 'undefined' && _errorCallback !== null)
+                        _errorCallback(_parent, _errorCode);
                 },
                 function(_data)
                 {
                     if (_data === "")
                     {
-                        console.log("Wish not added, tree is full.");
+                        msglog("RESPONSE (addWish): tree full");
                     }
                     else
                     {
-                        console.log("Wish added.");
+                        msglog("RESPONSE (addWish) ok: " + _data);
                     }
                 }
             );  
@@ -133,11 +150,12 @@ function Garden()
 
     Garden.prototype.logWishes = function () 
     {   
-        console.log(Garden.self.m_currentTree.getWishes());
+        msglog(Garden.self.m_currentTree.getWishes());
     };
 
     Garden.prototype.logCurrentTree = function () 
     {   
-        console.log(Garden.self.m_currentTree.dump());
+        msglog(Garden.self.m_currentTree.dump());
     };
+
 }

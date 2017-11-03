@@ -1,6 +1,7 @@
 Ladybug.self = null;
 
 Ladybug.C_UPDATE_FRECUENCY = 2000;
+
 Ladybug.C_MAX_STEPS = 100;
 Ladybug.C_DEFAULT_SCALE = 0.1;
 
@@ -19,8 +20,14 @@ function Ladybug()
     this.m_incX = 0;
     this.m_incY = 0;
     this.m_scale = Ladybug.C_DEFAULT_SCALE;
+    this.m_keyPath = "";
 
-    Ladybug.prototype.initWithView = function (_viewParent, _tree)
+    Ladybug.prototype.initWithType = function (_viewParent)
+    {
+        this.initWithView(_viewParent);
+    };
+
+    Ladybug.prototype.initWithView = function (_viewParent)
     {
         this.m_viewParent = _viewParent;
         this.m_ladybugImg = this.m_viewParent.getBitmapManagerInstance().getImageByName('ladybug.png');
@@ -93,4 +100,34 @@ function Ladybug()
         this.m_incY = (_yTarget - this.m_y) / Ladybug.C_MAX_STEPS;
 
     };
+
+    Ladybug.prototype.startNewWishAnimation = function (_background, _currentTree, _keyPath) 
+    {
+        this.m_keyPath = _keyPath;
+
+        var node = Garden.self.m_currentTree.findNodeByKeyPath(_keyPath);
+        if (node !== null)
+        {
+            this.travelToFlower(node.m_x1, node.m_y1);   
+            this.startTravel();
+        }
+    }
+
+    Ladybug.prototype.isPoligonPathFinished = function () 
+    {
+        return this.isTravelFinished();
+    }
+
+    Ladybug.prototype.endUsingPoligonPath = function () 
+    {
+        this.m_steps = 100;
+        this.m_scale = Ladybug.C_DEFAULT_SCALE;
+    }
+
+    Ladybug.prototype.getLadybugKeyPath = function () 
+    {
+        return this.m_keyPath;
+    }
+
+    
 }

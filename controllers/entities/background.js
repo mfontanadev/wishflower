@@ -58,13 +58,6 @@ function Background()
                         this.m_viewParent.m_canvasEx.m_context, 
                         this.m_bitmapManagerItem.m_originalBitmap, 0, 0, 1);
         }
-
-        // DEBUG: overlapped background transparent with real cherry tree
-        /*    drawImageTransparent( 
-                        this.m_viewParent.m_canvasEx.m_canvas, 
-                        this.m_viewParent.m_canvasEx.m_context, 
-                        this.m_background_reference, 0, 0, 1);
-        */
     };
 
 
