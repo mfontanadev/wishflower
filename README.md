@@ -1,8 +1,20 @@
 ## This a POC app to show how to integrate MongoDB to Node JS and use Socket.io
 Explanation in few words, the app let you send wishes (using REST messages) and see them in a wish tree.
 
-
 Enjoy at: https://wishflower.herokuapp.com/
+
+### Side effects
+- Learn about Utagawa Hiroshige, the UI was inspired on "Plum Park in Kameido".
+
+![UI side by side](https://github.com/mfontanadev/wishflower/blob/master/doc/wishflower_screenshot1.PNG)
+
+- Develop my own 2D graphics framework inspired on Processing.js, Pixi.js, and so on.
+
+- Learn about Coccinellidae, playing logic was inspired on this insect.
+
+![Ladybug](https://github.com/mfontanadev/wishflower/blob/master/doc/coccinellidae.PNG)
+
+- Trying to emulate doodle from Google, in game documentation with animations.
 
 ## Documentation
 
