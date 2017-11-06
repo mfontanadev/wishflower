@@ -1,5 +1,6 @@
-## This a POC app to show how to integrate MongoDB to Node JS
-Explanation in few words, the app let you send requests (wishes) and see them in a wish tree.
+## This a POC app to show how to integrate MongoDB to Node JS and use Socket.io
+Explanation in few words, the app let you send wishes (using REST messages) and see them in a wish tree.
+
 
 Enjoy at: https://wishflower.herokuapp.com/
 
