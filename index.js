@@ -10,7 +10,7 @@ var url = require('url');
 
 	// Global definitions
 	global.__basePath = __dirname;
-	global.__mockDB = true;
+	global.__mockDB = false;
 	global.__dbClient = null;
 	global.__services = null;
 
