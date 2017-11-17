@@ -5,8 +5,8 @@ var url = require('url');
 
 // Config
 {
-	var C_USE_MONGODB_OLD_CONNECTION_TYPE = false;
-	var C_USE_MLAB_DATABASE_HOST = true;
+	var C_USE_MONGODB_OLD_CONNECTION_TYPE = true;
+	var C_USE_MLAB_DATABASE_HOST = false;
 
 	// Global definitions
 	global.__basePath = __dirname;
