@@ -39,6 +39,9 @@ function Garden()
                 var node = Garden.self.m_currentTree.findNodeByKeyPath(keyPath);
                 node.startFading();
                 this.m_incommingLadybugs.splice(i,1);                
+                var sndId = Garden.self.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+                Garden.self.m_viewParent.getSoundManagerInstance().stop(sndId);
+  
             }
         }
     };
@@ -102,6 +105,8 @@ function Garden()
             var incommingLadybug = new Ladybug();
             incommingLadybug.initWithType(Garden.self.m_viewParent);
             incommingLadybug.startNewWishAnimation(Garden.self.m_background, Garden.self.m_currentTree, _node.getHash());
+            var sndId = Garden.self.m_viewParent.getSoundManagerInstance().getIdByName("wings.mp3");
+            Garden.self.m_viewParent.getSoundManagerInstance().play(sndId, true);
             Garden.self.m_incommingLadybugs.push(incommingLadybug);
         }
         else
