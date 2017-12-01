@@ -2,25 +2,38 @@ db_wish.COLLECTION_NAME = "wish";
 
 function db_wish()
 {
-	db_wish.prototype.initOnce = function(_dbclient)
+	db_wish.prototype.initOnce = function(_dbclient, _forcePopulation)
 	{		
 		console.log("mongo initOnce");
 	 	var collection = _dbclient.collection(db_wish.COLLECTION_NAME);
 		//collection.drop();
 
-		var res = this.automaticWishEntryGenerator(
-			global.__configDefinitions.get_C_TREE_LEVELS(), 
-			global.__configDefinitions.get_C_TREE_FLOWERS());
+		var self = this;
+		collection.count().then
+		(
+			function(countItems) 
+			{
+				if (countItems == 0 || _forcePopulation == true)
+				{
+					if (countItems == 0)
+      					console.log("Collection empty: " + db_wish.COLLECTION_NAME);
+			
+					var res = self.automaticWishEntryGenerator(
+						global.__configDefinitions.get_C_TREE_LEVELS(), 
+						global.__configDefinitions.get_C_TREE_FLOWERS());
 
-		// Clear wish field.
-		var docs = JSON.parse(res);
-		for (var i = 0; i < docs.length; i++)
-		{
-			if (i === 1)
-				docs[i].wish = 'WishTestMongo';
+					// Clear wish field.
+					var docs = JSON.parse(res);
+					for (var i = 0; i < docs.length; i++)
+					{
+						if (i === 1)
+							docs[i].wish = 'WishTestMongo';
 
-			collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
-		}
+						collection.insertOne({keyPath : docs[i].keyPath, wish: docs[i].wish});
+					}
+      			}
+	   		}
+    	);
 	}
 
 	db_wish.prototype.automaticWishEntryGenerator = function (_levels, _flowersQty)
@@ -193,7 +206,7 @@ function db_wish()
 		   }
 		)
 
-		console.log("find:" + _keyPath  +", wish:" + _wish);
+		console.log("find:" + _keyPath  +", wish:" + _wish + ", result:" + result);
     }
 
     db_wish.prototype.wishflowerClearTree = function(_callback)
@@ -203,7 +216,7 @@ function db_wish()
 	 	var collection = __dbClient.collection(db_wish.COLLECTION_NAME);
 
 		collection.drop();
-		this.initOnce(__dbClient);
+		this.initOnce(__dbClient, true);
 
 		_callback("");
     }
