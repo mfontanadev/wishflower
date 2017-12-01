@@ -13,7 +13,7 @@ function WishflowerService()
 
 WishflowerService.prototype.init = function (_dbclient) 
 {
-	this.m_db_wish.initOnce(_dbclient);
+	this.m_db_wish.initOnce(_dbclient, false);
 }
 
 WishflowerService.prototype.wishflowerGetAll = function (_callback) 

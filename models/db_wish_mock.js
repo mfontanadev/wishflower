@@ -4,7 +4,7 @@ function db_wish_mock()
 {
 	this.m_wishes = null;
 
-	db_wish_mock.prototype.initOnce = function(_dbclient)
+	db_wish_mock.prototype.initOnce = function(_dbclient, _forcePopulation)
 	{		
 		console.log("mock initOnce");
 
@@ -210,7 +210,7 @@ function db_wish_mock()
 		    this.m_wishes[i].wish = "";
 	    }
 
-	    this.initOnce(null);
+	    this.initOnce(null, true);
 	    
 	    _callback("");
     }
