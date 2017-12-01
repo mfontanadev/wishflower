@@ -13,7 +13,7 @@ var global_bitmap_definition =
     'ladybug.png'
 ];
 
-Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.3';
+Globals.C_APPLICATION_TITLE_AND_VERSION = 'Wishflower MongoDB v3.0.4';
 Globals.C_START_POSITION_PERCENT = 40;
 Globals.C_TREE_LEVELS = 4;
 Globals.C_TREE_FLOWERS = 3;
