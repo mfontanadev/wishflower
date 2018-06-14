@@ -2,6 +2,11 @@ WORKING
 ===================
   * TODO: Add animation class to chLib js. 
 
+1.0.6 / 2018-06-13
+===================
+  * deps: chLib
+    - Mod: chCanvas can use a background image.
+
 1.0.4 / 2017-03-01
 ===================
   * deps: mouseManager
