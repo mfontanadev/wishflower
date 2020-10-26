@@ -48,6 +48,9 @@ console.log('Database initializing.');
 if (global.__mockDB === false)
 {
 	var mongodb = require('mongodb');
+	var version = mongodb.version;
+	console.log("version");
+	console.log(version);
 
 	if (C_USE_MONGODB_OLD_CONNECTION_TYPE === true)
 	{
@@ -73,12 +76,13 @@ if (global.__mockDB === false)
 	}
 	else
 	{
+		
 		var mongoClient = mongodb.MongoClient;
 		var urlDB = "";
 
 		if (C_USE_MLAB_DATABASE_HOST === true)
 		{
-			urlDB = "mongodb://wishflowerdb_admin:wishflowerdb_pass@ds147421.mlab.com:47421/wishflowerdb"
+			urlDB = "mongodb://wishflowerdb_admin:wishflowerdb_pass@wishflowerdb-shard-00-00.r9dxy.mongodb.net:27017,wishflowerdb-shard-00-01.r9dxy.mongodb.net:27017,wishflowerdb-shard-00-02.r9dxy.mongodb.net:27017/wishflowerdb?ssl=true&replicaSet=atlas-n9ipyy-shard-0&authSource=admin&retryWrites=true&w=majority";
 		}
 		else
 		{
@@ -103,6 +107,30 @@ if (global.__mockDB === false)
 				}
 			}
 		);
+
+		/*
+
+		var  uri = "mongodb+srv://wishflowerdb_admin:wishflowerdb_pass@wishflowerdb.r9dxy.mongodb.net/wishflowerdb?retryWrites=true&w=majority";
+	  	const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
+	  	var usersCollection = "wish";
+
+		  client.connect
+		  (
+		  	err => {
+		    			if (err) return callback(err);
+
+		    			const collection = client.db(dbName).collection(usersCollection);
+
+					    collection.findOne({keyPath: "<<<<<<2"}, (err, user) => 
+					    {
+		      				if (err) return callback(err);
+		      				if (!user) return callback("User not found.");
+					      callback(null, profile);
+		      				client.close();
+		    			});
+		  			}
+		  	);*/
+
 	}
 }
 else

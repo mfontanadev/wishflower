@@ -9,7 +9,7 @@
   "dependencies": {
     "eslint": "^4.3.0",
     "express": "latest",
-    "mongodb": "^2.1.7",
+    "mongodb": "^2.2.33",
     "mongoose": "^4.4.6",
     "socket.io": "latest"
   },
